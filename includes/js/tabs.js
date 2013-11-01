@@ -1,0 +1,1 @@
+jQuery(function($){$(document).ready(function(){$( ".wc-tabs" ).tabs();});});
