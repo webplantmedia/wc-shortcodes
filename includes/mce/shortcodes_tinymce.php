@@ -12,7 +12,7 @@
  *
  * Special thank you to my buddy Syamil @ http://aquagraphite.com/
  */
-class WordPressCanvas_TinyMCE_Buttons {
+class WC_Shortcodes_TinyMCE_Buttons {
 	function __construct() {
     	add_action( 'init', array(&$this,'init') );
     }
@@ -33,4 +33,4 @@ class WordPressCanvas_TinyMCE_Buttons {
 	   return $buttons; 
 	} 	
 }
-$wcshortcode = new WordPressCanvas_TinyMCE_Buttons;
+$wcshortcode = new WC_Shortcodes_TinyMCE_Buttons;
