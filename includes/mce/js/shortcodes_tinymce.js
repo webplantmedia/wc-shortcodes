@@ -4,9 +4,9 @@
 			tinymce.plugins.wcShortcodeMce.theurl = url;
 		},
 		createControl : function(btn, e) {
-			if ( btn == "wordpresscanvas_shortcodes_button" ) {
+			if ( btn == "wc_shortcodes_button" ) {
 				var a = this;	
-				var btn = e.createSplitButton('wordpresscanvas_button', {
+				var btn = e.createSplitButton('wc_shortcodes_button', {
 	                title: "Insert Shortcode",
 					image: tinymce.plugins.wcShortcodeMce.theurl +"/images/shortcodes.png",
 					icons: false,
@@ -353,5 +353,5 @@
 		}
 	
 	});
-	tinymce.PluginManager.add("wordpresscanvas_shortcodes", tinymce.plugins.wcShortcodeMce);
+	tinymce.PluginManager.add("wc_shortcodes", tinymce.plugins.wcShortcodeMce);
 })();

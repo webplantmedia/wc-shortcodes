@@ -25,11 +25,11 @@ class WC_Shortcodes_TinyMCE_Buttons {
 		}  
     }  
 	function add_plugin($plugin_array) {  
-	   $plugin_array['wordpresscanvas_shortcodes'] = plugin_dir_url( __FILE__ ) .'js/shortcodes_tinymce.js';
+	   $plugin_array['wc_shortcodes'] = plugin_dir_url( __FILE__ ) .'js/shortcodes_tinymce.js';
 	   return $plugin_array; 
 	}
 	function register_button($buttons) {  
-	   array_push($buttons, "wordpresscanvas_shortcodes_button");
+	   array_push($buttons, "wc_shortcodes_button");
 	   return $buttons; 
 	} 	
 }

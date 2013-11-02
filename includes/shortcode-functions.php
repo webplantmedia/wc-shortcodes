@@ -9,14 +9,14 @@
  * @param mixed $content
  * @return void
  */
-function wordpresscanvas_pre_process_shortcode($content) {
+function wc_shortcodes_pre_process($content) {
     global $shortcode_tags;
 
     // Backup current registered shortcodes and clear them all out
     $orig_shortcode_tags = $shortcode_tags;
     $shortcode_tags = array();
 
-	do_action( 'wordpresscanvas_add_preprocess_shortcodes' );
+	do_action( 'wc_shortcodes_add_preprocess' );
 
     // Do the shortcode (only the one above is registered)
     $content = do_shortcode($content);
@@ -26,7 +26,7 @@ function wordpresscanvas_pre_process_shortcode($content) {
  
     return $content;
 }
-add_filter('the_content', 'wordpresscanvas_pre_process_shortcode', 7);
+add_filter('the_content', 'wc_shortcodes_pre_process', 7);
 
 /**
  * Add all preprocessed shortcodes here
@@ -36,22 +36,22 @@ add_filter('the_content', 'wordpresscanvas_pre_process_shortcode', 7);
  *
  * @return void
  */
-function wordpresscanvas_add_preprocess_shortcodes() {
-	add_shortcode( 'wc_fullwidth' , 'wordpresscanvas_shortcode_fullwidth' );
-	add_shortcode( 'wc_column', 'wordpresscanvas_column_shortcode' );
-	add_shortcode( 'wc_row', 'wordpresscanvas_row_shortcode' );
-	add_shortcode( 'wc_center', 'wordpresscanvas_center_shortcode' );
-	add_shortcode( 'wc_toggle', 'wordpresscanvas_toggle_shortcode' );
-	add_shortcode( 'wc_accordion', 'wordpresscanvas_accordion_main_shortcode' );
-	add_shortcode( 'wc_accordion_section', 'wordpresscanvas_accordion_section_shortcode' );
-	add_shortcode( 'wc_tabgroup', 'wordpresscanvas_tabgroup_shortcode' );
-	add_shortcode( 'wc_tab', 'wordpresscanvas_tab_shortcode' );
-	add_shortcode( 'wc_testimonial', 'wordpresscanvas_testimonial_shortcode' );
-	add_shortcode( 'wc_box', 'wordpresscanvas_box_shortcode' );
-	add_shortcode( 'wc_pricing', 'wordpresscanvas_pricing_shortcode' );
-	add_shortcode( 'wc_code' , 'wordpresscanvas_displaycode_shortcode' );
+function wc_shortcodes_add_preprocess() {
+	add_shortcode( 'wc_fullwidth' , 'wc_shortcodes_fullwidth' );
+	add_shortcode( 'wc_column', 'wc_shortcodes_column' );
+	add_shortcode( 'wc_row', 'wc_shortcodes_row' );
+	add_shortcode( 'wc_center', 'wc_shortcodes_center' );
+	add_shortcode( 'wc_toggle', 'wc_shortcodes_toggle' );
+	add_shortcode( 'wc_accordion', 'wc_shortcodes_accordion_main' );
+	add_shortcode( 'wc_accordion_section', 'wc_shortcodes_accordion_section' );
+	add_shortcode( 'wc_tabgroup', 'wc_shortcodes_tabgroup' );
+	add_shortcode( 'wc_tab', 'wc_shortcodes_tab' );
+	add_shortcode( 'wc_testimonial', 'wc_shortcodes_testimonial' );
+	add_shortcode( 'wc_box', 'wc_shortcodes_box' );
+	add_shortcode( 'wc_pricing', 'wc_shortcodes_pricing' );
+	add_shortcode( 'wc_code' , 'wc_shortcodes_displaycode' );
 }
-add_action( 'wordpresscanvas_add_preprocess_shortcodes', 'wordpresscanvas_add_preprocess_shortcodes' );
+add_action( 'wc_shortcodes_add_preprocess', 'wc_shortcodes_add_preprocess' );
 
 
 /*
@@ -62,8 +62,6 @@ add_filter('widget_text', 'do_shortcode');
 
 
 /**
- * wordpresscanvas_shortcode_full_width 
- *
  * @since 3.6
  * @access public
  *
@@ -71,13 +69,13 @@ add_filter('widget_text', 'do_shortcode');
  * @param string $content 
  * @return void
  */
-function wordpresscanvas_shortcode_fullwidth( $atts, $content = null ) {
+function wc_shortcodes_fullwidth( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'inside'			=>	'content'
 	), $atts));
 
 	if ( 'site' == $inside ) {
-		wp_enqueue_script('wordpresscanvas_fullwidth');
+		wp_enqueue_script('wc_shortcodes_fullwidth');
 	}
 	else {
 		$inside = 'content';
@@ -91,8 +89,8 @@ function wordpresscanvas_shortcode_fullwidth( $atts, $content = null ) {
 //  * Fix Shortcodes
 //  * @since v1.0
 //  */
-// if( !function_exists('wordpresscanvas_fix_shortcodes') ) {
-// 	function wordpresscanvas_fix_shortcodes($content){   
+// if( !function_exists('wc_shortcodes_fix') ) {
+// 	function wc_shortcodes_fix($content){   
 // 		$array = array (
 // 			'<p>['		=> '[', 
 // 			']</p>'		=> ']', 
@@ -101,7 +99,7 @@ function wordpresscanvas_shortcode_fullwidth( $atts, $content = null ) {
 // 		$content = strtr($content, $array);
 // 		return $content;
 // 	}
-// 	add_filter('the_content', 'wordpresscanvas_fix_shortcodes');
+// 	add_filter('the_content', 'wc_shortcodes_fix');
 // }
 
 
@@ -113,7 +111,7 @@ function wordpresscanvas_shortcode_fullwidth( $atts, $content = null ) {
  * @access public
  * @return void
  */
-function wordpresscanvas_displayhtml_shortcode( $atts, $content = null ) {
+function wc_shortcodes_displayhtml( $atts, $content = null ) {
 	global $post;
 	$html = '';
 
@@ -137,30 +135,26 @@ function wordpresscanvas_displayhtml_shortcode( $atts, $content = null ) {
 
 	return $html;
 }
-add_shortcode( 'wc_html', 'wordpresscanvas_displayhtml_shortcode' );
+add_shortcode( 'wc_html', 'wc_shortcodes_displayhtml' );
 
 
 /**
- * bootstrap_shortcode_displaycode 
- * 
  * @param mixed $atts 
  * @param mixed $content 
  * @access public
  * @return void
  */
-function wordpresscanvas_displaycode_shortcode( $atts, $content = null ) {
+function wc_shortcodes_displaycode( $atts, $content = null ) {
 	return '<code>'.$content.'</code>';
 }
 
 /**
- * bootstrap_shortcode_displaypre 
- * 
  * @param mixed $atts 
  * @param mixed $content 
  * @access public
  * @return void
  */
-function wordpresscanvas_displaypre_shortcode( $atts, $content = null ) {
+function wc_shortcodes_displaypre( $atts, $content = null ) {
 	global $post;
 	$html = '';
 	static $instance = 0;
@@ -200,8 +194,8 @@ function wordpresscanvas_displaypre_shortcode( $atts, $content = null ) {
 		return null;
 
 	if ( $code = get_post_meta($post->ID, $name, true ) ) {
-		wp_enqueue_script('wordpresscanvas_prettify');
-		wp_enqueue_script('wordpresscanvas_pre');
+		wp_enqueue_script('wc_shortcodes_prettify');
+		wp_enqueue_script('wc_shortcodes_pre');
 		//$code = preg_replace( '/[ ]{4,}|[\t]/', '  ', $code );
 		$html .= '<pre id="prettycode-'.$instance.'" class="'.$class.'">';
 		$html .= htmlspecialchars( $code );
@@ -210,18 +204,18 @@ function wordpresscanvas_displaypre_shortcode( $atts, $content = null ) {
 
 	return $html;
 }
-add_shortcode( 'wc_pre' , 'wordpresscanvas_displaypre_shortcode' );
+add_shortcode( 'wc_pre' , 'wc_shortcodes_displaypre' );
 
 
 /*
  * Clear Floats
  * @since v1.0
  */
-if( !function_exists('wordpresscanvas_clear_floats_shortcode') ) {
-	function wordpresscanvas_clear_floats_shortcode() {
+if( !function_exists('wc_shortcodes_clear_floats') ) {
+	function wc_shortcodes_clear_floats() {
 	   return '<div class="wc-clear-floats"></div>';
 	}
-	add_shortcode( 'wc_clear_floats', 'wordpresscanvas_clear_floats_shortcode' );
+	add_shortcode( 'wc_clear_floats', 'wc_shortcodes_clear_floats' );
 }
 
 
@@ -229,8 +223,8 @@ if( !function_exists('wordpresscanvas_clear_floats_shortcode') ) {
  * Skillbars
  * @since v1.4
  */
-if( !function_exists('wordpresscanvas_callout_shortcode') ) {
-	function wordpresscanvas_callout_shortcode( $atts, $content = NULL  ) {		
+if( !function_exists('wc_shortcodes_callout') ) {
+	function wc_shortcodes_callout( $atts, $content = NULL  ) {		
 		extract( shortcode_atts( array(
 			'caption'				=> '',
 			'button_text'			=> '',
@@ -260,7 +254,7 @@ if( !function_exists('wordpresscanvas_callout_shortcode') ) {
 		
 		return $output;
 	}
-	add_shortcode( 'wc_callout', 'wordpresscanvas_callout_shortcode' );
+	add_shortcode( 'wc_callout', 'wc_shortcodes_callout' );
 }
 
 
@@ -268,8 +262,8 @@ if( !function_exists('wordpresscanvas_callout_shortcode') ) {
  * Skillbars
  * @since v1.3
  */
-if( !function_exists('wordpresscanvas_skillbar_shortcode') ) {
-	function wordpresscanvas_skillbar_shortcode( $atts  ) {		
+if( !function_exists('wc_shortcodes_skillbar') ) {
+	function wc_shortcodes_skillbar( $atts  ) {		
 		extract( shortcode_atts( array(
 			'title'	=> '',
 			'percentage'	=> '100',
@@ -279,7 +273,7 @@ if( !function_exists('wordpresscanvas_skillbar_shortcode') ) {
 		), $atts ) );
 		
 		// Enque scripts
-		wp_enqueue_script('wordpresscanvas_skillbar');
+		wp_enqueue_script('wc_shortcodes_skillbar');
 		
 		// Display the accordion	';
 		$output = '<div class="wc-skillbar wc-clearfix '. $class .'" data-percent="'. $percentage .'%">';
@@ -292,7 +286,7 @@ if( !function_exists('wordpresscanvas_skillbar_shortcode') ) {
 		
 		return $output;
 	}
-	add_shortcode( 'wc_skillbar', 'wordpresscanvas_skillbar_shortcode' );
+	add_shortcode( 'wc_skillbar', 'wc_shortcodes_skillbar' );
 }
 
 
@@ -300,8 +294,8 @@ if( !function_exists('wordpresscanvas_skillbar_shortcode') ) {
  * Spacing
  * @since v1.0
  */
-if( !function_exists('wordpresscanvas_spacing_shortcode') ) {
-	function wordpresscanvas_spacing_shortcode( $atts ) {
+if( !function_exists('wc_shortcodes_spacing') ) {
+	function wc_shortcodes_spacing( $atts ) {
 		extract( shortcode_atts( array(
 			'size'	=> '20px',
 			'class'	=> '',
@@ -309,7 +303,7 @@ if( !function_exists('wordpresscanvas_spacing_shortcode') ) {
 		  $atts ) );
 	 return '<hr class="wc-spacing '. $class .'" style="height: '. $size .'" />';
 	}
-	add_shortcode( 'wc_spacing', 'wordpresscanvas_spacing_shortcode' );
+	add_shortcode( 'wc_spacing', 'wc_shortcodes_spacing' );
 }
 
 
@@ -317,8 +311,8 @@ if( !function_exists('wordpresscanvas_spacing_shortcode') ) {
 * Social Icons
 * @since 1.0
 */
-if( !function_exists('wordpresscanvas_social_icons_shortcode') ) {
-	function wordpresscanvas_social_icons_shortcode( $atts ){   
+if( !function_exists('wc_shortcodes_social_icons') ) {
+	function wc_shortcodes_social_icons( $atts ){   
 		$social = array(
 			'facebook' => 'Facebook',
 			'google' => 'Google',
@@ -357,8 +351,8 @@ if( !function_exists('wordpresscanvas_social_icons_shortcode') ) {
 					$link_option_name = 'social_media_' . $key . '_link';
 					$icon_option_name = 'social_media_' . $key . '_icon';
 
-					if ( ( $social_link = wordpresscanvas_get_option( $link_option_name ) ) && ( $icon_url = wordpresscanvas_get_option( $icon_option_name ) ) ) {
-						$social_link = apply_filters( 'wordpresscanvas_social_link', $key, $social_link );
+					if ( ( $social_link = wc_shortcodes_get_option( $link_option_name ) ) && ( $icon_url = wc_shortcodes_get_option( $icon_option_name ) ) ) {
+						$social_link = apply_filters( 'wc_shortcodes_social_link', $key, $social_link );
 						$first_class = $first ? ' first-icon' : '';
 						$first = false;
 
@@ -374,15 +368,15 @@ if( !function_exists('wordpresscanvas_social_icons_shortcode') ) {
 
 		return $html;
 	}
-	add_shortcode( 'wc_social_icons', 'wordpresscanvas_social_icons_shortcode' );
+	add_shortcode( 'wc_social_icons', 'wc_shortcodes_social_icons' );
 }
 
 /**
 * Highlights
 * @since 1.0
 */
-if ( !function_exists( 'wordpresscanvas_highlight_shortcode' ) ) {
-	function wordpresscanvas_highlight_shortcode( $atts, $content = null ) {
+if ( !function_exists( 'wc_shortcodes_highlight' ) ) {
+	function wc_shortcodes_highlight( $atts, $content = null ) {
 		extract( shortcode_atts( array(
 			'color'	=> 'yellow',
 			'class'	=> '',
@@ -391,7 +385,7 @@ if ( !function_exists( 'wordpresscanvas_highlight_shortcode' ) ) {
 		  return '<span class="wc-highlight wc-highlight-'. $color .' '. $class .'">' . do_shortcode( $content ) . '</span>';
 	
 	}
-	add_shortcode( 'wc_highlight', 'wordpresscanvas_highlight_shortcode' );
+	add_shortcode( 'wc_highlight', 'wc_shortcodes_highlight' );
 }
 
 
@@ -399,8 +393,8 @@ if ( !function_exists( 'wordpresscanvas_highlight_shortcode' ) ) {
  * Buttons
  * @since v1.0
  */
-if( !function_exists('wordpresscanvas_button_shortcode') ) {
-	function wordpresscanvas_button_shortcode( $atts, $content = null ) {
+if( !function_exists('wc_shortcodes_button') ) {
+	function wc_shortcodes_button( $atts, $content = null ) {
 		extract( shortcode_atts( array(
 			'type'			=> 'primary', // or inverse
 			'url'			=> 'http://www.wordpresscanvas.com',
@@ -428,7 +422,7 @@ if( !function_exists('wordpresscanvas_button_shortcode') ) {
 		$button .= '</a>';
 		return $button;
 	}
-	add_shortcode( 'wc_button', 'wordpresscanvas_button_shortcode' );
+	add_shortcode( 'wc_button', 'wc_shortcodes_button' );
 }
 
 
@@ -438,8 +432,8 @@ if( !function_exists('wordpresscanvas_button_shortcode') ) {
  * @since v1.0
  *
  */
-if( !function_exists('wordpresscanvas_box_shortcode') ) { 
-	function wordpresscanvas_box_shortcode( $atts, $content = null ) {
+if( !function_exists('wc_shortcodes_box') ) { 
+	function wc_shortcodes_box( $atts, $content = null ) {
 		extract( shortcode_atts( array(
 			'color'			=> 'primary',
 			'text_align'	=> 'left',
@@ -470,8 +464,8 @@ if( !function_exists('wordpresscanvas_box_shortcode') ) {
  * @since v1.0
  *
  */
-if( !function_exists('wordpresscanvas_testimonial_shortcode') ) { 
-	function wordpresscanvas_testimonial_shortcode( $atts, $content = null  ) {
+if( !function_exists('wc_shortcodes_testimonial') ) { 
+	function wc_shortcodes_testimonial( $atts, $content = null  ) {
 		extract( shortcode_atts( array(
 			'by'	=> '',
 			'position'	=> 'left',
@@ -493,8 +487,8 @@ if( !function_exists('wordpresscanvas_testimonial_shortcode') ) {
  * @since v1.0
  *
  */
-if( !function_exists('wordpresscanvas_center_shortcode') ) {
-	function wordpresscanvas_center_shortcode( $atts, $content = null ){
+if( !function_exists('wc_shortcodes_center') ) {
+	function wc_shortcodes_center( $atts, $content = null ){
 		extract( shortcode_atts( array(
 			'max_width'		=> '500px',
 			'text_align'	=> 'center',
@@ -515,8 +509,8 @@ if( !function_exists('wordpresscanvas_center_shortcode') ) {
  * @since v1.0
  *
  */
-if( !function_exists('wordpresscanvas_column_shortcode') ) {
-	function wordpresscanvas_column_shortcode( $atts, $content = null ){
+if( !function_exists('wc_shortcodes_column') ) {
+	function wc_shortcodes_column( $atts, $content = null ){
 		extract( shortcode_atts( array(
 			'size'		=> 'one-third',
 			'position'	=>'',
@@ -548,8 +542,8 @@ if( !function_exists('wordpresscanvas_column_shortcode') ) {
  * @since v1.0
  *
  */
-if( !function_exists('wordpresscanvas_row_shortcode') ) {
-	function wordpresscanvas_row_shortcode( $atts, $content = null ){
+if( !function_exists('wc_shortcodes_row') ) {
+	function wc_shortcodes_row( $atts, $content = null ){
 		return '<div class="wc-row clearfix">' . do_shortcode($content) . '</div>';
 	}
 }
@@ -560,8 +554,8 @@ if( !function_exists('wordpresscanvas_row_shortcode') ) {
  * Toggle
  * @since v1.0
  */
-if( !function_exists('wordpresscanvas_toggle_shortcode') ) {
-	function wordpresscanvas_toggle_shortcode( $atts, $content = null ) {
+if( !function_exists('wc_shortcodes_toggle') ) {
+	function wc_shortcodes_toggle( $atts, $content = null ) {
 		extract( shortcode_atts( array(
 			'title'	=> 'Toggle Title',
 			'class'	=> '',
@@ -579,7 +573,7 @@ if( !function_exists('wordpresscanvas_toggle_shortcode') ) {
 		$style = implode( ';', $style );
 		 
 		// Enque scripts
-		wp_enqueue_script('wordpresscanvas_toggle');
+		wp_enqueue_script('wc_shortcodes_toggle');
 		
 		// Display the Toggle
 		return '<div class="wc-toggle '. $class .'"><div class="wc-toggle-trigger"><a href="#">'. $title .'</a></div><div style="'.$style.'" class="wc-toggle-container">' . do_shortcode($content) . '</div></div>';
@@ -594,8 +588,8 @@ if( !function_exists('wordpresscanvas_toggle_shortcode') ) {
  */
 
 // Main
-if( !function_exists('wordpresscanvas_accordion_main_shortcode') ) {
-	function wordpresscanvas_accordion_main_shortcode( $atts, $content = null  ) {
+if( !function_exists('wc_shortcodes_accordion_main') ) {
+	function wc_shortcodes_accordion_main( $atts, $content = null  ) {
 		
 		extract( shortcode_atts( array(
 			'class'	=> '',
@@ -609,7 +603,7 @@ if( !function_exists('wordpresscanvas_accordion_main_shortcode') ) {
 		
 		// Enque scripts
 		wp_enqueue_script('jquery-ui-accordion');
-		wp_enqueue_script('wordpresscanvas_accordion');
+		wp_enqueue_script('wc_shortcodes_accordion');
 		
 		// Display the accordion	
 		return '<div class="wc-accordion '.$type.' '. $class .'">' . do_shortcode($content) . '</div>';
@@ -618,8 +612,8 @@ if( !function_exists('wordpresscanvas_accordion_main_shortcode') ) {
 
 
 // Section
-if( !function_exists('wordpresscanvas_accordion_section_shortcode') ) {
-	function wordpresscanvas_accordion_section_shortcode( $atts, $content = null  ) {
+if( !function_exists('wc_shortcodes_accordion_section') ) {
+	function wc_shortcodes_accordion_section( $atts, $content = null  ) {
 		extract( shortcode_atts( array(
 			'title'	=> 'Title',
 			'class'	=> '',
@@ -647,12 +641,12 @@ if( !function_exists('wordpresscanvas_accordion_section_shortcode') ) {
  * @since v1.0
  *
  */
-if (!function_exists('wordpresscanvas_tabgroup_shortcode')) {
-	function wordpresscanvas_tabgroup_shortcode( $atts, $content = null ) {
+if (!function_exists('wc_shortcodes_tabgroup')) {
+	function wc_shortcodes_tabgroup( $atts, $content = null ) {
 		
 		//Enque scripts
 		wp_enqueue_script('jquery-ui-tabs');
-		wp_enqueue_script('wordpresscanvas_tabs');
+		wp_enqueue_script('wc_shortcodes_tabs');
 		
 		// Display Tabs
 		$defaults = array();
@@ -676,8 +670,8 @@ if (!function_exists('wordpresscanvas_tabgroup_shortcode')) {
 		return $output;
 	}
 }
-if (!function_exists('wordpresscanvas_tab_shortcode')) {
-	function wordpresscanvas_tab_shortcode( $atts, $content = null ) {
+if (!function_exists('wc_shortcodes_tab')) {
+	function wc_shortcodes_tab( $atts, $content = null ) {
 		$defaults = array(
 			'title'	=> 'Tab',
 			'class'	=> ''
@@ -697,8 +691,8 @@ if (!function_exists('wordpresscanvas_tab_shortcode')) {
  */
  
 /*section*/
-if( !function_exists('wordpresscanvas_pricing_shortcode') ) {
-	function wordpresscanvas_pricing_shortcode( $atts, $content = null  ) {
+if( !function_exists('wc_shortcodes_pricing') ) {
+	function wc_shortcodes_pricing( $atts, $content = null  ) {
 		
 		extract( shortcode_atts( array(
 			'type'					=> 'primary',
@@ -746,8 +740,8 @@ if( !function_exists('wordpresscanvas_pricing_shortcode') ) {
  * Heading
  * @since v1.1
  */
-if( !function_exists('wordpresscanvas_heading_shortcode') ) {
-	function wordpresscanvas_heading_shortcode( $atts ) {
+if( !function_exists('wc_shortcodes_heading') ) {
+	function wc_shortcodes_heading( $atts ) {
 		extract( shortcode_atts( array(
 			'title'			=> __('Sample Heading', 'wc'),
 			'type'			=> 'h2',
@@ -796,7 +790,7 @@ if( !function_exists('wordpresscanvas_heading_shortcode') ) {
 		
 		return $output;
 	}
-	add_shortcode( 'wc_heading', 'wordpresscanvas_heading_shortcode' );
+	add_shortcode( 'wc_heading', 'wc_shortcodes_heading' );
 }
 
 
@@ -804,8 +798,8 @@ if( !function_exists('wordpresscanvas_heading_shortcode') ) {
  * Google Maps
  * @since v1.1
  */
-if (! function_exists( 'wordpresscanvas_shortcode_googlemaps' ) ) :
-	function wordpresscanvas_shortcode_googlemaps($atts, $content = null) {
+if (! function_exists( 'wc_shortcodes_googlemaps' ) ) :
+	function wc_shortcodes_googlemaps($atts, $content = null) {
 		
 		extract(shortcode_atts(array(
 				'title'		=> '',
@@ -818,8 +812,8 @@ if (! function_exists( 'wordpresscanvas_shortcode_googlemaps' ) ) :
 		), $atts));
 		
 		// load scripts
-		wp_enqueue_script('wordpresscanvas_googlemap');
-		wp_enqueue_script('wordpresscanvas_googlemap_api');
+		wp_enqueue_script('wc_shortcodes_googlemap');
+		wp_enqueue_script('wc_shortcodes_googlemap_api');
 		
 		
 		$output = '<div id="map_canvas_'.rand(1, 100).'" class="googlemap '. $class .'" style="height:'.$height.'px;width:100%">';
@@ -832,7 +826,7 @@ if (! function_exists( 'wordpresscanvas_shortcode_googlemaps' ) ) :
 		return $output;
 	   
 	}
-	add_shortcode( 'wc_googlemap', 'wordpresscanvas_shortcode_googlemaps' );
+	add_shortcode( 'wc_googlemap', 'wc_shortcodes_googlemaps' );
 endif;
 
 
@@ -840,8 +834,8 @@ endif;
  * Divider
  * @since v1.1
  */
-if( !function_exists('wordpresscanvas_divider_shortcode') ) {
-	function wordpresscanvas_divider_shortcode( $atts ) {
+if( !function_exists('wc_shortcodes_divider') ) {
+	function wc_shortcodes_divider( $atts ) {
 		extract( shortcode_atts( array(
 			'style'			=> 'solid',
 			'line'			=> 'single',
@@ -862,7 +856,7 @@ if( !function_exists('wordpresscanvas_divider_shortcode') ) {
 		}
 	 return '<hr class="wc-divider wc-divider-line-'.$line.' wc-divider-style-'. $style .' '. $class .'" '.$style_attr.' />';
 	}
-	add_shortcode( 'wc_divider', 'wordpresscanvas_divider_shortcode' );
+	add_shortcode( 'wc_divider', 'wc_shortcodes_divider' );
 }
 
 
