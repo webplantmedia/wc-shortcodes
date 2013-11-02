@@ -81,7 +81,7 @@ function wc_shortcodes_fullwidth( $atts, $content = null ) {
 		$inside = 'content';
 	}
 
-	return '<div class="wc-full-width-'.$inside.'">' . do_shortcode( $content ) . '</div>';
+	return '<div class="wc-shortcodes-full-width-'.$inside.'">' . do_shortcode( $content ) . '</div>';
 }
 
 
@@ -130,7 +130,7 @@ function wc_shortcodes_displayhtml( $atts, $content = null ) {
 		return null;
 
 	if ( $snippet = get_post_meta($post->ID, $name, true ) ) {
-        $html = '<div class="wc-html-wrapper">' . $snippet . '</div>';
+        $html = '<div class="wc-shortcodes-html-wrapper">' . $snippet . '</div>';
 	}
 
 	return $html;
@@ -213,7 +213,7 @@ add_shortcode( 'wc_pre' , 'wc_shortcodes_displaypre' );
  */
 if( !function_exists('wc_shortcodes_clear_floats') ) {
 	function wc_shortcodes_clear_floats() {
-	   return '<div class="wc-clear-floats"></div>';
+	   return '<div class="wc-shortcodes-clear-floats"></div>';
 	}
 	add_shortcode( 'wc_clear_floats', 'wc_shortcodes_clear_floats' );
 }
@@ -239,15 +239,15 @@ if( !function_exists('wc_shortcodes_callout') ) {
 		), $atts ) );
 		
 		$border_radius_style = ( $button_border_radius ) ? 'style="border-radius:'. $button_border_radius .'"' : NULL;
-		$output = '<div class="wc-callout wc-clearfix '. $class .'">';
-		$output .= '<div class="wc-callout-caption">';
-			if ( $icon_left ) $output .= '<span class="wc-callout-icon-left icon-'. $icon_left .'"></span>';
+		$output = '<div class="wc-shortcodes-callout wc-clearfix '. $class .'">';
+		$output .= '<div class="wc-shortcodes-callout-caption">';
+			if ( $icon_left ) $output .= '<span class="wc-shortcodes-callout-icon-left icon-'. $icon_left .'"></span>';
 			$output .= do_shortcode ( $content );
-			if ( $icon_right ) $output .= '<span class="wc-callout-icon-right icon-'. $icon_right .'"></span>';
+			if ( $icon_right ) $output .= '<span class="wc-shortcodes-callout-icon-right icon-'. $icon_right .'"></span>';
 		$output .= '</div>';	
 		if ( $button_text !== '' ) {
-			$output .= '<div class="wc-callout-button">';
-				$output .='<a href="'. $button_url .'" title="'. $button_text .'" target="_'. $button_target .'" class="wc-button '.$button_color .'" '. $border_radius_style .'><span class="wc-button-inner">'. $button_text .'</span></a>';
+			$output .= '<div class="wc-shortcodes-callout-button">';
+				$output .='<a href="'. $button_url .'" title="'. $button_text .'" target="_'. $button_target .'" class="wc-shortcodes-button '.$button_color .'" '. $border_radius_style .'><span class="wc-button-inner">'. $button_text .'</span></a>';
 			$output .='</div>';
 		}
 		$output .= '</div>';
@@ -276,11 +276,11 @@ if( !function_exists('wc_shortcodes_skillbar') ) {
 		wp_enqueue_script('wc_shortcodes_skillbar');
 		
 		// Display the accordion	';
-		$output = '<div class="wc-skillbar wc-clearfix '. $class .'" data-percent="'. $percentage .'%">';
-			if ( $title !== '' ) $output .= '<div class="wc-skillbar-title" style="background: '. $color .';"><span>'. $title .'</span></div>';
-			$output .= '<div class="wc-skillbar-bar" style="background: '. $color .';"></div>';
+		$output = '<div class="wc-shortcodes-skillbar wc-clearfix '. $class .'" data-percent="'. $percentage .'%">';
+			if ( $title !== '' ) $output .= '<div class="wc-shortcodes-skillbar-title" style="background: '. $color .';"><span>'. $title .'</span></div>';
+			$output .= '<div class="wc-shortcodes-skillbar-bar" style="background: '. $color .';"></div>';
 			if ( $show_percent == 'true' ) {
-				$output .= '<div class="wc-skill-bar-percent">'.$percentage.'%</div>';
+				$output .= '<div class="wc-shortcodes-skill-bar-percent">'.$percentage.'%</div>';
 			}
 		$output .= '</div>';
 		
@@ -301,7 +301,7 @@ if( !function_exists('wc_shortcodes_spacing') ) {
 			'class'	=> '',
 		  ),
 		  $atts ) );
-	 return '<hr class="wc-spacing '. $class .'" style="height: '. $size .'" />';
+	 return '<hr class="wc-shortcodes-spacing '. $class .'" style="height: '. $size .'" />';
 	}
 	add_shortcode( 'wc_spacing', 'wc_shortcodes_spacing' );
 }
@@ -337,13 +337,13 @@ if( !function_exists('wc_shortcodes_social_icons') ) {
 			'display' => 'facebook,google,twitter,pinterest,instagram,bloglovin,flickr,rss,email,custom1,custom2,custom3,custom4,custom5',
 		), $atts));
 
-		$class = trim( 'wc-social-icons-wrapper ' . $class );
+		$class = trim( 'wc-shortcodes-social-icons-wrapper ' . $class );
 
 		$order = explode( ',', $display );
 		$first = true;
 
 		$html = '<div class="' . $class . '">';
-			$html .= '<ul class="wc-social-icons clearfix wc-social-icons-align-'.$align.' wc-social-icons-size-'.$size.'">';
+			$html .= '<ul class="wc-shortcodes-social-icons clearfix wc-social-icons-align-'.$align.' wc-social-icons-size-'.$size.'">';
 				foreach ( $order as $key ) {
 					if ( ! array_key_exists( $key, $social ) )
 						continue;
@@ -382,7 +382,7 @@ if ( !function_exists( 'wc_shortcodes_highlight' ) ) {
 			'class'	=> '',
 		  ),
 		  $atts ) );
-		  return '<span class="wc-highlight wc-highlight-'. $color .' '. $class .'">' . do_shortcode( $content ) . '</span>';
+		  return '<span class="wc-shortcodes-highlight wc-highlight-'. $color .' '. $class .'">' . do_shortcode( $content ) . '</span>';
 	
 	}
 	add_shortcode( 'wc_highlight', 'wc_shortcodes_highlight' );
@@ -410,14 +410,14 @@ if( !function_exists('wc_shortcodes_button') ) {
 		
 		// $border_radius_style = ( $border_radius ) ? 'style="border-radius:'. $border_radius .'"' : NULL;		
 		$rel = ( $rel ) ? 'rel="'.$rel.'"' : NULL;
-		$type = 'wc-button-' . $type;
+		$type = 'wc-shortcodes-button-' . $type;
 		
 		$button = NULL;
-		$button .= '<a href="' . $url . '" class="wc-button ' . $type . ' '. $class .'" target="_'.$target.'" title="'. $title .'" '. $rel .'>';
-			$button .= '<span class="wc-button-inner">';
-				if ( $icon_left ) $button .= '<span class="wc-button-icon-left icon-'. $icon_left .'"></span>';
+		$button .= '<a href="' . $url . '" class="wc-shortcodes-button ' . $type . ' '. $class .'" target="_'.$target.'" title="'. $title .'" '. $rel .'>';
+			$button .= '<span class="wc-shortcodes-button-inner">';
+				if ( $icon_left ) $button .= '<span class="wc-shortcodes-button-icon-left icon-'. $icon_left .'"></span>';
 				$button .= $content;
-				if ( $icon_right ) $button .= '<span class="wc-button-icon-right icon-'. $icon_right .'"></span>';
+				if ( $icon_right ) $button .= '<span class="wc-shortcodes-button-icon-right icon-'. $icon_right .'"></span>';
 			$button .= '</span>';			
 		$button .= '</a>';
 		return $button;
@@ -451,7 +451,7 @@ if( !function_exists('wc_shortcodes_box') ) {
 			}
 		  
 		  $alert_content = '';
-		  $alert_content .= '<div class="wc-box clearfix wc-box-' . $color . ' '. $class .'" style="text-align:'. $text_align .';'. $style_attr .'">';
+		  $alert_content .= '<div class="wc-shortcodes-box clearfix wc-box-' . $color . ' '. $class .'" style="text-align:'. $text_align .';'. $style_attr .'">';
 		  $alert_content .= ' '. do_shortcode($content) .'</div>';
 		  return $alert_content;
 	}
@@ -472,9 +472,9 @@ if( !function_exists('wc_shortcodes_testimonial') ) {
 			'class'	=> '',
 		  ), $atts ) );
 		$testimonial_content = '';
-		$testimonial_content .= '<div class="wc-testimonial clearfix wc-testimonial-'.$position.' '. $class .'"><div class="wc-testimonial-content">';
+		$testimonial_content .= '<div class="wc-shortcodes-testimonial clearfix wc-testimonial-'.$position.' '. $class .'"><div class="wc-testimonial-content">';
 		$testimonial_content .= $content;
-		$testimonial_content .= '</div><div class="wc-testimonial-author">';
+		$testimonial_content .= '</div><div class="wc-shortcodes-testimonial-author">';
 		$testimonial_content .= $by .'</div></div>';	
 		return $testimonial_content;
 	}
@@ -495,10 +495,10 @@ if( !function_exists('wc_shortcodes_center') ) {
 			'class'			=> '',
 		  ), $atts ) );
 
-		// $append_clearfix = '<div class="wc-clear-floats"></div>';
+		// $append_clearfix = '<div class="wc-shortcodes-clear-floats"></div>';
 		$style = empty( $max_width ) ? '' : ' style="max-width:'.$max_width.';"';
 
-		return '<div class="wc-center clearfix wc-center-inner-align-'. $text_align .' '. $class .'"' . $style . '>' . do_shortcode($content) . '</div>';
+		return '<div class="wc-shortcodes-center clearfix wc-center-inner-align-'. $text_align .' '. $class .'"' . $style . '>' . do_shortcode($content) . '</div>';
 	}
 }
 
@@ -528,9 +528,9 @@ if( !function_exists('wc_shortcodes_column') ) {
 				$style = ' style="text-align: '.$text_align.';"';
 		}
 
-		$append_clearfix = 'last' == $position ? '<div class="wc-clear-floats"></div>' : '';
+		$append_clearfix = 'last' == $position ? '<div class="wc-shortcodes-clear-floats"></div>' : '';
 
-		return '<div'.$style.' class="wc-column wc-' . $size . ' wc-column-'.$position.' '. $class .'">' . do_shortcode($content) . '</div>';
+		return '<div'.$style.' class="wc-shortcodes-column wc-' . $size . ' wc-column-'.$position.' '. $class .'">' . do_shortcode($content) . '</div>';
 	}
 }
 
@@ -544,7 +544,7 @@ if( !function_exists('wc_shortcodes_column') ) {
  */
 if( !function_exists('wc_shortcodes_row') ) {
 	function wc_shortcodes_row( $atts, $content = null ){
-		return '<div class="wc-row clearfix">' . do_shortcode($content) . '</div>';
+		return '<div class="wc-shortcodes-row clearfix">' . do_shortcode($content) . '</div>';
 	}
 }
 
@@ -576,7 +576,7 @@ if( !function_exists('wc_shortcodes_toggle') ) {
 		wp_enqueue_script('wc_shortcodes_toggle');
 		
 		// Display the Toggle
-		return '<div class="wc-toggle '. $class .'"><div class="wc-toggle-trigger"><a href="#">'. $title .'</a></div><div style="'.$style.'" class="wc-toggle-container">' . do_shortcode($content) . '</div></div>';
+		return '<div class="wc-shortcodes-toggle '. $class .'"><div class="wc-toggle-trigger"><a href="#">'. $title .'</a></div><div style="'.$style.'" class="wc-toggle-container">' . do_shortcode($content) . '</div></div>';
 	}
 }
 
@@ -596,17 +596,17 @@ if( !function_exists('wc_shortcodes_accordion_main') ) {
 			'collapse' => 0,
 		), $atts ) );
 
-		$type = 'wc-accordion-default';
+		$type = 'wc-shortcodes-accordion-default';
 
 		if ( (int) $collapse )
-			$type = 'wc-accordion-collapse';
+			$type = 'wc-shortcodes-accordion-collapse';
 		
 		// Enque scripts
 		wp_enqueue_script('jquery-ui-accordion');
 		wp_enqueue_script('wc_shortcodes_accordion');
 		
 		// Display the accordion	
-		return '<div class="wc-accordion '.$type.' '. $class .'">' . do_shortcode($content) . '</div>';
+		return '<div class="wc-shortcodes-accordion '.$type.' '. $class .'">' . do_shortcode($content) . '</div>';
 	}
 }
 
@@ -630,7 +630,7 @@ if( !function_exists('wc_shortcodes_accordion_section') ) {
 
 		$style = implode( ';', $style );
 		  
-		return '<div class="wc-accordion-trigger '. $class .'"><a href="#">'. $title .'</a></div><div style="'.$style.'" class="wc-accordion-content">' . do_shortcode($content) . '</div>';
+		return '<div class="wc-shortcodes-accordion-trigger '. $class .'"><a href="#">'. $title .'</a></div><div style="'.$style.'" class="wc-accordion-content">' . do_shortcode($content) . '</div>';
 	}
 	
 }
@@ -656,10 +656,10 @@ if (!function_exists('wc_shortcodes_tabgroup')) {
 		if( isset($matches[1]) ){ $tab_titles = $matches[1]; }
 		$output = '';
 		if( count($tab_titles) ){
-		    $output .= '<div id="wc-tab-'. rand(1, 100) .'" class="wc-tabs">';
+		    $output .= '<div id="wc-shortcodes-tab-'. rand(1, 100) .'" class="wc-tabs">';
 			$output .= '<ul class="ui-tabs-nav clearfix">';
 			foreach( $tab_titles as $tab ){
-				$output .= '<li><a href="#wc-tab-'. sanitize_title( $tab[0] ) .'">' . $tab[0] . '</a></li>';
+				$output .= '<li><a href="#wc-shortcodes-tab-'. sanitize_title( $tab[0] ) .'">' . $tab[0] . '</a></li>';
 			}
 		    $output .= '</ul>';
 		    $output .= do_shortcode( $content );
@@ -677,7 +677,7 @@ if (!function_exists('wc_shortcodes_tab')) {
 			'class'	=> ''
 		);
 		extract( shortcode_atts( $defaults, $atts ) );
-		return '<div id="wc-tab-'. sanitize_title( $title ) .'" class="tab-content '. $class .'">'. do_shortcode( $content ) .'</div>';
+		return '<div id="wc-shortcodes-tab-'. sanitize_title( $title ) .'" class="tab-content '. $class .'">'. do_shortcode( $content ) .'</div>';
 	}
 }
 
@@ -708,16 +708,16 @@ if( !function_exists('wc_shortcodes_pricing') ) {
 		
 		//start content  
 		$pricing_content ='';
-		$pricing_content .= '<div class="wc-pricing wc-pricing-type-'. $type .' '. $class .'">';
-			$pricing_content .= '<div class="wc-pricing-header">';
+		$pricing_content .= '<div class="wc-shortcodes-pricing wc-pricing-type-'. $type .' '. $class .'">';
+			$pricing_content .= '<div class="wc-shortcodes-pricing-header">';
 				$pricing_content .= '<h5>'. $plan. '</h5>';
-				$pricing_content .= '<div class="wc-pricing-cost">'. $cost .'</div><div class="wc-pricing-per">'. $per .'</div>';
+				$pricing_content .= '<div class="wc-shortcodes-pricing-cost">'. $cost .'</div><div class="wc-pricing-per">'. $per .'</div>';
 			$pricing_content .= '</div>';
-			$pricing_content .= '<div class="wc-pricing-content">';
+			$pricing_content .= '<div class="wc-shortcodes-pricing-content">';
 				$pricing_content .= ''. $content. '';
 			$pricing_content .= '</div>';
 			if( $button_url ) {
-				$pricing_content .= '<div class="wc-pricing-button"><a href="'. $button_url .'" class="wc-button wc-button-'.$type.'" target="_'. $button_target .'" rel="'. $button_rel .'"><span class="wc-button-inner">'. $button_text .'</span></a></div>';
+				$pricing_content .= '<div class="wc-shortcodes-pricing-button"><a href="'. $button_url .'" class="wc-button wc-button-'.$type.'" target="_'. $button_target .'" rel="'. $button_rel .'"><span class="wc-button-inner">'. $button_text .'</span></a></div>';
 			}
 		$pricing_content .= '</div>';  
 		return $pricing_content;
@@ -779,10 +779,10 @@ if( !function_exists('wc_shortcodes_heading') ) {
 		if ( 'h1' == $type )
 			$class = trim( 'entry-title ' . $class );
 
-	 	$output = '<'.$type.' class="wc-heading '. $text_align .' '. $class .'" style="'.$style_attr.'"><span>';
-		if ( $icon_left ) $output .= '<i class="wc-button-icon-left icon-'. $icon_left .'"></i>';
+	 	$output = '<'.$type.' class="wc-shortcodes-heading '. $text_align .' '. $class .'" style="'.$style_attr.'"><span>';
+		if ( $icon_left ) $output .= '<i class="wc-shortcodes-button-icon-left icon-'. $icon_left .'"></i>';
 			$output .= $title;
-		if ( $icon_right ) $output .= '<i class="wc-button-icon-right icon-'. $icon_right .'"></i>';
+		if ( $icon_right ) $output .= '<i class="wc-shortcodes-button-icon-right icon-'. $icon_right .'"></i>';
 		$output .= '</'.$type.'></span>';
 
 		if ( 'h1' == $type )
@@ -854,7 +854,7 @@ if( !function_exists('wc_shortcodes_divider') ) {
 		} else {
 			$style_attr = NULL;
 		}
-	 return '<hr class="wc-divider wc-divider-line-'.$line.' wc-divider-style-'. $style .' '. $class .'" '.$style_attr.' />';
+	 return '<hr class="wc-shortcodes-divider wc-divider-line-'.$line.' wc-divider-style-'. $style .' '. $class .'" '.$style_attr.' />';
 	}
 	add_shortcode( 'wc_divider', 'wc_shortcodes_divider' );
 }
