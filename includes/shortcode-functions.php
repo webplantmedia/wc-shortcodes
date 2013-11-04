@@ -338,20 +338,21 @@ if( !function_exists('wc_shortcodes_social_icons') ) {
 		$first = true;
 
 		$html = '<div class="' . $class . '">';
-			$html .= '<ul class="wc-shortcodes-social-icons wc-shortcodes-clearfix wc-social-icons-align-'.$align.' wc-social-icons-size-'.$size.'">';
+			$html .= '<ul class="wc-shortcodes-social-icons wc-shortcodes-clearfix wc-shortcodes-social-icons-align-'.$align.' wc-shortcodes-social-icons-size-'.$size.'">';
 				foreach ( $order as $key ) {
 					if ( ! array_key_exists( $key, $social ) )
 						continue;
 
-					$link_option_name = 'social_media_' . $key . '_link';
-					$icon_option_name = 'social_media_' . $key . '_icon';
+					$link_option_name = WC_SHORTCODES_PREFIX . $key . '_link';
+					$icon_option_name = WC_SHORTCODES_PREFIX . $key . '_icon';
 
-					if ( ( $social_link = wc_shortcodes_get_option( $link_option_name ) ) && ( $icon_url = wc_shortcodes_get_option( $icon_option_name ) ) ) {
-						$social_link = apply_filters( 'wc_shortcodes_social_link', $key, $social_link );
+					if (  $icon_url = get_option( $icon_option_name ) ) {
+						$social_link = get_option( $link_option_name );
+						$social_link = apply_filters( 'wc_shortcodes_social_link', $social_link, $key );
 						$first_class = $first ? ' first-icon' : '';
 						$first = false;
 
-						$html .= '<li class="social-icon social-icon-' . $key . $first_class . '">';
+						$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . $key . $first_class . '">';
 							$html .='<a href="'.$social_link.'">';
 								$html .= '<img src="'.$icon_url.'">';
 							$html .= '</a>';
