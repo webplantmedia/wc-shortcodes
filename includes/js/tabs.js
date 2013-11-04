@@ -1,1 +1,1 @@
-jQuery(function($){$(document).ready(function(){$( ".wc-tabs" ).tabs();});});
+jQuery(function($){	$(document).ready(function(){		$( ".wc-shortcodes-tabs" ).tabs();	});});

@@ -13,6 +13,8 @@ if( !function_exists ('wc_shortcodes_scripts') ) :
 	function wc_shortcodes_scripts() {
 		$ver = '1.0';
 
+		wp_enqueue_style( 'wc_shortcodes_style', plugin_dir_url( __FILE__ ) . 'css/style.css', array( ), '2.1.5' );
+
 		wp_enqueue_script('jquery');
 		wp_register_script( 'wc_shortcodes_tabs', plugin_dir_url( __FILE__ ) . 'js/tabs.js', array ( 'jquery', 'jquery-ui-tabs'), $ver, true );
 		wp_register_script( 'wc_shortcodes_toggle', plugin_dir_url( __FILE__ ) . 'js/toggle.js', 'jquery', $ver, true );

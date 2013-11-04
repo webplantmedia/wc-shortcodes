@@ -1,7 +1,7 @@
 jQuery(function($){
 	$(document).ready(function(){
-		$('.wc-skillbar').each(function(){
-			$(this).find('.wc-skillbar-bar').animate({ width: $(this).attr('data-percent') }, 1500 );
+		$('.wc-shortcodes-skillbar').each(function(){
+			$(this).find('.wc-shortcodes-skillbar-bar').animate({ width: $(this).attr('data-percent') }, 1500 );
 		});
 	});
 });

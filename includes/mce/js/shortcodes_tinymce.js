@@ -328,7 +328,7 @@
 					
 					
 					if(id == "fullwidth") {
-						tinyMCE.activeEditor.selection.setContent('[wc_fullwidth inside="content"]' + wcDummyContent + '[/wc_fullwidth]');
+						tinyMCE.activeEditor.selection.setContent('[wc_fullwidth selector="#main"]' + wcDummyContent + '[/wc_fullwidth]');
 					}
 					
 					
