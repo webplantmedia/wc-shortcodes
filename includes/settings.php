@@ -1,5 +1,4 @@
 <?php
-
 function wc_shortcodes_options_enqueue_scripts() {
 	wp_register_style( 'wc-shortcodes-options', WC_SHORTCODES_PLUGIN_URL . 'includes/css/admin.css', array(), WC_SHORTCODES_VERSION, 'all' );
 	wp_enqueue_style( 'wc-shortcodes-options' );
