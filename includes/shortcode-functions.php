@@ -720,16 +720,6 @@ if( !function_exists('wc_shortcodes_pricing') ) {
 }
 
 
-
-
-/************************
- *
- * Version 1.1 Additions
- *
-*************************/
-
-
-
 /*
  * Heading
  * @since v1.1
@@ -852,6 +842,3 @@ if( !function_exists('wc_shortcodes_divider') ) {
 	}
 	add_shortcode( 'wc_divider', 'wc_shortcodes_divider' );
 }
-
-
-

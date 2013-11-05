@@ -22,15 +22,15 @@
 				contentWidth = $contentWidth.width();
 
 				// get position
-				sitePos = $( siteWidthId ).offset();
-				contentPos = $contentWidth.offset();
+				// sitePos = $( siteWidthId ).offset();
+				// contentPos = $contentWidth.offset();
 
 				// calculate margin
-				marginLeft = Math.floor( contentPos.left - sitePos.left ) * -1;
-				marginRight = Math.floor( siteWidth - contentWidth + sitePos.left - contentPos.left ) * -1;
+				// marginLeft = Math.floor( contentPos.left - sitePos.left ) * -1;
+				// marginRight = Math.floor( siteWidth - contentWidth + sitePos.left - contentPos.left ) * -1;
 
 				// used for centering.
-				// margin = Math.floor( ( siteWidth - contentWidth ) / 2 ) * -1;
+				marginLeft = marginRight = Math.floor( ( siteWidth - contentWidth ) / 2 ) * -1;
 
 				// apply margin offset
 				$this.css( {'margin-left': marginLeft+'px', 'margin-right': marginRight+'px'} );

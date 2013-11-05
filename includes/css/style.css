@@ -863,6 +863,16 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { }
 	pre .atv, code .atv { color: #060 }
 }
 
+pre.pre-scrollable {
+	max-height: 600px;
+}
+pre.pre-wrap {
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
 
 /**
  * [wc_center]
