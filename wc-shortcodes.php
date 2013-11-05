@@ -18,3 +18,4 @@ require_once( dirname(__FILE__) . '/includes/settings.php' ); // Adds settings
 require_once( dirname(__FILE__) . '/includes/scripts.php' ); // Adds plugin JS and CSS
 require_once( dirname(__FILE__) . '/includes/shortcode-functions.php'); // Main shortcode functions
 require_once( dirname(__FILE__) . '/includes/mce/shortcodes_tinymce.php'); // Add mce buttons to post editor
+require_once( dirname(__FILE__) . '/includes/widgets.php' ); // include any widgets
