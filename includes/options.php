@@ -285,4 +285,23 @@ $wc_shortcodes_options = array(
 			),
 		),
 	),
+	'misc' => array(
+		'title' => 'Misc',
+		'sections' => array(
+			array(
+				'section' => 'wc-shortcodes-options-facebook-section',
+				'title' => 'Miscellaneous Options',
+				'options' => array(
+					array(
+						'id' => 'enable_shortcode_css',
+						'title' => 'Shortcode CSS',
+						'default' => '1',
+						'description' => '',
+						'label' => 'Use shortcode CSS provided by plugin',
+						'type' => 'checkbox',
+					),
+				),
+			),
+		),
+	),
 );

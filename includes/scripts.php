@@ -11,9 +11,10 @@
  */
 if( !function_exists ('wc_shortcodes_scripts') ) :
 	function wc_shortcodes_scripts() {
-		$ver = '1.0';
+		$ver = WC_SHORTCODES_VERSION;
 
-		wp_enqueue_style( 'wc_shortcodes_style', plugin_dir_url( __FILE__ ) . 'css/style.css', array( ), '2.1.5' );
+		if ( get_option( WC_SHORTCODES_PREFIX . 'enable_shortcode_css', true ) )
+			wp_enqueue_style( 'wc_shortcodes_style', plugin_dir_url( __FILE__ ) . 'css/style.css', array( ), $ver );
 
 		wp_enqueue_script('jquery');
 		wp_register_script( 'wc_shortcodes_tabs', plugin_dir_url( __FILE__ ) . 'js/tabs.js', array ( 'jquery', 'jquery-ui-tabs'), $ver, true );

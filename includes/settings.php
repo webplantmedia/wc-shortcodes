@@ -92,6 +92,9 @@ function wc_shortcodes_options_display_page() {
 	<?php
 }
 
+/*
+ * Display Options 
+ */
 function wc_shortcodes_options_display_setting( $args ) {
 	if ( !isset( $args['type'] ) )
 		return;
@@ -105,6 +108,9 @@ function wc_shortcodes_options_display_setting( $args ) {
 	switch ( $args['type'] ) {
 		case 'image' :
 			wc_shortcodes_options_display_image_field( $args );
+			break;
+		case 'checkbox' :
+			wc_shortcodes_options_display_checkbox_field( $args );
 			break;
 		default :
 			wc_shortcodes_options_input_field( $args );
@@ -153,17 +159,64 @@ function wc_shortcodes_options_display_image_field( $args ) {
 	<?php
 }
 
+function wc_shortcodes_options_display_checkbox_field( $args ) {
+	extract( $args );
+
+	$val = get_option( $option_name, $default );
+	?>
+
+	<?php if ( isset( $label ) ) : ?>
+		<label for="<?php echo esc_attr($option_name); ?>">
+	<?php endif; ?>
+
+	<input name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>" type="checkbox" value="1" <?php checked( true, $val ); ?> />
+
+	<?php if ( isset( $label ) ) : ?>
+		&nbsp;<?php echo $label; ?></label>&nbsp;
+	<?php endif; ?>
+
+	<?php if ( isset( $description ) && !empty( $description ) ) : ?>
+		<p class="description"><?php echo $description; ?></p>
+	<?php endif; ?>
+	<?php
+}
+
+/*
+ * Sanitize Options
+ */
 function wc_shortcodes_options_find_sanitize_callback( $type ) {
 	switch ( $type ) {
 		case 'color' :
 			return 'wc_shortcodes_options_sanitize_hex_color';
 		case 'image' :
 			return 'esc_url_raw';
+		case 'checkbox' :
+			return 'wc_shortcodes_options_sanitize_checkbox';
 	}
 
 	return '';
 }
 
+function wc_shortcodes_options_sanitize_checkbox( $val ) {
+	if ( $val )
+		return 1;
+	else
+		return 0;
+}
+
+function wc_shortcodes_options_sanitize_hex_color( $color ) {
+	if ( '' === $color )
+		return '';
+
+	if ( preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) )
+		return $color;
+
+	return null;
+}
+
+/*
+ * Misc
+ */
 function wc_shortcodes_remember_last_options_tab() {
 	global $page;
 
@@ -174,4 +227,3 @@ function wc_shortcodes_remember_last_options_tab() {
 	}
 }
 add_action( 'admin_init', 'wc_shortcodes_remember_last_options_tab' );
-
