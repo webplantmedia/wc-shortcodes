@@ -1,11 +1,13 @@
-=== Grid Columns ===
+=== WordPress Canvas Shortcodes ===
 
+Contributors: cbaldelomar
 Donate link: http://webplantmedia.com/pay-now/
-Tags: shortcode
+Tags: shortcode, shortcodes
 Requires at least: 3.7
 Tested up to: 3.7.1
-License: GPLv2 or later
 Stable tag: 1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A family of shortcodes to enhance site functionality. 
 
