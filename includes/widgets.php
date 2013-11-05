@@ -108,7 +108,7 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 		);
 		$order = isset( $instance['order'] ) ? $instance['order'] : $default_order;
 		$title = isset( $instance['title'] ) ? $instance['title'] : 'Follow Me!';
-		$columns = isset( $instance['columns'] ) ? (int) $instance['columns'] : 3;
+		$columns = isset( $instance['columns'] ) ? (int) $instance['columns'] : 6;
 		?>
 		<label><?php _e('Order:'); ?></label>
 		<ul class="wc-shortcodes-clearfix wc-shortcodes-social-icons">
