@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: WordPress Canvas Shortcodes
-Plugin URI: http://contactform7.com/
-Description: Just another shortcode plugin. Simple but flexible.
+Plugin URI: http://wordpresscanvas.com/features/shortcodes/
+Description: A family of shortcodes to enhance site functionality.
 Author: Chris Baldelomar
 Author URI: http://webplantmedia.com/
 Version: 1.0
