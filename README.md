@@ -44,6 +44,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.3
+
+* Fixed style bug with columns not changing width on mobile devices
+
 ### Version 1.2
 
 * Added banner image.
