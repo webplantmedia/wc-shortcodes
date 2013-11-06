@@ -44,6 +44,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.2
+
+* Added banner image.
+
 ### Version 1.1
 
 * Plugin released.  Everything is new!
