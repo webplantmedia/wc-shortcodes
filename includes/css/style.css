@@ -195,23 +195,21 @@
 }
 
 @media (max-width: 480px) {
-	body {
-		.wc-shortcodes-one-half,
-		.wc-shortcodes-one-third,
-		.wc-shortcodes-two-third,
-		.wc-shortcodes-three-fourth,
-		.wc-shortcodes-one-fourth,
-		.wc-shortcodes-one-fifth,
-		.wc-shortcodes-two-fifth,
-		.wc-shortcodes-three-fifth,
-		.wc-shortcodes-four-fifth,
-		.wc-shortcodes-one-sixth,
-		.wc-shortcodes-five-sixth {
-			width: 100%;
-			float: none;
-			margin-left: 0;
-			margin-bottom: 0;
-		}
+	body .wc-shortcodes-one-half,
+	body .wc-shortcodes-one-third,
+	body .wc-shortcodes-two-third,
+	body .wc-shortcodes-three-fourth,
+	body .wc-shortcodes-one-fourth,
+	body .wc-shortcodes-one-fifth,
+	body .wc-shortcodes-two-fifth,
+	body .wc-shortcodes-three-fifth,
+	body .wc-shortcodes-four-fifth,
+	body .wc-shortcodes-one-sixth,
+	body .wc-shortcodes-five-sixth {
+		width: 100%;
+		float: none;
+		margin-left: 0;
+		margin-bottom: 0;
 	}
 }
 
