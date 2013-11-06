@@ -44,6 +44,6 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
-### Version 0.1.0
+### Version 1.1
 
 * Plugin released.  Everything is new!

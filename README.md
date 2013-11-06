@@ -5,7 +5,7 @@
 **Tags:** shortcode, shortcodes  
 **Requires at least:** 3.7  
 **Tested up to:** 3.7.1  
-**Stable tag:** trunk
+**Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -44,6 +44,7 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
-### Version 0.1.0
+### Version 1.1
 
 * Plugin released.  Everything is new!
+
