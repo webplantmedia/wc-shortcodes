@@ -8,7 +8,11 @@
 		createControl : function(btn, e) {
 			if ( btn === "wc_shortcodes_button" ) {
 				var a = this;
-				btn = e.createSplitButton('wc_shortcodes_button', {
+
+				// out puts an js error when clicking on button
+				// btn = e.createSplitButton('wc_shortcodes_button', {
+
+				btn = e.createMenuButton('wc_shortcodes_button', {
 					title: "Insert Shortcode",
 					image: tinymce.plugins.wcShortcodeMce.theurl +"/images/shortcodes.png",
 					icons: false,
