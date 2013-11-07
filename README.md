@@ -44,6 +44,12 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.4
+
+* Fixed minor JS bugs
+* Ran Javascript through jshint
+* Fixed minor shortcode button bug in TinyMCE editor
+
 ### Version 1.3
 
 * Fixed style bug with columns not changing width on mobile devices
