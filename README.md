@@ -44,6 +44,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.5
+
+* prepended mailto to email addresses
+
 ### Version 1.4
 
 * Fixed minor JS bugs
