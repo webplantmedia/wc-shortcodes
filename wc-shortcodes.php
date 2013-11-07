@@ -5,7 +5,7 @@ Plugin URI: http://wordpresscanvas.com/features/shortcodes/
 Description: A family of shortcodes to enhance site functionality.
 Author: Chris Baldelomar
 Author URI: http://webplantmedia.com/
-Version: 1.5
+Version: 1.6
 License: GPLv2 or later
 */
 

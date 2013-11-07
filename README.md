@@ -44,6 +44,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.6
+
+* Fixed bug with social icons displaying even if social link was not given.
+
 ### Version 1.5
 
 * prepended mailto to email addresses
