@@ -1,12 +1,18 @@
 ( function( $ ) {
+	"use strict";
+
 	var fullWidthSite = function() {
 		$('.wc-shortcodes-full-width').each( function() {
 			var $this,
-				siteWidthId, contentWidthId,
-				$siteWidth, $contentWidth,
-				siteWidth, contentWidth,
-				sitePos, contentPos,
-				marginLeft, marginRight;
+				siteWidthId,
+				$siteWidth,
+				$contentWidth,
+				siteWidth,
+				contentWidth,
+				// sitePos,
+				// contentPos,
+				marginLeft,
+				marginRight;
 
 			$this = $(this);
 
@@ -36,7 +42,7 @@
 				$this.css( {'margin-left': marginLeft+'px', 'margin-right': marginRight+'px'} );
 			}
 		});
-	}
+	};
 	fullWidthSite();
 
 	$(window).resize( fullWidthSite );

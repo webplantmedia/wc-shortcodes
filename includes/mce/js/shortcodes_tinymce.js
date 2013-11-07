@@ -1,17 +1,19 @@
-(function() {	
+(function () {
+	"use strict";
+
 	tinymce.create('tinymce.plugins.wcShortcodeMce', {
 		init : function(ed, url){
 			tinymce.plugins.wcShortcodeMce.theurl = url;
 		},
 		createControl : function(btn, e) {
-			if ( btn == "wc_shortcodes_button" ) {
-				var a = this;	
-				var btn = e.createSplitButton('wc_shortcodes_button', {
-	                title: "Insert Shortcode",
+			if ( btn === "wc_shortcodes_button" ) {
+				var a = this;
+				btn = e.createSplitButton('wc_shortcodes_button', {
+					title: "Insert Shortcode",
 					image: tinymce.plugins.wcShortcodeMce.theurl +"/images/shortcodes.png",
 					icons: false,
-	            });
-	            btn.onRenderMenu.add(function (c, b) {
+				});
+				btn.onRenderMenu.add(function (c, b) {
 					
 					b.add({title : 'WC Shortcodes', 'class' : 'mceMenuItemTitle'}).setDisabled(1);
 					
@@ -41,7 +43,7 @@
 						a.render( c, "Heading", "heading" );
 						a.render( c, "Pricing Table", "pricing" );
 						a.render( c, "Skillbar", "skillbar" );
-						a.render( c, "Social Icon", "social" );	
+						a.render( c, "Social Icon", "social" );
 						a.render( c, "Testimonial", "testimonial" );
 						a.render( c, "HTML", "html" );
 					
@@ -108,10 +110,10 @@
 					
 					
 				});
-	            
-	          return btn;
+
+				return btn;
 			}
-			return null;               
+			return null;
 		},
 		render : function(ed, title, id) {
 			ed.add({
@@ -122,15 +124,16 @@
 					var mceSelected = tinyMCE.activeEditor.selection.getContent();
 					
 					// Add highlighted content inside the shortcode when possible - yay!
+					var wcDummyContent;
 					if ( mceSelected ) {
-						var wcDummyContent = mceSelected;
+						wcDummyContent = mceSelected;
 					} else {
-						var wcDummyContent = 'Sample Content';
+						wcDummyContent = 'Sample Content';
 					}
 					var wcParagraphContent = '<p>Sample Content</p>';
 					
 					// Accordion
-					if(id == "accordion") {
+					if(id === "accordion") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_accordion collapse="0"][wc_accordion_section title="Section 1"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section][wc_accordion_section title="Section 2"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section][/wc_accordion]</p>');
 					}
 					
@@ -138,25 +141,25 @@
 					
 					
 					// Boxes
-					if(id == "primaryBox") {
+					if(id === "primaryBox") {
 						tinyMCE.activeEditor.selection.setContent('[wc_box color="primary" text_align="left"]' + wcDummyContent + '[/wc_box]');
 					}
-					if(id == "secondaryBox") {
+					if(id === "secondaryBox") {
 						tinyMCE.activeEditor.selection.setContent('[wc_box color="secondary" text_align="left"]' + wcDummyContent + '[/wc_box]');
 					}
-					if(id == "inverseBox") {
+					if(id === "inverseBox") {
 						tinyMCE.activeEditor.selection.setContent('[wc_box color="inverse" text_align="left"]' + wcDummyContent + '[/wc_box]');
 					}
-					if(id == "successBox") {
+					if(id === "successBox") {
 						tinyMCE.activeEditor.selection.setContent('[wc_box color="success" text_align="left"]' + wcDummyContent + '[/wc_box]');
 					}
-					if(id == "warningBox") {
+					if(id === "warningBox") {
 						tinyMCE.activeEditor.selection.setContent('[wc_box color="warning" text_align="left"]' + wcDummyContent + '[/wc_box]');
 					}
-					if(id == "dangerBox") {
+					if(id === "dangerBox") {
 						tinyMCE.activeEditor.selection.setContent('[wc_box color="danger" text_align="left"]' + wcDummyContent + '[/wc_box]');
 					}
-					if(id == "infoBox") {
+					if(id === "infoBox") {
 						tinyMCE.activeEditor.selection.setContent('[wc_box color="info" text_align="left"]' + wcDummyContent + '[/wc_box]');
 					}
 					
@@ -164,7 +167,7 @@
 					
 					
 					// Button
-					if(id == "button") {
+					if(id === "button") {
 						tinyMCE.activeEditor.selection.setContent('[wc_button type="primary" url="http://www.wordpresscanvas.com" title="Visit Site" target="self"]' + wcDummyContent + '[/wc_button]');
 					}
 					
@@ -172,7 +175,7 @@
 					
 					
 					// Clear Floats
-					if(id == "clear") {
+					if(id === "clear") {
 						tinyMCE.activeEditor.selection.setContent('[wc_clear_floats]');
 					}
 					
@@ -180,56 +183,56 @@
 					
 					
 					// Columns
-					if(id == "half-half") {
+					if(id === "half-half") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="one-half" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
-					if(id == "third-third-third") {
+					if(id === "third-third-third") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="one-third" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
-					if(id == "third-twothird") {
+					if(id === "third-twothird") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="one-third" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="two-third" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
-					if(id == "twothird-third") {
+					if(id === "twothird-third") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="two-third" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
-					if(id == "fourth-fourth-fourth-fourth") {
+					if(id === "fourth-fourth-fourth-fourth") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="one-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
-					if(id == "fourth-half-fourth") {
+					if(id === "fourth-half-fourth") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="one-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
-					if(id == "half-fourth-fourth") {
+					if(id === "half-fourth-fourth") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="one-half" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
-					if(id == "fourth-fourth-half") {
+					if(id === "fourth-fourth-half") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="one-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
-					if(id == "fourth-three-fourth") {
+					if(id === "fourth-three-fourth") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="one-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="three-fourth" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
-					if(id == "three-fourth-fourth") {
+					if(id === "three-fourth-fourth") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_row][wc_column size="three-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcParagraphContent + '<p>[/wc_column][/wc_row]</p>');
 					}
 					
 									
 				
 					// Divider
-					if(id == "solidDivider") {
+					if(id === "solidDivider") {
 						tinyMCE.activeEditor.selection.setContent('[wc_divider style="solid" line="single" margin_top="" margin_bottom=""]');
 					}
-					if(id == "dashedDivider") {
+					if(id === "dashedDivider") {
 						tinyMCE.activeEditor.selection.setContent('[wc_divider style="dashed" line="single" margin_top="" margin_bottom=""]');
 					}
-					if(id == "dottedDivider") {
+					if(id === "dottedDivider") {
 						tinyMCE.activeEditor.selection.setContent('[wc_divider style="dotted" line="single" margin_top="" margin_bottom=""]');
 					}
-					if(id == "doubleDivider") {
+					if(id === "doubleDivider") {
 						tinyMCE.activeEditor.selection.setContent('[wc_divider style="solid" line="double" margin_top="" margin_bottom=""]');
 					}
-					if(id == "tripleDivider") {
+					if(id === "tripleDivider") {
 						tinyMCE.activeEditor.selection.setContent('[wc_divider style="solid" line="triple" margin_top="" margin_bottom=""]');
 					}
-					if(id == "imageDivider") {
+					if(id === "imageDivider") {
 						tinyMCE.activeEditor.selection.setContent('[wc_divider style="image" margin_top="" margin_bottom=""]');
 					}
 					
@@ -237,7 +240,7 @@
 					
 					
 					// Google Map
-					if(id == "googlemap") {
+					if(id === "googlemap") {
 						tinyMCE.activeEditor.selection.setContent('[wc_googlemap title="St. Paul\'s Chapel" location="209 Broadway, New York, NY 10007" zoom="10" height="250"]');
 					}
 					
@@ -245,7 +248,7 @@
 					
 					
 					// Heading
-					if(id == "heading") {
+					if(id === "heading") {
 						tinyMCE.activeEditor.selection.setContent('[wc_heading type="h1" title="' + wcDummyContent + '" text_align="left"]');
 					}
 					
@@ -253,26 +256,26 @@
 					
 					
 					// Highlight
-					if(id == "blueHighlight") {
+					if(id === "blueHighlight") {
 						tinyMCE.activeEditor.selection.setContent('[wc_highlight color="blue"]' + wcDummyContent + '[/wc_highlight]');
 					}
-					if(id == "grayHighlight") {
+					if(id === "grayHighlight") {
 						tinyMCE.activeEditor.selection.setContent('[wc_highlight color="gray"]' + wcDummyContent + '[/wc_highlight]');
 					}
-					if(id == "greenHighlight") {
+					if(id === "greenHighlight") {
 						tinyMCE.activeEditor.selection.setContent('[wc_highlight color="green"]' + wcDummyContent + '[/wc_highlight]');
 					}
-					if(id == "redHighlight") {
+					if(id === "redHighlight") {
 						tinyMCE.activeEditor.selection.setContent('[wc_highlight color="red"]' + wcDummyContent + '[/wc_highlight]');
 					}
-					if(id == "yellowHighlight") {
+					if(id === "yellowHighlight") {
 						tinyMCE.activeEditor.selection.setContent('[wc_highlight color="yellow"]' + wcDummyContent + '[/wc_highlight]');
-					}					
+					}
 					
 					
 					
 					// Pricing
-					if(id == "pricing") {
+					if(id === "pricing") {
 						tinyMCE.activeEditor.selection.setContent('[wc_pricing featured="yes" plan="Basic" cost="$19.99" per="per month" button_url="#" button_text="Sign Up" button_target="self" button_rel="nofollow"]<ul><li>30GB Storage</li><li>512MB Ram</li><li>10 databases</li><li>1,000 Emails</li><li>25GB Bandwidth</li></ul>[/wc_pricing]');
 					}
 					
@@ -280,7 +283,7 @@
 					
 					
 					//Spacing
-					if(id == "spacing") {
+					if(id === "spacing") {
 						tinyMCE.activeEditor.selection.setContent('[wc_spacing size="40px"]');
 					}
 					
@@ -288,7 +291,7 @@
 					
 					
 					//Social
-					if(id == "social") {
+					if(id === "social") {
 						tinyMCE.activeEditor.selection.setContent('[wc_social_icons align="left" size="large" display="facebook,google,twitter,pinterest,instagram,bloglovin,flickr,rss,email,custom1,custom2,custom3,custom4,custom5"]');
 					}
 					
@@ -296,7 +299,7 @@
 					
 					
 					//Skillbar
-					if(id == "skillbar") {
+					if(id === "skillbar") {
 						tinyMCE.activeEditor.selection.setContent('[wc_skillbar title="' + wcDummyContent + '" percentage="100" color="#6adcfa"]');
 					}
 					
@@ -304,52 +307,52 @@
 					
 					
 					//Tabs
-					if(id == "tabs") {
+					if(id === "tabs") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_tabgroup][wc_tab title="First Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab][wc_tab title="Second Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab][/wc_tabgroup]</p>');
 					}
 					
 					
 					
 					//Testimonial
-					if(id == "testimonial") {
+					if(id === "testimonial") {
 						tinyMCE.activeEditor.selection.setContent('[wc_testimonial by="Wordpress Canvas" position="left"]' + wcDummyContent + '[/wc_testimonial]');
 					}
 					
 					
 					
 					//Toggle
-					if(id == "toggle") {
+					if(id === "toggle") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_toggle title="This Is Your Toggle Title" padding="" border_width=""]</p>' + wcParagraphContent + '<p>[/wc_toggle]</p>');
 					}
 
-					if(id == "center") {
+					if(id === "center") {
 						tinyMCE.activeEditor.selection.setContent('<p>[wc_center max_width="500px" text_align="left"]</p>' + wcParagraphContent + '<p>[/wc_center]</p>');
 					}
 					
 					
-					if(id == "fullwidth") {
+					if(id === "fullwidth") {
 						tinyMCE.activeEditor.selection.setContent('[wc_fullwidth selector="#main"]' + wcDummyContent + '[/wc_fullwidth]');
 					}
 					
 					
-					if(id == "html") {
+					if(id === "html") {
 						tinyMCE.activeEditor.selection.setContent('[wc_html name="Custom Field Name"]');
 					}
 
 
-					if(id == "code") {
+					if(id === "code") {
 						tinyMCE.activeEditor.selection.setContent('[wc_code]' + wcDummyContent + '[/wc_code]');
 					}
 					
 
-					if(id == "pre") {
+					if(id === "pre") {
 						tinyMCE.activeEditor.selection.setContent('[wc_pre color="1" wrap="0" scrollable="1" linenums="0" name="Custom Field Name"]');
 					}
 
 
 					return false;
 				}
-			})
+			});
 		}
 	
 	});

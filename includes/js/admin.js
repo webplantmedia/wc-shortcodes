@@ -2,36 +2,39 @@
  * WC Shortcodes Gallery Settings
  */
 (function($) {
-	var $body = $("body"), file_frame = [], media = wp.media, custom_uploader;
+	"use strict";
+
+	var $body = $("body"), file_frame = [], media = wp.media;
 
 	//fetch preExisting selection of galleries. change the gallery state based on wheter we got a selection or not to "Edit gallery" or "AAdd gallery"
-	fetchSelection = function(ids, options) {
-		if(typeof ids == 'undefined') return; //<--happens on multi_image insert for modal group
+	var fetchSelection = function(ids, options) {
+		if(typeof ids === 'undefined') {
+			return; //<--happens on multi_image insert for modal group
+		}
 	
 		var id_array = ids.split(','),
 			args = {orderby: "post__in", order: "ASC", type: "image", perPage: -1, post__in:id_array},
 			attachments = wp.media.query( args ),
-			selection = new wp.media.model.Selection( attachments.models, 
-			{
+			selection = new wp.media.model.Selection( attachments.models, {
 				props:    attachments.props.toJSON(),
 				multiple: true
 			});
 			
 			
-		if(options.state == 'gallery-library' && id_array.length &&  !isNaN(parseInt(id_array[0],10)))
+		if(options.state === 'gallery-library' && id_array.length &&  !isNaN(parseInt(id_array[0],10)))
 		{
 			options.state = 'gallery-edit';
 		}
 		return selection;
 	};
 
-	$body.on('click', '.wc-shortcodes-image-upload', function( event ) {	
+	$body.on('click', '.wc-shortcodes-image-upload', function( event ) {
 		event.preventDefault();
 		
-		var clicked = $(this), 
+		var clicked = $(this),
 			options = clicked.data(),
-			parent 	= clicked.parent(),
-			target 	= parent.find(options.target),
+			parent = clicked.parent(),
+			target = parent.find(options.target),
 			preview = parent.find(options.preview), // will not find <div> tag inside of <p>
 			prefill = fetchSelection(target.val(), options),
 			frame_key = _.random(0, 999999999999999999);
@@ -45,15 +48,15 @@
 		
 		// Create the media frame.
 		file_frame[frame_key]  = wp.media({
-			frame:   options.frame,
-			state:	 options.state,
+			frame: options.frame,
+			state: options.state,
 			library: { type: 'image' },
-			button:  { text: options.button },
+			button: { text: options.button },
 			className: options['class'],
 			selection: prefill
 		});
 
-		if ( 'wordpresscanvas_insert_single' == options.state ) {
+		if ( 'wordpresscanvas_insert_single' === options.state ) {
 			// add the single insert state
 			file_frame[frame_key].states.add([
 				// Main states.
@@ -66,14 +69,14 @@
 					library:    media.query( file_frame[frame_key].options.library ),
 					multiple:   false,
 					editable:   true,
-					displayUserSettings: false, 
+					displayUserSettings: false,
 					displaySettings: true,
 					allowLocalEdits: true
 					// AttachmentView: media.view.Attachment.Library
 				})
 			]);
 		}
-		else if ( 'wordpresscanvas_insert_multi' == options.state ) {
+		else if ( 'wordpresscanvas_insert_multi' === options.state ) {
 			// add the single insert state
 			file_frame[frame_key].states.add([
 				new media.controller.Library({
@@ -85,7 +88,7 @@
 					library:    media.query( file_frame[frame_key].options.library ),
 					multiple:   'add',
 					editable:   true,
-					displayUserSettings: false, 
+					displayUserSettings: false,
 					displaySettings: false,
 					allowLocalEdits: true
 					// AttachmentView: media.view.Attachment.Library
@@ -112,14 +115,14 @@
 			values = selection.map( function( attachment ) {
 				element = attachment.toJSON();
 				
-				if ( 'url' == options.fetch ) {
+				if ( 'url' === options.fetch ) {
 					display = state.display( attachment ).toJSON();
 					
-					if ( 'undefined' == typeof element.sizes ) {
+					if ( 'undefined' === typeof element.sizes ) {
 						preview_img = element.url;
 						preview_html = "";
 					}
-					else if ( ( 'string' == typeof options.imgsize ) && ( 'object' == typeof element.sizes[ options.imgsize ] ) ) {
+					else if ( ( 'string' === typeof options.imgsize ) && ( 'object' === typeof element.sizes[ options.imgsize ] ) ) {
 						preview_img = element.sizes[ options.imgsize ].url;
 						preview_html += "<img src='"+preview_img+"' />";
 					}
@@ -130,8 +133,8 @@
 					
 					return preview_img;
 				}
-				else if(options.fetch == 'id') {
-					preview_img = typeof element.sizes['thumbnail'] != 'undefined'  ? element.sizes['thumbnail'].url : element.url ;
+				else if(options.fetch === 'id') {
+					preview_img = typeof element.sizes.thumbnail !== 'undefined'  ? element.sizes.thumbnail.url : element.url ;
 					preview_html += "<img src='"+preview_img+"' />";
 					
 					return element[options.fetch];
@@ -142,42 +145,45 @@
 			});
 			
 			if ( target.length ) {
-				target.val( values.join(',') ).trigger('change');	
+				target.val( values.join(',') ).trigger('change');
 			}
 			
-			if ( preview.length )
+			if ( preview.length ) {
 				preview.html( preview_html ).show();
+			}
 		});
 
 		// Finally, open the modal
 		file_frame[frame_key].open();
 	})
-	.on('click', '.wc-shortcodes-restore-image', function( e ) {	
+	.on('click', '.wc-shortcodes-restore-image', function( e ) {
 		e.preventDefault();
 
-		var clicked = $(this), 
+		var clicked = $(this),
 			options = clicked.data(),
-			parent 	= clicked.parent(),
-			target 	= parent.find(options.target),
+			parent  = clicked.parent(),
+			target  = parent.find(options.target),
 			preview = parent.find(options.preview);
 
 		$(target).val(options.restore);
 
-		if ( preview.length && options.restore.length )
+		if ( preview.length && options.restore.length ) {
 			$(preview).html('<img src="'+options.restore+'" />').show();
+		}
 	})
-	.on('click', '.wc-shortcodes-delete-image', function( e ) {	
+	.on('click', '.wc-shortcodes-delete-image', function( e ) {
 		e.preventDefault();
 
-		var clicked = $(this), 
+		var clicked = $(this),
 			options = clicked.data(),
-			parent 	= clicked.parent(),
-			target 	= parent.find(options.target),
+			parent  = clicked.parent(),
+			target  = parent.find(options.target),
 			preview = parent.find(options.preview);
 
 		$(target).val('');
 
-		if ( preview.length )
+		if ( preview.length ) {
 			$(preview).html("").hide();
-	})
+		}
+	});
 })(jQuery);

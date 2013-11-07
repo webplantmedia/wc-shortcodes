@@ -2,6 +2,8 @@
 /* Googlemap - code from http://aquagraphite.com/
 /*===================================================================================*/
 jQuery(function($){
+	"use strict";
+
 	$(document).ready(function(){
 		$('.googlemap').each( function() {
 			
@@ -11,16 +13,11 @@ jQuery(function($){
 			$zoom = parseInt( $(this).find('.zoom').val() ),
 			geocoder, map;
 			
-			var mapOptions = {
-				zoom: $zoom,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-			
 			geocoder = new google.maps.Geocoder();
 			
 			geocoder.geocode( { 'address': $location}, function(results, status) {
 			
-				if (status == google.maps.GeocoderStatus.OK) {
+				if (status === google.maps.GeocoderStatus.OK) {
 				
 					var mapOptions = {
 						scrollwheel: false,
@@ -33,19 +30,19 @@ jQuery(function($){
 					map.setCenter(results[0].geometry.location);
 					
 					var marker = new google.maps.Marker({
-					  map: map, 
-					  position: results[0].geometry.location,
-					  title : $location
+						map: map,
+						position: results[0].geometry.location,
+						title : $location
 					});
 					
 					var contentString = '<div class="map-infowindow">'+
-						( ($title) ? '<h3>' + $title + '</h3>' : '' ) + 
+						( ($title) ? '<h3>' + $title + '</h3>' : '' ) +
 						$location + '<br/>' +
 						'<a href="https://maps.google.com/?q='+ $location +'" target="_blank">View on Google Map</a>' +
 						'</div>';
 					
 					var infowindow = new google.maps.InfoWindow({
-					  content: contentString
+						content: contentString
 					});
 					
 					google.maps.event.addListener(marker, 'click', function() {
