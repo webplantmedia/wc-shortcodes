@@ -63,6 +63,9 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 					$social_link = get_option( $link_option_name );
 					$social_link = apply_filters( 'wc_shortcodes_social_link', $social_link, $key );
 
+					if ( empty( $social_link ) )
+						continue;
+
 					if ( $first )
 						$li_class[] = 'first-icon';
 

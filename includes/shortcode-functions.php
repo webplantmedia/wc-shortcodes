@@ -349,6 +349,10 @@ if( !function_exists('wc_shortcodes_social_icons') ) {
 					if (  $icon_url = get_option( $icon_option_name ) ) {
 						$social_link = get_option( $link_option_name );
 						$social_link = apply_filters( 'wc_shortcodes_social_link', $social_link, $key );
+
+						if ( empty( $social_link ) )
+							continue;
+
 						$first_class = $first ? ' first-icon' : '';
 						$first = false;
 
