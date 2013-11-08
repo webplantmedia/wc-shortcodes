@@ -44,6 +44,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.8
+
+* Email link can be either mailto address or hyperlink
+
 ### Version 1.7
 
 * Better facebook and pinterest icons
