@@ -44,6 +44,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.9
+
+* Appended version number to css and js files
+
 ### Version 1.8
 
 * Email link can be either mailto address or hyperlink
