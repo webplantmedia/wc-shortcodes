@@ -226,6 +226,7 @@
 	float: left;
 	background: #eeeeee;;
 	padding: 20px;
+	width: 100%;
 }
 .wc-shortcodes-testimonial-content:after {
 	content: "";

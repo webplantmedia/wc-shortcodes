@@ -44,6 +44,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.10
+
+* Fixed style bug for testimonials
+
 ### Version 1.9
 
 * Appended version number to css and js files
