@@ -280,7 +280,7 @@
 					
 					// Pricing
 					if(id === "pricing") {
-						tinyMCE.activeEditor.selection.setContent('[wc_pricing featured="yes" plan="Basic" cost="$19.99" per="per month" button_url="#" button_text="Sign Up" button_target="self" button_rel="nofollow"]<ul><li>30GB Storage</li><li>512MB Ram</li><li>10 databases</li><li>1,000 Emails</li><li>25GB Bandwidth</li></ul>[/wc_pricing]');
+						tinyMCE.activeEditor.selection.setContent('[wc_pricing type="primary" featured="yes" plan="Basic" cost="$19.99" per="per month" button_url="#" button_text="Sign Up" button_target="self" button_rel="nofollow"]<ul><li>30GB Storage</li><li>512MB Ram</li><li>10 databases</li><li>1,000 Emails</li><li>25GB Bandwidth</li></ul>[/wc_pricing]');
 					}
 					
 					
