@@ -380,6 +380,29 @@
 
 .wc-shortcodes-button:active {}
 
+.wc-shortcodes-button-left {
+	text-align: left;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+.wc-shortcodes-button-center {
+	text-align: center;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+.wc-shortcodes-button-center .wc-shortcodes-button {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.wc-shortcodes-button-right {
+	text-align: right;
+}
+.wc-shortcodes-button-right .wc-shortcodes-button {
+	margin-right: 0px;
+	margin-left: 10px;
+}
+
 /* Secondary */
 .wc-shortcodes-button.wc-shortcodes-button-secondary:visited,
 .wc-shortcodes-button.wc-shortcodes-button-secondary {

@@ -402,24 +402,35 @@ if( !function_exists('wc_shortcodes_button') ) {
 			'target'		=> 'self',
 			'rel'			=> '',
 			'border_radius'	=> '',
-			'class'			=> '',
 			'icon_left'		=> '',
-			'icon_right'	=> ''
+			'icon_right'	=> '',
+			'position'		=> 'float',
 		), $atts ) );
-		
+
+		$whitelist = array( 'center', 'left', 'right' );
 		
 		// $border_radius_style = ( $border_radius ) ? 'style="border-radius:'. $border_radius .'"' : NULL;		
 		$rel = ( $rel ) ? 'rel="'.$rel.'"' : NULL;
 		$type = 'wc-shortcodes-button-' . $type;
 		
+		$class = array();
+		$class[] = 'wc-shortcodes-button';
+		$class[] = $type;
+		$class[] = 'wc-shortcodes-button-position-' . $position;
+		
 		$button = NULL;
-		$button .= '<a href="' . $url . '" class="wc-shortcodes-button ' . $type . ' '. $class .'" target="_'.$target.'" title="'. $title .'" '. $rel .'>';
+		$button .= '<a href="' . $url . '" class="'.implode( ' ', $class ).'" target="_'.$target.'" title="'. $title .'" '. $rel .'>';
 			$button .= '<span class="wc-shortcodes-button-inner">';
 				if ( $icon_left ) $button .= '<span class="wc-shortcodes-button-icon-left icon-'. $icon_left .'"></span>';
 				$button .= $content;
 				if ( $icon_right ) $button .= '<span class="wc-shortcodes-button-icon-right icon-'. $icon_right .'"></span>';
 			$button .= '</span>';			
 		$button .= '</a>';
+
+		if ( in_array( $position, $whitelist ) ) {
+			$button = '<div class="wc-shortcodes-button-'.$position.'">'. $button .'</div>';
+		}
+
 		return $button;
 	}
 	add_shortcode( 'wc_button', 'wc_shortcodes_button' );
