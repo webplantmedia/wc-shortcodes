@@ -478,10 +478,17 @@ if( !function_exists('wc_shortcodes_box') ) {
 if( !function_exists('wc_shortcodes_testimonial') ) { 
 	function wc_shortcodes_testimonial( $atts, $content = null  ) {
 		extract( shortcode_atts( array(
-			'by'	=> '',
-			'position'	=> 'left',
+			'by' => '',
+			'url' => '',
+			'position' => 'left',
 			'class'	=> '',
-		  ), $atts ) );
+		), $atts ) );
+
+		if ( ! empty( $url ) ) {
+			$url = esc_url( $url );
+			$by = '<a href="' . $url . '">' . $by . '</a>';
+		}
+
 		$testimonial_content = '';
 		$testimonial_content .= '<div class="wc-shortcodes-testimonial wc-shortcodes-clearfix wc-shortcodes-testimonial-'.$position.' '. $class .'"><div class="wc-shortcodes-testimonial-content">';
 		$testimonial_content .= $content;
