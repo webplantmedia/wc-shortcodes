@@ -44,6 +44,13 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.11
+
+* added countdown shortcode
+* added link to testimonial author
+* added support for buttons to be positioned left, right, or centered
+* added type attribute to pricing box
+
 ### Version 1.10
 
 * Fixed style bug for testimonials
