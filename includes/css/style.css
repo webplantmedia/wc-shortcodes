@@ -973,3 +973,71 @@ pre.pre-wrap {
 .widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-1 li {
 	width: 100%;
 }
+
+
+/**
+ * jQuery Countdown styles 1.6.3.
+ * ----------------------------------------------------------------------------
+ */
+.wc-shortcodes-countdown.hasCountdown {
+	border: 1px solid #ccc;
+	background-color: #eee;
+	text-align: center;
+	margin-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.wc-shortcodes-countdown.countdown_rtl {
+	direction: rtl;
+}
+.wc-shortcodes-countdown.countdown_holding div {
+	color: #888;
+}
+.wc-shortcodes-countdown .countdown_row {
+	clear: both;
+	width: 100%;
+	padding: 0px 2px;
+	text-align: center;
+}
+.wc-shortcodes-countdown .countdown_show1 .countdown_section {
+	width: 98%;
+}
+.wc-shortcodes-countdown .countdown_show2 .countdown_section {
+	width: 48%;
+}
+.wc-shortcodes-countdown .countdown_show3 .countdown_section {
+	width: 32.5%;
+}
+.wc-shortcodes-countdown .countdown_show4 .countdown_section {
+	width: 24.5%;
+}
+.wc-shortcodes-countdown .countdown_show5 .countdown_section {
+	width: 19.5%;
+}
+.wc-shortcodes-countdown .countdown_show6 .countdown_section {
+	width: 16.25%;
+}
+.wc-shortcodes-countdown .countdown_show7 .countdown_section {
+	width: 14%;
+}
+.wc-shortcodes-countdown .countdown_section {
+	display: inline-block;
+	font-size: 80%;
+	text-align: center;
+	border-right: 1px solid #cccccc;
+	border-left: 1px solid #eeeeee;
+}
+.wc-shortcodes-countdown .countdown_row *:last-child,
+.wc-shortcodes-countdown .countdown_row .countdown_section:last-child {
+	border-right: 1px solid #eeeeee;
+}
+.wc-shortcodes-countdown .countdown_amount {
+	font-size: 200%;
+}
+.wc-shortcodes-countdown .countdown_descr {
+	display: block;
+	width: 100%;
+}
+.wc-shortcodes-countdown .countdown_expired_message {
+	font-size: 200%;
+}

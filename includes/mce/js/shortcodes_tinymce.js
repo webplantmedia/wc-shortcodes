@@ -49,6 +49,7 @@
 						a.render( c, "Skillbar", "skillbar" );
 						a.render( c, "Social Icon", "social" );
 						a.render( c, "Testimonial", "testimonial" );
+						a.render( c, "Countdown", "countdown" );
 						a.render( c, "HTML", "html" );
 					
 					b.addSeparator();
@@ -320,6 +321,15 @@
 					//Testimonial
 					if(id === "testimonial") {
 						tinyMCE.activeEditor.selection.setContent('[wc_testimonial by="Wordpress Canvas" url="" position="left"]' + wcDummyContent + '[/wc_testimonial]');
+					}
+					
+					
+					
+					//Countdown
+					if(id === "countdown") {
+						var d = new Date();
+						var year = d.getFullYear() + 1;
+						tinyMCE.activeEditor.selection.setContent('[wc_countdown date="July 23, '+year+', 6:00:00 PM" format="wdHMs" message="Happy New Year!"]');
 					}
 					
 					

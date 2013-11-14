@@ -864,3 +864,33 @@ if( !function_exists('wc_shortcodes_divider') ) {
 	}
 	add_shortcode( 'wc_divider', 'wc_shortcodes_divider' );
 }
+
+
+/*
+ * Countdown
+ * @since v1.10
+ */
+if( !function_exists('wc_shortcodes_countdown') ) {
+	function wc_shortcodes_countdown( $atts ) {
+		extract( shortcode_atts( array(
+			'date' => '',
+			'format' => 'wdHMs',
+			'message' => 'Happy New Year!',
+		), $atts ) );
+
+		if ( empty( $date ) ) {
+			return '<p>*Please enter a date for your countdown*</p>';
+		}
+
+		wp_enqueue_script('wc_shortcodes_countdown');
+
+		$html = '<div class="wc-shortcodes-countdown" data-date="'.esc_attr( $date ).'" data-format="'.esc_attr( $format ).'" data-message="'.esc_attr( $message ).'"></div>';
+		$html = '<div class="wc-shortcodes-countdown-bg1">'.$html.'</div>';
+		$html = '<div class="wc-shortcodes-countdown-bg2">'.$html.'</div>';
+		$html = '<div class="wc-shortcodes-countdown-bg3">'.$html.'</div>';
+		$html = '<div class="wc-shortcodes-countdown-bg4">'.$html.'</div>';
+
+		return $html;
+	}
+	add_shortcode( 'wc_countdown', 'wc_shortcodes_countdown' );
+}
