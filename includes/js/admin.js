@@ -56,12 +56,12 @@
 			selection: prefill
 		});
 
-		if ( 'wordpresscanvas_insert_single' === options.state ) {
+		if ( 'wc_shortcodes_insert_single' === options.state ) {
 			// add the single insert state
 			file_frame[frame_key].states.add([
 				// Main states.
 				new media.controller.Library({
-					id:         'wordpresscanvas_insert_single',
+					id:         'wc_shortcodes_insert_single',
 					title: clicked.data( 'title' ),
 					priority:   20,
 					toolbar:    'select',
@@ -76,11 +76,11 @@
 				})
 			]);
 		}
-		else if ( 'wordpresscanvas_insert_multi' === options.state ) {
+		else if ( 'wc_shortcodes_insert_multi' === options.state ) {
 			// add the single insert state
 			file_frame[frame_key].states.add([
 				new media.controller.Library({
-					id:         'wordpresscanvas_insert_multi',
+					id:         'wc_shortcodes_insert_multi',
 					title: clicked.data( 'title' ),
 					priority:   20,
 					toolbar:    'select',
