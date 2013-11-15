@@ -44,6 +44,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.12
+
+* cleaned up some code
+
 ### Version 1.11
 
 * added countdown shortcode
