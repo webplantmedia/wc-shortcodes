@@ -23,7 +23,7 @@ add_action('widgets_init', 'wc_shortcodes_register_widgets');
 class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 	function __construct() {
 		$widget_ops = array( 'description' => __('Add your social icons to your sidebar.') );
-		parent::__construct( 'wc_shortcodes_social_icons', __('Social Icons'), $widget_ops );
+		parent::__construct( 'wc_shortcodes_social_icons', __('WordPress Canvas - Social Icons'), $widget_ops );
 	}
 
 	function widget($args, $instance) {
