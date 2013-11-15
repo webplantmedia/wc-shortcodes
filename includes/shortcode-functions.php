@@ -74,7 +74,7 @@ function wc_shortcodes_fullwidth( $atts, $content = null ) {
 		'selector' => '#main',
 	), $atts));
 
-	wp_enqueue_script('wc_shortcodes_fullwidth');
+	wp_enqueue_script('wc-shortcodes-fullwidth');
 
 	return '<div class="wc-shortcodes-full-width" data-selector="' . esc_attr($selector) . '">' . do_shortcode( $content ) . '</div>';
 }
@@ -189,8 +189,8 @@ function wc_shortcodes_displaypre( $atts, $content = null ) {
 		return null;
 
 	if ( $code = get_post_meta($post->ID, $name, true ) ) {
-		wp_enqueue_script('wc_shortcodes_prettify');
-		wp_enqueue_script('wc_shortcodes_pre');
+		wp_enqueue_script('wc-shortcodes-prettify');
+		wp_enqueue_script('wc-shortcodes-pre');
 		//$code = preg_replace( '/[ ]{4,}|[\t]/', '  ', $code );
 		$html .= '<pre id="prettycode-'.$instance.'" class="'.$class.'">';
 		$html .= htmlspecialchars( $code );
@@ -268,7 +268,7 @@ if( !function_exists('wc_shortcodes_skillbar') ) {
 		), $atts ) );
 		
 		// Enque scripts
-		wp_enqueue_script('wc_shortcodes_skillbar');
+		wp_enqueue_script('wc-shortcodes-skillbar');
 		
 		// Display the accordion	';
 		$output = '<div class="wc-shortcodes-skillbar wc-shortcodes-clearfix '. $class .'" data-percent="'. $percentage .'%">';
@@ -591,7 +591,7 @@ if( !function_exists('wc_shortcodes_toggle') ) {
 		$style = implode( ';', $style );
 		 
 		// Enque scripts
-		wp_enqueue_script('wc_shortcodes_toggle');
+		wp_enqueue_script('wc-shortcodes-toggle');
 		
 		// Display the Toggle
 		return '<div class="wc-shortcodes-toggle '. $class .'"><div class="wc-shortcodes-toggle-trigger"><a href="#">'. $title .'</a></div><div style="'.$style.'" class="wc-shortcodes-toggle-container">' . do_shortcode($content) . '</div></div>';
@@ -620,7 +620,7 @@ if( !function_exists('wc_shortcodes_accordion_main') ) {
 			$type = 'wc-shortcodes-accordion-collapse';
 		
 		// Enque scripts
-		wp_enqueue_script('wc_shortcodes_accordion');
+		wp_enqueue_script('wc-shortcodes-accordion');
 		
 		// Display the accordion	
 		return '<div class="wc-shortcodes-accordion '.$type.' '. $class .'">' . do_shortcode($content) . '</div>';
@@ -662,7 +662,7 @@ if (!function_exists('wc_shortcodes_tabgroup')) {
 	function wc_shortcodes_tabgroup( $atts, $content = null ) {
 		
 		//Enque scripts
-		wp_enqueue_script('wc_shortcodes_tabs');
+		wp_enqueue_script('wc-shortcodes-tabs');
 		
 		// Display Tabs
 		$defaults = array();
@@ -818,8 +818,8 @@ if (! function_exists( 'wc_shortcodes_googlemaps' ) ) :
 		), $atts));
 		
 		// load scripts
-		wp_enqueue_script('wc_shortcodes_googlemap');
-		wp_enqueue_script('wc_shortcodes_googlemap_api');
+		wp_enqueue_script('wc-shortcodes-googlemap');
+		wp_enqueue_script('wc-shortcodes-googlemap-api');
 		
 		
 		$output = '<div id="map_canvas_'.rand(1, 100).'" class="googlemap '. $class .'" style="height:'.$height.'px;width:100%">';
@@ -875,14 +875,14 @@ if( !function_exists('wc_shortcodes_countdown') ) {
 		extract( shortcode_atts( array(
 			'date' => '',
 			'format' => 'wdHMs',
-			'message' => 'Happy New Year!',
+			'message' => 'Your Message Here!',
 		), $atts ) );
 
 		if ( empty( $date ) ) {
 			return '<p>*Please enter a date for your countdown*</p>';
 		}
 
-		wp_enqueue_script('wc_shortcodes_countdown');
+		wp_enqueue_script('wc-shortcodes-countdown');
 
 		$html = '<div class="wc-shortcodes-countdown" data-date="'.esc_attr( $date ).'" data-format="'.esc_attr( $format ).'" data-message="'.esc_attr( $message ).'"></div>';
 		$html = '<div class="wc-shortcodes-countdown-bg1">'.$html.'</div>';

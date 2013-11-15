@@ -226,3 +226,19 @@ function wc_shortcodes_remember_last_options_tab() {
 	}
 }
 add_action( 'admin_init', 'wc_shortcodes_remember_last_options_tab' );
+
+/*
+ * On Activation
+ */
+function wc_shortcodes_options_activation_hook() {
+	global $wc_shortcodes_options;
+
+	foreach ( $wc_shortcodes_options as $o ) {
+		foreach ( $o['sections'] as $oo ) {
+			foreach ( $oo['options'] as $ooo ) {
+				$option_name = WC_SHORTCODES_PREFIX . $ooo['id'];
+				add_option( $option_name, $ooo['default'] );
+			}
+		}
+	}
+}

@@ -329,7 +329,7 @@
 					if(id === "countdown") {
 						var d = new Date();
 						var year = d.getFullYear() + 1;
-						tinyMCE.activeEditor.selection.setContent('[wc_countdown date="July 23, '+year+', 6:00:00 PM" format="wdHMs" message="Happy New Year!"]');
+						tinyMCE.activeEditor.selection.setContent('[wc_countdown date="July 23, '+year+', 6:00:00 PM" format="wdHMs" message="Your Message Here!"]');
 					}
 					
 					

@@ -11,6 +11,7 @@ License: GPLv2 or later
 
 define( 'WC_SHORTCODES_VERSION', '1.12' );
 define( 'WC_SHORTCODES_PREFIX', 'wc_shortcodes_' );
+define( '_WC_SHORTCODES_PREFIX', '_wc_shortcodes_' );
 define( 'WC_SHORTCODES_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 global $wc_shortcodes_options;
@@ -23,16 +24,4 @@ require_once( dirname(__FILE__) . '/includes/shortcode-functions.php'); // Main 
 require_once( dirname(__FILE__) . '/includes/mce/shortcodes_tinymce.php'); // Add mce buttons to post editor
 require_once( dirname(__FILE__) . '/includes/widgets.php' ); // include any widgets
 
-function wc_shortcodes_options_activation_hook() {
-	global $wc_shortcodes_options;
-
-	foreach ( $wc_shortcodes_options as $o ) {
-		foreach ( $o['sections'] as $oo ) {
-			foreach ( $oo['options'] as $ooo ) {
-				$option_name = WC_SHORTCODES_PREFIX . $ooo['id'];
-				add_option( $option_name, $ooo['default'] );
-			}
-		}
-	}
-}
 register_activation_hook( __FILE__, 'wc_shortcodes_options_activation_hook' );
