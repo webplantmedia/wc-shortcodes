@@ -44,6 +44,12 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.13
+
+* added rsvp shortcode
+* removed focus css acting as hover
+* minor css fix for countdown shortcode
+
 ### Version 1.12
 
 * cleaned up some code
