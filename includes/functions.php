@@ -20,3 +20,113 @@ function wc_shortcodes_smart_social_link( $social_link, $name ) {
     return $social_link;
 }
 add_filter( 'wc_shortcodes_social_link' , 'wc_shortcodes_smart_social_link', 10, 2 );
+
+/*
+ * On New Version
+ */
+function wc_shortcodes_options_activation() {
+	global $wc_shortcodes_options;
+
+	$initialize = false;
+
+	if ( ! WC_SHORTCODES_CURRENT_VERSION ) {
+		$initialize = true;
+	}
+	else if ( version_compare( WC_SHORTCODES_VERSION, WC_SHORTCODES_CURRENT_VERSION ) > 0 ) {
+		$initialize = true;
+	}
+
+	if ( $initialize ) {
+		update_option( WC_SHORTCODES_PREFIX . 'current_version', WC_SHORTCODES_VERSION );
+		foreach ( $wc_shortcodes_options as $o ) {
+			foreach ( $o['sections'] as $oo ) {
+				foreach ( $oo['options'] as $ooo ) {
+					$option_name = WC_SHORTCODES_PREFIX . $ooo['id'];
+					add_option( $option_name, $ooo['default'] );
+				}
+			}
+		}
+	} 
+}
+add_action( 'admin_init', 'wc_shortcodes_options_activation' );
+
+
+/**
+ * webpm_send_email 
+ *
+ * Ajax function to send email without
+ * reloading the page.
+ * 
+ * @access public
+ * @return void
+ */
+function wc_shortcodes_send_rsvp_email() {
+    // get the submitted parameters
+    $error = array();
+    $emailSent = false;
+	$message = array();
+
+    $email_to = get_option( WC_SHORTCODES_PREFIX . 'rsvp_email');
+    $email_title = trim( get_option( WC_SHORTCODES_PREFIX . 'rsvp_email_title') );
+    $email_success_message = trim( get_option( WC_SHORTCODES_PREFIX . 'rsvp_success_message') );
+	$email_success_message = empty( $email_success_message ) ? 'Message Sent' : $email_success_message;
+
+	$admin_email = get_option('admin_email');
+    if ( empty( $email_to ) ) {
+        $email_to = $admin_email;
+	}
+
+	$rsvp_name = trim( $_POST['rsvp_name'] );
+    if ( $rsvp_name === '') {
+        $error[] = 'Please enter your name.';
+        $hasError = true;
+    } else {
+		$message[] = 'Name: ' . esc_html( $rsvp_name );
+    }
+
+	$rsvp_number = trim( $_POST['rsvp_number'] );
+    if ( $rsvp_number === '') {
+        $error[] = 'Please select a number.';
+        $hasError = true;
+    } else {
+		$message[] = 'Number: ' . esc_html( $rsvp_number );
+    }
+
+	$rsvp_event = trim( $_POST['rsvp_event'] );
+    if ( $rsvp_event === '') {
+        $error[] = 'Please select event.';
+        $hasError = true;
+    } else {
+		$message[] = 'Event: ' . esc_html( $rsvp_event );
+    }
+
+    $status = trim(implode("<br />", $error));
+
+    if ( empty( $error ) ) {
+        $subject = $email_title;
+        $name = $rsvp_name;
+        $body = implode( "\n\n", $message );
+        $body .= "\n\n\n\nThis message was sent through the contact form via ".get_bloginfo('url');
+        $headers = "From: " . $admin_email . "\r\n";
+
+        wp_mail($email_to, $subject, $body, $headers);
+        $emailSent = true;
+		$status = $email_success_message;
+    }
+ 
+    // generate the response
+    $response = json_encode( array( 'success' => (int) $emailSent, 'message' => $status ) );
+ 
+    // response output
+    header( "Content-Type: application/json" );
+    echo $response;
+ 
+    // IMPORTANT: don't forget to "exit"
+    exit;
+}
+// send email when logged out
+add_action( 'wp_ajax_nopriv_wc-send-rsvp-email', 'wc_shortcodes_send_rsvp_email' );
+// send email when logged in
+add_action( 'wp_ajax_wc-send-rsvp-email', 'wc_shortcodes_send_rsvp_email' );
+
+

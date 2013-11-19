@@ -111,6 +111,12 @@ function wc_shortcodes_options_display_setting( $args ) {
 		case 'checkbox' :
 			wc_shortcodes_options_display_checkbox_field( $args );
 			break;
+		case 'textarea' :
+			wc_shortcodes_options_display_textarea_field( $args );
+			break;
+		case 'email' :
+			wc_shortcodes_options_email_field( $args );
+			break;
 		default :
 			wc_shortcodes_options_input_field( $args );
 			break;
@@ -118,6 +124,22 @@ function wc_shortcodes_options_display_setting( $args ) {
 }
 
 function wc_shortcodes_options_input_field( $args ) {
+	extract( $args );
+
+	$val = get_option( $option_name, $default );
+	?>
+
+	<?php if ( isset( $label ) ) : ?>
+		<label for="<?php echo esc_attr($option_name); ?>"><?php echo $label; ?></label>&nbsp;
+	<?php endif; ?>
+
+	<input name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>" type="text" value="<?php echo esc_attr($val); ?>" class="regular-text" />
+	<?php if ( isset( $description ) && !empty( $description ) ) : ?>
+		<p class="description"><?php echo $description; ?></p>
+	<?php endif; ?>
+	<?php
+}
+function wc_shortcodes_options_email_field( $args ) {
 	extract( $args );
 
 	$val = get_option( $option_name, $default );
@@ -180,6 +202,23 @@ function wc_shortcodes_options_display_checkbox_field( $args ) {
 	<?php
 }
 
+function wc_shortcodes_options_display_textarea_field( $args ) {
+	extract( $args );
+
+	$val = get_option( $option_name, $default );
+	?>
+
+	<?php if ( isset( $label ) ) : ?>
+		<label for="<?php echo esc_attr($option_name); ?>"><?php echo $label; ?></label>&nbsp;
+	<?php endif; ?>
+
+	<textarea name="<?php echo $option_name; ?>" class="wc-shortcodes-textarea" id="<?php echo $option_name; ?>"><?php echo esc_textarea($val); ?></textarea>
+	<?php if ( isset( $description ) && !empty( $description ) ) : ?>
+		<p class="description"><?php echo $description; ?></p>
+	<?php endif; ?>
+	<?php
+}
+
 /*
  * Sanitize Options
  */
@@ -191,6 +230,8 @@ function wc_shortcodes_options_find_sanitize_callback( $type ) {
 			return 'esc_url_raw';
 		case 'checkbox' :
 			return 'wc_shortcodes_options_sanitize_checkbox';
+		case 'email' :
+			return 'wc_shortcodes_options_sanitize_email';
 	}
 
 	return '';
@@ -213,6 +254,23 @@ function wc_shortcodes_options_sanitize_hex_color( $color ) {
 	return null;
 }
 
+function wc_shortcodes_options_sanitize_email( $email ) {
+	$valid = array();
+
+	$email = explode( ',', $email );
+
+	foreach ( $email as $e ) {
+		$e = trim( $e );
+		if ( is_email( $e ) )
+			$valid[] = $e;
+	}
+
+	if ( ! empty( $valid ) )
+		return implode( ',', $valid );
+
+	return null;
+}
+
 /*
  * Misc
  */
@@ -226,19 +284,3 @@ function wc_shortcodes_remember_last_options_tab() {
 	}
 }
 add_action( 'admin_init', 'wc_shortcodes_remember_last_options_tab' );
-
-/*
- * On Activation
- */
-function wc_shortcodes_options_activation_hook() {
-	global $wc_shortcodes_options;
-
-	foreach ( $wc_shortcodes_options as $o ) {
-		foreach ( $o['sections'] as $oo ) {
-			foreach ( $oo['options'] as $ooo ) {
-				$option_name = WC_SHORTCODES_PREFIX . $ooo['id'];
-				add_option( $option_name, $ooo['default'] );
-			}
-		}
-	}
-}

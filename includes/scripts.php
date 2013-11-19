@@ -31,6 +31,16 @@ if( !function_exists ('wc_shortcodes_scripts') ) :
 		// countdown
 		wp_register_script( 'wc-shortcodes-jquery-countdown-js', plugin_dir_url( __FILE__ ) . 'js/jquery.countdown.js', array ( 'jquery' ), $ver, true );
 		wp_register_script( 'wc-shortcodes-countdown', plugin_dir_url( __FILE__ ) . 'js/countdown.js', array ( 'wc-shortcodes-jquery-countdown-js' ), $ver, true );
+
+		// rsvp
+		wp_register_script( 'wc-shortcodes-rsvp', plugin_dir_url( __FILE__ ) . 'js/rsvp.js', array ( 'jquery' ), $ver, true );
+
+		$local = array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		);
+
+		wp_localize_script( 'wc-shortcodes-rsvp', 'WCShortcodes', $local );
+		wp_enqueue_script( 'wc-shortcodes-rsvp' );
 	}
 	add_action('wp_enqueue_scripts', 'wc_shortcodes_scripts');
 endif;

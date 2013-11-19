@@ -1035,3 +1035,43 @@ pre.pre-wrap {
 .wc-shortcodes-countdown .countdown_expired_message {
 	font-size: 200%;
 }
+
+
+/**
+ * [wc_rsvp]
+ * ----------------------------------------------------------------------------
+ */
+.wc-shortcodes-rsvp input[type="text"], 
+.wc-shortcodes-rsvp textarea, 
+.wc-shortcodes-rsvp select {
+	width: 100%;
+}
+.wc-shortcodes-rsvp-align-center {
+	text-align: center;
+}
+.wc-shortcodes-rsvp-align-right {
+	text-align: right;
+}
+.rsvp-button-align-center .rsvp-button-wrapper {
+	text-align: center;
+}
+.rsvp-button-align-center .wc-shortcodes-box {
+	text-align: center;
+}
+.rsvp-button-align-right .rsvp-button-wrapper {
+	text-align: right;
+}
+.rsvp-button-align-right .wc-shortcodes-box {
+	text-align: right;
+}
+.rsvp-button-align-left .rsvp-button-wrapper {
+	text-align: left;
+}
+.rsvp-button-align-left .wc-shortcodes-box {
+	text-align: left;
+}
+.wc-shortcodes-rsvp .wc-shortcodes-box {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display: none;
+}

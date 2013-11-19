@@ -894,3 +894,86 @@ if( !function_exists('wc_shortcodes_countdown') ) {
 	}
 	add_shortcode( 'wc_countdown', 'wc_shortcodes_countdown' );
 }
+
+
+
+if( !function_exists('wc_shortcodes_rsvp') ) {
+	function wc_shortcodes_rsvp( $atts ) {
+		extract( shortcode_atts( array(
+			'columns' => '3',
+			'align' => 'left',
+			'button_align' => 'center',
+		), $atts ) );
+
+		wp_enqueue_script('wc-shortcodes-rsvp');
+
+		$columns = (int) $columns;
+		$columns = 3 == $columns ? $columns : 1;
+
+		$html = '';
+
+		// RSVP Name
+		$name_title = get_option( WC_SHORTCODES_PREFIX . 'rsvp_name_title' );
+		$name_html = '<p class="rsvp-name-wrapper"><span>'.esc_html($name_title).'</span><br /><input name="rsvp_name" class="rsvp-name rsvp-data" type="text" value="" /></p>';
+
+		// RSVP Number
+		$number_title = get_option( WC_SHORTCODES_PREFIX . 'rsvp_number_title' );
+		$number_options = get_option( WC_SHORTCODES_PREFIX . 'rsvp_number_options' );
+		$number_options = explode( "\n", $number_options );
+		$options = '';
+		foreach ( $number_options as $o ) {
+			$o = trim( $o );
+			if ( empty( $o ) )
+				continue;
+
+			$options .= '<option value="'.esc_attr( $o ).'">'.esc_html( $o ).'</option>';
+		}
+		$options = '<select name="rsvp_number" class="rsvp-number rsvp-data">'.$options.'</select>';
+		$number_html = '<p class="rsvp-number-wrapper"><span>'.esc_html( $number_title ).'</span><br />'.$options.'</p>';
+
+		// RSVP Event
+		$event_title = get_option( WC_SHORTCODES_PREFIX . 'rsvp_event_title' );
+		$event_options = get_option( WC_SHORTCODES_PREFIX . 'rsvp_event_options' );
+		$event_options = explode( "\n", $event_options );
+		$options = '';
+		foreach ( $event_options as $o ) {
+			$o = trim( $o );
+			if ( empty( $o ) )
+				continue;
+
+			$options .= '<option value="'.esc_attr( $o ).'">'.esc_html( $o ).'</option>';
+		}
+		$options = '<select name="rsvp_event" class="rsvp-event rsvp-data">'.$options.'</select>';
+		$event_html = '<p class="rsvp-event-options"><span>'.esc_html( $event_title ).'</span><br />'.$options.'</p>';
+
+		// RSVP Button
+		$button_title = get_option( WC_SHORTCODES_PREFIX . 'rsvp_button_title' );
+		$button_html = '<p class="rsvp-button-wrapper"><input name="rsvp_button" class="rsvp-button" type="button" value="'.esc_attr( $button_title ).'" /></p>';
+
+		// RSVP Action
+		$action_html = '<input name="action" class="rsvp-action rsvp-data" type="hidden" value="wc-send-rsvp-email">';
+
+		// RSVP Message
+		$message_html = '<div class="wc-shortcodes-box wc-shortcodes-clearfix wc-shortcodes-box-info"><p class="rsvp-message">Hello</p></div>';
+
+		// Style
+
+		$html .= $action_html;
+
+		if ( 3 == $columns ) {
+			$html .= '<div class="wc-shortcodes-row wc-shortcodes-clearfix">';
+			$html .= '	<div class="wc-shortcodes-column wc-shortcodes-one-third wc-shortcodes-column-first ">'.$name_html.'</div>';
+			$html .= '	<div class="wc-shortcodes-column wc-shortcodes-one-third wc-shortcodes-column- ">'.$number_html.'</div>';
+			$html .= '	<div class="wc-shortcodes-column wc-shortcodes-one-third wc-shortcodes-column-last ">'.$event_html.'</div>';
+			$html .= '</div>';
+			$html .= $message_html;
+			$html .= $button_html;
+		}
+		else {
+			$html .= $name_html . $number_html . $event_html . $message_html . $button_html;
+		}
+
+		return '<div class="wc-shortcodes-rsvp wc-shortcodes-rsvp-columns-'.$columns.' wc-shortcodes-rsvp-align-'.esc_attr($align).' rsvp-button-align-'.esc_attr($button_align).'">' . do_shortcode( $html ) . '</div>';
+	}
+	add_shortcode( 'wc_rsvp', 'wc_shortcodes_rsvp' );
+}
