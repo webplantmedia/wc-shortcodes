@@ -369,8 +369,7 @@
 	padding: 6px 20px;
 }
 
-.wc-shortcodes-button:hover,
-.wc-shortcodes-button:focus {
+.wc-shortcodes-button:hover {
 	color: #ffffff;
 	background-color: #3276b1;
 	border-color: #285e8e;
@@ -411,8 +410,7 @@
 	border: 1px solid #cccccc;
 }
 
-.wc-shortcodes-button.wc-shortcodes-button-secondary:hover,
-.wc-shortcodes-button.wc-shortcodes-button-secondary:focus {
+.wc-shortcodes-button.wc-shortcodes-button-secondary:hover {
 	color: #333333;
 	background-color: #ebebeb;
 	border-color: #adadad;
@@ -426,8 +424,7 @@
 	border: 1px solid #428bca;
 }
 
-.wc-shortcodes-button.wc-shortcodes-button-inverse:hover,
-.wc-shortcodes-button.wc-shortcodes-button-inverse:focus {
+.wc-shortcodes-button.wc-shortcodes-button-inverse:hover {
 	color: #ffffff;
 	background-color: #428bca;
 	border-color: #357ebd;
@@ -441,8 +438,7 @@
 	border: 1px solid #4cae4c;
 }
 
-.wc-shortcodes-button.wc-shortcodes-button-success:hover,
-.wc-shortcodes-button.wc-shortcodes-button-success:focus {
+.wc-shortcodes-button.wc-shortcodes-button-success:hover {
 	color: #ffffff;
 	background-color: #47a447;
 	border-color: #398439;
@@ -456,8 +452,7 @@
 	border: 1px solid #eea236;
 }
 
-.wc-shortcodes-button.wc-shortcodes-button-warning:hover,
-.wc-shortcodes-button.wc-shortcodes-button-warning:focus {
+.wc-shortcodes-button.wc-shortcodes-button-warning:hover {
 	color: #ffffff;
 	background-color: #ed9c28;
 	border-color: #d58512;
@@ -471,8 +466,7 @@
 	border: 1px solid #d43f3a;
 }
 
-.wc-shortcodes-button.wc-shortcodes-button-danger:hover,
-.wc-shortcodes-button.wc-shortcodes-button-danger:focus {
+.wc-shortcodes-button.wc-shortcodes-button-danger:hover {
 	color: #ffffff;
 	background-color: #d2322d;
 	border-color: #ac2925;
@@ -486,8 +480,7 @@
 	border: 1px solid #46b8da;
 }
 
-.wc-shortcodes-button.wc-shortcodes-button-info:hover,
-.wc-shortcodes-button.wc-shortcodes-button-info:focus {
+.wc-shortcodes-button.wc-shortcodes-button-info:hover {
 	color: #ffffff;
 	background-color: #39b3d7;
 	border-color: #269abc;
