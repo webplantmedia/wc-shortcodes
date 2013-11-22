@@ -848,7 +848,6 @@ if( !function_exists('wc_shortcodes_divider') ) {
 			'line'			=> 'single',
 			'margin_top'	=> '',
 			'margin_bottom'	=> '',
-			'height'		=> '',
 			'class'			=> '',
 		), $atts ) );
 
@@ -860,9 +859,6 @@ if( !function_exists('wc_shortcodes_divider') ) {
 			$style_attr[] = 'margin-bottom: '. $margin_bottom .';';
 		} elseif ( $margin_top ) {
 			$style_attr[] = 'margin-top: '. $margin_top .';';
-		}
-		if ( $height ) {
-			$style_attr[] = 'height: '. $height .';';
 		}
 
 		if ( ! empty ( $style_attr ) ) {

@@ -241,13 +241,13 @@
 						tinyMCE.activeEditor.selection.setContent('[wc_divider style="solid" line="triple" margin_top="" margin_bottom=""]');
 					}
 					if(id === "imageDivider") {
-						tinyMCE.activeEditor.selection.setContent('[wc_divider style="image" margin_top="" margin_bottom="" height=""]');
+						tinyMCE.activeEditor.selection.setContent('[wc_divider style="image" margin_top="" margin_bottom=""]');
 					}
 					if(id === "imageDivider2") {
-						tinyMCE.activeEditor.selection.setContent('[wc_divider style="image2" margin_top="" margin_bottom="" height=""]');
+						tinyMCE.activeEditor.selection.setContent('[wc_divider style="image2" margin_top="" margin_bottom=""]');
 					}
 					if(id === "imageDivider3") {
-						tinyMCE.activeEditor.selection.setContent('[wc_divider style="image3" margin_top="" margin_bottom="" height=""]');
+						tinyMCE.activeEditor.selection.setContent('[wc_divider style="image3" margin_top="" margin_bottom=""]');
 					}
 					
 					
