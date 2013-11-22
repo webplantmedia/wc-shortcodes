@@ -128,5 +128,3 @@ function wc_shortcodes_send_rsvp_email() {
 add_action( 'wp_ajax_nopriv_wc-send-rsvp-email', 'wc_shortcodes_send_rsvp_email' );
 // send email when logged in
 add_action( 'wp_ajax_wc-send-rsvp-email', 'wc_shortcodes_send_rsvp_email' );
-
-

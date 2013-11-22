@@ -170,6 +170,9 @@
 		if ( preview.length && options.restore.length ) {
 			$(preview).html('<img src="'+options.restore+'" />').show();
 		}
+		else {
+			$(preview).html("").hide();
+		}
 	})
 	.on('click', '.wc-shortcodes-delete-image', function( e ) {
 		e.preventDefault();

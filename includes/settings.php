@@ -108,15 +108,22 @@ function wc_shortcodes_options_display_setting( $args ) {
 		case 'image' :
 			wc_shortcodes_options_display_image_field( $args );
 			break;
+		case 'background' :
+			wc_shortcodes_options_display_background_fields( $args );
+			break;
 		case 'checkbox' :
 			wc_shortcodes_options_display_checkbox_field( $args );
 			break;
 		case 'textarea' :
 			wc_shortcodes_options_display_textarea_field( $args );
 			break;
-		case 'email' :
-			wc_shortcodes_options_email_field( $args );
+		case 'positive_pixel' :
+			wc_shortcodes_options_display_positive_pixel_input_field( $args );
 			break;
+		case 'pixel' :
+			wc_shortcodes_options_display_pixel_input_field( $args );
+			break;
+		case 'emails' :
 		default :
 			wc_shortcodes_options_input_field( $args );
 			break;
@@ -139,20 +146,105 @@ function wc_shortcodes_options_input_field( $args ) {
 	<?php endif; ?>
 	<?php
 }
-function wc_shortcodes_options_email_field( $args ) {
+function wc_shortcodes_options_display_positive_pixel_input_field( $args ) {
 	extract( $args );
 
 	$val = get_option( $option_name, $default );
+	$val = preg_replace("/[^0-9]/", "",$val);
 	?>
 
 	<?php if ( isset( $label ) ) : ?>
-		<label for="<?php echo esc_attr($option_name); ?>"><?php echo $label; ?></label>&nbsp;
+		<label for="<?php echo $option_name; ?>"><?php echo $label; ?></label>&nbsp;
 	<?php endif; ?>
 
-	<input name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>" type="text" value="<?php echo esc_attr($val); ?>" class="regular-text" />
+	<input type="number" min="0" class="small-text" name="<?php echo esc_attr($option_name); ?>" id="<?php echo $option_name; ?>" value="<?php echo esc_attr($val); ?>" />&nbsp;
+
 	<?php if ( isset( $description ) && !empty( $description ) ) : ?>
 		<p class="description"><?php echo $description; ?></p>
 	<?php endif; ?>
+
+	<?php
+}
+function wc_shortcodes_options_display_pixel_input_field( $args ) {
+	extract( $args );
+
+	$val = get_option( $option_name, $default );
+	$val = preg_replace("/[^0-9\-]/", "",$val);
+	?>
+
+	<?php if ( isset( $label ) ) : ?>
+		<label for="<?php echo $option_name; ?>"><?php echo $label; ?></label>&nbsp;
+	<?php endif; ?>
+
+	<input type="number" class="small-text" name="<?php echo esc_attr($option_name); ?>" id="<?php echo $option_name; ?>" value="<?php echo esc_attr($val); ?>" />&nbsp;
+
+	<?php if ( isset( $description ) && !empty( $description ) ) : ?>
+		<p class="description"><?php echo $description; ?></p>
+	<?php endif; ?>
+
+	<?php
+}
+function wc_shortcodes_options_display_background_fields( $args ) {
+	extract( $args );
+
+	$val = get_option( $option_name, $default );
+
+	// preview image default style
+	$style = '';
+	if ( empty( $val['image'] ) )
+		$style = ' style="display:none"';
+	?>
+
+	<div class="wc-shortcodes-background-options">
+		<?php // Background Image ?>
+		<input name="<?php echo $option_name; ?>[image]" id="<?php echo $option_name; ?>" class="regular-text ltr upload-input" type="text" value="<?php echo esc_attr( $val['image'] ); ?>" />
+		<br />
+		<a class="button wc-shortcodes-image-upload" data-target="#<?php echo $option_name; ?>" data-preview=".wc-shortcodes-preview-image" data-frame="select" data-state="wc_shortcodes_insert_single" data-fetch="url" data-title="Insert Image" data-button="Insert" data-class="media-frame wc-shortcodes-custom-uploader" title="Add Media"><span class="wp-media-buttons-icon"></span> Add Media</a>
+		<a class="button wc-shortcodes-restore-image" data-restore="<?php echo esc_attr( $default['image'] ); ?>" data-target="#<?php echo $option_name; ?>" data-preview=".wc-shortcodes-preview-image">Default</a>
+		<a class="button wc-shortcodes-delete-image" data-target="#<?php echo $option_name; ?>" data-preview=".wc-shortcodes-preview-image">Delete</a>
+		<br />
+		<p class="wc-shortcodes-preview-image"<?php echo $style; ?>><img src="<?php echo esc_attr( $val['image'] ); ?>" /></p>
+
+		<?php // Background Repeat ?>
+		<select name="<?php echo $option_name; ?>[repeat]" >
+			<option value="repeat" <?php selected( $val['repeat'], 'repeat'); ?>>Repeat</option>
+			<option value="repeat-x" <?php echo selected( $val['repeat'], 'repeat-x', false ); ?>>Repeat Horizontal</option>
+			<option value="repeat-y" <?php echo selected( $val['repeat'], 'repeat-y', false ); ?>>Repeat Vertical</option>
+			<option value="no-repeat" <?php echo selected( $val['repeat'], 'no-repeat', false ); ?>>No Repeat</option>
+			<option value="" <?php selected( $val['repeat'], ''); ?>>Inherit</option>
+		</select>
+
+		<?php // Background position ?>
+		<select name="<?php echo $option_name; ?>[position]" >
+			<option value="left top" <?php selected( $val['position'], 'left top'); ?>>Left Top</option>
+			<option value="left center" <?php selected( $val['position'], 'left center'); ?>>Left Center</option>
+			<option value="left bottom" <?php selected( $val['position'], 'left bottom'); ?>>Left Bottom</option>
+			<option value="right top" <?php selected( $val['position'], 'right top'); ?>>Right Top</option>
+			<option value="right center" <?php selected( $val['position'], 'right center'); ?>>Right Center</option>
+			<option value="right bottom" <?php selected( $val['position'], 'right bottom'); ?>>Right Bottom</option>
+			<option value="center top" <?php selected( $val['position'], 'center top'); ?>>Center Top</option>
+			<option value="center center" <?php selected( $val['position'], 'center center'); ?>>Center Center</option>
+			<option value="center bottom" <?php selected( $val['position'], 'center bottom'); ?>>Center Bottom</option>
+			<option value="" <?php selected( $val['position'], ''); ?>>Inherit</option>
+		</select>
+
+		<?php // Background Attachment ?>
+		<select name="<?php echo $option_name; ?>[attachment]" >
+			<option value="scroll" <?php selected( $val['attachment'], 'scroll'); ?>>Scroll</option>
+			<option value="fixed" <?php selected( $val['attachment'], 'fixed'); ?>>Fixed</option>
+			<option value="" <?php selected( $val['attachment'], ''); ?>>Inherit</option>
+		</select>
+		<br />
+
+		<?php // Background Color ?>
+		<input name="<?php echo $option_name; ?>[color]" type="text" value="<?php echo $val['color']; ?>" class="wc-shortcodes-color-field" data-default-color="<?php echo $default['color']; ?>" />
+
+		<?php // Description ?>
+		<?php if ( isset( $description ) && !empty( $description ) ) : ?>
+			<p class="description"><?php echo $description; ?></p>
+		<?php endif; ?>
+	</div>
+
 	<?php
 }
 function wc_shortcodes_options_display_image_field( $args ) {
@@ -230,9 +322,112 @@ function wc_shortcodes_options_find_sanitize_callback( $type ) {
 			return 'esc_url_raw';
 		case 'checkbox' :
 			return 'wc_shortcodes_options_sanitize_checkbox';
-		case 'email' :
-			return 'wc_shortcodes_options_sanitize_email';
+		case 'emails' :
+			return 'wc_shortcodes_options_sanitize_emails';
+		case 'background' :
+			return 'wc_shortcodes_options_sanitize_background_css';
+		case 'positive_pixel' :
+			return 'wc_shortcodes_options_sanitize_positive_pixel';
+		case 'pixel' :
+			return 'wc_shortcodes_options_sanitize_pixel';
 	}
+
+	return '';
+}
+
+function wc_shortcodes_options_sanitize_positive_pixel( $value ) {
+	$value = preg_replace("/[^0-9]/", "",$value);
+	$value = intval( $value );
+
+	if ( empty( $value ) )
+		$value = '0';
+
+	return $value."px";
+}
+
+function wc_shortcodes_options_sanitize_pixel( $value ) {
+	$value = preg_replace("/[^0-9\-]/", "",$value);
+	$value = intval( $value );
+
+	if ( empty( $value ) )
+		$value = '0';
+
+	return $value."px";
+}
+
+function wc_shortcodes_options_sanitize_background_css( $value ) {
+	$background = array(
+		'color' => '',
+		'image' => '',
+		'repeat' => '',
+		'position' => '',
+		'attachment' => '',
+	);
+
+	if ( !is_array( $value ) )
+		return $background;
+
+	foreach ( $value as $k => $v ) {
+		switch ( $k ) {
+			case 'color' :
+				$v = wc_shortcodes_options_sanitize_hex_color( $v );
+				$background['color'] = $v;
+				break;
+			case 'image' :
+				$v = esc_url_raw( $v );
+				$background['image'] = $v;
+				break;
+			case 'repeat' :
+				$v = wc_shortcodes_options_sanitize_background_repeat( $v );
+				$background['repeat'] = $v;
+				break;
+			case 'position' :
+				$v = wc_shortcodes_options_sanitize_background_position( $v );
+				$background['position'] = $v;
+				break;
+			case 'attachment' :
+				$v = wc_shortcodes_options_sanitize_background_attachment( $v );
+				$background['attachment'] = $v;
+				break;
+		}
+	}
+
+	return $background;
+}
+
+function wc_shortcodes_options_sanitize_background_repeat( $value ) {
+	$whitelist = array( 'repeat', 'no-repeat', 'repeat-x', 'repeat-y' );
+
+	if ( in_array( $value, $whitelist ) )
+		return $value;
+
+	return '';
+}
+
+function wc_shortcodes_options_sanitize_background_position( $value ) {
+	$whitelist = array(
+		'left top',
+		'left center',
+		'left bottom',
+		'right top',
+		'right center',
+		'right bottom',
+		'center top',
+		'center center',
+		'center bottom',
+	);
+
+	if ( in_array( $value, $whitelist ) )
+		return $value;
+
+	return '';
+}
+
+function wc_shortcodes_options_sanitize_background_attachment( $value ) {
+	$whitelist = array( 'fixed', 'scroll' );
+
+	if ( in_array( $value, $whitelist ) )
+		return $value;
 
 	return '';
 }
@@ -254,7 +449,7 @@ function wc_shortcodes_options_sanitize_hex_color( $color ) {
 	return null;
 }
 
-function wc_shortcodes_options_sanitize_email( $email ) {
+function wc_shortcodes_options_sanitize_emails( $email ) {
 	$valid = array();
 
 	$email = explode( ',', $email );

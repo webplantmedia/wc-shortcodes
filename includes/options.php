@@ -301,7 +301,7 @@ $wc_shortcodes_options['rsvp'] = array(
 					'title' => 'Email To',
 					'default' => $admin_email,
 					'description' => 'Send RSVP notification to the email address above. Separate multiple emails with a comma.',
-					'type' => 'email',
+					'type' => 'emails',
 				),
 				array(
 					'id' => 'rsvp_email_title',
