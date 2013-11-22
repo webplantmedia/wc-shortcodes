@@ -44,6 +44,12 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.14
+
+* Cleaned up code
+* Added 2 more image dividers
+* more support for different theme options
+
 ### Version 1.13
 
 * added rsvp shortcode
