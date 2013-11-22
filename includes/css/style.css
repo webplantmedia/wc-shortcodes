@@ -282,6 +282,20 @@
 	background: url("../img/circle-border.png") repeat-x center left scroll;
 }
 
+/* Image Line 2 */
+.wc-shortcodes-divider.wc-shortcodes-divider-style-image2 {
+	border: 0;
+	height: 10px;
+	background: url("../img/dash-border.png") repeat-x center left scroll;
+}
+
+/* Image Line 3 */
+.wc-shortcodes-divider.wc-shortcodes-divider-style-image3 {
+	border: 0;
+	height: 10px;
+	background: url("../img/rustic-border.png") repeat-x center left scroll;
+}
+
 /* Single Solid Line */
 .wc-shortcodes-divider.wc-shortcodes-divider-style-solid {
 	border: 0;

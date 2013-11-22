@@ -848,20 +848,30 @@ if( !function_exists('wc_shortcodes_divider') ) {
 			'line'			=> 'single',
 			'margin_top'	=> '',
 			'margin_bottom'	=> '',
+			'height'		=> '',
 			'class'			=> '',
 		), $atts ) );
 
-		$style_attr = '';
+		$style_attr = array();
 
 		if ( $margin_top && $margin_bottom ) {  
-			$style_attr = 'style="margin-top: '. $margin_top .';margin-bottom: '. $margin_bottom .';"';
+			$style_attr[] = 'margin-top: '. $margin_top .';margin-bottom: '. $margin_bottom .';';
 		} elseif( $margin_bottom ) {
-			$style_attr = 'style="margin-bottom: '. $margin_bottom .';"';
+			$style_attr[] = 'margin-bottom: '. $margin_bottom .';';
 		} elseif ( $margin_top ) {
-			$style_attr = 'style="margin-top: '. $margin_top .';"';
-		} else {
-			$style_attr = NULL;
+			$style_attr[] = 'margin-top: '. $margin_top .';';
 		}
+		if ( $height ) {
+			$style_attr[] = 'height: '. $height .';';
+		}
+
+		if ( ! empty ( $style_attr ) ) {
+			$style_attr = 'style="' . implode( '', $style_attr ) . '"';
+		}
+		else {
+			$style_attr = '';
+		}
+
 	 return '<hr class="wc-shortcodes-divider wc-shortcodes-divider-line-'.$line.' wc-shortcodes-divider-style-'. $style .' '. $class .'" '.$style_attr.' />';
 	}
 	add_shortcode( 'wc_divider', 'wc_shortcodes_divider' );
