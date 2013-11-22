@@ -451,20 +451,21 @@ if( !function_exists('wc_shortcodes_box') ) {
 			'margin_top'	=> '',
 			'margin_bottom'	=> '',
 			'class'			=> '',
-		  ), $atts ) );
-		  
-			$style_attr = '';
-			if( $margin_bottom ) {
-				$style_attr .= 'margin-bottom: '. $margin_bottom .';';
-			}
-			if ( $margin_top ) {
-				$style_attr .= 'margin-top: '. $margin_top .';';
-			}
-		  
-		  $alert_content = '';
-		  $alert_content .= '<div class="wc-shortcodes-box wc-shortcodes-clearfix wc-shortcodes-box-' . $color . ' '. $class .'" style="text-align:'. $text_align .';'. $style_attr .'">';
-		  $alert_content .= ' '. do_shortcode($content) .'</div>';
-		  return $alert_content;
+		), $atts ) );
+
+		$style_attr = '';
+
+		if( $margin_bottom ) {
+			$style_attr .= 'margin-bottom: '. $margin_bottom .';';
+		}
+		if ( $margin_top ) {
+			$style_attr .= 'margin-top: '. $margin_top .';';
+		}
+
+		$alert_content = '';
+		$alert_content .= '<div class="wc-shortcodes-box wc-shortcodes-clearfix wc-shortcodes-box-' . $color . ' '. $class .'" style="text-align:'. $text_align .';'. $style_attr .'">';
+		$alert_content .= ' '. do_shortcode($content) .'</div>';
+		return $alert_content;
 	}
 }
 
@@ -759,10 +760,10 @@ if( !function_exists('wc_shortcodes_heading') ) {
 			'class'			=> '',
 			'icon_left'		=> '',
 			'icon_right'	=> ''
-		  ),
-		  $atts ) );
-		  
+		), $atts ) );
+
 		$style_attr = '';
+
 		if ( $font_size ) {
 			$style_attr .= 'font-size: '. $font_size .';';
 		}
@@ -848,9 +849,10 @@ if( !function_exists('wc_shortcodes_divider') ) {
 			'margin_top'	=> '',
 			'margin_bottom'	=> '',
 			'class'			=> '',
-		  ),
-		  $atts ) );
+		), $atts ) );
+
 		$style_attr = '';
+
 		if ( $margin_top && $margin_bottom ) {  
 			$style_attr = 'style="margin-top: '. $margin_top .';margin-bottom: '. $margin_bottom .';"';
 		} elseif( $margin_bottom ) {
