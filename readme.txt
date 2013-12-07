@@ -44,6 +44,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.15
+
+* added block display to image anchor elements
+* updated icons
+
 ### Version 1.14
 
 * Cleaned up code
