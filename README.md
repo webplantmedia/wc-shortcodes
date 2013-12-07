@@ -44,6 +44,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.16
+
+* updated youtube icon
+
 ### Version 1.15
 
 * added block display to image anchor elements
