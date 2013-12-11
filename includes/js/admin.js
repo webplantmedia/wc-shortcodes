@@ -120,7 +120,7 @@
 					
 					if ( 'undefined' === typeof element.sizes ) {
 						preview_img = element.url;
-						preview_html = "";
+						preview_html += "<img src='"+preview_img+"' />";
 					}
 					else if ( ( 'string' === typeof options.imgsize ) && ( 'object' === typeof element.sizes[ options.imgsize ] ) ) {
 						preview_img = element.sizes[ options.imgsize ].url;
