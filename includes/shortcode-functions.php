@@ -985,3 +985,191 @@ if( !function_exists('wc_shortcodes_rsvp') ) {
 	}
 	add_shortcode( 'wc_rsvp', 'wc_shortcodes_rsvp' );
 }
+
+if( ! function_exists( 'wc_shortcodes_posts' ) ) {
+	/**
+	 * Display posts in various formats
+	 *
+	 * @since 3.8
+	 * @access public
+	 *
+	 * @param mixed $atts
+	 * @return void
+	 */
+	function wc_shortcodes_posts( $atts ) {
+		global $data;
+		global $post;
+
+		wp_enqueue_script('wordpresscanvas-isotope');
+		wp_enqueue_script('wc-shortcodes-posts');
+
+		if((is_front_page() || is_home() ) ) {
+			$paged = (get_query_var('paged')) ?get_query_var('paged') : ((get_query_var('page')) ? get_query_var('page') : 1);
+		} else {
+			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+		}
+
+		// get specified number of posts per page
+		if (isset($atts['number_posts']) && $atts['number_posts']) {
+			$atts['number_posts'] = (int) $atts['number_posts'];
+		}
+		else {
+			$atts['number_posts'] = 0;
+		}
+
+		$atts = shortcode_atts( array(
+			'author'              => '',
+			'author_name'		  => '',
+			'category_name'       => '',
+			'cat'      			  => '',
+			'id'                  => false,
+			'p'					  => false,
+			'post__in'			  => false,
+			'order'               => 'DESC',
+			'orderby'             => 'date',
+			'post_status'         => 'publish',
+			'post_type'           => 'post',
+			'posts_per_page'	  => (int) $atts['number_posts'],
+			'nopaging'			  => false,
+			'paged'				  => $paged,
+			'tag'                 => '',
+			'tax_operator'        => 'IN',
+			'tax_term'            => false,
+			'taxonomy'            => 'category',
+			'title_meta'		  => '',
+			'include_shortcodes'  => false,
+			'layout' 			  => 'large',
+
+			'cat_slug'			  => '',
+			'title'				  => true,
+			'meta_all'			  => true,
+			'meta_author' 		  => true,
+			'meta_date' 		  => true,
+			'meta_categories'  	  => true,
+			'meta_comments'  	  => true,
+			'meta_link'  	  	  => true,
+			'thumbnail'			  => true,
+			'excerpt'			  => true,
+			'excerpt_words'		  => '50',
+			'strip_html'		  => true,
+			'paging'			  => true,
+			'scrolling'		      => 'infinite',
+			'posts_grid_columns'  => '3',
+			'heading_type'        => 'h2',
+		), $atts );
+
+
+
+		if(isset($atts['posts_per_page']) && $atts['posts_per_page'] == -1) {
+			$atts['nopaging'] = true;
+		}
+
+		// setting attributes right for the php script
+		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
+		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
+
+		$valid_posts = array( 2, 3, 4 );
+		$atts['posts_grid_columns'] == (int) $atts['posts_grid_columns'];
+		$atts['posts_grid_columns'] = in_array( $atts['posts_grid_columns'], $valid_posts ) ? $atts['posts_grid_columns'] : 2;
+		
+		($atts['title'] == "yes") ? ($atts['title'] = true) : ($atts['title'] = false);
+		($atts['meta_all'] == "yes") ? ($atts['meta_all'] = true) : ($atts['meta_all'] = false);
+		($atts['meta_author'] == "yes") ? ($atts['meta_author'] = true) : ($atts['meta_author'] = false);
+		($atts['meta_date'] == "yes") ? ($atts['meta_date'] = true) : ($atts['meta_date'] = false);
+		($atts['meta_categories'] == "yes") ? ($atts['meta_categories'] = true) : ($atts['meta_categories'] = false);
+		($atts['meta_comments'] == "yes") ? ($atts['meta_comments'] = true) : ($atts['meta_comments'] = false);
+		($atts['meta_link'] == "yes") ? ($atts['meta_link'] = true) : ($atts['meta_link'] = false);
+
+		//checking if there are categories that are excluded using "-"; transform slugs to ids
+		$cat_ids ='';
+		$categories = explode(',', $atts['cat_slug']);
+		if ( isset($cateogries) && $categories) {
+			foreach ($categories as $category) {
+				if(strpos($category, '-') === 0) {
+					$cat_ids .= '-' .get_category_by_slug( $category )->cat_ID .',';
+				} else {
+					$cat_ids .= get_category_by_slug( $category )->cat_ID .',';
+				}
+			}
+		}
+		$atts['cat'] = substr($cat_ids, 0, -1);
+
+		($atts['thumbnail'] == "yes") ? ($atts['thumbnail'] = true) : ($atts['thumbnail'] = false);
+		($atts['thumbnail'] == "yes") ? ($atts['thumbnail'] = true) : ($atts['thumbnail'] = false);
+		($atts['excerpt'] == "yes") ? ($atts['excerpt'] = true) : ($atts['excerpt'] = false);
+		($atts['strip_html'] == "yes") ? ($atts['strip_html'] = 1) : ($atts['strip_html'] = 0);
+		($atts['paging'] == "yes") ? ($atts['paging'] = true) : ($atts['paging'] = false);
+		($atts['scrolling'] == "infinite") ? ($atts['paging'] = true) : ($atts['paging'] = $atts['paging']);
+
+		$ml_query = new WP_Query($atts);
+
+		$html = '';
+
+		$html .= '<div data-posts-grid-columns="'.$atts["posts_grid_columns"].'" class="wc-shortcodes-posts wc-shortcodes-posts-col-'.$atts["posts_grid_columns"].'">';
+
+		while( $ml_query->have_posts() ) :
+			$ml_query->the_post();
+
+			ob_start();
+			include('templates/posts-grid.php');
+			$html .= ob_get_clean();
+
+		endwhile;
+
+		$html .= '</div>';
+
+		//no paging if only the latest posts are shown
+		if ($atts['paging']) {
+			$html .= wc_shortcodes_posts_pagination($ml_query, $pages = '', $range = 2, $atts['scrolling']);
+		}
+		wp_reset_query();
+		return $html;
+	}
+}
+add_shortcode( 'wc_posts', 'wc_shortcodes_posts' );
+
+if( ! function_exists( 'wc_shortcodes_posts_pagination' ) ):
+	function wc_shortcodes_posts_pagination($ml_query, $pages = '', $range = 2, $infinite_scrolling = false) {
+		$html = '';
+
+		$showitems = ($range * 2)+1;
+
+		if((is_front_page() || is_home() ) ) {
+			$paged = (get_query_var('paged')) ?get_query_var('paged') : ((get_query_var('page')) ? get_query_var('page') : 1);
+		} else {
+			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+		}
+
+		if($pages == '') {
+			global $wp_query;
+			$pages = $ml_query->max_num_pages;
+			if(!$pages) {
+				$pages = 1;
+			}
+		}
+
+		if(1 != $pages) {
+			if ($infinite_scrolling == "infinite") {
+				$html .= '<div class="pagination infinite-scroll clearfix">';
+			} else {
+				$html .= '<div class="pagination clearfix">';
+			}
+
+			if($paged > 1) $html .= '<a class="pagination-prev" href="'.get_pagenum_link($paged - 1).'"><span class="page-prev"></span>'.__('Previous', 'Avada').'</a>';
+
+			for ($i=1; $i <= $pages; $i++) {
+				if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )) {
+					if ($paged == $i) {
+						$html .= '<span class="current">'.$i.'</span>';
+					} else {
+						$html .= '<a href="'.get_pagenum_link($i).'" class="inactive" >'.$i.'</a>';
+					}
+				}
+			}
+
+			if ($paged < $pages) $html .= '<a class="pagination-next" href="'.get_pagenum_link($paged + 1).'">'.__('Next', 'Avada').'<span class="page-next"></span></a>';
+			$html .= '</div>';
+		}
+		return $html;
+	}
+endif;
