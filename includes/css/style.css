@@ -1099,29 +1099,32 @@ pre.pre-wrap {
  * ----------------------------------------------------------------------------
  */
 .wc-shortcodes-post-content {
-	padding: 20px;
+	padding: 0 20px;
 }
 .wc-shortcodes-post-border {
 	border: 1px solid #dddddd;
 }
 .wc-shortcodes-entry-thumbnail {
 	margin: 0;
-	/* margin-bottom: 20px; */
 	text-align: center;
 }
 .wc-shortcodes-entry-title {
-	margin-top: 0;
+	margin-top: 20px;
 	margin-bottom: 20px;
 }
 .wc-shortcodes-entry-meta {
-	margin-top: 0;
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+.wc-shortcodes-entry-meta-inner {
 	margin-bottom: 20px;
 }
 .wc-shortcodes-entry-summary {
-	margin-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 0;
 }
 .wc-shortcodes-footer-entry-meta {
-	margin-top: 0;
+	margin-top: 20px;
 	margin-bottom: 0;
 	font-size: 80%;
 }
@@ -1183,14 +1186,6 @@ pre.pre-wrap {
 	width: 24.9%;
 } */
 
-@media (max-width: 480px) {
-	body .wc-shortcodes-posts-col-2 .wc-shortcodes-post-box,
-	body .wc-shortcodes-posts-col-3 .wc-shortcodes-post-box,
-	body .wc-shortcodes-posts-col-4 .wc-shortcodes-post-box {
-		width: 100%;
-	}
-}
-
 .wc-shortcodes-posts,
 .wc-shortcodes-posts .wc-shortcodes-post-box {
   -webkit-transition-duration: 0.8s;
@@ -1214,4 +1209,60 @@ pre.pre-wrap {
       -ms-transition-property:     -ms-transform, opacity;
        -o-transition-property:      -o-transform, opacity;
           transition-property:         transform, opacity;
+}
+
+.rslides-wrapper {
+	position: relative;
+	background-color: #000000;
+}
+.rslides {
+	position: relative;
+	list-style: none;
+	overflow: hidden;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.rslides li {
+	-webkit-backface-visibility: hidden;
+	position: absolute;
+	display: none;
+	width: 100%;
+	left: 0;
+	top: 0;
+	text-align: center;
+}
+
+.rslides li:first-child {
+	position: relative;
+	display: block;
+	float: left;
+}
+
+.rslides img {
+	display: inline-block;
+	height: auto;
+	/* float: left; */
+	/* width: 100%; */
+	border: 0;
+}
+.rslides_nav {
+	position: absolute;
+	top: 50%;
+	margin-top: -18px;
+	width: 36px;
+	height:36px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: rgba(0,0,0,.2);
+	z-index: 2;
+}
+.rslides_nav.prev {
+	left: 0;
+	background-image: url("../img/slide-arrow-left.png");
+}
+.rslides_nav.next {
+	right: 0;
+	background-image: url("../img/slide-arrow-right.png");
 }

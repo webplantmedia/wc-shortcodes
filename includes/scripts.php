@@ -28,9 +28,13 @@ if( !function_exists ('wc_shortcodes_scripts') ) :
 		wp_register_script( 'wc-shortcodes-skillbar', plugin_dir_url( __FILE__ ) . 'js/skillbar.js', array ( 'jquery' ), $ver, true );
 		wp_register_script( 'wc-shortcodes-fullwidth', plugin_dir_url( __FILE__ ) . 'js/fullwidth.js', array ( 'jquery' ), $ver, true );
 
+		// slider
+		wp_register_script( 'wordpresscanvas-rslides', plugin_dir_url( __FILE__ ) . 'js/responsiveslides.js', array ( 'jquery' ), '1.0', true );
+		wp_register_script( 'wc-shortcodes-slider', plugin_dir_url( __FILE__ ) . 'js/slider.js', array ( 'jquery', 'wordpresscanvas-rslides' ), $ver, true );
+
 		// isotope
 		wp_register_script( 'wordpresscanvas-isotope', plugin_dir_url( __FILE__ ) . 'js/jquery.isotope.min.js', array ( 'jquery' ), '1.5.25', false );
-		wp_register_script( 'wc-shortcodes-posts', plugin_dir_url( __FILE__ ) . 'js/posts.js', array ( 'jquery' ), $ver, true );
+		wp_register_script( 'wc-shortcodes-posts', plugin_dir_url( __FILE__ ) . 'js/posts.js', array ( 'jquery', 'wordpresscanvas-isotope' ), $ver, true );
 
 		// countdown
 		wp_register_script( 'wc-shortcodes-jquery-countdown-js', plugin_dir_url( __FILE__ ) . 'js/jquery.countdown.js', array ( 'jquery' ), $ver, true );

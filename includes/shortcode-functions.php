@@ -1000,7 +1000,6 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		global $data;
 		global $post;
 
-		wp_enqueue_script('wordpresscanvas-isotope');
 		wp_enqueue_script('wc-shortcodes-posts');
 
 		if((is_front_page() || is_home() ) ) {
@@ -1049,16 +1048,15 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			'meta_comments'  	  => true,
 			'meta_link'  	  	  => true,
 			'thumbnail'			  => true,
+			'size'  			  => 'large',
 			'excerpt'			  => true,
 			'excerpt_words'		  => '50',
 			'strip_html'		  => true,
 			'paging'			  => true,
 			'scrolling'		      => 'infinite',
 			'posts_grid_columns'  => '3',
-			'heading_type'        => 'h2',
+			'heading_type'		  => 'h2',
 		), $atts );
-
-
 
 		if(isset($atts['posts_per_page']) && $atts['posts_per_page'] == -1) {
 			$atts['nopaging'] = true;
@@ -1095,7 +1093,6 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		$atts['cat'] = substr($cat_ids, 0, -1);
 
 		($atts['thumbnail'] == "yes") ? ($atts['thumbnail'] = true) : ($atts['thumbnail'] = false);
-		($atts['thumbnail'] == "yes") ? ($atts['thumbnail'] = true) : ($atts['thumbnail'] = false);
 		($atts['excerpt'] == "yes") ? ($atts['excerpt'] = true) : ($atts['excerpt'] = false);
 		($atts['strip_html'] == "yes") ? ($atts['strip_html'] = 1) : ($atts['strip_html'] = 0);
 		($atts['paging'] == "yes") ? ($atts['paging'] = true) : ($atts['paging'] = false);
@@ -1111,7 +1108,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			$ml_query->the_post();
 
 			ob_start();
-			include('templates/posts-grid.php');
+			include('templates/index.php');
 			$html .= ob_get_clean();
 
 		endwhile;
@@ -1120,56 +1117,12 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 		//no paging if only the latest posts are shown
 		if ($atts['paging']) {
-			$html .= wc_shortcodes_posts_pagination($ml_query, $pages = '', $range = 2, $atts['scrolling']);
+			ob_start();
+			include('templates/nav-pagination.php');
+			$html .= ob_get_clean();
 		}
 		wp_reset_query();
 		return $html;
 	}
 }
 add_shortcode( 'wc_posts', 'wc_shortcodes_posts' );
-
-if( ! function_exists( 'wc_shortcodes_posts_pagination' ) ):
-	function wc_shortcodes_posts_pagination($ml_query, $pages = '', $range = 2, $infinite_scrolling = false) {
-		$html = '';
-
-		$showitems = ($range * 2)+1;
-
-		if((is_front_page() || is_home() ) ) {
-			$paged = (get_query_var('paged')) ?get_query_var('paged') : ((get_query_var('page')) ? get_query_var('page') : 1);
-		} else {
-			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-		}
-
-		if($pages == '') {
-			global $wp_query;
-			$pages = $ml_query->max_num_pages;
-			if(!$pages) {
-				$pages = 1;
-			}
-		}
-
-		if(1 != $pages) {
-			if ($infinite_scrolling == "infinite") {
-				$html .= '<div class="pagination infinite-scroll clearfix">';
-			} else {
-				$html .= '<div class="pagination clearfix">';
-			}
-
-			if($paged > 1) $html .= '<a class="pagination-prev" href="'.get_pagenum_link($paged - 1).'"><span class="page-prev"></span>'.__('Previous', 'Avada').'</a>';
-
-			for ($i=1; $i <= $pages; $i++) {
-				if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )) {
-					if ($paged == $i) {
-						$html .= '<span class="current">'.$i.'</span>';
-					} else {
-						$html .= '<a href="'.get_pagenum_link($i).'" class="inactive" >'.$i.'</a>';
-					}
-				}
-			}
-
-			if ($paged < $pages) $html .= '<a class="pagination-next" href="'.get_pagenum_link($paged + 1).'">'.__('Next', 'Avada').'<span class="page-next"></span></a>';
-			$html .= '</div>';
-		}
-		return $html;
-	}
-endif;
