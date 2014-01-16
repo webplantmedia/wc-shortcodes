@@ -11,6 +11,18 @@ switch( $post_format ) {
 	case 'excerpt' :
 		include( 'content-excerpt.php' );
 		break;
+	case 'aside' :
+		include( 'content-aside.php' );
+		break;
+	case 'link' :
+		include( 'content-link.php' );
+		break;
+	case 'chat' :
+		include( 'content-chat.php' );
+		break;
+	case 'quote' :
+		include( 'content-quote.php' );
+		break;
 	case 'gallery' :
 		wp_enqueue_script('wc-shortcodes-slider');
 		include( 'content-gallery.php' );

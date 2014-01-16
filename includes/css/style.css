@@ -1123,6 +1123,10 @@ pre.pre-wrap {
 	margin-top: 20px;
 	margin-bottom: 0;
 }
+.wc-shortcodes-entry-quote blockquote {
+	margin-top: 0;
+	padding: 10px 20px;
+}
 .wc-shortcodes-footer-entry-meta {
 	margin-top: 20px;
 	margin-bottom: 0;
