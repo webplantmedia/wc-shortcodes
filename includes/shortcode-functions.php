@@ -1002,10 +1002,10 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 		wp_enqueue_script('wc-shortcodes-posts');
 
-		if((is_front_page() || is_home() ) ) {
-			$paged = (get_query_var('paged')) ?get_query_var('paged') : ((get_query_var('page')) ? get_query_var('page') : 1);
+		if ( (is_front_page() || is_home() ) ) {
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
 		} else {
-			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+			$paged = ( get_query_var('paged') ) ? get_query_var( 'paged' ) : 1;
 		}
 
 		// get specified number of posts per page
@@ -1017,46 +1017,68 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		}
 
 		$atts = shortcode_atts( array(
-			'author'              => '',
-			'author_name'		  => '',
-			'category_name'       => '',
-			'cat'      			  => '',
-			'id'                  => false,
-			'p'					  => false,
-			'post__in'			  => false,
-			'order'               => 'DESC',
-			'orderby'             => 'date',
-			'post_status'         => 'publish',
-			'post_type'           => 'post',
-			'posts_per_page'	  => (int) $atts['number_posts'],
-			'nopaging'			  => false,
-			'paged'				  => $paged,
-			'tag'                 => '',
-			'tax_operator'        => 'IN',
-			'tax_term'            => false,
-			'taxonomy'            => 'category',
-			'title_meta'		  => '',
-			'include_shortcodes'  => false,
-			'layout' 			  => 'large',
+			'author' => '',
+			'author_name' => '',
+			'cat' => '',
+			'id' => false,
+			'p' => false,
+			'post__in' => false,
+			'order' => 'DESC',
+			'orderby' => 'date',
+			'post_status' => 'publish',
+			'post_type' => 'post',
+			'posts_per_page' => (int) $atts['number_posts'],
+			'nopaging' => false,
+			'paged' => $paged,
+			'tag' => '',
+			'ignore_sticky_posts' => 0,
 
-			'cat_slug'			  => '',
-			'title'				  => true,
-			'meta_all'			  => true,
-			'meta_author' 		  => true,
-			'meta_date' 		  => true,
-			'meta_categories'  	  => true,
-			'meta_comments'  	  => true,
-			'meta_link'  	  	  => true,
-			'thumbnail'			  => true,
-			'size'  			  => 'large',
-			'excerpt'			  => true,
-			'excerpt_words'		  => '50',
-			'strip_html'		  => true,
-			'paging'			  => true,
-			'scrolling'		      => 'infinite',
-			'posts_grid_columns'  => '3',
-			'heading_type'		  => 'h2',
+			'taxonomy' => '',
+			'field' => 'slug',
+			'terms' => '',
+
+			'layout' => 'isotope',
+
+			'cat_slug' => '',
+			'title' => true,
+			'meta_all' => true,
+			'meta_author' => true,
+			'meta_date' => true,
+			'meta_categories' => true,
+			'meta_comments' => true,
+			'meta_link' => true,
+			'thumbnail' => true,
+			'size' => 'large',
+			'excerpt' => true,
+			'excerpt_words' => '50',
+			'strip_html' => true,
+			'paging' => true,
+			'scrolling' => 'infinite',
+			'filtering' => true,
+			'posts_grid_columns' => '3',
+			'heading_type' => 'h2',
 		), $atts );
+
+		$terms = explode( ',', $atts['terms'] );
+		foreach ( $terms as $key => $term ) {
+			$term = trim( $term );
+
+			if ( empty( $term ) )
+				unset( $terms[ $key ] );
+			else
+				$terms[ $key ] = $term;
+		}
+		$atts['terms'] = $terms;
+
+		if ( ! empty( $atts['terms'] ) ) {
+			$atts['tax_query'] = array(
+				array(
+					'taxonomy' => $atts['taxonomy'],
+					'field' => $atts['field'],
+					'terms' => $atts['terms'],
+				),
+			);
+		}
 
 		if(isset($atts['posts_per_page']) && $atts['posts_per_page'] == -1) {
 			$atts['nopaging'] = true;
@@ -1096,13 +1118,23 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		($atts['excerpt'] == "yes") ? ($atts['excerpt'] = true) : ($atts['excerpt'] = false);
 		($atts['strip_html'] == "yes") ? ($atts['strip_html'] = 1) : ($atts['strip_html'] = 0);
 		($atts['paging'] == "yes") ? ($atts['paging'] = true) : ($atts['paging'] = false);
+		($atts['filtering'] == "yes") ? ($atts['filtering'] = true) : ($atts['filtering'] = false);
 		($atts['scrolling'] == "infinite") ? ($atts['paging'] = true) : ($atts['paging'] = $atts['paging']);
 
 		$ml_query = new WP_Query($atts);
 
 		$html = '';
 
-		$html .= '<div data-posts-grid-columns="'.$atts["posts_grid_columns"].'" class="wc-shortcodes-posts wc-shortcodes-posts-col-'.$atts["posts_grid_columns"].'">';
+		$class = array();
+		$class[] = 'wc-shortcodes-posts';
+		$class[] = 'wc-shortcodes-posts-col-' . $atts["posts_grid_columns"];
+		$class[] = 'wc-shortcodes-posts-layout-' . $atts['layout'];
+
+		$html .= '<div data-posts-grid-columns="'.$atts["posts_grid_columns"].'" class="' . implode( ' ', $class ) . '">';
+
+		if ( $atts['filtering'] ) {
+			include( 'templates/nav-filtering.php' );
+		}
 
 		while( $ml_query->have_posts() ) :
 			$ml_query->the_post();

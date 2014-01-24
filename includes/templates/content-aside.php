@@ -1,4 +1,5 @@
-<div id="post-<?php the_ID(); ?>" <?php post_class('wc-shortcodes-post-box'); ?>>
+<?php $classes[] = 'wc-shortcodes-post-box'; ?>
+<div id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
 	<div class="wc-shortcodes-post-border">
 		<?php if ( $atts['thumbnail'] && has_post_thumbnail() && ! post_password_required() ) : ?>
 			<div class="wc-shortcodes-entry-thumbnail">

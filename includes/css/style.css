@@ -1148,6 +1148,7 @@ pre.pre-wrap {
 .wc-shortcodes-date {
 	float: left;
 }
+/* Comment Box */
 .wc-shortcodes-comments-link {
 	float: right;
 }
@@ -1180,16 +1181,8 @@ pre.pre-wrap {
 	color: #999999;
 	text-decoration: none;
 }
-/* .wc-shortcodes-posts-col-2 .wc-shortcodes-post-box {
-	width: 49%;
-}
-.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box {
-	width: 33.2%;
-}
-.wc-shortcodes-posts-col-4 .wc-shortcodes-post-box {
-	width: 24.9%;
-} */
 
+/* Isotopes */
 .wc-shortcodes-posts,
 .wc-shortcodes-posts .wc-shortcodes-post-box {
   -webkit-transition-duration: 0.8s;
@@ -1197,6 +1190,14 @@ pre.pre-wrap {
       -ms-transition-duration: 0.8s;
        -o-transition-duration: 0.8s;
           transition-duration: 0.8s;
+}
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
 }
 
 .wc-shortcodes-posts {
@@ -1215,6 +1216,16 @@ pre.pre-wrap {
           transition-property:         transform, opacity;
 }
 
+/* isotope filtering */
+.wc-shortcodes-filtering {
+	margin-bottom: 20px;
+}
+.wc-shortcodes-filtering .tag-divider {
+	display: inline-block;
+	padding: 0 7px;
+}
+
+/* Post Gallery Slider */
 .rslides-wrapper {
 	position: relative;
 	background-color: #000000;

@@ -128,3 +128,21 @@ function wc_shortcodes_send_rsvp_email() {
 add_action( 'wp_ajax_nopriv_wc-send-rsvp-email', 'wc_shortcodes_send_rsvp_email' );
 // send email when logged in
 add_action( 'wp_ajax_wc-send-rsvp-email', 'wc_shortcodes_send_rsvp_email' );
+
+if ( ! function_exists( 'wc_shortcodes_display_term_classes' ) ) {
+	function wc_shortcodes_display_term_classes( $taxonomy ) {
+		global $post;
+
+		$classes = array();
+
+		if ( is_object_in_taxonomy( $post->post_type, $taxonomy ) ) {
+			foreach ( (array) wp_get_post_terms( $post->ID, $taxonomy ) as $term ) {
+				if ( empty( $term->slug ) )
+					continue;
+				$classes[] = 'wc-shortcodes-filter-' . sanitize_html_class($term->slug, $term->term_id);
+			}
+		}
+
+		return $classes;
+	}
+}

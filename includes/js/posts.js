@@ -86,5 +86,19 @@
 				}
 			});
 		});
+
+		$('.wc-shortcodes-filtering .wc-shortcodes-term').click( function( event ) {
+			event.preventDefault();
+
+			var selector = $(this).attr('data-filter');
+			$container.isotope({
+				filter: selector,
+				masonry: {
+					columnWidth: columnWidth,
+					gutterWidth: gutterWidth
+				}
+			});
+			return false;
+		});
 	});
 } )( jQuery );

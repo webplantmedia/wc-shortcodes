@@ -7,6 +7,8 @@ if ( $blog_use_excerpt ) {
 	}
 }
 
+$classes = wc_shortcodes_display_term_classes( $atts['taxonomy'] );
+
 switch( $post_format ) {
 	case 'excerpt' :
 		include( 'content-excerpt.php' );
@@ -19,6 +21,12 @@ switch( $post_format ) {
 		break;
 	case 'chat' :
 		include( 'content-chat.php' );
+		break;
+	case 'audio' :
+		include( 'content-audio.php' );
+		break;
+	case 'video' :
+		include( 'content-video.php' );
 		break;
 	case 'quote' :
 		include( 'content-quote.php' );
