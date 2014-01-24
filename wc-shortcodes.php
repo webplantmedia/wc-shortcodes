@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: WordPress Canvas Shortcodes
+Plugin Name: WordPress Canvas - Shortcodes
 Plugin URI: http://wordpresscanvas.com/features/shortcodes/
 Description: A family of shortcodes to enhance site functionality.
 Author: Chris Baldelomar
