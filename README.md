@@ -13,7 +13,7 @@ A family of shortcodes to enhance your site functionality.
 
 ## Description ##
 
-Enhance your pages and posts with the following actions.
+Enhance your pages and posts with the following features.
 
 * Accordion
 * Tabs
