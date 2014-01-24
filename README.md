@@ -1,21 +1,41 @@
-# WordPress Canvas Shortcodes #
+# WordPress Canvas - Shortcodes #
 
 **Contributors:** cbaldelomar  
 **Donate link:** http://webplantmedia.com/pay-now/  
-**Tags:** shortcode, shortcodes  
+**Tags:** shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type  
 **Requires at least:** 3.7  
-**Tested up to:** 3.7.1  
+**Tested up to:** 3.8.1  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-A family of shortcodes to enhance site functionality. 
+A family of shortcodes to enhance your site functionality. 
 
 ## Description ##
 
-Enhance Pages with the following features. Accordion, Tabs, Toggle, Columns, Testimonials, Borders, Buttons, Full Width, Notifications, Google Maps, Social Icons, Progress Bars, Pricing, Highlights, Custom HTML, Code.
+Enhance your pages and posts with the following actions.
 
-See the shortcodes in action at [WordPress Canvas Shortcodes](http://wordpresscanvas.com/features/shortcodes/).
+* Accordion
+* Tabs
+* Toggle
+* Columns & Sections
+* Testimonials
+* Borders
+* Buttons
+* Full Width
+* Notifications
+* Google Maps
+* Social Icons
+* Progress Bars
+* Pricing
+* Highlights
+* Countdown
+* RSVP
+* Custom HTML
+* Code Snippets
+* Isotope / Masonry Posts
+
+[Live Demo & Documentation](http://wordpresscanvas.com/features/shortcodes/)
 
 ### Professional Support
 
@@ -27,7 +47,7 @@ If you're a theme author, plugin author, or just a code hobbyist, you can follow
 
 ### Donations
 
-Yes, I do accept donations.  If you want to buy me a sandwich or whatever, you can do so from my [payment page](http://webplantmedia.com/pay-now/).  I appreciate all donations, no matter the size.  Further development of this plugin is not contingent on donations, but they are always a nice incentive.
+Thank you so much for even considering supporting my work. If you have benefited from my WordPress plugins, or are appreciative of my customer support, and feel led to send me a monetary donation, please follow the link [here](http://webplantmedia.com/donate/). I am truly thankful for your hard earned giving.
 
 ## Installation ##
 
@@ -43,6 +63,10 @@ Yes, I do accept donations.  If you want to buy me a sandwich or whatever, you c
 Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
+
+### Version 1.17
+
+* Added ability to showcase posts of any post type in an isotope / masonry layout.
 
 ### Version 1.16
 
@@ -117,4 +141,3 @@ Use the shortcode manager in the TinyMCE text editor
 ### Version 1.1
 
 * Plugin released.  Everything is new!
-
