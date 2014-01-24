@@ -44,15 +44,27 @@
 		var gutterWidth = 0;
 
 		var calculateGrid = function() {
-			var columns = parseInt( $container.data('postsGridColumns') );
+			var columns = parseInt( $container.data('columns') );
+			var gutterSpace = $container.data('gutterSpace');
 			var containerWidth = $container.width();
 			var marginBottom = 0;
 
-			if ( containerWidth < 568 ) { columns = 1; }
-			else if ( containerWidth < 768 ) { columns = 2; }
-			else if ( containerWidth < 991 ) { columns = 3; }
+			if ( isNaN( gutterSpace ) ) {
+				gutterSpace = .020;
+			}
+			else if ( gutterSpace > 0.05 || gutterSpace < 0 ) {
+				gutterSpace = .020;
+			}
 
-			gutterWidth = Math.floor( containerWidth * .02 );
+			if ( containerWidth < 568 ) { columns = 1; }
+			else if ( containerWidth < 768 ) { columns -= 2; }
+			else if ( containerWidth < 991 ) { columns -= 1; }
+
+			if ( columns < 1 ) {
+				columns = 1;
+			}
+
+			gutterWidth = Math.floor( containerWidth * gutterSpace );
 
 			var allGutters = gutterWidth * ( columns - 1 );
 			var contentWidth = containerWidth - allGutters;
@@ -91,8 +103,8 @@
 		$term.click( function( event ) {
 			event.preventDefault();
 
-			$term.removeClass('wc-shortcode-term-active');
-			$(this).addClass('wc-shortcode-term-active');
+			$term.removeClass('wc-shortcodes-term-active');
+			$(this).addClass('wc-shortcodes-term-active');
 
 			var selector = $(this).attr('data-filter');
 			$container.isotope({

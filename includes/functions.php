@@ -146,3 +146,23 @@ if ( ! function_exists( 'wc_shortcodes_display_term_classes' ) ) {
 		return $classes;
 	}
 }
+
+if ( ! function_exists( 'wc_shortcodes_comma_delim_to_array' ) ) {
+	function wc_shortcodes_comma_delim_to_array( $string ) {
+		$a = explode( ',', $string );
+
+		foreach ( $a as $key => $value ) {
+			$value = trim( $value );
+
+			if ( empty( $value ) )
+				unset( $a[ $key ] );
+			else
+				$a[ $key ] = $value;
+		}
+
+		if ( empty( $a ) )
+			return '';
+		else
+			return $a;
+	}
+}

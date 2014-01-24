@@ -1017,56 +1017,58 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		}
 
 		$atts = shortcode_atts( array(
-			'author' => '',
-			'author_name' => '',
-			'cat' => '',
-			'id' => false,
-			'p' => false,
-			'post__in' => false,
-			'order' => 'DESC',
+			'author' => '', //use author id
+			'author_name' => '', //use 'user_nicename' (NOT name).
+			'p' => false, //use post id.
+			'post__in' => false, //use post ids
+			'order' => 'DESC', // DESC, ASC
 			'orderby' => 'date',
 			'post_status' => 'publish',
-			'post_type' => 'post',
-			'posts_per_page' => (int) $atts['number_posts'],
-			'nopaging' => false,
-			'paged' => $paged,
-			'tag' => '',
+			'post_type' => 'post', // post, page, wc_portfolio_item, etc
+			'posts_per_page' => (int) $atts['number_posts'], //number of post to show per page
+			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
+			'paged' => $paged, // number of page. Show the posts that would normally show up just on page X when using the "Older Entries" link.
 			'ignore_sticky_posts' => 0,
 
-			'taxonomy' => '',
-			'field' => 'slug',
-			'terms' => '',
+			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
+			'field' => 'slug', // slug or id
+			'terms' => '', // taxonomy terms.
 
-			'layout' => 'isotope',
+			'title' => true, // show heading?
+			'meta_all' => true, // show all meta info?
+			'meta_author' => true, // show author?
+			'meta_date' => true, // show date?
+			'meta_comments' => true, // show comments?
+			'thumbnail' => true, // show thumbnail?
+			'content' => true, // show main content?
+			'paging' => true, // show pagination navigation?
 
-			'cat_slug' => '',
-			'title' => true,
-			'meta_all' => true,
-			'meta_author' => true,
-			'meta_date' => true,
-			'meta_categories' => true,
-			'meta_comments' => true,
-			'meta_link' => true,
-			'thumbnail' => true,
-			'size' => 'large',
-			'content' => true,
-			'paging' => true,
-			'filtering' => true,
-			'posts_grid_columns' => '3',
-			'heading_type' => 'h2',
+			'size' => 'large', // default thumbnail size
+
+			'filtering' => true, // insert isotope filter navigation
+			'columns' => '3', // default number of isotope columns
+			'gutter_space' => '0.020', // gutter width percentage relative to parent element width
+			'heading_type' => 'h2', // heading tag for title
+			'layout' => 'isotope', // blog layout
 		), $atts );
 
-		$terms = explode( ',', $atts['terms'] );
-		foreach ( $terms as $key => $term ) {
-			$term = trim( $term );
+		// clean input values
+		$atts['terms'] = wc_shortcodes_comma_delim_to_array( $atts['terms'] );
+		$atts['post__in'] = wc_shortcodes_comma_delim_to_array( $atts['post__in'] );
+		$atts['columns'] == (int) $atts['columns'];
+		$atts['order'] = strtoupper( $atts['order'] );
+		$atts['heading_type'] = strtolower( $atts['heading_type'] );
 
-			if ( empty( $term ) )
-				unset( $terms[ $key ] );
-			else
-				$terms[ $key ] = $term;
+		if ( ! is_numeric( $atts['gutter_space'] ) ) {
+			$atts['gutter_space'] = 0.020;
 		}
-		$atts['terms'] = $terms;
+		$atts['gutter_space'] = number_format( $atts['gutter_space'], 3 );
+		if ( $atts['gutter_space'] > 0.05 || $atts['gutter_space'] < 0.001 ) {
+			$atts['gutter_space'] = 0.020;
+		}
 
+
+		// add tax query if user specified
 		if ( ! empty( $atts['terms'] ) ) {
 			$atts['tax_query'] = array(
 				array(
@@ -1077,6 +1079,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			);
 		}
 
+		// no paging needed when showing all posts
 		if(isset($atts['posts_per_page']) && $atts['posts_per_page'] == -1) {
 			$atts['nopaging'] = true;
 		}
@@ -1085,36 +1088,19 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
 		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
 
-		$valid_posts = array( 2, 3, 4 );
-		$atts['posts_grid_columns'] == (int) $atts['posts_grid_columns'];
-		$atts['posts_grid_columns'] = in_array( $atts['posts_grid_columns'], $valid_posts ) ? $atts['posts_grid_columns'] : 2;
+		$valid_columns = array( 2, 3, 4, 5, 6, 7, 8, 9 );
+		$atts['columns'] = in_array( $atts['columns'], $valid_columns ) ? $atts['columns'] : 2;
 		
 		($atts['title'] == "yes") ? ($atts['title'] = true) : ($atts['title'] = false);
 		($atts['meta_all'] == "yes") ? ($atts['meta_all'] = true) : ($atts['meta_all'] = false);
 		($atts['meta_author'] == "yes") ? ($atts['meta_author'] = true) : ($atts['meta_author'] = false);
 		($atts['meta_date'] == "yes") ? ($atts['meta_date'] = true) : ($atts['meta_date'] = false);
-		($atts['meta_categories'] == "yes") ? ($atts['meta_categories'] = true) : ($atts['meta_categories'] = false);
 		($atts['meta_comments'] == "yes") ? ($atts['meta_comments'] = true) : ($atts['meta_comments'] = false);
-		($atts['meta_link'] == "yes") ? ($atts['meta_link'] = true) : ($atts['meta_link'] = false);
-
-		//checking if there are categories that are excluded using "-"; transform slugs to ids
-		$cat_ids ='';
-		$categories = explode(',', $atts['cat_slug']);
-		if ( isset($cateogries) && $categories) {
-			foreach ($categories as $category) {
-				if(strpos($category, '-') === 0) {
-					$cat_ids .= '-' .get_category_by_slug( $category )->cat_ID .',';
-				} else {
-					$cat_ids .= get_category_by_slug( $category )->cat_ID .',';
-				}
-			}
-		}
-		$atts['cat'] = substr($cat_ids, 0, -1);
-
 		($atts['thumbnail'] == "yes") ? ($atts['thumbnail'] = true) : ($atts['thumbnail'] = false);
 		($atts['content'] == "yes") ? ($atts['content'] = true) : ($atts['content'] = false);
 		($atts['paging'] == "yes") ? ($atts['paging'] = true) : ($atts['paging'] = false);
 		($atts['filtering'] == "yes") ? ($atts['filtering'] = true) : ($atts['filtering'] = false);
+		($atts['order'] == "ASC") ? ($atts['order'] = "ASC") : ($atts['order'] = "DESC");
 
 		$ml_query = new WP_Query($atts);
 
@@ -1122,10 +1108,10 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 		$class = array();
 		$class[] = 'wc-shortcodes-posts';
-		$class[] = 'wc-shortcodes-posts-col-' . $atts["posts_grid_columns"];
+		$class[] = 'wc-shortcodes-posts-col-' . $atts["columns"];
 		$class[] = 'wc-shortcodes-posts-layout-' . $atts['layout'];
 
-		$html .= '<div data-posts-grid-columns="'.$atts["posts_grid_columns"].'" class="' . implode( ' ', $class ) . '">';
+		$html .= '<div data-gutter-space="'.$atts["gutter_space"].'" data-columns="'.$atts["columns"].'" class="' . implode( ' ', $class ) . '">';
 
 		if ( $atts['filtering'] ) {
 			include( 'templates/nav-filtering.php' );
