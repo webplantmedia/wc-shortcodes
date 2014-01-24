@@ -1008,14 +1008,6 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			$paged = ( get_query_var('paged') ) ? get_query_var( 'paged' ) : 1;
 		}
 
-		// get specified number of posts per page
-		if (isset($atts['number_posts']) && $atts['number_posts']) {
-			$atts['number_posts'] = (int) $atts['number_posts'];
-		}
-		else {
-			$atts['number_posts'] = 0;
-		}
-
 		$atts = shortcode_atts( array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).
@@ -1025,7 +1017,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			'orderby' => 'date',
 			'post_status' => 'publish',
 			'post_type' => 'post', // post, page, wc_portfolio_item, etc
-			'posts_per_page' => (int) $atts['number_posts'], //number of post to show per page
+			'posts_per_page' => 10, //number of post to show per page
 			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
 			'paged' => $paged, // number of page. Show the posts that would normally show up just on page X when using the "Older Entries" link.
 			'ignore_sticky_posts' => 0,
@@ -1066,6 +1058,14 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		if ( $atts['gutter_space'] > 0.05 || $atts['gutter_space'] < 0.001 ) {
 			$atts['gutter_space'] = 0.020;
 		}
+		
+		if (isset($atts['posts_per_page']) && $atts['posts_per_page']) {
+			$atts['posts_per_page'] = (int) $atts['posts_per_page'];
+		}
+		else {
+			$atts['posts_per_page'] = 0;
+		}
+
 
 
 		// add tax query if user specified

@@ -42,6 +42,7 @@
 					// Elements
 					c = b.addMenu({title:"Elements"});
 									
+						a.render( c, "Posts", "posts" );
 						a.render( c, "Button", "button" );
 						a.render( c, "Google Map", "googlemap" );
 						a.render( c, "Heading", "heading" );
@@ -174,6 +175,14 @@
 					
 					
 					
+					// Posts
+					if(id === "posts") {
+						tinyMCE.activeEditor.selection.setContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="0.020" heading_type="h2" layout="isotope"][/wc_posts]');
+					}
+
+
+
+
 					// Button
 					if(id === "button") {
 						tinyMCE.activeEditor.selection.setContent('[wc_button type="primary" url="http://www.wordpresscanvas.com" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]');
