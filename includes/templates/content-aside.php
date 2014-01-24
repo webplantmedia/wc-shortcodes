@@ -8,7 +8,7 @@
 		<?php endif; ?>
 
 		<div class="wc-shortcodes-post-content">
-			<?php if ( $atts['excerpt'] ) : ?>
+			<?php if ( $atts['content'] ) : ?>
 			<div class="wc-shortcodes-entry-summary">
 				<?php the_content(); ?>
 			</div><!-- .entry-summary -->

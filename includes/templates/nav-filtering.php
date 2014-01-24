@@ -11,7 +11,7 @@ if ( ! empty( $taxonomy ) ) {
 	if ( ! is_wp_error( $terms ) || empty( $terms ) ) {
 
 		$links = array();
-		$links[] = "<a href='#' data-filter='*' title='All Tags' class='wc-shortcodes-term wc-shortcodes-all-tags'>" . __( 'All', 'wordpresscanvas' ) . "</a>";
+		$links[] = "<a href='#' data-filter='*' title='All Tags' class='wc-shortcodes-term wc-shortcodes-all-tags wc-shortcodes-term-active'>" . __( 'All', 'wordpresscanvas' ) . "</a>";
 
 		if ( ! is_array( $whitelist ) || empty( $whitelist ) ) {
 			foreach ( $terms as $term ) {

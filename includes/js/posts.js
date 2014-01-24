@@ -87,8 +87,12 @@
 			});
 		});
 
-		$('.wc-shortcodes-filtering .wc-shortcodes-term').click( function( event ) {
+		var $term = $('.wc-shortcodes-filtering .wc-shortcodes-term');
+		$term.click( function( event ) {
 			event.preventDefault();
+
+			$term.removeClass('wc-shortcode-term-active');
+			$(this).addClass('wc-shortcode-term-active');
 
 			var selector = $(this).attr('data-filter');
 			$container.isotope({

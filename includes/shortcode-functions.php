@@ -1049,11 +1049,8 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			'meta_link' => true,
 			'thumbnail' => true,
 			'size' => 'large',
-			'excerpt' => true,
-			'excerpt_words' => '50',
-			'strip_html' => true,
+			'content' => true,
 			'paging' => true,
-			'scrolling' => 'infinite',
 			'filtering' => true,
 			'posts_grid_columns' => '3',
 			'heading_type' => 'h2',
@@ -1115,11 +1112,9 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		$atts['cat'] = substr($cat_ids, 0, -1);
 
 		($atts['thumbnail'] == "yes") ? ($atts['thumbnail'] = true) : ($atts['thumbnail'] = false);
-		($atts['excerpt'] == "yes") ? ($atts['excerpt'] = true) : ($atts['excerpt'] = false);
-		($atts['strip_html'] == "yes") ? ($atts['strip_html'] = 1) : ($atts['strip_html'] = 0);
+		($atts['content'] == "yes") ? ($atts['content'] = true) : ($atts['content'] = false);
 		($atts['paging'] == "yes") ? ($atts['paging'] = true) : ($atts['paging'] = false);
 		($atts['filtering'] == "yes") ? ($atts['filtering'] = true) : ($atts['filtering'] = false);
-		($atts['scrolling'] == "infinite") ? ($atts['paging'] = true) : ($atts['paging'] = $atts['paging']);
 
 		$ml_query = new WP_Query($atts);
 
@@ -1148,7 +1143,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		$html .= '</div>';
 
 		//no paging if only the latest posts are shown
-		if ($atts['paging']) {
+		if ( $atts['paging'] ) {
 			ob_start();
 			include('templates/nav-pagination.php');
 			$html .= ob_get_clean();

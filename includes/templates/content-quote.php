@@ -1,7 +1,7 @@
 <?php $classes[] = 'wc-shortcodes-post-box'; ?>
 <div id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
 	<div class="wc-shortcodes-post-border">
-		<?php if ( $atts['excerpt'] ) : ?>
+		<?php if ( $atts['content'] ) : ?>
 			<div class="wc-shortcodes-entry-quote">
 				<?php the_content(); ?>
 			</div><!-- .entry-summary -->
