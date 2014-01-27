@@ -1111,20 +1111,22 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		$class[] = 'wc-shortcodes-posts-col-' . $atts["columns"];
 		$class[] = 'wc-shortcodes-posts-layout-' . $atts['layout'];
 
-		$html .= '<div data-gutter-space="'.$atts["gutter_space"].'" data-columns="'.$atts["columns"].'" class="' . implode( ' ', $class ) . '">';
-
 		if ( $atts['filtering'] ) {
+			ob_start();
 			include( 'templates/nav-filtering.php' );
+			$html .= ob_get_clean();
 		}
 
-		while( $ml_query->have_posts() ) :
-			$ml_query->the_post();
+		$html .= '<div data-gutter-space="'.$atts["gutter_space"].'" data-columns="'.$atts["columns"].'" class="' . implode( ' ', $class ) . '">';
 
-			ob_start();
-			include('templates/index.php');
-			$html .= ob_get_clean();
+			while( $ml_query->have_posts() ) :
+				$ml_query->the_post();
 
-		endwhile;
+				ob_start();
+				include('templates/index.php');
+				$html .= ob_get_clean();
+
+			endwhile;
 
 		$html .= '</div>';
 
