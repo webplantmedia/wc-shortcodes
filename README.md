@@ -64,6 +64,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.18
+
+* Navigation element needed to return string and no echo value.
+
 ### Version 1.17
 
 * Added ability to showcase posts of any post type in an isotope / masonry layout.
