@@ -84,6 +84,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.19
+
+* Refreshed isotope display on image load.
+
 ### Version 1.18
 
 * Navigation element needed to return string and no echo value.
