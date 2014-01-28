@@ -80,7 +80,6 @@
 
 		calculateGrid();
 
-
 		$container.isotope({
 			itemSelector : '.wc-shortcodes-post-box',
 			resizable: false,
@@ -88,6 +87,18 @@
 				columnWidth: columnWidth,
 				gutterWidth: gutterWidth
 			}
+		});
+		$container.imagesLoaded( function(){
+			calculateGrid();
+
+			$container.isotope({
+				itemSelector : '.wc-shortcodes-post-box',
+				resizable: false,
+				masonry: {
+					columnWidth: columnWidth,
+					gutterWidth: gutterWidth
+				}
+			});
 		});
 		$(window).smartresize(function(){
 			calculateGrid();
