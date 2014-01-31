@@ -50,6 +50,7 @@
 						a.render( c, "Skillbar", "skillbar" );
 						a.render( c, "Social Icon", "social" );
 						a.render( c, "Testimonial", "testimonial" );
+						a.render( c, "Image", "image" );
 						a.render( c, "Countdown", "countdown" );
 						a.render( c, "RSVP", "rsvp" );
 						a.render( c, "HTML", "html" );
@@ -175,6 +176,15 @@
 					
 					
 					
+					// Image
+					if(id === "image") {
+						tinyMCE.activeEditor.selection.setContent('[wc_image attachment_id="" size="" title="" alt="" caption="" link_to="post" url="" align="none" flag="For Sale" left="" top="" right="0" bottom="20" text_color="" background_color="" font_size=""][/wc_image]');
+					}
+
+
+
+
+
 					// Posts
 					if(id === "posts") {
 						tinyMCE.activeEditor.selection.setContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="0.020" heading_type="h2" layout="isotope"][/wc_posts]');

@@ -1141,3 +1141,123 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 	}
 }
 add_shortcode( 'wc_posts', 'wc_shortcodes_posts' );
+
+
+if( !function_exists('wc_shortcodes_image') ) {
+	function wc_shortcodes_image( $atts ) {
+		extract( shortcode_atts( array(
+			// attachment detail settings
+			'title' => '',
+			'alt' => '',
+			'caption' => '',
+
+			// attachment display settings
+			'link_to' => '', // post, file, none
+			'url' => '', // for custom link_to
+			'align' => '', // none, left, center, right
+			'attachment_id' => '', // int id
+			'size' => 'large', // image size
+
+			// flag options
+			'flag' => '',
+			'left' => '',
+			'right' => '',
+			'top' => '',
+			'bottom' => '',
+			'text_color' => '',
+			'background_color' => '',
+			'font_size' => '',
+
+			// misc options
+			'src' => '',
+			'class' => '',
+		), $atts ) );
+
+		// function options
+		$div_wrapper = false;
+
+		// sanitize
+		$attachment_id = (int) $attachment_id;
+		$src = esc_url( $src );
+
+		// classes
+		$classes = array();
+
+		$classes[] = 'wc-shortcodes-image';
+
+		$whitelist = array( 'none', 'left', 'center', 'right' );
+		if ( in_array( $align, $whitelist ) )
+			$classes[] = 'align' . $align;
+
+		if ( ! empty( $size ) )
+			$classes[] = 'size-' . $size;
+
+		if ( ! empty( $attachment_id ) )
+			$classes[] = 'wp-image-' . $attachment_id;
+
+		if ( ! empty( $class ) )
+			$classes[] = $class;
+
+		// check if src is set
+		list( $src, $width, $height ) = wp_get_attachment_image_src( $attachment_id, $size );
+		if ( empty( $src ) ) {
+			return '<p>Please insert a valid image</p>';
+		}
+
+		$html = '<img alt="' . $alt . '" title="' . $title . '" src="' . $src . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" />';
+
+		// insert flag
+		if ( ! empty( $flag ) ) {
+			$style = array();
+			if ( is_numeric( $top ) )
+				$style[] = 'top:' . (int) $top . 'px';
+			if ( is_numeric( $right ) )
+				$style[] = 'right:' . (int) $right . 'px';
+			if ( is_numeric( $bottom ) )
+				$style[] = 'bottom:' . (int) $bottom . 'px';
+			if ( is_numeric( $left ) )
+				$style[] = 'left:' . (int) $left . 'px';
+			if ( ! empty( $background_color ) )
+				$style[] = 'background-color:' . $background_color;
+			if ( ! empty( $text_color ) )
+				$style[] = 'color:' . $text_color;
+			if ( is_numeric( $font_size ) )
+				$style[] = 'font-size:' . (int) $font_size . 'px';
+
+			$html .= '<span style="' . implode( ';', $style ) . '" class="wc-shortcodes-image-flag-bg"><span class="wc-shortcodes-image-flag-text">' . esc_html( $flag ) . '</span></span>';
+			$div_wrapper = true;
+			
+		}
+
+		// insert caption
+		if ( ! empty( $caption ) ) {
+			$html .= '<p class="wp-caption-text">' . esc_html( $caption ) . '</p>';
+			$div_wrapper = true;
+		}
+
+		// check link_to
+		if ( ! empty( $url ) )
+			$url = esc_url( $url ); 
+		else if ( 'file' == $link_to )
+			$url = wp_get_attachment_url( $attachment_id );
+		else if ( 'post' == $link_to )
+			$url = get_attachment_link( $attachment_id );
+
+		if ( 'none' != $link_to )
+			$html = '<a class="wc-shortcodes-image-anchor" href="' . $url . '">' . $html . '</a>';
+
+		// do we need a div wrapper?
+		if ( $div_wrapper ) {
+			$html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)\s?/', '$1', $html );
+			$html = '<div id="attachment_' . $attachment_id . '" class="wc-shortcodes-image-wrapper wp-caption align' . $align . '" style="width:' . $width . 'px">' . $html . '</div>';
+		}
+		else if ( in_array( $align, array( 'none', 'center' ) ) ) {
+			$html = '<p>' . $html . '</p>';
+		}
+
+		return $html;
+	}
+	add_shortcode( 'wc_image', 'wc_shortcodes_image' );
+}
+
+

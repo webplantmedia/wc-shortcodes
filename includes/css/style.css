@@ -1281,3 +1281,26 @@ pre.pre-wrap {
 	right: 0;
 	background-image: url("../img/slide-arrow-right.png");
 }
+
+
+/**
+ * [wc_image]
+ * ----------------------------------------------------------------------------
+ */
+.wc-shortcodes-image-wrapper {
+	position: relative;
+}
+.wc-shortcodes-image-anchor {
+}
+.wc-shortcodes-image {
+}
+.wc-shortcodes-image-flag-bg {
+	position: absolute;
+	padding: 5px 10px;
+	background-color: #56ab00;
+	color: #ffffff;
+}
+.wc-shortcodes-image-wrapper.alignnone,
+.wc-shortcodes-image-wrapper.aligncenter {
+	margin-bottom: 20px;
+}
