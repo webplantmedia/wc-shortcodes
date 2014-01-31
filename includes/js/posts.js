@@ -58,7 +58,12 @@
 
 			if ( containerWidth < 568 ) { columns = 1; }
 			else if ( containerWidth < 768 ) { columns -= 2; }
-			else if ( containerWidth < 991 ) { columns -= 1; }
+			else if ( containerWidth < 991 ) { 
+				columns -= 1;
+				if ( columns < 2 ) {
+					columns = 2;
+				}
+			}
 
 			if ( columns < 1 ) {
 				columns = 1;
