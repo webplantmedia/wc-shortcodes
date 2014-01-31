@@ -65,6 +65,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.21
+
+* Better responsiveness logic for isotope posts.
+* Minor improvements for image shortcode.
+
 ### Version 1.20
 
 * Added image shortcode.
