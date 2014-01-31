@@ -2,7 +2,7 @@
 
 Contributors: cbaldelomar
 Donate link: http://webplantmedia.com/pay-now/
-Tags: shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type
+Tags: shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, image, flags, banners, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type
 Requires at least: 3.7
 Tested up to: 3.8.1
 Stable tag: trunk
@@ -28,6 +28,7 @@ Enhance your pages and posts with the following features.
 * Social Icons
 * Progress Bars
 * Pricing
+* Images with Flags
 * Highlights
 * Countdown
 * RSVP
@@ -81,8 +82,14 @@ Use the shortcode manager in the TinyMCE text editor
 15. Custom HTML
 16. Code Snippets
 17. Isotope / Masonry Posts
+17. Images with Flags
 
 == Changelog ==
+
+### Version 1.20
+
+* Added image shortcode.
+* Appended version number to JS file so new scripts get loaded.
 
 ### Version 1.19
 
