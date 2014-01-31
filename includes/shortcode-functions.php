@@ -1169,7 +1169,6 @@ if( !function_exists('wc_shortcodes_image') ) {
 			'font_size' => '',
 
 			// misc options
-			'src' => '',
 			'class' => '',
 		), $atts ) );
 
@@ -1178,7 +1177,6 @@ if( !function_exists('wc_shortcodes_image') ) {
 
 		// sanitize
 		$attachment_id = (int) $attachment_id;
-		$src = esc_url( $src );
 
 		// classes
 		$classes = array();
@@ -1229,12 +1227,6 @@ if( !function_exists('wc_shortcodes_image') ) {
 			
 		}
 
-		// insert caption
-		if ( ! empty( $caption ) ) {
-			$html .= '<p class="wp-caption-text">' . esc_html( $caption ) . '</p>';
-			$div_wrapper = true;
-		}
-
 		// check link_to
 		if ( ! empty( $url ) )
 			$url = esc_url( $url ); 
@@ -1245,6 +1237,12 @@ if( !function_exists('wc_shortcodes_image') ) {
 
 		if ( 'none' != $link_to )
 			$html = '<a class="wc-shortcodes-image-anchor" href="' . $url . '">' . $html . '</a>';
+
+		// insert caption
+		if ( ! empty( $caption ) ) {
+			$html .= '<p class="wp-caption-text">' . esc_html( $caption ) . '</p>';
+			$div_wrapper = true;
+		}
 
 		// do we need a div wrapper?
 		if ( $div_wrapper ) {
