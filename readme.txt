@@ -82,7 +82,7 @@ Use the shortcode manager in the TinyMCE text editor
 15. Custom HTML
 16. Code Snippets
 17. Isotope / Masonry Posts
-17. Images with Flags
+18. Images with Flags
 
 == Changelog ==
 
