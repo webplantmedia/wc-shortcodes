@@ -883,6 +883,8 @@ if( !function_exists('wc_shortcodes_countdown') ) {
 		extract( shortcode_atts( array(
 			'date' => '',
 			'format' => 'wdHMs',
+			'labels' => 'Years,Months,Weeks,Days,Hours,Minutes,Seconds',
+			'labels1' => 'Year,Month,Week,Day,Hour,Minute,Second',
 			'message' => 'Your Message Here!',
 		), $atts ) );
 
@@ -892,7 +894,7 @@ if( !function_exists('wc_shortcodes_countdown') ) {
 
 		wp_enqueue_script('wc-shortcodes-countdown');
 
-		$html = '<div class="wc-shortcodes-countdown" data-date="'.esc_attr( $date ).'" data-format="'.esc_attr( $format ).'" data-message="'.esc_attr( $message ).'"></div>';
+		$html = '<div class="wc-shortcodes-countdown" data-labels="'.esc_attr($labels).'" data-labels1="'.esc_attr($labels1).'" data-date="'.esc_attr( $date ).'" data-format="'.esc_attr( $format ).'" data-message="'.esc_attr( $message ).'"></div>';
 		$html = '<div class="wc-shortcodes-countdown-bg1">'.$html.'</div>';
 		$html = '<div class="wc-shortcodes-countdown-bg2">'.$html.'</div>';
 		$html = '<div class="wc-shortcodes-countdown-bg3">'.$html.'</div>';
