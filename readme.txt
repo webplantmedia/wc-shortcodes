@@ -86,6 +86,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.22
+
+* Added option for countdown shortcode to control labels.
+
 ### Version 1.21
 
 * Better responsiveness logic for isotope posts.
