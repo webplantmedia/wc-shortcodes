@@ -862,7 +862,8 @@
  */
 /* desert scheme ported from vim to google prettify */
 pre.prettyprint { 
-	display: block; background-color: #333
+	display: block;
+	background-color: #333;
 	overflow: auto;
 	padding: 20px;
 	white-space: pre;
