@@ -29,11 +29,11 @@ function wc_shortcodes_options_admin_menu() {
 	global $wc_shortcodes_options;
 
 	foreach ( $wc_shortcodes_options as $tab => $o ) {
-		$view_hook_name = add_submenu_page( 'options.php', $o['title'], $o['title'], 'read', 'wc-shortcodes-options-' . $tab, 'wc_shortcodes_options_display_page' );
+		$view_hook_name = add_submenu_page( 'options.php', $o['title'], $o['title'], 'manage_options', 'wc-shortcodes-options-' . $tab, 'wc_shortcodes_options_display_page' );
 	}
 
 	// add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-	$view_hook_name = add_submenu_page( 'themes.php', 'WC Shortcodes', 'WC Shortcodes', 'read', 'wc-shortcodes-options', 'wc_shortcodes_options_display_page' );
+	$view_hook_name = add_submenu_page( 'themes.php', 'WC Shortcodes', 'WC Shortcodes', 'manage_options', 'wc-shortcodes-options', 'wc_shortcodes_options_display_page' );
 }
 add_action( 'admin_menu', 'wc_shortcodes_options_admin_menu' );
 
