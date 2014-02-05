@@ -86,7 +86,7 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
-### Version 1.23
+### Version 1.24
 
 * Changed permission from read to manage_options
 * Better code formatting on pages and posts.
