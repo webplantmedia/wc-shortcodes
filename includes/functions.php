@@ -15,6 +15,9 @@ function wc_shortcodes_smart_social_link( $social_link, $name ) {
 				$social_link = 'mailto:'.$social_link;
 			}
             break;
+		default :
+			$social_link = esc_url( $social_link );
+			break;
     }
 
     return $social_link;
