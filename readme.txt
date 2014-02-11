@@ -86,6 +86,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.25
+
+* force link in social media icons have http://
+* Fixed date format string on isotope posts shortcode.
+
 ### Version 1.24
 
 * Changed permission from read to manage_options
