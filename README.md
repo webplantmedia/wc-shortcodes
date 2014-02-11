@@ -67,7 +67,7 @@ Use the shortcode manager in the TinyMCE text editor
 
 ### Version 1.25
 
-* force link in social media icons have http://
+* force link in social media icons have http at beginning
 * Fixed date format string on isotope posts shortcode.
 
 ### Version 1.24
