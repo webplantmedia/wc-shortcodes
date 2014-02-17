@@ -65,6 +65,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.26
+
+* Separated accordion shortcodes when inserting into editor.
+* Added option to display title on google map load.
+
 ### Version 1.25
 
 * force link in social media icons have http at beginning
