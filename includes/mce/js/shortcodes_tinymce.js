@@ -144,7 +144,7 @@
 					
 					// Accordion
 					if(id === "accordion") {
-						tinyMCE.activeEditor.selection.setContent('<p>[wc_accordion collapse="0"][wc_accordion_section title="Section 1"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section][wc_accordion_section title="Section 2"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section][/wc_accordion]</p>');
+						tinyMCE.activeEditor.selection.setContent('<p>[wc_accordion collapse="0"]</p><p>[wc_accordion_section title="Section 1"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section]</p><p>[wc_accordion_section title="Section 2"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section]</p><p>[/wc_accordion]</p>');
 					}
 					
 					
