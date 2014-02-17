@@ -809,14 +809,15 @@ if (! function_exists( 'wc_shortcodes_googlemaps' ) ) :
 	function wc_shortcodes_googlemaps($atts, $content = null) {
 		
 		extract(shortcode_atts(array(
-				'title'		=> '',
-				'location'	=> '',
-				'width'		=> '',
-				'height'	=> '300',
-				'zoom'		=> 8,
-				'align'		=> '',
-				'class'		=> '',
+				'title'		=> '', // content inside the info window
+				'title_on_load' => 'no', // should the info window display on map load
+				'location'	=> '', // Enter a valid address that Google can geocode.
+				'height'	=> '300', // set the height of your google map in pixels
+				'zoom'		=> 8, // the lower the zoom, the farther away the map appears
+				'class'		=> '', // add a custom class to your google map
 		), $atts));
+
+		$title_on_load = 'yes' == $title_on_load ? 1 : 0;
 		
 		// load scripts
 		wp_enqueue_script('wc-shortcodes-googlemap');
@@ -827,6 +828,7 @@ if (! function_exists( 'wc_shortcodes_googlemaps' ) ) :
 			$output .= (!empty($title)) ? '<input class="title" type="hidden" value="'.$title.'" />' : '';
 			$output .= '<input class="location" type="hidden" value="'.$location.'" />';
 			$output .= '<input class="zoom" type="hidden" value="'.$zoom.'" />';
+			$output .= '<input class="title-on-load" type="hidden" value="'.$title_on_load.'" />';
 			$output .= '<div class="map_canvas"></div>';
 		$output .= '</div>';
 		

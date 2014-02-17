@@ -11,10 +11,11 @@ jQuery(function($){
 			$title = $(this).find('.title').val(),
 			$location = $(this).find('.location').val(),
 			$zoom = parseInt( $(this).find('.zoom').val() ),
+			$titleOnLoad = parseInt( $(this).find('.title-on-load').val() ),
 			geocoder, map;
-			
+
 			geocoder = new google.maps.Geocoder();
-			
+
 			geocoder.geocode( { 'address': $location}, function(results, status) {
 			
 				if (status === google.maps.GeocoderStatus.OK) {
@@ -48,6 +49,12 @@ jQuery(function($){
 					google.maps.event.addListener(marker, 'click', function() {
 						infowindow.open(map,marker);
 					});
+
+					if ( 1 === $titleOnLoad ) {
+						google.maps.event.addDomListener(window, 'load', function() {
+							infowindow.open(map,marker);
+						});
+					}
 					
 				} else {
 					$('#'+ $map_id).html("Geocode was not successful for the following reason: " + status);

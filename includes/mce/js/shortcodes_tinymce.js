@@ -274,7 +274,7 @@
 					
 					// Google Map
 					if(id === "googlemap") {
-						tinyMCE.activeEditor.selection.setContent('[wc_googlemap title="St. Paul\'s Chapel" location="209 Broadway, New York, NY 10007" zoom="10" height="250"]');
+						tinyMCE.activeEditor.selection.setContent('[wc_googlemap title="St. Paul\'s Chapel" location="209 Broadway, New York, NY 10007" zoom="10" height="250" title_on_load="no" class=""]');
 					}
 					
 					
