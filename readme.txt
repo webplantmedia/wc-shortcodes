@@ -86,6 +86,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.27
+
+* Removed non GPL library.
+
 ### Version 1.26
 
 * Separated accordion shortcodes when inserting into editor.
