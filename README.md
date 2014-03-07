@@ -65,6 +65,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.28
+
+* Added ability to add custom class to buttons.
+
 ### Version 1.27
 
 * Removed non GPL library.
