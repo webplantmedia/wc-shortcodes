@@ -405,7 +405,10 @@ if( !function_exists('wc_shortcodes_button') ) {
 			'icon_left'		=> '',
 			'icon_right'	=> '',
 			'position'		=> 'float',
+			'class'			=> '',
 		), $atts ) );
+
+		$custom_class = sanitize_title( $class );
 
 		$whitelist = array( 'center', 'left', 'right' );
 		
@@ -417,6 +420,8 @@ if( !function_exists('wc_shortcodes_button') ) {
 		$class[] = 'wc-shortcodes-button';
 		$class[] = $type;
 		$class[] = 'wc-shortcodes-button-position-' . $position;
+		if ( ! empty( $custom_class ) )
+			$class[] = $custom_class;
 		
 		$button = NULL;
 		$button .= '<a href="' . $url . '" class="'.implode( ' ', $class ).'" target="_'.$target.'" title="'. $title .'" '. $rel .'>';
