@@ -65,6 +65,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.31
+
+* Added ability to insert excerpt under video and audio templates for isotope shortcode.
+
 ### Version 1.30
 
 * Fixed bug with isotope pagination not working on homepage.
