@@ -14,6 +14,12 @@
 			</div><!-- .entry-header -->
 			<?php endif; ?>
 
+			<?php if ( ! empty( $post->post_excerpt ) && $atts['content'] ) : ?>
+				<div class="wc-shortcodes-entry-summary">
+					<?php the_excerpt(); ?>
+				</div>
+			<?php endif; ?>
+
 			<?php include('entry-meta.php'); ?>
 
 		</div><!-- .wc-shortcodes-post-content -->
