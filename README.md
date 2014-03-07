@@ -65,9 +65,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
-### Version 1.29
+### Version 1.30
 
 * Fixed bug with isotope pagination not working on homepage.
+* Removed invalid css syntax
 
 ### Version 1.28
 
