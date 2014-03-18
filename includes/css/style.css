@@ -1118,6 +1118,8 @@ pre.pre-wrap {
 .wc-shortcodes-entry-title {
 	margin-top: 20px;
 	margin-bottom: 20px;
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
 }
 .wc-shortcodes-entry-meta {
 	margin-top: 20px;
