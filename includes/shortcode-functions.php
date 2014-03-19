@@ -1130,6 +1130,9 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 			while( $ml_query->have_posts() ) :
 				$ml_query->the_post();
+				
+				if ( $atts['content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) )
+					$atts['content'] = false;
 
 				ob_start();
 				include('templates/index.php');

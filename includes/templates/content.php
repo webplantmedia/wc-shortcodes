@@ -16,7 +16,7 @@
 			</div><!-- .entry-header -->
 			<?php endif; ?>
 
-			<?php if ( ! empty( $post->post_excerpt ) && $atts['content'] ) : ?>
+			<?php if ( $atts['content'] ) : ?>
 			<div class="wc-shortcodes-entry-summary">
 				<?php the_excerpt(); ?>
 			</div><!-- .entry-summary -->
