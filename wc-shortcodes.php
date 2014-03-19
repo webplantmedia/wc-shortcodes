@@ -14,6 +14,7 @@ define( 'WC_SHORTCODES_PREFIX', 'wc_shortcodes_' );
 define( '_WC_SHORTCODES_PREFIX', '_wc_shortcodes_' );
 define( 'WC_SHORTCODES_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WC_SHORTCODES_CURRENT_VERSION', get_option( WC_SHORTCODES_PREFIX . 'current_version' ) );
+define( 'WC_SHORTCODES_FONT_AWESOME_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_font_awesome', true ) );
 
 global $wc_shortcodes_options;
 

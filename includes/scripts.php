@@ -17,6 +17,10 @@ if( !function_exists ('wc_shortcodes_scripts') ) :
 			wp_enqueue_style( 'wc-shortcodes-style', plugin_dir_url( __FILE__ ) . 'css/style.css', array( ), $ver );
 		}
 
+		if ( WC_SHORTCODES_FONT_AWESOME_ENABLED ) {
+			wp_enqueue_style( 'wordpresscanvas-font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array( ), '3.2.1' );
+		}
+
 		wp_enqueue_script('jquery');
 		wp_register_script( 'wc-shortcodes-tabs', plugin_dir_url( __FILE__ ) . 'js/tabs.js', array ( 'jquery', 'jquery-ui-tabs'), $ver, true );
 		wp_register_script( 'wc-shortcodes-toggle', plugin_dir_url( __FILE__ ) . 'js/toggle.js', 'jquery', $ver, true );

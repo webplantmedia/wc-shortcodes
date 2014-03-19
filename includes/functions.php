@@ -169,3 +169,11 @@ if ( ! function_exists( 'wc_shortcodes_comma_delim_to_array' ) ) {
 			return $a;
 	}
 }
+
+function wc_shortcodes_body_class( $classes ) {
+	if ( WC_SHORTCODES_FONT_AWESOME_ENABLED )
+		$classes[] = 'wc-shortcodes-font-awesome-enabled';
+
+	return $classes;
+}
+add_filter( 'body_class', 'wc_shortcodes_body_class' );

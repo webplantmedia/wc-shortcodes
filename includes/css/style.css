@@ -33,6 +33,40 @@
 	padding: 10px 20px;
 	cursor: pointer;
 }
+.wc-shortcodes-font-awesome-enabled .wc-shortcodes-accordion .wc-shortcodes-accordion-trigger a {
+	padding: 10px 20px 10px 40px;
+	position: relative;
+}
+.wc-shortcodes-font-awesome-enabled .wc-shortcodes-accordion .wc-shortcodes-accordion-trigger a:before {
+	font-family: FontAwesome;
+	font-weight: normal;
+	font-size: inherit;
+	text-decoration: inherit;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* *margin-right: @spacing; */
+	speak: none;
+	content: "\f105";
+	margin-right: 0px;
+	display: inline-block;
+	line-height: inherit;
+
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	padding: 10px 0;
+	width: 40px;
+	text-align: center;
+}
+.wc-shortcodes-font-awesome-enabled .wc-shortcodes-accordion .wc-shortcodes-accordion-trigger a:hover:before {
+	text-decoration: none;
+}
+.wc-shortcodes-font-awesome-enabled .wc-shortcodes-accordion .wc-shortcodes-accordion-trigger.ui-accordion-header-active a:before {
+		content: "\f107";
+}
+
 .wc-shortcodes-accordion .wc-shortcodes-accordion-trigger:first-child {
 	margin-top: 0; 
 }
@@ -75,6 +109,40 @@
 	padding: 10px 20px;
 	cursor: pointer;
 }
+.wc-shortcodes-font-awesome-enabled .wc-shortcodes-toggle .wc-shortcodes-toggle-trigger a {
+	padding: 10px 20px 10px 40px;
+	position: relative;
+}
+.wc-shortcodes-font-awesome-enabled .wc-shortcodes-toggle .wc-shortcodes-toggle-trigger a:before {
+	font-family: FontAwesome;
+	font-weight: normal;
+	font-size: inherit;
+	text-decoration: inherit;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* *margin-right: @spacing; */
+	speak: none;
+	content: "\f105";
+	margin-right: 0px;
+	display: inline-block;
+	line-height: inherit;
+
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	padding: 10px 0;
+	width: 40px;
+	text-align: center;
+}
+.wc-shortcodes-font-awesome-enabled .wc-shortcodes-toggle .wc-shortcodes-toggle-trigger a:hover:before {
+	text-decoration: none;
+}
+.wc-shortcodes-font-awesome-enabled .wc-shortcodes-toggle .wc-shortcodes-toggle-trigger.active a:before {
+	content: "\f107";
+}
+
 .wc-shortcodes-toggle .wc-shortcodes-toggle-trigger.active a {
 }
 .wc-shortcodes-toggle .wc-shortcodes-toggle-trigger:first-child {
