@@ -65,6 +65,15 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.32
+
+* Added Font Awesome Icons.
+* Added option to disable Font Awesome Icons. Enabled by Default.
+* Fixed bug with no excerpt showing on isotope posts after updating to 1.31.
+* Code clean up.
+* Style fix for isotope posts.
+* Title should not overflow the content area in the isotope posts.
+
 ### Version 1.31
 
 * Added ability to insert excerpt under video and audio templates for isotope shortcode.
