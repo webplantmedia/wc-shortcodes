@@ -1,15 +1,5 @@
 <?php
-/**
- * This file loads the CSS and JS necessary for your shortcodes display
- * @package wc Shortcodes Plugin
- * @since 1.0
- * @author AJ Clarke : http://wpexplorer.com
- * @copyright Copyright (c) 2012, AJ Clarke
- * @link http://wpexplorer.com
- * @License: GNU General Public License version 2.0
- * @License URI: http://www.gnu.org/licenses/gpl-2.0.html
- */
-if( !function_exists ('wc_shortcodes_scripts') ) :
+if( ! function_exists('wc_shortcodes_scripts') ) :
 	function wc_shortcodes_scripts() {
 		$ver = WC_SHORTCODES_VERSION;
 
