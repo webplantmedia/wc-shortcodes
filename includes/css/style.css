@@ -1147,6 +1147,7 @@ pre.pre-wrap {
 .wc-shortcodes-post-box {
 	background-color: #ffffff;
 	margin-bottom: 20px;
+	padding: 0;
 }
 .wc-shortcodes-sep {
 	padding-left: 5px;

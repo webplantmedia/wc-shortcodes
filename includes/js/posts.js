@@ -80,7 +80,7 @@
 			if ( 1 == columns ) {
 				marginBottom = 20;
 			}
-			$container.children('.wc-shortcodes-post-box').css({'width':columnWidth+'px', 'marginBottom':marginBottom+'px'});
+			$container.children('.wc-shortcodes-post-box').css({'width':columnWidth+'px', 'marginBottom':marginBottom+'px', 'padding':'0'});
 		}
 
 		calculateGrid();
