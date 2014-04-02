@@ -1,8 +1,8 @@
 === WordPress Canvas - Shortcodes ===
 
 Contributors: cbaldelomar
-Donate link: http://webplantmedia.com/pay-now/
-Tags: shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, image, flags, banners, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type
+Donate link: http://webplantmedia.com/donate/
+Tags: shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, image, flags, banners, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type, font awesome, icons, fontawesome, fa icons
 Requires at least: 3.7
 Tested up to: 3.8.1
 Stable tag: trunk
@@ -35,6 +35,7 @@ Enhance your pages and posts with the following features.
 * Custom HTML
 * Code Snippets
 * Isotope / Masonry Posts
+* Font Awesome Icons
 
 [Live Demo & Documentation](http://wordpresscanvas.com/features/shortcodes/)
 
@@ -83,8 +84,13 @@ Use the shortcode manager in the TinyMCE text editor
 16. Code Snippets
 17. Isotope / Masonry Posts
 18. Images with Flags
+19. Font Awesome Icons
 
 == Changelog ==
+
+### Version 1.33
+
+* Added shortcodes for inserting Font Awesome icons.
 
 ### Version 1.32
 
