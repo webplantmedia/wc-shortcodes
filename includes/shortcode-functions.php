@@ -1270,4 +1270,42 @@ if( !function_exists('wc_shortcodes_image') ) {
 	add_shortcode( 'wc_image', 'wc_shortcodes_image' );
 }
 
+if( !function_exists('wc_shortcodes_fa') ) {
+	function wc_shortcodes_fa( $atts ) {
+		extract( shortcode_atts( array(
+			// icon options
+			'icon' => '',
+			'margin_right' => '0',
+			'margin_left' => '0',
 
+			// misc options
+			'class' => '',
+		), $atts ) );
+
+		if ( empty( $icon ) )
+			return '';
+
+		// classes
+		$classes = array();
+
+		$classes[] = 'wc-shortcodes-fa';
+		$classes[] = 'fa';
+		$classes[] = 'fa-' . $icon;
+		if ( empty( $class ) )
+			$classes[] = $class;
+
+		$style_attr = '';
+
+		if( $margin_right ) {
+			$style_attr .= 'margin-right: '. $margin_right .';';
+		}
+		if ( $margin_left ) {
+			$style_attr .= 'margin-left: '. $margin_left .';';
+		}
+
+		$html = '<i class="' . implode( ' ', $classes ) . '" style="'.$style_attr.'"></i>';
+
+		return $html;
+	}
+	add_shortcode( 'wc_fa', 'wc_shortcodes_fa' );
+}

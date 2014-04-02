@@ -8,7 +8,7 @@ if( ! function_exists('wc_shortcodes_scripts') ) :
 		}
 
 		if ( WC_SHORTCODES_FONT_AWESOME_ENABLED ) {
-			wp_enqueue_style( 'wordpresscanvas-font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array( ), '3.2.1' );
+			wp_enqueue_style( 'wordpresscanvas-font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array( ), '4.0.3' );
 		}
 
 		wp_enqueue_script('jquery');
