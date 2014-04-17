@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.34
+
+* Updated plugin to be compatible with version 3.9
+
 ### Version 1.33
 
 * Added shortcodes for inserting Font Awesome icons.
