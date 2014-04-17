@@ -1,7 +1,7 @@
 <?php
 class WC_Shortcodes_TinyMCE_Buttons {
 	function __construct() {
-    	add_action( 'init', array(&$this,'init') );
+    	add_action( 'admin_head', array(&$this,'init') );
     }
     function init() {
 		if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') )
@@ -15,14 +15,23 @@ class WC_Shortcodes_TinyMCE_Buttons {
 		}  
     }  
 	function add_plugin($plugin_array) {  
+		global $wp_version;
 		$ver = WC_SHORTCODES_VERSION;
-		$plugin_array['wc_shortcodes'] = plugin_dir_url( __FILE__ ) .'js/shortcodes_tinymce.js?ver=' . $ver;
-		$plugin_array['wc_font_awesome'] = plugin_dir_url( __FILE__ ) .'js/font_awesome_tinymce.js?ver=' . $ver;
+
+		// version 3.9 updated to tinymce 4.0
+		if ( version_compare( $wp_version, '3.9', '>=' ) ) {
+			$plugin_array['wc_shortcodes'] = plugin_dir_url( __FILE__ ) .'js/shortcodes-tinymce-4.js?ver=' . $ver;
+			$plugin_array['wc_font_awesome'] = plugin_dir_url( __FILE__ ) .'js/font-awesome-tinymce-4.js?ver=' . $ver;
+		}
+		else {
+			$plugin_array['wc_shortcodes'] = plugin_dir_url( __FILE__ ) .'js/shortcodes_tinymce.js?ver=' . $ver;
+			$plugin_array['wc_font_awesome'] = plugin_dir_url( __FILE__ ) .'js/font_awesome_tinymce.js?ver=' . $ver;
+		}
 		return $plugin_array; 
 	}
 	function register_button($buttons) {  
 		array_push($buttons, "wc_shortcodes_button");
-        array_push($buttons, '|', 'wcfontAwesomeGlyphSelect');
+        array_push($buttons, 'wcfontAwesomeGlyphSelect');
 		
 		return $buttons; 
 	}

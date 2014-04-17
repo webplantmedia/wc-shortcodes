@@ -89,7 +89,6 @@
 						a.render( c, "Dashed", "dashedDivider" );
 						a.render( c, "Dotted", "dottedDivider" );
 						a.render( c, "Double", "doubleDivider" );
-						a.render( c, "Triple", "tripleDivider" );
 						a.render( c, "Image1", "imageDivider" );
 						a.render( c, "Image2", "imageDivider2" );
 						a.render( c, "Image3", "imageDivider3" );
@@ -195,7 +194,7 @@
 
 					// Button
 					if(id === "button") {
-						tinyMCE.activeEditor.selection.setContent('[wc_button type="primary" url="http://www.wordpresscanvas.com" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]');
+						tinyMCE.activeEditor.selection.setContent('[wc_button type="primary" url="http://webplantmedia.com" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]');
 					}
 					
 					
