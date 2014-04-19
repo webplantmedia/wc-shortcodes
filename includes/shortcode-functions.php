@@ -640,20 +640,9 @@ if( !function_exists('wc_shortcodes_accordion_section') ) {
 		extract( shortcode_atts( array(
 			'title'	=> 'Title',
 			'class'	=> '',
-			'padding'	=> '',
-			'border_width'	=> '',
 		), $atts ) );
 
-		$style = array();
-
-		if ( ! empty( $padding ) || '0' === $padding )
-			$style[] = 'padding:'.$padding;
-		if ( ! empty( $border_width ) || '0' === $border_width )
-			$style[] = 'border-width:'.$border_width;
-
-		$style = implode( ';', $style );
-		  
-		return '<div class="wc-shortcodes-accordion-trigger '. $class .'"><a href="#">'. $title .'</a></div><div style="'.$style.'" class="wc-shortcodes-accordion-content">' . do_shortcode($content) . '</div>';
+		return '<div class="wc-shortcodes-accordion-trigger '. $class .'"><a href="#">'. $title .'</a></div><div class="wc-shortcodes-accordion-content">' . do_shortcode($content) . '</div>';
 	}
 	
 }
