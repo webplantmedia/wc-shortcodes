@@ -133,7 +133,7 @@
 							{
 								text: "Image",
 								onclick: function(){
-									editor.insertContent('[wc_image attachment_id="" size="" title="" alt="" caption="" link_to="post" url="" align="none" flag="For Sale" left="" top="" right="0" bottom="20" text_color="" background_color="" font_size=""][/wc_image]');
+									editor.insertContent('[wc_image attachment_id="" size="" title="" alt="" caption="" link_to="post" url="" align="none" flag="For Sale" left="" top="" right="0" bottom="20" text_color="" background_color="" font_size="" text_align="center" flag_width=""][/wc_image]');
 								}
 							},
 							{

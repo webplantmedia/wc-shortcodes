@@ -1168,6 +1168,8 @@ if( !function_exists('wc_shortcodes_image') ) {
 			'text_color' => '',
 			'background_color' => '',
 			'font_size' => '',
+			'text_align' => '', // none, left, center, right
+			'flag_width' => '',
 
 			// misc options
 			'class' => '',
@@ -1222,6 +1224,11 @@ if( !function_exists('wc_shortcodes_image') ) {
 				$style[] = 'color:' . $text_color;
 			if ( is_numeric( $font_size ) )
 				$style[] = 'font-size:' . (int) $font_size . 'px';
+			if ( in_array( $text_align, $whitelist ) )
+				$style[] = 'text-align:' . $text_align;
+			if ( is_numeric( $flag_width ) )
+				$style[] = 'width:' . (int) $flag_width . 'px';
+
 
 			$html .= '<span style="' . implode( ';', $style ) . '" class="wc-shortcodes-image-flag-bg"><span class="wc-shortcodes-image-flag-text">' . esc_html( $flag ) . '</span></span>';
 			$div_wrapper = true;
