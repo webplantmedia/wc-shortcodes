@@ -40,6 +40,7 @@
 
 	$(document).ready(function(){
 		var $container = $('.wc-shortcodes-posts');
+		var $postBox = $container.children('.wc-shortcodes-post-box');
 		var columnWidth = 0;
 		var gutterWidth = 0;
 
@@ -80,7 +81,7 @@
 			if ( 1 == columns ) {
 				marginBottom = 20;
 			}
-			$container.children('.wc-shortcodes-post-box').css({'width':columnWidth+'px', 'marginBottom':marginBottom+'px', 'padding':'0'});
+			$postBox.css({'width':columnWidth+'px', 'marginBottom':marginBottom+'px', 'padding':'0'});
 		}
 
 		calculateGrid();
@@ -93,6 +94,7 @@
 				gutterWidth: gutterWidth
 			}
 		});
+
 		$container.imagesLoaded( function(){
 			calculateGrid();
 
@@ -104,6 +106,9 @@
 					gutterWidth: gutterWidth
 				}
 			});
+
+			$postBox.css('visibility', 'visible');
+			$container.addClass('wc-shortcodes-posts-animation');
 		});
 		$(window).smartresize(function(){
 			calculateGrid();

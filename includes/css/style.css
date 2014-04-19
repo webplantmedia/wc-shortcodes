@@ -1211,6 +1211,7 @@ pre.pre-wrap {
 }
 .wc-shortcodes-posts {
 	position: relative;
+	visibility: hidden;
 }
 .wc-shortcodes-post-box {
 	background-color: #ffffff;
@@ -1261,8 +1262,8 @@ pre.pre-wrap {
 }
 
 /* Isotopes */
-.wc-shortcodes-posts,
-.wc-shortcodes-posts .wc-shortcodes-post-box {
+.wc-shortcodes-posts.wc-shortcodes-posts-animation,
+.wc-shortcodes-posts.wc-shortcodes-posts-animation .wc-shortcodes-post-box {
   -webkit-transition-duration: 0.8s;
      -moz-transition-duration: 0.8s;
       -ms-transition-duration: 0.8s;
@@ -1278,7 +1279,7 @@ pre.pre-wrap {
   z-index: 1;
 }
 
-.wc-shortcodes-posts {
+.wc-shortcodes-posts.wc-shortcodes-posts-animation {
   -webkit-transition-property: height, width;
      -moz-transition-property: height, width;
       -ms-transition-property: height, width;
@@ -1286,7 +1287,7 @@ pre.pre-wrap {
           transition-property: height, width;
 }
 
-.wc-shortcodes-posts .wc-shortcodes-post-box {
+.wc-shortcodes-posts.wc-shortcodes-posts-animation .wc-shortcodes-post-box {
   -webkit-transition-property: -webkit-transform, opacity;
      -moz-transition-property:    -moz-transform, opacity;
       -ms-transition-property:     -ms-transform, opacity;
