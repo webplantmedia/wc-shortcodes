@@ -1226,7 +1226,7 @@ if( !function_exists('wc_shortcodes_image') ) {
 				$style[] = 'font-size:' . (int) $font_size . 'px';
 			if ( in_array( $text_align, $whitelist ) )
 				$style[] = 'text-align:' . $text_align;
-			if ( is_numeric( $flag_width ) )
+			if ( is_numeric( $flag_width ) && ! empty( $flag_width ) )
 				$style[] = 'width:' . (int) $flag_width . 'px';
 
 
