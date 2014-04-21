@@ -88,6 +88,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.36
+
+* switched out isotope library with open source masonry library
+* Increased number of pagination buttons
+
 ### Version 1.35
 
 * wc_box short code needed line breaks inserted
