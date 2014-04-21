@@ -32,7 +32,7 @@ switch( $post_format ) {
 		include( 'content-quote.php' );
 		break;
 	case 'gallery' :
-		wp_enqueue_script('wc-shortcodes-slider');
+		// wp_enqueue_script('wc-shortcodes-slider');
 		include( 'content-gallery.php' );
 		break;
 	default :

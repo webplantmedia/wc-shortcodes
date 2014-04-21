@@ -1046,6 +1046,9 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		global $data;
 		global $post;
 
+		static $instance = 0;
+		$instance++;
+
 		wp_enqueue_script('wc-shortcodes-posts');
 
 		if ( (is_front_page() || is_home() ) ) {
@@ -1087,7 +1090,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			'columns' => '3', // default number of isotope columns
 			'gutter_space' => '0.020', // gutter width percentage relative to parent element width
 			'heading_type' => 'h2', // heading tag for title
-			'layout' => 'isotope', // blog layout
+			'layout' => 'masonry', // blog layout
 		), $atts );
 
 		// clean input values
@@ -1148,6 +1151,11 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		($atts['filtering'] == "yes") ? ($atts['filtering'] = true) : ($atts['filtering'] = false);
 		($atts['order'] == "ASC") ? ($atts['order'] = "ASC") : ($atts['order'] = "DESC");
 
+		// changed default layout name. Let's catch old inputs
+		if ($atts['layout'] == "isotope") {
+			$atts['layout'] = "masonry";
+		}
+
 		$ml_query = new WP_Query($atts);
 
 		$html = '';
@@ -1163,7 +1171,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			$html .= ob_get_clean();
 		}
 
-		$html .= '<div data-gutter-space="'.$atts["gutter_space"].'" data-columns="'.$atts["columns"].'" class="' . implode( ' ', $class ) . '">';
+		$html .= '<div id="wc-shortcodes-posts-'.$instance.'" data-gutter-space="'.$atts["gutter_space"].'" data-columns="'.$atts["columns"].'" class="' . implode( ' ', $class ) . '">';
 
 			while( $ml_query->have_posts() ) :
 				$ml_query->the_post();

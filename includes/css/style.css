@@ -1273,41 +1273,7 @@ pre.pre-wrap {
 	text-decoration: none;
 }
 
-/* Isotopes */
-.wc-shortcodes-posts.wc-shortcodes-posts-animation,
-.wc-shortcodes-posts.wc-shortcodes-posts-animation .wc-shortcodes-post-box {
-  -webkit-transition-duration: 0.8s;
-     -moz-transition-duration: 0.8s;
-      -ms-transition-duration: 0.8s;
-       -o-transition-duration: 0.8s;
-          transition-duration: 0.8s;
-}
-.isotope-item {
-  z-index: 2;
-}
-
-.isotope-hidden.isotope-item {
-  pointer-events: none;
-  z-index: 1;
-}
-
-.wc-shortcodes-posts.wc-shortcodes-posts-animation {
-  -webkit-transition-property: height, width;
-     -moz-transition-property: height, width;
-      -ms-transition-property: height, width;
-       -o-transition-property: height, width;
-          transition-property: height, width;
-}
-
-.wc-shortcodes-posts.wc-shortcodes-posts-animation .wc-shortcodes-post-box {
-  -webkit-transition-property: -webkit-transform, opacity;
-     -moz-transition-property:    -moz-transform, opacity;
-      -ms-transition-property:     -ms-transform, opacity;
-       -o-transition-property:      -o-transform, opacity;
-          transition-property:         transform, opacity;
-}
-
-/* isotope filtering */
+/* masonry filtering */
 .wc-shortcodes-filtering {
 	margin-bottom: 20px;
 }

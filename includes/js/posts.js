@@ -1,43 +1,6 @@
 ( function( $ ) {
 	"use strict";
 
-	// Modified Isotope methods for gutters in masonry
-	$.Isotope.prototype._getMasonryGutterColumns = function() {
-		var gutter = this.options.masonry && this.options.masonry.gutterWidth || 0;
-		var containerWidth = this.element.width();
-	 
-		this.masonry.columnWidth = this.options.masonry && this.options.masonry.columnWidth ||
-		// Or use the size of the first item
-		this.$filteredAtoms.outerWidth(true) ||
-		// If there's no items, use size of container
-		containerWidth;
-	 
-		this.masonry.columnWidth += gutter;
-	 
-		this.masonry.cols = Math.floor((containerWidth + gutter) / this.masonry.columnWidth);
-		this.masonry.cols = Math.max(this.masonry.cols, 1);
-	};
-	 
-	$.Isotope.prototype._masonryReset = function() {
-		// Layout-specific props
-		this.masonry = {};
-		// FIXME shouldn't have to call this again
-		this._getMasonryGutterColumns();
-		var i = this.masonry.cols;
-		this.masonry.colYs = [];
-		while (i--) {
-			this.masonry.colYs.push(0);
-		}
-	};
-	 
-	$.Isotope.prototype._masonryResizeChanged = function() {
-		var prevSegments = this.masonry.cols;
-		// Update cols/rows
-		this._getMasonryGutterColumns();
-		// Return if updated cols/rows is not equal to previous
-		return (this.masonry.cols !== prevSegments);
-	};
-
 	$(document).ready(function(){
 		var $container = $('.wc-shortcodes-posts');
 		var $postBox = $container.children('.wc-shortcodes-post-box');
@@ -84,43 +47,32 @@
 			$postBox.css({'width':columnWidth+'px', 'marginBottom':marginBottom+'px', 'padding':'0'});
 		}
 
-		calculateGrid();
+		var runMasonry = function( duration ) {
+			calculateGrid();
 
-		$container.isotope({
-			itemSelector : '.wc-shortcodes-post-box',
-			resizable: false,
-			masonry: {
+			$container.masonry( {
+				itemSelector: '.wc-shortcodes-post-box',
 				columnWidth: columnWidth,
-				gutterWidth: gutterWidth
-			}
+				gutter: gutterWidth,
+				transitionDuration: duration 
+			} );
+		}
+
+		// keeps the media elements from calculating for the full width of the post
+		runMasonry(0);
+
+		imagesLoaded( $container, function() {
+			runMasonry(0);
+
+			$container.css('visibility', 'visible');
 		});
 
-		$container.imagesLoaded( function(){
-			calculateGrid();
-
-			$container.isotope({
-				itemSelector : '.wc-shortcodes-post-box',
-				resizable: false,
-				masonry: {
-					columnWidth: columnWidth,
-					gutterWidth: gutterWidth
-				}
-			});
-
-			$postBox.css('visibility', 'visible');
-			$container.addClass('wc-shortcodes-posts-animation');
-		});
-		$(window).smartresize(function(){
-			calculateGrid();
-			$container.isotope({
-				masonry: {
-					columnWidth: columnWidth,
-					gutterWidth: gutterWidth
-				}
-			});
+		$(window).resize(function() {
+			runMasonry(0);
 		});
 
-		var $term = $('.wc-shortcodes-filtering .wc-shortcodes-term');
+		var $filterNav = $('.wc-shortcodes-filtering');
+		var $term = $filterNav.find('.wc-shortcodes-term');
 		$term.click( function( event ) {
 			event.preventDefault();
 
@@ -128,14 +80,44 @@
 			$(this).addClass('wc-shortcodes-term-active');
 
 			var selector = $(this).attr('data-filter');
-			$container.isotope({
-				filter: selector,
-				masonry: {
-					columnWidth: columnWidth,
-					gutterWidth: gutterWidth
+			var target = $filterNav.data('target');
+			var $target = $(target);
+			$target.animate({opacity: 0}, 300, function() {
+				if ( '*' == selector ) {
+					$target.find('.wc-shortcodes-post-box').show();
 				}
+				else {
+					$target.find('.wc-shortcodes-post-box').hide();
+					$target.find(selector).show();
+				}
+
+				runMasonry(0);
+
+				$target.animate({opacity: 1}, 300);
 			});
+
 			return false;
+		});
+
+		$(".wc-shortcodes-post-box .rslides").responsiveSlides({
+			auto: false,             // Boolean: Animate automatically, true or false
+			speed: 500,            // Integer: Speed of the transition, in milliseconds
+			timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+			pager: false,           // Boolean: Show pager, true or false
+			nav: true,             // Boolean: Show navigation, true or false
+			random: false,          // Boolean: Randomize the order of the slides, true or false
+			pause: false,           // Boolean: Pause on hover, true or false
+			pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+			prevText: "",   // String: Text for the "previous" button
+			nextText: "",       // String: Text for the "next" button
+			maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+			navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+			manualControls: "",     // Selector: Declare custom pager navigation
+			namespace: "rslides",   // String: Change the default namespace used
+			before: function(){},   // Function: Before callback
+			after: function(){
+				runMasonry(0);
+			}// Function: After callback
 		});
 	});
 } )( jQuery );
