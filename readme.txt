@@ -88,6 +88,16 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.35
+
+* wc_box short code needed line breaks inserted
+* update to image flag short code
+* changed name
+* added more options to image shortcode
+* removed unnecessary short code parameters from accordion
+* fixed style bug before accordion js was loaded
+* isotope appear and animation enabled after initial load.
+
 ### Version 1.34
 
 * Updated plugin to be compatible with version 3.9
