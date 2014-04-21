@@ -17,8 +17,8 @@ if ( $ml_query->max_num_pages < 2 )
 				'prev_next' => true,
 				'prev_text' => __('Previous Page'),
 				'next_text' => __('Next Page'),
-				'end_size' => 1,
-				'mid_size' => 1,
+				'end_size' => 2,
+				'mid_size' => 2,
 				'type' => 'plain',
 				'add_args' => false, // array of query args to add
 				'add_fragment' => ''
