@@ -164,43 +164,43 @@
 							{
 								text: "Primary",
 								onclick: function(){
-									editor.insertContent('[wc_box color="primary" text_align="left"]' + wcDummyContent + '[/wc_box]');
+									editor.insertContent('[wc_box color="primary" text_align="left"]' + wcParagraphContent + '[/wc_box]');
 								}
 							},
 							{
 								text: "Secondary",
 								onclick: function(){
-									editor.insertContent('[wc_box color="secondary" text_align="left"]' + wcDummyContent + '[/wc_box]');
+									editor.insertContent('[wc_box color="secondary" text_align="left"]' + wcParagraphContent + '[/wc_box]');
 								}
 							},
 							{
 								text: "Inverse",
 								onclick: function(){
-									editor.insertContent('[wc_box color="inverse" text_align="left"]' + wcDummyContent + '[/wc_box]');
+									editor.insertContent('[wc_box color="inverse" text_align="left"]' + wcParagraphContent + '[/wc_box]');
 								}
 							},
 							{
 								text: "Success",
 								onclick: function(){
-									editor.insertContent('[wc_box color="success" text_align="left"]' + wcDummyContent + '[/wc_box]');
+									editor.insertContent('[wc_box color="success" text_align="left"]' + wcParagraphContent + '[/wc_box]');
 								}
 							},
 							{
 								text: "Warning",
 								onclick: function(){
-									editor.insertContent('[wc_box color="warning" text_align="left"]' + wcDummyContent + '[/wc_box]');
+									editor.insertContent('[wc_box color="warning" text_align="left"]' + wcParagraphContent + '[/wc_box]');
 								}
 							},
 							{
 								text: "Danger",
 								onclick: function(){
-									editor.insertContent('[wc_box color="danger" text_align="left"]' + wcDummyContent + '[/wc_box]');
+									editor.insertContent('[wc_box color="danger" text_align="left"]' + wcParagraphContent + '[/wc_box]');
 								}
 							},
 							{
 								text: "Info",
 								onclick: function(){
-									editor.insertContent('[wc_box color="info" text_align="left"]' + wcDummyContent + '[/wc_box]');
+									editor.insertContent('[wc_box color="info" text_align="left"]' + wcParagraphContent + '[/wc_box]');
 								}
 							}
 						]
