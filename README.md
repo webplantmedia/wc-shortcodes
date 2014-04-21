@@ -1,4 +1,4 @@
-# WordPress Canvas - Shortcodes #
+# WP Canvas - Shortcodes #
 
 **Contributors:** cbaldelomar  
 **Donate link:** http://webplantmedia.com/donate/
