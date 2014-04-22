@@ -1104,7 +1104,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			$atts['gutter_space'] = 0.020;
 		}
 		$atts['gutter_space'] = number_format( $atts['gutter_space'], 3 );
-		if ( $atts['gutter_space'] > 0.05 || $atts['gutter_space'] < 0.001 ) {
+		if ( $atts['gutter_space'] > 0.05 || $atts['gutter_space'] < 0.000 ) {
 			$atts['gutter_space'] = 0.020;
 		}
 		
