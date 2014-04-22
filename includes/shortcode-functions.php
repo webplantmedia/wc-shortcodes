@@ -681,6 +681,8 @@ if( !function_exists('wc_shortcodes_accordion_section') ) {
  */
 if (!function_exists('wc_shortcodes_tabgroup')) {
 	function wc_shortcodes_tabgroup( $atts, $content = null ) {
+		static $instance = 0;
+		$instance++;
 		
 		//Enque scripts
 		wp_enqueue_script('wc-shortcodes-tabs');
@@ -709,7 +711,7 @@ if (!function_exists('wc_shortcodes_tabgroup')) {
 		if( isset($matches[1]) ){ $tab_titles = $matches[1]; }
 		$output = '';
 		if( count($tab_titles) ){
-		    $output .= '<div class="'.$class.'">';
+		    $output .= '<div id="wc-shortcodes-tab-'. $instance .'" class="'.$class.'">';
 			$output .= '<ul class="ui-tabs-nav wc-shortcodes-clearfix">';
 			foreach( $tab_titles as $tab ){
 				$output .= '<li><a href="#wc-shortcodes-tab-'. sanitize_title( $tab[0] ) .'">' . $tab[0] . '</a></li>';
@@ -849,6 +851,8 @@ if( !function_exists('wc_shortcodes_heading') ) {
  */
 if (! function_exists( 'wc_shortcodes_googlemaps' ) ) :
 	function wc_shortcodes_googlemaps($atts, $content = null) {
+		static $instance = 0;
+		$instance++;
 		
 		extract(shortcode_atts(array(
 				'title'		=> '', // content inside the info window
@@ -866,7 +870,7 @@ if (! function_exists( 'wc_shortcodes_googlemaps' ) ) :
 		wp_enqueue_script('wc-shortcodes-googlemap-api');
 		
 		
-		$output = '<div class="googlemap '. $class .'" style="height:'.$height.'px;width:100%">';
+		$output = '<div id="map_canvas_'.$instance.'" class="googlemap '. $class .'" style="height:'.$height.'px;width:100%">';
 			$output .= (!empty($title)) ? '<input class="title" type="hidden" value="'.$title.'" />' : '';
 			$output .= '<input class="location" type="hidden" value="'.$location.'" />';
 			$output .= '<input class="zoom" type="hidden" value="'.$zoom.'" />';
