@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.38
+
+* Made an update to the responsive behavior of wc_posts short code
+
 ### Version 1.37
 
 * Fixed bug with google maps not working
