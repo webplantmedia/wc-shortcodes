@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.37
+
+* Fixed bug with google maps not working
+
 ### Version 1.36
 
 * switched out isotope library with open source masonry library
