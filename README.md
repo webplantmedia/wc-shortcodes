@@ -66,6 +66,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.39
+
+* Removed query ui for tabs and added custom tab script.
+* Removed query ui for accordion. Using custom built accordion script.
+
 ### Version 1.38
 
 * Made an update to the responsive behavior of wc_posts short code
