@@ -722,9 +722,10 @@ if (!function_exists('wc_shortcodes_tabgroup')) {
 		$output = '';
 		if( count($tab_titles) ){
 		    $output .= '<div id="wc-shortcodes-tab-'. $instance .'" class="'.$class.'">';
-			$output .= '<ul class="ui-tabs-nav wc-shortcodes-clearfix">';
+			$output .= '<ul class="wcs-tabs-nav wc-shortcodes-clearfix">';
+			$i = 0;
 			foreach( $tab_titles as $tab ){
-				$output .= '<li><a href="#wc-shortcodes-tab-'. sanitize_title( $tab[0] ) .'">' . $tab[0] . '</a></li>';
+				$output .= '<li><a href="#" data-index="'.$i++.'" data-id="#wc-shortcodes-tab-'. sanitize_title( $tab[0] ) .'">' . $tab[0] . '</a></li>';
 			}
 		    $output .= '</ul>';
 		    $output .= do_shortcode( $content );

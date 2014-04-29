@@ -299,7 +299,7 @@
 							{
 								text: "Tabs",
 								onclick: function(){
-									editor.insertContent('[wc_tabgroup layout="box"][wc_tab title="First Tab"]'+wcParagraphContent+'<p>[/wc_tab][wc_tab title="Second Tab"]</p>'+wcParagraphContent+'[/wc_tab][/wc_tabgroup]');
+									editor.insertContent('[wc_tabgroup layout="box"]<p>[wc_tab title="First Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab]</p><p>[wc_tab title="Second Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab]</p>[/wc_tabgroup]');
 								}
 							},
 							{
