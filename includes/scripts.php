@@ -14,7 +14,7 @@ if( ! function_exists('wc_shortcodes_scripts') ) :
 		wp_enqueue_script('jquery');
 		wp_register_script( 'wc-shortcodes-tabs', plugin_dir_url( __FILE__ ) . 'js/tabs.js', array ( 'jquery', 'jquery-ui-tabs'), $ver, true );
 		wp_register_script( 'wc-shortcodes-toggle', plugin_dir_url( __FILE__ ) . 'js/toggle.js', 'jquery', $ver, true );
-		wp_register_script( 'wc-shortcodes-accordion', plugin_dir_url( __FILE__ ) . 'js/accordion.js', array ( 'jquery', 'jquery-ui-accordion'), $ver, true );
+		wp_register_script( 'wc-shortcodes-accordion', plugin_dir_url( __FILE__ ) . 'js/accordion.js', array ( 'jquery' ), $ver, true );
 		wp_register_script( 'wc-shortcodes-prettify', plugin_dir_url( __FILE__ ) . 'js/prettify.js', array ( ), $ver, true );
 		wp_register_script( 'wc-shortcodes-pre', plugin_dir_url( __FILE__ ) . 'js/pre.js', array ( 'jquery' ), $ver, true );
 		wp_register_script( 'wc-shortcodes-googlemap',  plugin_dir_url( __FILE__ ) . 'js/googlemap.js', array('jquery'), $ver, true);

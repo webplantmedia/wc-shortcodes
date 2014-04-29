@@ -631,6 +631,7 @@ if( !function_exists('wc_shortcodes_accordion_main') ) {
 		extract( shortcode_atts( array(
 			'class'	=> '',
 			'collapse' => 0,
+			'leaveopen' => 0,
 			'layout' => 'box',
 		), $atts ) );
 
@@ -638,10 +639,19 @@ if( !function_exists('wc_shortcodes_accordion_main') ) {
 
 		$classes[] = 'wc-shortcodes-accordion';
 
-		if ( (int) $collapse )
+		$behavior = 'autoclose';
+		if ( (int) $leaveopen ) {
+			$behavior = 'leaveopen';
+		}
+
+		$state = 'default';
+		if ( (int) $collapse ) {
 			$classes[] = 'wc-shortcodes-accordion-collapse';
-		else
+			$state = 'collapse';
+		}
+		else {
 			$classes[] = 'wc-shortcodes-accordion-default';
+		}
 
 		if ( ! empty( $class ) )
 			$classes[] = $class;
@@ -655,7 +665,7 @@ if( !function_exists('wc_shortcodes_accordion_main') ) {
 		wp_enqueue_script('wc-shortcodes-accordion');
 		
 		// Display the accordion	
-		return '<div class="'. $class .'">' . do_shortcode($content) . '</div>';
+		return '<div class="'. $class .'" data-behavior="'.$behavior.'" data-start-state="'.$state.'">' . do_shortcode($content) . '</div>';
 	}
 }
 

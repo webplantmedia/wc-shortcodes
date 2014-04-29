@@ -63,33 +63,24 @@
 .wc-shortcodes-font-awesome-enabled .wc-shortcodes-accordion .wc-shortcodes-accordion-trigger a:hover:before {
 	text-decoration: none;
 }
-.wc-shortcodes-font-awesome-enabled .wc-shortcodes-accordion .wc-shortcodes-accordion-trigger.ui-accordion-header-active a:before {
+.wc-shortcodes-font-awesome-enabled .wc-shortcodes-accordion .wc-shortcodes-accordion-trigger.wc-shortcodes-accordion-header-active a:before {
 		content: "\f107";
 }
-
 .wc-shortcodes-accordion .wc-shortcodes-accordion-trigger:first-child {
 	margin-top: 0; 
 }
-.wc-shortcodes-accordion .ui-state-focus {
-	outline: none 
-}
-.wc-shortcodes-accordion .wc-shortcodes-accordion-trigger.ui-state-hover { }
-.wc-shortcodes-accordion .wc-shortcodes-accordion-trigger.ui-state-active { }
-.wc-shortcodes-accordion .wc-shortcodes-accordion-trigger.ui-state-active a { }
 .wc-shortcodes-accordion .wc-shortcodes-accordion-content {
 	padding: 20px;
 	border: 1px solid #cccccc;
 	border-top: 0px; 
+	display: none;
 }
 .wc-shortcodes-accordion.wc-shortcodes-accordion-layout-none .wc-shortcodes-accordion-content {
 	padding: 20px 0;
 	border-width: 0;
 }
-.wc-shortcodes-accordion .ui-accordion-content *:last-child {
+.wc-shortcodes-accordion .wc-shortcodes-accordion-content *:last-child {
 	margin-bottom: 0 
-}
-.wc-shortcodes-accordion .ui-icon {
-	position: absolute; 
 }
 
 
