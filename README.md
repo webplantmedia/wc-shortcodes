@@ -37,11 +37,11 @@ Enhance your pages and posts with the following features.
 * Isotope / Masonry Posts
 * Font Awesome Icons
 
-[Live Demo & Documentation](http://wordpresscanvas.com/features/shortcodes/)
+[Live Demo & Documentation](http://webplantmedia.com/starter-themes/wordpresscanvas/features/shortcodes/)
 
 ### Professional Support
 
-If you need professional plugin support from me, the plugin author, you can contact me at [WordPress Canvas](http://wordpresscanvas.com/).
+If you need professional plugin support from me, the plugin author, you can contact me at [Web Plant Media](http://webplantmedia.com/).
 
 ### Plugin Development
 

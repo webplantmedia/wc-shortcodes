@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Canvas - Shortcodes
-Plugin URI: http://wordpresscanvas.com/features/shortcodes/
+Plugin URI: http://webplantmedia.com/starter-themes/wordpresscanvas/features/shortcodes/
 Description: A family of shortcodes to enhance site functionality.
 Author: Chris Baldelomar
 Author URI: http://webplantmedia.com/
