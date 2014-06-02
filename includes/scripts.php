@@ -7,10 +7,6 @@ if( ! function_exists('wc_shortcodes_scripts') ) :
 			wp_enqueue_style( 'wc-shortcodes-style', plugin_dir_url( __FILE__ ) . 'css/style.css', array( ), $ver );
 		}
 
-		if ( WC_SHORTCODES_FONT_AWESOME_ENABLED ) {
-			wp_enqueue_style( 'wordpresscanvas-font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array( ), '4.0.3' );
-		}
-
 		wp_enqueue_script('jquery');
 		wp_register_script( 'wc-shortcodes-tabs', plugin_dir_url( __FILE__ ) . 'js/tabs.js', array ( 'jquery' ), $ver, true );
 		wp_register_script( 'wc-shortcodes-toggle', plugin_dir_url( __FILE__ ) . 'js/toggle.js', 'jquery', $ver, true );
@@ -51,4 +47,17 @@ if( ! function_exists('wc_shortcodes_scripts') ) :
 		wp_enqueue_script( 'wc-shortcodes-rsvp' );
 	}
 	add_action('wp_enqueue_scripts', 'wc_shortcodes_scripts');
+endif;
+
+if( ! function_exists('wc_shortcodes_scripts_override') ) :
+	function wc_shortcodes_scripts_override() {
+		
+		if ( WC_SHORTCODES_FONT_AWESOME_ENABLED ) {
+			wp_deregister_style( 'wordpresscanvas-font-awesome' );
+			wp_register_style( 'wordpresscanvas-font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array( ), '4.0.3' );
+			wp_enqueue_style( 'wordpresscanvas-font-awesome' );
+		}
+
+	}
+	add_action('wp_enqueue_scripts', 'wc_shortcodes_scripts_override', 9999 );
 endif;
