@@ -285,6 +285,96 @@ $wc_shortcodes_options['social-media'] = array(
 		),
 	),
 );
+$wc_shortcodes_share_buttons = array(
+	'pinterest' => 'Pinterest',
+	'facebook' => 'Facebook',
+	'twitter' => 'Twitter',
+	'google' => 'Google',
+	'email' => 'Email',
+);
+$wc_shortcodes_options['share-buttons'] = array(
+	'title' => 'Share Buttons',
+	'sections' => array(
+		array(
+			'section' => 'wc-shortcodes-options-share-display-section',
+			'title' => 'Display',
+			'options' => array(
+				array(
+					'id' => 'share_buttons_display',
+					'title' => 'Order / Show / Hide',
+					'default' => $wc_shortcodes_share_buttons,
+					'description' => '',
+					'type' => 'share_buttons',
+				),
+			),
+		),
+		array(
+			'section' => 'wc-shortcodes-options-facebook-share-section',
+			'title' => 'Facebook',
+			'options' => array(
+				array(
+					'id' => 'facebook_share_icon',
+					'title' => 'Icon',
+					'default' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/facebook.png',
+					'description' => '',
+					'type' => 'image',
+				),
+			),
+		),
+		array(
+			'section' => 'wc-shortcodes-options-twitter-share-section',
+			'title' => 'Twitter',
+			'options' => array(
+				array(
+					'id' => 'twitter_share_icon',
+					'title' => 'Icon',
+					'default' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/twitter.png',
+					'description' => '',
+					'type' => 'image',
+				),
+			),
+		),
+		array(
+			'section' => 'wc-shortcodes-options-pinterest-share-section',
+			'title' => 'Pinterest',
+			'options' => array(
+				array(
+					'id' => 'pinterest_share_icon',
+					'title' => 'Icon',
+					'default' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/pinterest.png',
+					'description' => '',
+					'type' => 'image',
+				),
+			),
+		),
+		array(
+			'section' => 'wc-shortcodes-options-google-share-section',
+			'title' => 'Google',
+			'options' => array(
+				array(
+					'id' => 'google_share_icon',
+					'title' => 'Icon',
+					'default' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/google.png',
+					'description' => '',
+					'type' => 'image',
+				),
+			),
+		),
+		array(
+			'section' => 'wc-shortcodes-options-email-share-section',
+			'title' => 'Email',
+			'options' => array(
+				array(
+					'id' => 'email_share_icon',
+					'title' => 'Icon',
+					'default' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/email.png',
+					'description' => '',
+					'type' => 'image',
+				),
+			),
+		),
+	),
+);
 $number_options = "1\n2\n3\n4\n5";
 $event_options = "All Events\nMain Ceremony\nWedding Party";
 $admin_email = get_option( 'admin_email' );

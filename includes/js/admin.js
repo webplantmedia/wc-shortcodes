@@ -189,4 +189,9 @@
 			$(preview).html("").hide();
 		}
 	});
+
+	$(document).ready(function($){
+		$('.wc-shortcodes-share-buttons').sortable({ axis: "y" });
+	});
+
 })(jQuery);
