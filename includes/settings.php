@@ -33,7 +33,7 @@ function wc_shortcodes_options_admin_menu() {
 	}
 
 	// add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-	$view_hook_name = add_submenu_page( 'themes.php', 'WC Shortcodes', 'WC Shortcodes', 'manage_options', 'wc-shortcodes-options', 'wc_shortcodes_options_display_page' );
+	$view_hook_name = add_submenu_page( 'themes.php', 'Shortcodes', 'Shortcodes', 'manage_options', 'wc-shortcodes-options', 'wc_shortcodes_options_display_page' );
 }
 add_action( 'admin_menu', 'wc_shortcodes_options_admin_menu' );
 
