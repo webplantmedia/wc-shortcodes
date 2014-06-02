@@ -47,7 +47,6 @@
 		var $postBox = $container.children('.wc-shortcodes-post-box');
 
 		var o = calculateGrid($container);
-		console.log(o);
 
 		var marginBottom = o.gutterWidth;
 		if ( 1 == o.columns ) {
