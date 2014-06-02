@@ -1,10 +1,20 @@
 <?php
 function wc_shortcodes_options_enqueue_scripts() {
-	wp_register_style( 'wc-shortcodes-options', WC_SHORTCODES_PLUGIN_URL . 'includes/css/admin.css', array(), WC_SHORTCODES_VERSION, 'all' );
-	wp_enqueue_style( 'wc-shortcodes-options' );
+	global $wc_shortcodes_plugin_screen_hook_suffix;
 
-	wp_register_script( 'wc-shortcodes-options-js', WC_SHORTCODES_PLUGIN_URL . 'includes/js/admin.js', array('jquery'), WC_SHORTCODES_VERSION, true );
-	wp_enqueue_script( 'wc-shortcodes-options-js' );
+	if ( ! isset( $wc_shortcodes_plugin_screen_hook_suffix ) ) {
+		return;
+	}
+
+	$screen = get_current_screen();
+
+	if ( $wc_shortcodes_plugin_screen_hook_suffix == $screen->id ) {
+		wp_register_style( 'wc-shortcodes-options', WC_SHORTCODES_PLUGIN_URL . 'includes/css/admin.css', array(), WC_SHORTCODES_VERSION, 'all' );
+		wp_enqueue_style( 'wc-shortcodes-options' );
+
+		wp_register_script( 'wc-shortcodes-options-js', WC_SHORTCODES_PLUGIN_URL . 'includes/js/admin.js', array('jquery'), WC_SHORTCODES_VERSION, true );
+		wp_enqueue_script( 'wc-shortcodes-options-js' );
+	}
 }
 add_action('admin_enqueue_scripts', 'wc_shortcodes_options_enqueue_scripts' );
 
@@ -27,6 +37,7 @@ add_action( 'admin_init', 'wc_shortcodes_options_init' );
 
 function wc_shortcodes_options_admin_menu() {
 	global $wc_shortcodes_options;
+	global $wc_shortcodes_plugin_screen_hook_suffix;
 
 	foreach ( $wc_shortcodes_options as $tab => $o ) {
 		$view_hook_name = add_submenu_page( 'options.php', $o['title'], $o['title'], 'manage_options', 'wc-shortcodes-options-' . $tab, 'wc_shortcodes_options_display_page' );
@@ -34,6 +45,7 @@ function wc_shortcodes_options_admin_menu() {
 
 	// add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
 	$view_hook_name = add_submenu_page( 'themes.php', 'Shortcodes', 'Shortcodes', 'manage_options', 'wc-shortcodes-options', 'wc_shortcodes_options_display_page' );
+	$wc_shortcodes_plugin_screen_hook_suffix = $view_hook_name;
 }
 add_action( 'admin_menu', 'wc_shortcodes_options_admin_menu' );
 
