@@ -177,15 +177,18 @@ function wc_shortcodes_options_display_share_buttons_field( $args ) {
 	<?php endif; ?>
 
 	<ul class="wc-shortcodes-clearfix wc-shortcodes-share-buttons">
-		<?php foreach ( $val as $key => $name ) : ?>
-			<li>
-				<p style="width:300px;background-color:#f7f7f7;border:1px solid #dfdfdf;padding:5px 5px;line-height:1;margin:0;text-align:left;cursor:move;">
-					<input type="checkbox" name="<?php echo $option_name; ?>[<?php echo $key; ?>]" value="<?php echo $name; ?>" <?php checked( true, true ); ?> />
-					<?php echo $name; ?>
-				</p>
-			</li>
-			<?php unset( $not_selected[ $key ] ); ?>
-		<?php endforeach; ?>
+		<?php if ( is_array( $val ) && ! empty( $val ) ) : ?>
+			<?php foreach ( $val as $key => $name ) : ?>
+				<li>
+					<p style="width:300px;background-color:#f7f7f7;border:1px solid #dfdfdf;padding:5px 5px;line-height:1;margin:0;text-align:left;cursor:move;">
+						<input type="checkbox" name="<?php echo $option_name; ?>[<?php echo $key; ?>]" value="<?php echo $name; ?>" <?php checked( true, true ); ?> />
+						<?php echo $name; ?>
+					</p>
+				</li>
+				<?php unset( $not_selected[ $key ] ); ?>
+			<?php endforeach; ?>
+		<?php endif; ?>
+
 		<?php foreach ( $not_selected as $key => $name ) : ?>
 			<li>
 				<p style="width:300px;background-color:#f7f7f7;border:1px solid #dfdfdf;padding:5px 5px;line-height:1;margin:0;text-align:left;cursor:move;">
@@ -420,8 +423,8 @@ function wc_shortcodes_options_sanitize_share_buttons( $value ) {
 
 	$valid = array();
 
-	if ( !is_array( $value ) )
-		return $whitelist;
+	if ( ! is_array( $value ) || empty( $value ) )
+		return null;
 
 	foreach ( $value as $k => $v ) {
 		if ( array_key_exists( $k, $whitelist ) )

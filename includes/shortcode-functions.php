@@ -1376,3 +1376,83 @@ if( !function_exists('wc_shortcodes_fa') ) {
 	}
 	add_shortcode( 'wc_fa', 'wc_shortcodes_fa' );
 }
+
+if ( ! function_exists('wc_shortcodes_share_buttons') ) {
+	function wc_shortcodes_share_buttons( $atts ) {
+		extract( shortcode_atts( array(
+			// misc options
+			'class' => '',
+		), $atts ) );
+
+		$share_buttons = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_display' );
+
+		if ( empty( $share_buttons ) )
+			return '';
+
+		// classes
+		$classes = array();
+
+		$classes[] = 'wc-shortcodes-share-buttons';
+		if ( ! empty( $class ) )
+			$classes[] = $class;
+
+		$style_attr = '';
+
+		$first = true;
+
+		$html = '<div class="' . implode( ' ', $classes ) . '" style="'.$style_attr.'">';
+			$html .= '<ul class="wc-shortcodes-clearfix">';
+				foreach ( $share_buttons as $key => $name ) {
+					$icon_option_name = WC_SHORTCODES_PREFIX . $key . '_share_icon';
+
+					if ( $icon_url = get_option( $icon_option_name ) ) {
+						$first_class = $first ? ' first-share-button' : '';
+						$first = false;
+
+						switch ( $key ) {
+							case 'pinterest' :
+								$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
+									$html .='<a href="javascript:void((function()%7Bvar%20e=document.createElement(&apos;script&apos;);e.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);e.setAttribute(&apos;charset&apos;,&apos;UTF-8&apos;);e.setAttribute(&apos;src&apos;,&apos;http://assets.pinterest.com/js/pinmarklet.js?r=&apos;+Math.random()*99999999);document.body.appendChild(e)%7D)());">';
+										$html .= '<img src="'.$icon_url.'" alt="Pin it">';
+									$html .= '</a>';
+								$html .= '</li>';
+								break;
+							case 'facebook' :
+								$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
+									$html .='<a target="_blank" onclick="return !window.open(this.href, \'Facebook\', \'width=640,height=300\')" href="http://www.facebook.com/sharer/sharer.php?u='.urlencode(get_permalink()).'">';
+										$html .= '<img src="'.$icon_url.'" alt="Share on Facebook">';
+									$html .= '</a>';
+								$html .= '</li>';
+								break;
+							case 'twitter' :
+								$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
+									$html .='<a target="_blank" onclick="return !window.open(this.href, \'Twitter\', \'width=500,height=430\')" href="https://twitter.com/share?url='.urlencode(get_permalink()).'" class="share-button-twitter" data-lang="en">';
+										$html .= '<img src="'.$icon_url.'" alt="Share on Twitter">';
+									$html .= '</a>';
+								$html .= '</li>';
+								break;
+							case 'email' :
+								$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
+									$html .='<a title="Share by Email" target="_self" href="mailto:?subject=&amp;body='.urlencode(get_permalink()).'">';
+										$html .= '<img src="'.$icon_url.'" alt="Share by Email">';
+									$html .= '</a>';
+								$html .= '</li>';
+								break;
+							case 'google' :
+								$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
+									$html .='<a href="https://plus.google.com/share?url='.urlencode(get_permalink()).'" onclick="javascript:window.open(this.href,
+\'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;">';
+										$html .= '<img src="'.$icon_url.'" alt="Share on Google+">';
+									$html .= '</a>';
+								$html .= '</li>';
+								break;
+						}
+					}
+				}
+			$html .= '</ul>';
+		$html .= '</div>';
+
+		return $html;
+	}
+	add_shortcode( 'wc_share', 'wc_shortcodes_share_buttons' );
+}
