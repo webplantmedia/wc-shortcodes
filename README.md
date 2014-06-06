@@ -66,6 +66,21 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.40
+
+* Fixed bug with Shortcode menu button hiding when latest WooCommerce plugin was installed.
+* Added share buttons short code
+* Added options for share buttons
+* updated name of widget
+* fixed bug where we didn't enqueue media in plugin
+* optimize loading of js and css files
+* Changed name from WC Shortcodes to Shortcodes in menu
+* Updated to font awesome 4.1.0
+* removed console.log from javascript file
+* Use masonry library provided by WordPress
+* Give plugin ability to override font awesome icons in theme
+* changed links in read me
+
 ### Version 1.39
 
 * Removed query ui for tabs and added custom tab script.
