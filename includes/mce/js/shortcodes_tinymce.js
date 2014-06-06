@@ -6,13 +6,13 @@
 			tinymce.plugins.wcShortcodeMce.theurl = url;
 		},
 		createControl : function(btn, e) {
-			if ( btn === "wc_shortcodes_button" ) {
+			if ( btn === "wpc_shortcodes_button" ) {
 				var a = this;
 
 				// out puts an js error when clicking on button
-				// btn = e.createSplitButton('wc_shortcodes_button', {
+				// btn = e.createSplitButton('wpc_shortcodes_button', {
 
-				btn = e.createMenuButton('wc_shortcodes_button', {
+				btn = e.createMenuButton('wpc_shortcodes_button', {
 					title: "Insert Shortcode",
 					image: tinymce.plugins.wcShortcodeMce.theurl +"/images/shortcodes.png",
 					icons: false,
@@ -403,5 +403,5 @@
 		}
 	
 	});
-	tinymce.PluginManager.add("wc_shortcodes", tinymce.plugins.wcShortcodeMce);
+	tinymce.PluginManager.add("wpc_shortcodes", tinymce.plugins.wcShortcodeMce);
 })();

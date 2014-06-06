@@ -6,10 +6,10 @@
 		var wcParagraphContent = '<p>Sample Content</p>';
 
 
-		editor.addButton('wc_shortcodes_button', function() {
+		editor.addButton('wpc_shortcodes_button', function() {
 			return {
 				title: "",
-				text: "Shortcodes",
+				text: "[ ]",
 				image: url + "/images/shortcodes.png",
 				type: 'menubutton',
 				icons: false,
@@ -356,5 +356,5 @@
 		});
 	};
 	
-	tinymce.PluginManager.add( "wc_shortcodes", wcShortcodeManager );
+	tinymce.PluginManager.add( "wpc_shortcodes", wcShortcodeManager );
 })();
