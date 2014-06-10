@@ -66,7 +66,7 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
-### Version 1.41
+### Version 1.42
 
 * Improved social icons widget
 
