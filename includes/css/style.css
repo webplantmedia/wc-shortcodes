@@ -1063,6 +1063,14 @@ pre.pre-wrap {
 	-moz-box-sizing:    border-box;
 	box-sizing:         border-box;
 }
+.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-float-left li {
+	padding-right: 6px;
+	padding-left: 0;
+}
+.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-float-right li {
+	padding-right: 0;
+	padding-left: 6px;
+}
 .widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-8 li {
 	width: 12.5%;
 }
