@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.41
+
+* Improved social icons widget
+
 ### Version 1.40
 
 * Fixed bug with Shortcode menu button hiding when latest WooCommerce plugin was installed.
