@@ -1049,6 +1049,12 @@ pre.pre-wrap {
 .widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons {
 	text-align: center;
 }
+.wc-shortcodes-social-icons.wc-shortcodes-columns-float-left {
+	text-align: left;
+}
+.wc-shortcodes-social-icons.wc-shortcodes-columns-float-right {
+	text-align: right;
+}
 .widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons li {
 	display: inline-block;
 	padding: 3px;
@@ -1081,6 +1087,37 @@ pre.pre-wrap {
 .widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-1 li {
 	width: 100%;
 }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-10 img { max-height: 10px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-12 img { max-height: 12px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-14 img { max-height: 14px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-16 img { max-height: 16px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-18 img { max-height: 18px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-20 img { max-height: 20px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-22 img { max-height: 22px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-24 img { max-height: 24px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-26 img { max-height: 26px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-28 img { max-height: 28px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-30 img { max-height: 30px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-32 img { max-height: 32px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-34 img { max-height: 34px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-36 img { max-height: 36px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-38 img { max-height: 38px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-40 img { max-height: 40px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-42 img { max-height: 42px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-44 img { max-height: 44px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-46 img { max-height: 46px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-48 img { max-height: 48px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-50 img { max-height: 50px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-52 img { max-height: 52px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-54 img { max-height: 54px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-56 img { max-height: 56px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-58 img { max-height: 58px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-60 img { max-height: 60px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-62 img { max-height: 62px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-64 img { max-height: 64px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-66 img { max-height: 66px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-68 img { max-height: 68px; }
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight-70 img { max-height: 70px; }
 
 
 /**
