@@ -2,6 +2,7 @@
 class WC_Shortcodes_TinyMCE_Buttons {
 	function __construct() {
     	add_action( 'admin_head', array(&$this,'init') );
+		// add_action( 'admin_head', array( &$this, 'localize_script' ) );
     }
     function init() {
 		if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') )
@@ -14,6 +15,15 @@ class WC_Shortcodes_TinyMCE_Buttons {
 			add_filter( 'mce_buttons', array(&$this,'register_button') ); 
 		}  
     }  
+	function localize_script() {
+		global $wc_shortcodes_theme_support;
+
+		?>
+		<script type="text/javascript">
+			var wpc_shortcodes = <?php echo json_encode( $wc_shortcodes_theme_support ); ?>;
+		</script>
+		<?php
+	}
 	function add_plugin($plugin_array) {  
 		global $wp_version;
 		$ver = WC_SHORTCODES_VERSION;

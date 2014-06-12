@@ -334,7 +334,7 @@
 							{
 								text: "Full Width",
 								onclick: function(){
-									editor.insertContent('[wc_fullwidth selector="#main"]' + wcDummyContent + '[/wc_fullwidth]');
+									editor.insertContent('[wc_fullwidth selector=""]' + wcDummyContent + '[/wc_fullwidth]');
 								}
 							},
 							{

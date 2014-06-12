@@ -19,6 +19,7 @@ define( 'WC_SHORTCODES_FONT_AWESOME_ENABLED', get_option( WC_SHORTCODES_PREFIX .
 global $wc_shortcodes_options;
 global $wc_shortcodes_social_icons;
 global $wc_shortcodes_share_buttons;
+global $wc_shortcodes_theme_support;
 global $wc_shortcodes_plugin_screen_hook_suffix;
 
 $wc_shortcodes_options = array();
@@ -49,6 +50,9 @@ $wc_shortcodes_share_buttons = array(
 	'twitter' => 'Twitter',
 	'google' => 'Google',
 	'email' => 'Email',
+);
+$wc_shortcodes_theme_support = array(
+	'fullwidth_container' => '#main',
 );
 
 require_once( dirname(__FILE__) . '/includes/options.php' ); // define options array

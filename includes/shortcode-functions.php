@@ -70,9 +70,15 @@ add_filter('widget_text', 'do_shortcode');
  * @return void
  */
 function wc_shortcodes_fullwidth( $atts, $content = null ) {
+	global $wc_shortcodes_theme_support;
+
 	extract(shortcode_atts(array(
-		'selector' => '#main',
+		'selector' => $wc_shortcodes_theme_support[ 'fullwidth_container' ],
 	), $atts));
+
+	if ( empty( $selector ) ) {
+		$selector = $wc_shortcodes_theme_support[ 'fullwidth_container' ];
+	}
 
 	wp_enqueue_script('wc-shortcodes-fullwidth');
 

@@ -1,4 +1,19 @@
 <?php
+function wc_shortcodes_check_supports() {
+	global $wc_shortcodes_theme_support;
+
+	if ( current_theme_supports( 'wpc-shortcodes' ) ) {
+		$supports = get_theme_support( 'wpc-shortcodes' );
+
+		if ( isset( $supports[0] ) && is_array( $supports[0] ) ) {
+			foreach ( $supports[0] as $key => $value ) {
+				$wc_shortcodes_theme_support[ $key ] = $value;
+			}
+		}
+	}
+}
+add_action( 'init', 'wc_shortcodes_check_supports' );
+
 /**
  * filter social url. For example, we want to add
  * mailto: to an email address.
