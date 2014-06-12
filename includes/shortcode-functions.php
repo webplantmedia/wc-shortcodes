@@ -308,50 +308,31 @@ if( !function_exists('wc_shortcodes_spacing') ) {
 */
 if( !function_exists('wc_shortcodes_social_icons') ) {
 	function wc_shortcodes_social_icons( $atts ){   
-		$social = array(
-			'facebook' => 'Facebook',
-			'google' => 'Google',
-			'twitter' => 'Twitter',
-			'pinterest' => 'Pinterest',
-			'instagram' => 'Instagram',
-			'bloglovin' => 'BlogLovin',
-			'flickr' => 'Flickr',
-			'rss' => 'RSS',
-			'email' => 'Email',
-			'custom1' => 'Custom 1',
-			'custom2' => 'Custom 2',
-			'custom3' => 'Custom 3',
-			'custom4' => 'Custom 4',
-			'custom5' => 'Custom 5',
-		);
-
 		extract(shortcode_atts(array(
 			'class'      => '',
 			'size'		 => 'large',
 			'align' => 'left',
-			'display' => 'facebook,google,twitter,pinterest,instagram,bloglovin,flickr,rss,email,custom1,custom2,custom3,custom4,custom5',
 		), $atts));
 
 		$class = trim( 'wc-shortcodes-social-icons-wrapper ' . $class );
 
-		$order = explode( ',', $display );
+		$order = get_option( WC_SHORTCODES_PREFIX . 'social_icons_display' );
+
+		if ( ! is_array( $order ) || empty( $order ) ) {
+			return;
+		}
+
 		$first = true;
 
 		$html = '<div class="' . $class . '">';
 			$html .= '<ul class="wc-shortcodes-social-icons wc-shortcodes-clearfix wc-shortcodes-social-icons-align-'.$align.' wc-shortcodes-social-icons-size-'.$size.'">';
-				foreach ( $order as $key ) {
-					if ( ! array_key_exists( $key, $social ) )
-						continue;
-
+				foreach ( $order as $key => $value ) {
 					$link_option_name = WC_SHORTCODES_PREFIX . $key . '_link';
 					$icon_option_name = WC_SHORTCODES_PREFIX . $key . '_icon';
 
 					if (  $icon_url = get_option( $icon_option_name ) ) {
 						$social_link = get_option( $link_option_name );
 						$social_link = apply_filters( 'wc_shortcodes_social_link', $social_link, $key );
-
-						if ( empty( $social_link ) )
-							continue;
 
 						$first_class = $first ? ' first-icon' : '';
 						$first = false;

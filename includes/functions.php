@@ -45,14 +45,43 @@ function wc_shortcodes_options_activation() {
 			foreach ( $o['sections'] as $oo ) {
 				foreach ( $oo['options'] as $ooo ) {
 					$option_name = WC_SHORTCODES_PREFIX . $ooo['id'];
-					add_option( $option_name, $ooo['default'] );
+					if ( WC_SHORTCODES_PREFIX . 'social_icons_display' == $option_name ) {
+						$default = wc_shortcodes_default_social_icons();
+						add_option( $option_name, $default );
+					}
+					else {
+						add_option( $option_name, $ooo['default'] );
+					}
 				}
 			}
 		}
 	} 
 }
-add_action( 'admin_init', 'wc_shortcodes_options_activation' );
+add_action( 'init', 'wc_shortcodes_options_activation' );
 
+function wc_shortcodes_default_social_icons() {
+	global $wc_shortcodes_social_icons;
+
+	$default = $wc_shortcodes_social_icons;
+
+	foreach ( $wc_shortcodes_social_icons as $key => $value ) {
+		$link_option_name = WC_SHORTCODES_PREFIX . $key . '_link';
+		$icon_option_name = WC_SHORTCODES_PREFIX . $key . '_icon';
+
+		if (  $icon_url = get_option( $icon_option_name ) ) {
+			$social_link = get_option( $link_option_name );
+
+			if ( empty( $social_link ) )
+				unset( $default[ $key ] );
+		}
+	}
+
+	if ( empty( $default ) ) {
+		$default = $wc_shortcodes_social_icons;
+	}
+
+	return $default;
+}
 
 /**
  * webpm_send_email 

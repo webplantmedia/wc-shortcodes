@@ -45,7 +45,12 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 			$maxheight = $instance['maxheight'];
 		}
 
-		$order = $instance['order'];
+		$order = get_option( WC_SHORTCODES_PREFIX . 'social_icons_display' );
+
+		if ( ! is_array( $order ) || empty( $order ) ) {
+			return;
+		}
+
 		$first = true;
 
 		$column_display = false;
@@ -77,9 +82,6 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 					$social_link = get_option( $link_option_name );
 					$social_link = apply_filters( 'wc_shortcodes_social_link', $social_link, $key );
 
-					if ( empty( $social_link ) )
-						continue;
-
 					if ( $first )
 						$li_class[] = 'first-icon';
 
@@ -103,27 +105,10 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 		$instance['title'] = strip_tags( stripslashes($new_instance['title']) );
 		$instance['columns'] = $new_instance['columns'];
 		$instance['maxheight'] = $new_instance['maxheight'];
-		$instance['order'] = $new_instance['order'];
 		return $instance;
 	}
 
 	function form( $instance ) {
-		$default_order = array(
-			'facebook' => 'Facebook',
-			'google' => 'Google',
-			'twitter' => 'Twitter',
-			'pinterest' => 'Pinterest',
-			'instagram' => 'Instagram',
-			'bloglovin' => 'BlogLovin',
-			'flickr' => 'Flickr',
-			'rss' => 'RSS',
-			'email' => 'Email',
-			'custom1' => 'Custom 1',
-			'custom2' => 'Custom 2',
-			'custom3' => 'Custom 3',
-			'custom4' => 'Custom 4',
-			'custom5' => 'Custom 5',
-		);
 		$order = isset( $instance['order'] ) ? $instance['order'] : $default_order;
 		$title = isset( $instance['title'] ) ? $instance['title'] : 'Follow Me!';
 		$columns = isset( $instance['columns'] ) ? $instance['columns'] : 6;
@@ -133,15 +118,6 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>" />
 		</p>
-		<label><?php _e('Order:'); ?></label>
-		<ul class="wc-shortcodes-clearfix wc-shortcodes-social-icons">
-			<?php foreach ( $order as $key => $name ) : ?>
-				<li>
-					<p style="background-color:#f7f7f7;border:1px solid #dfdfdf;padding:2px;margin:0;text-align:center;cursor:move;"><?php echo $name; ?></p>
-					<input type="hidden" name="<?php echo $this->get_field_name('order'); ?>[<?php echo $key; ?>]" value="<?php echo $name; ?>" />
-				</li>
-			<?php endforeach; ?>
-		</ul>
 		<p>
 			<label for="<?php echo $this->get_field_id('columns'); ?>"><?php _e('Display:'); ?></label>
 			<select id="<?php echo $this->get_field_id('columns'); ?>" name="<?php echo $this->get_field_name('columns'); ?>">

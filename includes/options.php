@@ -1,8 +1,20 @@
 <?php
-$wc_shortcodes_options = array();
 $wc_shortcodes_options['social-media'] = array(
 	'title' => 'Social Media',
 	'sections' => array(
+		array(
+			'section' => 'wc-shortcodes-options-social-display-section',
+			'title' => 'Display',
+			'options' => array(
+				array(
+					'id' => 'social_icons_display',
+					'title' => 'Order / Show / Hide',
+					'default' => $wc_shortcodes_social_icons,
+					'description' => '',
+					'type' => 'social_icons',
+				),
+			),
+		),
 		array(
 			'section' => 'wc-shortcodes-options-facebook-section',
 			'title' => 'Facebook',
@@ -284,13 +296,6 @@ $wc_shortcodes_options['social-media'] = array(
 			),
 		),
 	),
-);
-$wc_shortcodes_share_buttons = array(
-	'pinterest' => 'Pinterest',
-	'facebook' => 'Facebook',
-	'twitter' => 'Twitter',
-	'google' => 'Google',
-	'email' => 'Email',
 );
 $wc_shortcodes_options['share-buttons'] = array(
 	'title' => 'Share Buttons',

@@ -17,7 +17,39 @@ define( 'WC_SHORTCODES_CURRENT_VERSION', get_option( WC_SHORTCODES_PREFIX . 'cur
 define( 'WC_SHORTCODES_FONT_AWESOME_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_font_awesome', true ) );
 
 global $wc_shortcodes_options;
+global $wc_shortcodes_social_icons;
+global $wc_shortcodes_share_buttons;
 global $wc_shortcodes_plugin_screen_hook_suffix;
+
+$wc_shortcodes_options = array();
+$wc_shortcodes_social_icons = array(
+	'facebook' => 'Facebook',
+	'google' => 'Google',
+	'twitter' => 'Twitter',
+	'pinterest' => 'Pinterest',
+	'instagram' => 'Instagram',
+	'bloglovin' => 'BlogLovin',
+	'flickr' => 'Flickr',
+	'rss' => 'RSS',
+	'email' => 'Email',
+	'custom1' => 'Custom 1',
+	'custom2' => 'Custom 2',
+	'custom3' => 'Custom 3',
+	'custom4' => 'Custom 4',
+	'custom5' => 'Custom 5',
+	'pinterest' => 'Pinterest',
+	'facebook' => 'Facebook',
+	'twitter' => 'Twitter',
+	'google' => 'Google',
+	'email' => 'Email',
+);
+$wc_shortcodes_share_buttons = array(
+	'pinterest' => 'Pinterest',
+	'facebook' => 'Facebook',
+	'twitter' => 'Twitter',
+	'google' => 'Google',
+	'email' => 'Email',
+);
 
 require_once( dirname(__FILE__) . '/includes/options.php' ); // define options array
 require_once( dirname(__FILE__) . '/includes/functions.php' ); // Adds basic filters and actions
