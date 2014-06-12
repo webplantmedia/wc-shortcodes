@@ -88,6 +88,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.43
+
+* Added theme support for developers
+* Updated settings for social media icons
+
 ### Version 1.42
 
 * Improved social icons widget
