@@ -3,14 +3,14 @@
 
 	var calculateGrid = function($container) {
 		var columns = parseInt( $container.data('columns') );
-		var gutterSpace = $container.data('gutterSpace');
+		var gutterWidth = $container.data('gutterSpace');
 		var containerWidth = $container.width();
 
-		if ( isNaN( gutterSpace ) ) {
-			gutterSpace = .020;
+		if ( isNaN( gutterWidth ) ) {
+			gutterWidth = 20;
 		}
-		else if ( gutterSpace > 0.05 || gutterSpace < 0 ) {
-			gutterSpace = .020;
+		else if ( gutterWidth > 50 || gutterWidth < 0 ) {
+			gutterWidth = 20;
 		}
 
 		if ( containerWidth < 568 ) {
@@ -33,7 +33,7 @@
 			columns = 1;
 		}
 
-		var gutterWidth = Math.floor( containerWidth * gutterSpace );
+		gutterWidth = parseInt( gutterWidth );
 
 		var allGutters = gutterWidth * ( columns - 1 );
 		var contentWidth = containerWidth - allGutters;
@@ -49,9 +49,9 @@
 		var o = calculateGrid($container);
 
 		var marginBottom = o.gutterWidth;
-		if ( 1 == o.columns ) {
+		/* if ( 1 == o.columns ) {
 			marginBottom = 20;
-		}
+		} */
 
 		$postBox.css({'width':o.columnWidth+'px', 'margin-bottom':marginBottom+'px', 'padding':'0'});
 

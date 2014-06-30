@@ -1090,7 +1090,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 			'filtering' => true, // insert isotope filter navigation
 			'columns' => '3', // default number of isotope columns
-			'gutter_space' => '0.020', // gutter width percentage relative to parent element width
+			'gutter_space' => '20', // gutter width percentage relative to parent element width
 			'heading_type' => 'h2', // heading tag for title
 			'layout' => 'masonry', // blog layout
 		), $atts );
@@ -1103,13 +1103,16 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		$atts['heading_type'] = strtolower( $atts['heading_type'] );
 
 		if ( ! is_numeric( $atts['gutter_space'] ) ) {
-			$atts['gutter_space'] = 0.020;
+			$atts['gutter_space'] = 20;
 		}
-		$atts['gutter_space'] = number_format( $atts['gutter_space'], 3 );
-		if ( $atts['gutter_space'] > 0.05 || $atts['gutter_space'] < 0.000 ) {
-			$atts['gutter_space'] = 0.020;
+		if ( $atts['gutter_space'] > 0 && $atts['gutter_space'] < 1 ) {
+			$atts['gutter_space'] = (int) ( $atts['gutter_space'] * 1000 );
 		}
-		
+		$atts['gutter_space'] = (int) $atts['gutter_space'];
+		if ( $atts['gutter_space'] > 50 || $atts['gutter_space'] < 0 ) {
+			$atts['gutter_space'] = 20;
+		}
+
 		if (isset($atts['posts_per_page']) && $atts['posts_per_page']) {
 			$atts['posts_per_page'] = (int) $atts['posts_per_page'];
 		}
