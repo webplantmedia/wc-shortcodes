@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.44
+
+* Changed gutter width to fixed pixel value instead of percentage.
+
 ### Version 1.43
 
 * Added theme support for developers
