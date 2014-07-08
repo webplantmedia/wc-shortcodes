@@ -38,11 +38,6 @@ $wc_shortcodes_social_icons = array(
 	'custom3' => 'Custom 3',
 	'custom4' => 'Custom 4',
 	'custom5' => 'Custom 5',
-	'pinterest' => 'Pinterest',
-	'facebook' => 'Facebook',
-	'twitter' => 'Twitter',
-	'google' => 'Google',
-	'email' => 'Email',
 );
 $wc_shortcodes_share_buttons = array(
 	'pinterest' => 'Pinterest',

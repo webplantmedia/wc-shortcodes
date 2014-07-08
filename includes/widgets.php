@@ -109,9 +109,8 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$order = isset( $instance['order'] ) ? $instance['order'] : $default_order;
 		$title = isset( $instance['title'] ) ? $instance['title'] : 'Follow Me!';
-		$columns = isset( $instance['columns'] ) ? $instance['columns'] : 6;
+		$columns = isset( $instance['columns'] ) ? $instance['columns'] : 'float-left';
 		$maxheight = isset( $instance['maxheight'] ) ? $instance['maxheight'] : 'none';
 		?>
 		<p>
