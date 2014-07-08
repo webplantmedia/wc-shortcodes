@@ -88,6 +88,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.45
+
+* Added theme support for social icons and share buttons
+* Clean up
+
 ### Version 1.44
 
 * Changed gutter width to fixed pixel value instead of percentage.
