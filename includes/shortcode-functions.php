@@ -832,7 +832,7 @@ if( !function_exists('wc_shortcodes_heading') ) {
 		if ( $icon_left ) $output .= '<i class="wc-shortcodes-button-icon-left icon-'. $icon_left .'"></i>';
 			$output .= $title;
 		if ( $icon_right ) $output .= '<i class="wc-shortcodes-button-icon-right icon-'. $icon_right .'"></i>';
-		$output .= '</'.$type.'></span>';
+		$output .= '</span></'.$type.'>';
 
 		if ( 'h1' == $type )
 			$output = '<header class="entry-header">'. $output . '</header>';
