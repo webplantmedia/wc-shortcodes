@@ -26,7 +26,7 @@
 
 			<?php if ( $atts['content'] ) : ?>
 			<div class="wc-shortcodes-entry-summary">
-				<?php the_excerpt(); ?>
+				<?php wc_shortcodes_the_excerpt(); ?>
 			</div><!-- .entry-summary -->
 			<?php endif; ?>
 

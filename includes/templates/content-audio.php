@@ -2,7 +2,7 @@
 <div id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
 	<div class="wc-shortcodes-post-border">
 		<div class="wc-shortcodes-entry-audio">
-			<?php the_content(); ?>
+			<?php wc_shortcodes_the_media_content(); ?>
 		</div><!-- .entry-summary -->
 
 		<div class="wc-shortcodes-post-content">
@@ -16,7 +16,7 @@
 
 			<?php if ( $atts['content'] ) : ?>
 				<div class="wc-shortcodes-entry-summary">
-					<?php the_excerpt(); ?>
+					<?php wc_shortcodes_the_excerpt(); ?>
 				</div>
 			<?php endif; ?>
 
