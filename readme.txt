@@ -88,6 +88,12 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.46
+
+* hide fullwidth items until they have broken free from their container.
+* Fixed problem with plugins appending text to content in wc_post shortcode display
+* Update the wc_heading shortcode
+
 ### Version 1.45
 
 * Added theme support for social icons and share buttons
