@@ -39,7 +39,7 @@
 				marginLeft = marginRight = Math.floor( ( siteWidth - contentWidth ) / 2 ) * -1;
 
 				// apply margin offset
-				$this.css( {'margin-left': marginLeft+'px', 'margin-right': marginRight+'px'} );
+				$this.css( {'margin-left': marginLeft+'px', 'margin-right': marginRight+'px', 'visibility':'visible'} );
 			}
 		});
 	};

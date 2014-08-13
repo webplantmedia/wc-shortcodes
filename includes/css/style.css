@@ -1417,3 +1417,10 @@ pre.pre-wrap {
 .wc-shortcodes-image-wrapper.aligncenter {
 	margin-bottom: 20px;
 }
+/**
+ * [wc_fullwidth]
+ * ----------------------------------------------------------------------------
+ */
+.wc-shortcodes-full-width {
+	visibility: hidden;
+}
