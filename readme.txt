@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.47
+
+* Trigger custom event so other javascript elements can refresh when accordion, tabs, or toggle elements are opened.
+
 ### Version 1.46
 
 * hide fullwidth items until they have broken free from their container.
