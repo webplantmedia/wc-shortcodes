@@ -44,6 +44,8 @@
 					}
 				}
 
+				$( document.body ).trigger( 'wcs-toggled' );
+
 			});
 		});
 	});

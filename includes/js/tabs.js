@@ -22,6 +22,9 @@
 
 				$target.show();
 				$content.not($target).hide();
+
+				$( document.body ).trigger( 'wcs-toggled' );
+				
 			});
 		});
 	});
