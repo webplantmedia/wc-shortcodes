@@ -27,6 +27,7 @@ function wc_shortcodes_pre_process($content) {
     return $content;
 }
 add_filter('the_content', 'wc_shortcodes_pre_process', 7);
+add_filter('wc_shortcodes_the_content', 'wc_shortcodes_pre_process', 7);
 
 /**
  * Add all preprocessed shortcodes here
