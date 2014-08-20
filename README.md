@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.48
+
+* Fixed bug on masonry posts layout with the shortcodes displaying in the excerpt
+
 ### Version 1.47
 
 * Trigger custom event so other javascript elements can refresh when accordion, tabs, or toggle elements are opened.
