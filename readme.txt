@@ -88,6 +88,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.49
+
+* Added padding around price heading
+* Added helpful classnames
+
 ### Version 1.48
 
 * Fixed bug on masonry posts layout with the shortcodes displaying in the excerpt
