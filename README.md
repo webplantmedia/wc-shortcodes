@@ -66,6 +66,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.50
+
+* Social icons now open a new tab by default
+* Added ability to display share buttons as text
+
 ### Version 1.49
 
 * Added padding around price heading
