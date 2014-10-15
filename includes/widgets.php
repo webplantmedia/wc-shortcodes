@@ -46,6 +46,8 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 		}
 
 		$order = get_option( WC_SHORTCODES_PREFIX . 'social_icons_display' );
+		$format = get_option( WC_SHORTCODES_PREFIX . 'social_icons_format', 'image' );
+		$show_image = 'image' == $format ? true : false;
 
 		if ( ! is_array( $order ) || empty( $order ) ) {
 			return;
@@ -63,6 +65,7 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 		$classes[] = 'wc-shortcodes-clearfix';
 		$classes[] = 'wc-shortcodes-columns-'.$columns;
 		$classes[] = 'wc-shortcodes-maxheight-'.$maxheight;
+		$classes[] = 'wc-shortcodes-social-icons-format-'.$format;
 
 		$html = '<ul class="'.implode( ' ', $classes ).'">';
 			$i = 0;
@@ -76,20 +79,30 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 				}
 
 				$link_option_name = WC_SHORTCODES_PREFIX . $key . '_link';
-				$icon_option_name = WC_SHORTCODES_PREFIX . $key . '_icon';
+				$image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_icon';
+				$font_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_font_icon';
 
-				if (  $icon_url = get_option( $icon_option_name ) ) {
-					$social_link = get_option( $link_option_name );
-					$social_link = apply_filters( 'wc_shortcodes_social_link', $social_link, $key );
+				$social_link = get_option( $link_option_name );
+				$social_link = apply_filters( 'wc_shortcodes_social_link', $social_link, $key );
 
-					if ( $first )
-						$li_class[] = 'first-icon';
+				$first_class = $first ? ' first-icon' : '';
+				$first = false;
 
-					$first = false;
+				if ( $show_image ) {
+					$icon_url = get_option( $image_icon_option_name );
 
-					$html .= '<li class="'.implode( ' ', $li_class ).'">';
+					$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . $key . $first_class . '">';
 						$html .='<a target="_blank" href="'.$social_link.'">';
 							$html .= '<img src="'.$icon_url.'">';
+						$html .= '</a>';
+					$html .= '</li>';
+				}
+				else {
+					$icon_class = get_option( $font_icon_option_name );
+
+					$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . $key . $first_class . '">';
+						$html .='<a target="_blank" href="'.$social_link.'">';
+							$html .= '<i class="fa '.$icon_class.'"></i>';
 						$html .= '</a>';
 					$html .= '</li>';
 				}
