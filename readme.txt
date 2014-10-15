@@ -88,6 +88,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.51
+
+* Fixed line-height style bug
+* Now supporting font icons and images for social media buttons
+
 ### Version 1.50
 
 * Social icons now open a new tab by default
