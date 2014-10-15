@@ -317,12 +317,30 @@ function wc_shortcodes_set_options() {
 						'description' => '',
 						'type' => 'share_buttons',
 					),
+					array(
+						'id' => 'share_buttons_format',
+						'title' => 'Format',
+						'default' => $wc_shortcodes_theme_support['share_buttons_format'],
+						'description' => '',
+						'type' => 'dropdown',
+						'options' => array(
+							'text' => 'Text',
+							'image' => 'Image',
+						),
+					),
 				),
 			),
 			array(
 				'section' => 'wc-shortcodes-options-facebook-share-section',
 				'title' => 'Facebook',
 				'options' => array(
+					array(
+						'id' => 'facebook_share_text',
+						'title' => 'Share Text',
+						'default' => $wc_shortcodes_theme_support['facebook_share_text'],
+						'description' => '',
+						'type' => 'input',
+					),
 					array(
 						'id' => 'facebook_share_icon',
 						'title' => 'Icon',
@@ -337,6 +355,13 @@ function wc_shortcodes_set_options() {
 				'title' => 'Twitter',
 				'options' => array(
 					array(
+						'id' => 'twitter_share_text',
+						'title' => 'Share Text',
+						'default' => $wc_shortcodes_theme_support['twitter_share_text'],
+						'description' => '',
+						'type' => 'input',
+					),
+					array(
 						'id' => 'twitter_share_icon',
 						'title' => 'Icon',
 						'default' => $wc_shortcodes_theme_support['twitter_share_button'],
@@ -349,6 +374,13 @@ function wc_shortcodes_set_options() {
 				'section' => 'wc-shortcodes-options-pinterest-share-section',
 				'title' => 'Pinterest',
 				'options' => array(
+					array(
+						'id' => 'pinterest_share_text',
+						'title' => 'Share Text',
+						'default' => $wc_shortcodes_theme_support['pinterest_share_text'],
+						'description' => '',
+						'type' => 'input',
+					),
 					array(
 						'id' => 'pinterest_share_icon',
 						'title' => 'Icon',
@@ -363,6 +395,13 @@ function wc_shortcodes_set_options() {
 				'title' => 'Google',
 				'options' => array(
 					array(
+						'id' => 'google_share_text',
+						'title' => 'Share Text',
+						'default' => $wc_shortcodes_theme_support['google_share_text'],
+						'description' => '',
+						'type' => 'input',
+					),
+					array(
 						'id' => 'google_share_icon',
 						'title' => 'Icon',
 						'default' => $wc_shortcodes_theme_support['google_share_button'],
@@ -375,6 +414,13 @@ function wc_shortcodes_set_options() {
 				'section' => 'wc-shortcodes-options-email-share-section',
 				'title' => 'Email',
 				'options' => array(
+					array(
+						'id' => 'email_share_text',
+						'title' => 'Share Text',
+						'default' => $wc_shortcodes_theme_support['email_share_text'],
+						'description' => '',
+						'type' => 'input',
+					),
 					array(
 						'id' => 'email_share_icon',
 						'title' => 'Icon',

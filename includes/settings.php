@@ -121,6 +121,9 @@ function wc_shortcodes_options_display_setting( $args ) {
 		case 'image' :
 			wc_shortcodes_options_display_image_field( $args );
 			break;
+		case 'dropdown' :
+			wc_shortcodes_options_display_custom_dropdown( $args );
+			break;
 		case 'background' :
 			wc_shortcodes_options_display_background_fields( $args );
 			break;
@@ -410,6 +413,41 @@ function wc_shortcodes_options_display_textarea_field( $args ) {
 	<?php endif; ?>
 
 	<textarea name="<?php echo $option_name; ?>" class="wc-shortcodes-textarea" id="<?php echo $option_name; ?>"><?php echo esc_textarea($val); ?></textarea>
+	<?php if ( isset( $description ) && !empty( $description ) ) : ?>
+		<p class="description"><?php echo $description; ?></p>
+	<?php endif; ?>
+	<?php
+}
+
+/**
+ * Display custom dropdown
+ *
+ * @since 3.5.2
+ * @access public
+ *
+ * @param array $args 
+ * @return void
+ */
+function wc_shortcodes_options_display_custom_dropdown( $args ) {
+	extract( $args );
+
+	$val = get_option( $option_name, $default );
+
+	if ( isset( $options_callback ) && ! empty( $options_callback ) )
+		$options = call_user_func( $options_callback );
+	?>
+
+	<?php if ( isset( $label ) ) : ?>
+		<label for="<?php echo $option_name; ?>"><?php echo $label; ?></label>&nbsp;
+	<?php endif; ?>
+
+	<select name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>">
+		<?php foreach ( $options as $key => $name ) : ?>
+			<option value="<?php echo $key; ?>" <?php selected( $val, $key); ?>><?php echo $name; ?></option>
+		<?php endforeach; ?>
+	</select>&nbsp;
+
+	<?php // Description ?>
 	<?php if ( isset( $description ) && !empty( $description ) ) : ?>
 		<p class="description"><?php echo $description; ?></p>
 	<?php endif; ?>

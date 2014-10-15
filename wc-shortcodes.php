@@ -62,11 +62,17 @@ $wc_shortcodes_theme_support = array(
 	'custom3_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/youtube.png',
 	'custom4_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/etsy.png',
 	'custom5_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/tumblr.png',
+	'share_buttons_format' => 'image',
 	'pinterest_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/pinterest.png',
 	'facebook_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/facebook.png',
 	'twitter_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/twitter.png',
 	'google_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/google.png',
 	'email_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/email.png',
+	'pinterest_share_text' => 'Pin it',
+	'facebook_share_text' => 'Share',
+	'twitter_share_text' => 'Tweet',
+	'google_share_text' => 'Google+',
+	'email_share_text' => 'Email',
 );
 
 require_once( dirname(__FILE__) . '/includes/options.php' ); // define options array
