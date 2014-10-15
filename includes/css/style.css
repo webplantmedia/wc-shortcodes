@@ -712,6 +712,7 @@
 }
 .wc-shortcodes-social-icons li a {
 	display: block;
+	line-height: 1;
 }
 .wc-shortcodes-social-icons li img {
 	max-height: 48px;
