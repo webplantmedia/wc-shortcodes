@@ -345,7 +345,7 @@ if( !function_exists('wc_shortcodes_social_icons') ) {
 						$first = false;
 
 						$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . $key . $first_class . '">';
-							$html .='<a href="'.$social_link.'">';
+							$html .='<a target="_blank" href="'.$social_link.'">';
 								$html .= '<img src="'.$icon_url.'">';
 							$html .= '</a>';
 						$html .= '</li>';
