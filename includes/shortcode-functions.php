@@ -1408,7 +1408,6 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 		$share_buttons = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_display' );
 		$size = sizeof( $share_buttons );
 		$format = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_format', 'image' );
-		$show_image = 'image' == $format ? true : false;
 
 		if ( empty( $share_buttons ) )
 			return '';
@@ -1436,17 +1435,24 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 					$icon_option_name = WC_SHORTCODES_PREFIX . $key . '_share_text';
 					$icon_text = get_option( $icon_option_name );
 
+					$font_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_share_font_icon';
+					$icon_class = get_option( $font_icon_option_name );
+
 					$first_class = $first ? ' first-share-button' : '';
 
 					switch ( $key ) {
 						case 'pinterest' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a href="javascript:void((function()%7Bvar%20e=document.createElement(&apos;script&apos;);e.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);e.setAttribute(&apos;charset&apos;,&apos;UTF-8&apos;);e.setAttribute(&apos;src&apos;,&apos;http://assets.pinterest.com/js/pinmarklet.js?r=&apos;+Math.random()*99999999);document.body.appendChild(e)%7D)());">';
-									if ( $show_image ) {
-										$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
-									}
-									else {
-										$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+									switch ( $format ) {
+										case 'image' :
+											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											break;
+										case 'icon' :
+											$html .= '<i class="fa '.$icon_class.'"></i>';
+											break;
+										default :
+											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
 									}
 								$html .= '</a>';
 							$html .= '</li>';
@@ -1454,11 +1460,15 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 						case 'facebook' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a target="_blank" onclick="return !window.open(this.href, \'Facebook\', \'width=640,height=300\')" href="http://www.facebook.com/sharer/sharer.php?u='.urlencode(get_permalink()).'">';
-									if ( $show_image ) {
-										$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
-									}
-									else {
-										$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+									switch ( $format ) {
+										case 'image' :
+											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											break;
+										case 'icon' :
+											$html .= '<i class="fa '.$icon_class.'"></i>';
+											break;
+										default :
+											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
 									}
 								$html .= '</a>';
 							$html .= '</li>';
@@ -1466,11 +1476,15 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 						case 'twitter' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a target="_blank" onclick="return !window.open(this.href, \'Twitter\', \'width=500,height=430\')" href="https://twitter.com/share?url='.urlencode(get_permalink()).'" class="share-button-twitter" data-lang="en">';
-									if ( $show_image ) {
-										$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
-									}
-									else {
-										$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+									switch ( $format ) {
+										case 'image' :
+											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											break;
+										case 'icon' :
+											$html .= '<i class="fa '.$icon_class.'"></i>';
+											break;
+										default :
+											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
 									}
 								$html .= '</a>';
 							$html .= '</li>';
@@ -1478,11 +1492,15 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 						case 'email' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a title="Share by Email" target="_self" href="mailto:?subject=&amp;body='.urlencode(get_permalink()).'">';
-									if ( $show_image ) {
-										$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
-									}
-									else {
-										$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+									switch ( $format ) {
+										case 'image' :
+											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											break;
+										case 'icon' :
+											$html .= '<i class="fa '.$icon_class.'"></i>';
+											break;
+										default :
+											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
 									}
 								$html .= '</a>';
 							$html .= '</li>';
@@ -1491,11 +1509,15 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a href="https://plus.google.com/share?url='.urlencode(get_permalink()).'" onclick="javascript:window.open(this.href,
 \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;">';
-									if ( $show_image ) {
-										$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
-									}
-									else {
-										$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+									switch ( $format ) {
+										case 'image' :
+											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											break;
+										case 'icon' :
+											$html .= '<i class="fa '.$icon_class.'"></i>';
+											break;
+										default :
+											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
 									}
 								$html .= '</a>';
 							$html .= '</li>';
