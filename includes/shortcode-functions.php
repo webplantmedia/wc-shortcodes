@@ -317,9 +317,25 @@ if( !function_exists('wc_shortcodes_social_icons') ) {
 	function wc_shortcodes_social_icons( $atts ){   
 		extract(shortcode_atts(array(
 			'class'      => '',
-			'size'		 => 'large',
-			'align' => 'left',
+			'size'		 => 'large', // deprecated. using maxheight now
+			'align'      => 'left',
+			'maxheight'  => '0',
 		), $atts));
+
+		$maxheight = (int) $maxheight;
+
+		if ( empty( $maxheight ) ) {
+			switch ( $size ) {
+				case 'small' :
+					$maxheight = 16;
+					break;
+				case 'medium' :
+					$maxheight = 24;
+					break;
+				default :
+					$maxheight = 48;
+			}
+		}
 
 		$class = trim( 'wc-shortcodes-social-icons-wrapper wc-shortcodes-item ' . $class );
 
@@ -337,7 +353,7 @@ if( !function_exists('wc_shortcodes_social_icons') ) {
 		$classes[] = 'wc-shortcodes-social-icons';
 		$classes[] = 'wc-shortcodes-clearfix';
 		$classes[] = 'wc-shortcodes-social-icons-align-'.$align;
-		$classes[] = 'wc-shortcodes-social-icons-size-'.$size;
+		$classes[] = 'wc-shortcodes-maxheight-'.$maxheight;
 		$classes[] = 'wc-shortcodes-social-icons-format-'.$format;
 
 		$first = true;
