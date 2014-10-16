@@ -66,10 +66,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
-### Version 1.51
+### Version 1.52
 
-* Fixed line-height style bug
+* Added font icons for share buttons
 * Now supporting font icons and images for social media buttons
+* Fixed line-height style bug
 
 ### Version 1.50
 
