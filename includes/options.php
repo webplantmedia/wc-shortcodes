@@ -435,6 +435,7 @@ function wc_shortcodes_set_options() {
 						'options' => array(
 							'icon' => 'Icon',
 							'image' => 'Image',
+							'icon-text' => 'Icon + Text',
 							'text' => 'Text',
 						),
 					),

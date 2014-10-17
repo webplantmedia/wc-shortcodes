@@ -865,6 +865,12 @@
 	background-color: #999999;
 	color: #ffffff;
 }
+.wc-shortcodes-share-buttons-format-icon-text li span {
+	margin-left: 0.4em;
+}
+.wc-shortcodes-share-buttons-format-text li a i {
+	display: none;
+}
 .wc-shortcodes-share-buttons li i.fa-facebook { background-color: #305999; }
 .wc-shortcodes-share-buttons li i.fa-google-plus { background-color: #ee7321; }
 .wc-shortcodes-share-buttons li i.fa-twitter { background-color: #00a7f1; }

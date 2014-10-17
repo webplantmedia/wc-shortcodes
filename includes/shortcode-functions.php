@@ -1468,7 +1468,8 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 											$html .= '<i class="fa '.$icon_class.'"></i>';
 											break;
 										default :
-											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+											$html .= '<i class="fa '.$icon_class.'"></i><span class="wc-share-button-'.$key.'">'.$icon_text.'</span>';
+											break;
 									}
 								$html .= '</a>';
 							$html .= '</li>';
@@ -1484,7 +1485,8 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 											$html .= '<i class="fa '.$icon_class.'"></i>';
 											break;
 										default :
-											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+											$html .= '<i class="fa '.$icon_class.'"></i><span class="wc-share-button-'.$key.'">'.$icon_text.'</span>';
+											break;
 									}
 								$html .= '</a>';
 							$html .= '</li>';
@@ -1500,7 +1502,8 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 											$html .= '<i class="fa '.$icon_class.'"></i>';
 											break;
 										default :
-											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+											$html .= '<i class="fa '.$icon_class.'"></i><span class="wc-share-button-'.$key.'">'.$icon_text.'</span>';
+											break;
 									}
 								$html .= '</a>';
 							$html .= '</li>';
@@ -1516,7 +1519,8 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 											$html .= '<i class="fa '.$icon_class.'"></i>';
 											break;
 										default :
-											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+											$html .= '<i class="fa '.$icon_class.'"></i><span class="wc-share-button-'.$key.'">'.$icon_text.'</span>';
+											break;
 									}
 								$html .= '</a>';
 							$html .= '</li>';
@@ -1533,7 +1537,8 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 											$html .= '<i class="fa '.$icon_class.'"></i>';
 											break;
 										default :
-											$html .= '<span class="wc-share-button-"'.$key.'>'.$icon_text.'</span>';
+											$html .= '<i class="fa '.$icon_class.'"></i><span class="wc-share-button-'.$key.'">'.$icon_text.'</span>';
+											break;
 									}
 								$html .= '</a>';
 							$html .= '</li>';
