@@ -66,6 +66,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.53
+
+* Added Icon+Text option for share buttons
+* Deprecated an attribute in social icons shortcode
+
 ### Version 1.52
 
 * Added font icons for share buttons
