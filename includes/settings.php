@@ -362,8 +362,9 @@ function wc_shortcodes_options_display_image_field( $args ) {
 
 	// preview image default style
 	$style = '';
-	if ( empty( $val['image'] ) )
+	if ( empty( $val ) ) {
 		$style = ' style="display:none"';
+	}
 	?>
 
 	<div class="wc-shortcodes-image-field">
