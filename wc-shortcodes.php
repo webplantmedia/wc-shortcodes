@@ -5,11 +5,11 @@ Plugin URI: http://webplantmedia.com/starter-themes/wordpresscanvas/features/sho
 Description: A family of shortcodes to enhance site functionality.
 Author: Chris Baldelomar
 Author URI: http://webplantmedia.com/
-Version: 1.53
+Version: 1.54
 License: GPLv2 or later
 */
 
-define( 'WC_SHORTCODES_VERSION', '1.53' );
+define( 'WC_SHORTCODES_VERSION', '1.54' );
 define( 'WC_SHORTCODES_PREFIX', 'wc_shortcodes_' );
 define( '_WC_SHORTCODES_PREFIX', '_wc_shortcodes_' );
 define( 'WC_SHORTCODES_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.54
+
+* Fixed bug with image settings not previewing images
+
 ### Version 1.53
 
 * Added Icon+Text option for share buttons
