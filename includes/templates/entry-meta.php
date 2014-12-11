@@ -13,7 +13,7 @@
 			$meta = array();
 			// Post author
 			if ( $atts['meta_author'] ) {
-				$meta[] = sprintf( '<span class="wc-shortcodes-author"><span class="wc-shortcodes-by">By</span> <a class="wc-shortcodes-url" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
+				$meta[] = sprintf( '<span class="wc-shortcodes-author"><span class="wc-shortcodes-by">' . __( 'By', 'wordpresscanvas' ) . '</span> <a class="wc-shortcodes-url" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
 					esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 					get_the_author(),
 					get_the_author()
