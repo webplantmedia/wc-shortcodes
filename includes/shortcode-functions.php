@@ -1098,8 +1098,6 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		static $instance = 0;
 		$instance++;
 
-		wp_enqueue_script('wc-shortcodes-posts');
-
 		if ( (is_front_page() || is_home() ) ) {
 			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
 		} else {
@@ -1141,6 +1139,21 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			'heading_type' => 'h2', // heading tag for title
 			'layout' => 'masonry', // blog layout
 		), $atts );
+
+		// changed default layout name. Let's catch old inputs
+		$valid_layouts = array( 'masonry', 'masonry2', 'grid' );
+		if ( ! in_array( $atts['layout'], $valid_layouts ) ) {
+			$atts['layout'] = "masonry";
+		}
+		$is_masonry = false;
+		$masonry_whitelist = array( 'masonry', 'masonry2' );
+		if ( in_array( $atts['layout'], $masonry_whitelist ) ) {
+			$is_masonry = true;
+		}
+
+		if ( $is_masonry ) {
+			wp_enqueue_script('wc-shortcodes-posts');
+		}
 
 		// clean input values
 		$atts['terms'] = wc_shortcodes_comma_delim_to_array( $atts['terms'] );
@@ -1203,11 +1216,6 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		($atts['filtering'] == "yes") ? ($atts['filtering'] = true) : ($atts['filtering'] = false);
 		($atts['order'] == "ASC") ? ($atts['order'] = "ASC") : ($atts['order'] = "DESC");
 
-		// changed default layout name. Let's catch old inputs
-		if ($atts['layout'] == "isotope") {
-			$atts['layout'] = "masonry";
-		}
-
 		$ml_query = new WP_Query($atts);
 
 		$html = '';
@@ -1216,7 +1224,10 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		$class[] = 'wc-shortcodes-posts';
 		$class[] = 'wc-shortcodes-posts-col-' . $atts["columns"];
 		$class[] = 'wc-shortcodes-posts-layout-' . $atts['layout'];
-
+		$class[] = 'wc-shortcodes-posts-gutter-space-' . $atts['gutter_space'];
+		if ( ! $is_masonry ) {
+			$class[] = 'wc-shortcodes-posts-no-masonry';
+		}
 		if ( $atts['filtering'] ) {
 			ob_start();
 			include( 'templates/nav-filtering.php' );
@@ -1232,7 +1243,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 					$atts['content'] = false;
 
 				ob_start();
-				include('templates/index.php');
+				include('templates/'.$atts['layout'].'/index.php');
 				$html .= ob_get_clean();
 
 			endwhile;

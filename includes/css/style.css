@@ -1391,6 +1391,9 @@ pre.pre-wrap {
 	position: relative;
 	visibility: hidden;
 }
+.wc-shortcodes-posts.wc-shortcodes-posts-no-masonry {
+	visibility: visible;
+}
 .wc-shortcodes-post-box {
 	background-color: #ffffff;
 	margin-bottom: 20px;
@@ -1504,6 +1507,69 @@ pre.pre-wrap {
 	right: 0;
 	background-image: url("../img/slide-arrow-right.png");
 }
+/* Masonry 2 */
+.wc-shortcodes-posts-layout-masonry2 .wc-shortcodes-post-border {
+	border: none;
+	border-bottom: 1px solid #dddddd;
+	padding-bottom: 20px;
+}
+.wc-shortcodes-posts-layout-masonry2 .wc-shortcodes-post-border > *:first-child {
+	margin-top: 0;
+}
+.wc-shortcodes-posts-layout-masonry2 .wc-shortcodes-post-border > *:last-child {
+	margin-bottom: 0;
+}
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-0 .wc-shortcodes-post-border { padding-bottom: 0px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-1 .wc-shortcodes-post-border { padding-bottom: 1px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-2 .wc-shortcodes-post-border { padding-bottom: 2px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-3 .wc-shortcodes-post-border { padding-bottom: 3px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-4 .wc-shortcodes-post-border { padding-bottom: 4px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-5 .wc-shortcodes-post-border { padding-bottom: 5px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-6 .wc-shortcodes-post-border { padding-bottom: 6px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-7 .wc-shortcodes-post-border { padding-bottom: 7px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-8 .wc-shortcodes-post-border { padding-bottom: 8px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-9 .wc-shortcodes-post-border { padding-bottom: 9px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-10 .wc-shortcodes-post-border { padding-bottom: 10px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-11 .wc-shortcodes-post-border { padding-bottom: 11px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-12 .wc-shortcodes-post-border { padding-bottom: 12px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-13 .wc-shortcodes-post-border { padding-bottom: 13px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-14 .wc-shortcodes-post-border { padding-bottom: 14px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-15 .wc-shortcodes-post-border { padding-bottom: 15px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-16 .wc-shortcodes-post-border { padding-bottom: 16px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-17 .wc-shortcodes-post-border { padding-bottom: 17px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-18 .wc-shortcodes-post-border { padding-bottom: 18px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-19 .wc-shortcodes-post-border { padding-bottom: 19px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-20 .wc-shortcodes-post-border { padding-bottom: 20px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-21 .wc-shortcodes-post-border { padding-bottom: 21px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-22 .wc-shortcodes-post-border { padding-bottom: 22px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-23 .wc-shortcodes-post-border { padding-bottom: 23px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-24 .wc-shortcodes-post-border { padding-bottom: 24px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-25 .wc-shortcodes-post-border { padding-bottom: 25px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-26 .wc-shortcodes-post-border { padding-bottom: 26px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-27 .wc-shortcodes-post-border { padding-bottom: 27px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-28 .wc-shortcodes-post-border { padding-bottom: 28px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-29 .wc-shortcodes-post-border { padding-bottom: 29px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-30 .wc-shortcodes-post-border { padding-bottom: 30px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-31 .wc-shortcodes-post-border { padding-bottom: 31px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-32 .wc-shortcodes-post-border { padding-bottom: 32px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-33 .wc-shortcodes-post-border { padding-bottom: 33px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-34 .wc-shortcodes-post-border { padding-bottom: 34px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-35 .wc-shortcodes-post-border { padding-bottom: 35px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-36 .wc-shortcodes-post-border { padding-bottom: 36px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-37 .wc-shortcodes-post-border { padding-bottom: 37px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-38 .wc-shortcodes-post-border { padding-bottom: 38px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-39 .wc-shortcodes-post-border { padding-bottom: 39px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-40 .wc-shortcodes-post-border { padding-bottom: 40px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-41 .wc-shortcodes-post-border { padding-bottom: 41px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-42 .wc-shortcodes-post-border { padding-bottom: 42px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-43 .wc-shortcodes-post-border { padding-bottom: 43px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-44 .wc-shortcodes-post-border { padding-bottom: 44px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-45 .wc-shortcodes-post-border { padding-bottom: 45px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-46 .wc-shortcodes-post-border { padding-bottom: 46px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-47 .wc-shortcodes-post-border { padding-bottom: 47px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-48 .wc-shortcodes-post-border { padding-bottom: 48px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-49 .wc-shortcodes-post-border { padding-bottom: 49px; }
+.wc-shortcodes-posts-layout-masonry2.wc-shortcodes-posts-gutter-space-50 .wc-shortcodes-post-border { padding-bottom: 50px; }
 
 
 /**

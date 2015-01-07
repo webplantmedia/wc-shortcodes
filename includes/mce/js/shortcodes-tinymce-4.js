@@ -83,12 +83,6 @@
 						text: 'Elements',
 						menu: [
 							{
-								text: "Posts",
-								onclick: function(){
-									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="20" heading_type="h2" layout="masonry"][/wc_posts]');
-								}
-							},
-							{
 								text: "Button",
 								onclick: function(){
 									editor.insertContent('[wc_button type="primary" url="http://webplantmedia.com" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]');
@@ -154,6 +148,29 @@
 								text: "HTML",
 								onclick: function(){
 									editor.insertContent('[wc_html name="Custom Field Name"]');
+								}
+							}
+						]
+					},
+					{
+						text: 'Posts',
+						menu: [
+							{
+								text: "Masonry - Box",
+								onclick: function(){
+									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="20" heading_type="h2" layout="masonry"][/wc_posts]');
+								}
+							},
+							{
+								text: "Masonry - Borderless",
+								onclick: function(){
+									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="40" heading_type="h2" layout="masonry2"][/wc_posts]');
+								}
+							},
+							{
+								text: "Grid",
+								onclick: function(){
+									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="40" heading_type="h2" layout="grid"][/wc_posts]');
 								}
 							}
 						]
