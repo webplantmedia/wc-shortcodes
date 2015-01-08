@@ -1,6 +1,6 @@
 <?php
 // Don't print empty markup if there's only one page.
-if ( $ml_query->max_num_pages < 2 )
+if ( $wc_shortcodes_posts_query->max_num_pages < 2 )
 	return;
 ?>
 <nav class="navigation paging-navigation" role="navigation">
@@ -11,8 +11,8 @@ if ( $ml_query->max_num_pages < 2 )
 			$args = array(
 				'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
 				'format' => '?page=%#%', // ?page=%#% : %#% is replaced by the page number
-				'total' => $ml_query->max_num_pages,
-				'current' => max( 1, $ml_query->get('paged') ),
+				'total' => $wc_shortcodes_posts_query->max_num_pages,
+				'current' => max( 1, $wc_shortcodes_posts_query->get('paged') ),
 				'show_all' => false,
 				'prev_next' => true,
 				'prev_text' => __('Previous Page'),

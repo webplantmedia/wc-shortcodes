@@ -347,6 +347,13 @@ function wc_shortcodes_get_the_excerpt( $deprecated = '' ) {
  * @return string The excerpt.
  */
 function wc_shortcodes_wp_trim_excerpt($text = '') {
+	global $wc_shortcodes_posts_query;
+
+	$excerpt_length = 55;
+	if ( isset( $wc_shortcodes_posts_query->excerpt_length ) && ! empty( $wc_shortcodes_posts_query->excerpt_length ) ) {
+	   $excerpt_length = (int) $wc_shortcodes_posts_query->excerpt_length;
+	}
+
 	$raw_excerpt = $text;
 	if ( '' == $text ) {
 		$text = get_the_content('');
@@ -364,7 +371,7 @@ function wc_shortcodes_wp_trim_excerpt($text = '') {
 		 *
 		 * @param int $number The number of words. Default 55.
 		 */
-		$excerpt_length = apply_filters( 'excerpt_length', 55 );
+		$excerpt_length = apply_filters( 'wc_shortcodes_excerpt_length', $excerpt_length );
 		/**
 		 * Filter the string in the "more" link displayed after a trimmed excerpt.
 		 *
@@ -372,7 +379,7 @@ function wc_shortcodes_wp_trim_excerpt($text = '') {
 		 *
 		 * @param string $more_string The string shown within the more link.
 		 */
-		$excerpt_more = apply_filters( 'excerpt_more', ' ' . '[&hellip;]' );
+		$excerpt_more = apply_filters( 'wc_shortcodes_excerpt_more', '&hellip;' );
 		$text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
 	}
 	/**
