@@ -66,6 +66,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.57
+
+* Fixed overflow style bug with wc_posts
+* Updated default attributes on wc_posts shortcode
+
 ### Version 1.56
 
 * Fixed Readme text
