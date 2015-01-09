@@ -1698,7 +1698,7 @@ pre.pre-wrap {
 .wc-shortcodes-posts-template-borderless .wc-shortcodes-post-box .wc-shortcodes-post-border { padding-bottom: 20px; }
 
 @media (max-width: 990px) {
-	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box { width: 100%; }
+	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box { width: 50%; }
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box { width: 50%; }
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-4 .wc-shortcodes-post-box { width: 33.33%; }
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-5 .wc-shortcodes-post-box { width: 25%; }
@@ -1707,7 +1707,7 @@ pre.pre-wrap {
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-8 .wc-shortcodes-post-box { width: 14.28%; }
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-9 .wc-shortcodes-post-box { width: 12.5%; }
 
-	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box { clear: both; }
+	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box:nth-child(2n+3) { clear: left; }
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box:nth-child(2n+3) { clear: left; }
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-4 .wc-shortcodes-post-box:nth-child(3n+4) { clear: left; }
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-5 .wc-shortcodes-post-box:nth-child(4n+5) { clear: left; }
@@ -1715,16 +1715,11 @@ pre.pre-wrap {
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-7 .wc-shortcodes-post-box:nth-child(6n+7) { clear: left; }
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-8 .wc-shortcodes-post-box:nth-child(7n+8) { clear: left; }
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-9 .wc-shortcodes-post-box:nth-child(8n+9) { clear: left; }
-
-	body .wc-shortcodes-posts.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box .wc-shortcodes-post-border,
-	body .wc-shortcodes-posts.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 {
-		margin-right: 0;
-	}
 }
 
 @media (max-width: 767px) {
-	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box { width: 100%; }
-	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box { width: 100%; }
+	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box { width: 50%; }
+	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box { width: 50%; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-4 .wc-shortcodes-post-box { width: 50%; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-5 .wc-shortcodes-post-box { width: 33.33%; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-6 .wc-shortcodes-post-box { width: 25%; }
@@ -1732,21 +1727,14 @@ pre.pre-wrap {
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-8 .wc-shortcodes-post-box { width: 16.66%; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-9 .wc-shortcodes-post-box { width: 14.28%; }
 
-	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box { clear: both; }
-	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box { clear: both; }
+	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box:nth-child(2n+3) { clear: left; }
+	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box:nth-child(2n+3) { clear: left; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-4 .wc-shortcodes-post-box:nth-child(2n+3) { clear: left; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-5 .wc-shortcodes-post-box:nth-child(3n+4) { clear: left; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-6 .wc-shortcodes-post-box:nth-child(4n+5) { clear: left; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-7 .wc-shortcodes-post-box:nth-child(5n+6) { clear: left; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-8 .wc-shortcodes-post-box:nth-child(6n+7) { clear: left; }
 	html body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-9 .wc-shortcodes-post-box:nth-child(7n+8) { clear: left; }
-
-	html body .wc-shortcodes-posts.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box .wc-shortcodes-post-border,
-	html body .wc-shortcodes-posts.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2,
-	html body .wc-shortcodes-posts.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box .wc-shortcodes-post-border,
-	html body .wc-shortcodes-posts.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 {
-		margin-right: 0;
-	}
 }
 
 @media (max-width: 567px) {
