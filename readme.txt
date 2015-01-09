@@ -88,6 +88,12 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+### Version 1.55
+
+3977abe Updated TinyMCE button options for shortcodes
+03cab7e Added new layout 'grid' and template options 'box' and 'borderless' for wc_posts shortcode
+227f4b1 Fixed Translation issue - thanks ziofix
+
 ### Version 1.54
 
 * Fixed bug with image settings not previewing images
