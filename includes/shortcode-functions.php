@@ -1243,6 +1243,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			$html .= ob_get_clean();
 		}
 
+		$html .= '<div class="wc-shortcodes-posts-wrapper">';
 		$html .= '<div id="wc-shortcodes-posts-'.$instance.'" data-gutter-space="'.$atts["gutter_space"].'" data-columns="'.$atts["columns"].'" class="' . implode( ' ', $class ) . '">';
 
 			while( $wc_shortcodes_posts_query->have_posts() ) :
@@ -1257,6 +1258,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 			endwhile;
 
+		$html .= '</div>';
 		$html .= '</div>';
 
 		//no paging if only the latest posts are shown

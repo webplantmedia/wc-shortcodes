@@ -1351,6 +1351,9 @@ pre.pre-wrap {
  * [wc_post]
  * ----------------------------------------------------------------------------
  */
+.wc-shortcodes-posts-wrapper {
+	overflow-x: hidden;
+}
 .wc-shortcodes-post-content {
 	padding: 0 20px;
 }
@@ -1391,9 +1394,6 @@ pre.pre-wrap {
 	position: relative;
 	visibility: hidden;
 }
-.wc-shortcodes-posts.wc-shortcodes-posts-no-masonry {
-	visibility: visible;
-}
 .wc-shortcodes-post-box {
 	background-color: #ffffff;
 	margin-bottom: 20px;
@@ -1407,6 +1407,10 @@ pre.pre-wrap {
 .wc-shortcodes-author,
 .wc-shortcodes-date {
 	float: left;
+}
+/* No Masonry */
+.wc-shortcodes-posts.wc-shortcodes-posts-no-masonry {
+	visibility: visible;
 }
 /* Comment Box */
 .wc-shortcodes-comments-link {
