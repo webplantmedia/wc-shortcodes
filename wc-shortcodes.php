@@ -95,6 +95,7 @@ $wc_shortcodes_theme_support = array(
 	'email_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/email.png',
 );
 
+require_once( plugin_dir_path( __FILE__ ) . 'includes/vendors/wpc-settings-framework/init.php' );
 require_once( dirname(__FILE__) . '/includes/options.php' ); // define options array
 require_once( dirname(__FILE__) . '/includes/functions.php' ); // Adds basic filters and actions
 require_once( dirname(__FILE__) . '/includes/settings.php' ); // Adds settings
