@@ -6,7 +6,7 @@
 		<div id="message" class="updated"><p><strong><?php _e( 'Settings saved.', 'wpc-settings-framework' ) ?></strong></p></div>
 	<?php endif; ?>
 
-	<form id="compile-less-css" method="post" action="options.php">
+	<form id="wpcsf-options" method="post" action="options.php">
 		<?php
 		// settings_fields( $option_group )
 		// @option_group A settings group name. This should match the group name used in register_setting()

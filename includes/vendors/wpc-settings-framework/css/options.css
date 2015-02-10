@@ -111,3 +111,14 @@
 	height: 150px;
 	width: 97%;
 }
+
+/**
+* Tabs
+*/
+
+.wpcsf-tab {
+	display: none;
+}
+.wpcsf-tab.wpcsf-active-tab {
+	display: block;
+}

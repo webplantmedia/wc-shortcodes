@@ -19,6 +19,8 @@ namespace WC_Shortcodes;
  */
 class WPC_Settings_Framework {
 
+	protected $version = '1.0.0';
+
 	/**
 	 * Instance of this class.
 	 *
@@ -37,7 +39,6 @@ class WPC_Settings_Framework {
 	 *
 	 * @var      string
 	 */
-	protected $plugin_screen_hook_suffix = null;
 	protected $views = array();
 
 	/**
@@ -51,8 +52,9 @@ class WPC_Settings_Framework {
 	 */
 	protected $plugin_slug = null;
 	protected $plugin_prefix = null;
-	protected $plugin_version = null;
-	protected $theme_options = array();
+	protected $options = array();
+	protected $wp_settings_tabs = array();
+	protected $tabs = array();
 
 
 	/**
@@ -69,8 +71,8 @@ class WPC_Settings_Framework {
 		$this->set_slug_prefix();
 
 		add_action( 'init', array( $this, 'set_options' ), 100 );
-		add_action( 'admin_init', array( $this, 'theme_options_init' ) );
-		add_action( 'admin_menu', array( $this, 'theme_options_admin_menu' ) );
+		add_action( 'admin_init', array( $this, 'options_init' ) );
+		add_action( 'admin_menu', array( $this, 'options_admin_menu' ) );
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
@@ -106,7 +108,7 @@ class WPC_Settings_Framework {
 	}
 
 	public function set_options() {
-		$this->theme_options = apply_filters ( $this->plugin_prefix . '_theme_options' , $this->theme_options );
+		$this->options = apply_filters ( $this->plugin_prefix . '_wpcsf_options' , $this->options );
 	}
 
 	/**
@@ -117,55 +119,67 @@ class WPC_Settings_Framework {
 	 *
 	 * @return void
 	 */
-	public function theme_options_init() {
-		foreach ( $this->theme_options as $menu_slug => $o ) {
-			if ( isset( $o['option_group'] ) &&
-			isset( $o['tabs'] ) &&
-			is_array( $o['tabs'] ) ) {
-				foreach( $o['tabs'] as $key => $oo ) {
-					if ( isset( $oo['sections'] ) &&
-					is_array( $oo['sections'] ) ) {
-						foreach( $oo['sections'] as $ooo ) {
-							if ( isset( $ooo['id'] ) &&
-							isset( $ooo['title'] ) &&
-							isset( $ooo['options'] ) &&
-							is_array( $ooo['options'] ) ) {
-								// add_settings_section( $id, $title, $callback, $page );
-								// @page should match @menu_slug from add_theme_page
-								if ( isset( $ooo['add_section'] ) && $ooo['add_section'] ) {
-									add_settings_section( $ooo['id'], $ooo['title'], '', $menu_slug );
-								}
+	public function options_init() {
+		foreach ( $this->options as $menu_slug => $o ) {
+			if ( isset( $o['option_group'] ) ) {
+				if ( isset( $o['tabs'] ) &&
+				is_array( $o['tabs'] ) ) {
+					foreach( $o['tabs'] as $key => $oo ) {
+						if ( isset( $oo['sections'] ) &&
+						is_array( $oo['sections'] ) ) {
+							$this->loop_sections( $menu_slug, $o['option_group'], $oo['sections'], $oo['id'], $oo['title'] );
+						}
+					}
+				}
+				else if ( isset( $o['sections'] ) &&
+				is_array( $o['sections'] ) ) {
+					$this->loop_sections( $menu_slug, $o['option_group'], $o['sections'] );
+				}
+			}
+		}
+	}
 
-								foreach( $ooo['options'] as $oooo ) {
-									if ( isset( $oooo['group'] ) && is_array( $oooo['group'] ) ) {
-										foreach ( $oooo['group'] as $ooooo ) {
-											if ( isset( $ooooo['option_name'] ) ) {
-												$callback = $this->sanitize->callback( $ooooo['type'] );
-												// register_setting( $option_group, $option_name, $callback );
-												register_setting( $o['option_group'], $ooooo['option_name'], array( $this, $callback ) );
-											}
-										}
-										if ( isset( $oooo['id'] ) && isset( $oooo['title'] ) ) {
-											// add_settings_field( $id, $title, $callback, $page, $section, $args );
-											// @page should match @menu_slug from add_theme_page
-											// @section the section you added with add_settings_section
-											add_settings_field($oooo['id'], $oooo['title'], array( $this, 'display_group' ), $menu_slug, $ooo['id'], $oooo );
-										}
-									}
-									else {
-										if ( isset( $oooo['option_name'] ) ) {
-											$callback = $this->sanitize->callback( $oooo['type'] );
-											// register_setting( $option_group, $option_name, $callback );
-											register_setting( $o['option_group'], $oooo['option_name'], array( $this, $callback ) );
+	public function loop_sections( $menu_slug, $option_group, &$sections, $tab_id = null, $tab_title = null ) {
+		foreach( $sections as $ooo ) {
+			if ( isset( $ooo['id'] ) &&
+			isset( $ooo['title'] ) &&
+			isset( $ooo['options'] ) &&
+			is_array( $ooo['options'] ) ) {
+				// add_settings_section( $id, $title, $callback, $page );
+				// @page should match @menu_slug from add_theme_page
+				if ( isset( $ooo['add_section'] ) && $ooo['add_section'] ) {
+					if ( ! empty( $tab_id ) && ! empty( $tab_title ) ) {
+						$this->add_settings_tabs( $tab_id, $tab_title, $ooo['id'], $ooo['title'], $menu_slug );
+					}
+					add_settings_section( $ooo['id'], $ooo['title'], '', $menu_slug );
+				}
 
-											// add_settings_field( $id, $title, $callback, $page, $section, $args );
-											// @page should match @menu_slug from add_theme_page
-											// @section the section you added with add_settings_section
-											add_settings_field($oooo['option_name'], '<label for="'.$oooo['option_name'].'">'.$oooo['title'].'</label>' , array( $this, 'display_setting' ), $menu_slug, $ooo['id'], $oooo );
-										}
-									}
-								}
+				foreach( $ooo['options'] as $oooo ) {
+					if ( isset( $oooo['group'] ) && is_array( $oooo['group'] ) ) {
+						foreach ( $oooo['group'] as $ooooo ) {
+							if ( isset( $ooooo['option_name'] ) ) {
+								$callback = $this->sanitize->callback( $ooooo['type'] );
+								// register_setting( $option_group, $option_name, $callback );
+								register_setting( $option_group, $ooooo['option_name'], array( $this->sanitize, $callback ) );
 							}
+						}
+						if ( isset( $oooo['id'] ) && isset( $oooo['title'] ) ) {
+							// add_settings_field( $id, $title, $callback, $page, $section, $args );
+							// @page should match @menu_slug from add_theme_page
+							// @section the section you added with add_settings_section
+							add_settings_field($oooo['id'], $oooo['title'], array( $this, 'display_group' ), $menu_slug, $ooo['id'], $oooo );
+						}
+					}
+					else {
+						if ( isset( $oooo['option_name'] ) ) {
+							$callback = $this->sanitize->callback( $oooo['type'] );
+							// register_setting( $option_group, $option_name, $callback );
+							register_setting( $option_group, $oooo['option_name'], array( $this->sanitize, $callback ) );
+
+							// add_settings_field( $id, $title, $callback, $page, $section, $args );
+							// @page should match @menu_slug from add_theme_page
+							// @section the section you added with add_settings_section
+							add_settings_field($oooo['option_name'], '<label for="'.$oooo['option_name'].'">'.$oooo['title'].'</label>' , array( $this, 'display_setting' ), $menu_slug, $ooo['id'], $oooo );
 						}
 					}
 				}
@@ -181,21 +195,54 @@ class WPC_Settings_Framework {
 	 *
 	 * @return void
 	 */
-	public function theme_options_admin_menu() {
-		if ( ! empty( $this->theme_options ) ) {
-			foreach ( $this->theme_options as $menu_slug => $v ) {
+	public function options_admin_menu() {
+		if ( ! empty( $this->options ) ) {
+			foreach ( $this->options as $menu_slug => $v ) {
 				if ( isset( $v['parent_slug'] ) &&
 				isset( $v['page_title'] ) &&
 				isset( $v['menu_title'] ) &&
 				isset( $v['capability'] ) &&
 				isset( $v['option_group'] ) ) {
-					$function = 'display_page';
 					// add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-					$view_hook_name = add_submenu_page( $v['parent_slug'], $v['page_title'], $v['menu_title'], $v['capability'], $menu_slug, array( $this, $function ) );
-					$this->views[$view_hook_name] = $menu_slug;
+					$view_hook_name = add_submenu_page( $v['parent_slug'], $v['page_title'], $v['menu_title'], $v['capability'], $menu_slug, array( $this, 'display_page' ) );
+					$this->views[ $view_hook_name ] = $menu_slug;
+				}
+				else if ( isset( $v['parent_slug'] ) ) {
+					$this->views[ $v['parent_slug'] ] = $menu_slug;
 				}
 			}
 		}
+	}
+
+	public function add_settings_tabs( $id, $title, $section_id, $section_title, $menu_slug ) {
+		$this->wp_settings_tabs[ $menu_slug ][ $id ][ $section_id ] = array(
+			'id' => $section_id,
+			'title' => $section_title
+		);
+
+		$this->tabs[ $menu_slug ][ $id ] = array(
+			'id' => $id,
+			'title' => $title,
+		);
+	}
+
+	public function fetch_proper_hook_name( $hook ) {
+		switch( $hook ) {
+			case 'options-general.php' :
+				return 'settings_page_general';
+			case 'options-writing.php' :
+				return 'settings_page_writing';
+			case 'options-reading.php' :
+				return 'settings_page_reading';
+			case 'options-discussion.php' :
+				return 'settings_page_discussion';
+			case 'options-media.php' :
+				return 'settings_page_media';
+			case 'options-permalink.php' :
+				return 'settings_page_permalink';
+		}
+
+		return $hook;
 	}
 
 	/**
@@ -209,20 +256,24 @@ class WPC_Settings_Framework {
 	 */
 	public function enqueue_admin_scripts( $hook ) {
 
+		$hook = $this->fetch_proper_hook_name( $hook );
+		// pr($hook);
+		// pr($this->views);
+
 		if ( ! isset( $this->views ) || empty( $this->views ) ) {
 			return;
 		}
 
 		if ( array_key_exists( $hook, $this->views ) ) {
 			// CSS
-			wp_enqueue_style( $this->plugin_slug .'-theme-options-styles', plugins_url( 'css/theme-options.css', __FILE__ ), array(), $this->plugin_version );
-			wp_enqueue_style( $this->plugin_slug .'-media-uploader-styles', plugins_url( 'css/media-uploader.css', __FILE__ ), array(), $this->plugin_version );
+			wp_enqueue_style( $this->plugin_slug .'-options-styles', plugins_url( 'css/options.css', __FILE__ ), array(), $this->version );
+			wp_enqueue_style( $this->plugin_slug .'-media-uploader-styles', plugins_url( 'css/media-uploader.css', __FILE__ ), array(), $this->version );
 			wp_enqueue_style( 'wp-color-picker' );
 
 			// JS
-			wp_enqueue_script( $this->plugin_slug . '-theme-options-script', plugins_url( 'js/theme-options.js', __FILE__ ), array( 'jquery' ), $this->plugin_version, true );
+			wp_enqueue_script( $this->plugin_slug . '-options-script', plugins_url( 'js/options.js', __FILE__ ), array( 'jquery' ), $this->version, true );
 			wp_enqueue_media();
-			wp_enqueue_script( $this->plugin_slug . '-media-uploader-script', plugins_url( 'js/media-uploader.js', __FILE__ ), array( 'jquery', 'wp-color-picker' ), $this->plugin_version, true );
+			wp_enqueue_script( $this->plugin_slug . '-media-uploader-script', plugins_url( 'js/media-uploader.js', __FILE__ ), array( 'jquery', 'wp-color-picker' ), $this->version, true );
 		}
 
 	}
@@ -259,9 +310,13 @@ class WPC_Settings_Framework {
 		if ( ! $menu_slug = $this->get_current_view() )
 			return;
 
-		$o = $this->theme_options[$menu_slug];
-
-		include_once( 'views/page.php' );
+		$o = $this->options[$menu_slug];
+		if ( ! empty( $this->wp_settings_tabs ) ) {
+			include_once( 'views/tabs.php' );
+		}
+		else {
+			include_once( 'views/page.php' );
+		}
 	}
 
 	/**

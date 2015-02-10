@@ -88,7 +88,7 @@ class WPC_Settings_Framework_Sanitize {
 				return 'emails';
 		}
 
-		return '';
+		return 'no_sanitize';
 	}
 
 	/**
@@ -646,5 +646,13 @@ class WPC_Settings_Framework_Sanitize {
 		}
 
 		return $valid;
+	}
+
+	public function esc_url_raw( $value ) {
+		return esc_url_raw( $value );
+	}
+	
+	public function no_sanitize( $value ) {
+		return $value;
 	}
 }
