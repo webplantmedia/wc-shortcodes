@@ -1,6 +1,6 @@
 <?php
 $active_tab = null;
-$cookie_name = $this->plugin_prefix . '_wpcsf_active_tab';
+$cookie_name = $this->plugin_prefix . 'wpcsf_active_tab';
 
 // restore last tab visited
 if ( empty( $active_tab ) && isset( $_COOKIE[ $cookie_name ] ) && ! empty( $_COOKIE[ $cookie_name ] ) ) {

@@ -712,7 +712,6 @@ add_action( 'init', 'wc_shortcodes_set_options', 100 );
 
 
 function wc_shortcodes_options( $options ) {
-	$prefix = 'wc_shortcodes_';
 	$menu_slug = 'wc-shortcodes';
 
 	// Grid Option
@@ -738,21 +737,21 @@ function wc_shortcodes_options( $options ) {
 								'description' => 'Set the width and padding of your content.',
 								'group' => array(
 									array(
-										'option_name' => $prefix . 'content_max_width',
+										'option_name' => 'content_max_width',
 										'label' => 'Max Width',
 										'default' => '1200px',
 										'type' => 'positive_pixel',
 										'less' => true,
 									),
 									array(
-										'option_name' => $prefix . 'edge_padding',
+										'option_name' => 'edge_padding',
 										'label' => 'Edge Padding',
 										'default' => '0px',
 										'type' => 'positive_pixel',
 										'less' => true,
 									),
 									array(
-										'option_name' => $prefix . 'sidebar_padding',
+										'option_name' => 'sidebar_padding',
 										'label' => 'Sidebar Padding',
 										'default' => '60px',
 										'type' => 'positive_pixel',
@@ -761,7 +760,7 @@ function wc_shortcodes_options( $options ) {
 								),
 							),
 							array(
-								'option_name' => $prefix . 'sidebar_width',
+								'option_name' => 'sidebar_width',
 								'title' => 'Sidebar Width',
 								'default' => '320px',
 								'description' => 'Set the width of your sidebar widgets.',
@@ -769,7 +768,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'heading_line_height',
+								'option_name' => 'heading_line_height',
 								'title' => 'Heading Line Height',
 								'default' => '1.3',
 								'description' => 'Set line height for your heading text.',
@@ -790,14 +789,14 @@ function wc_shortcodes_options( $options ) {
 						'title' => '',
 						'options' => array(
 							array(
-								'option_name' => $prefix . 'logo_image',
+								'option_name' => 'logo_image',
 								'title' => 'Logo Image',
 								'default' => '',
 								'description' => 'Select you logo image. If no logo image is selected, then we will showcase your blog title and description.',
 								'type' => 'gallery',
 							),
 							array(
-								'option_name' => $prefix . 'logo_width',
+								'option_name' => 'logo_width',
 								'title' => 'Logo Width',
 								'default' => '22',
 								'description' => 'Set the percentage width of your logo. Should be an even number between 10% - 40%.',
@@ -805,7 +804,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'show_site_text',
+								'option_name' => 'show_site_text',
 								'title' => 'Show Site Text',
 								'default' => '0',
 								'description' => '',
@@ -813,7 +812,7 @@ function wc_shortcodes_options( $options ) {
 								'type' => 'checkbox',
 							),
 							array(
-								'option_name' => $prefix . 'site_title_bottom_padding',
+								'option_name' => 'site_title_bottom_padding',
 								'title' => 'Site Title Bottom Padding',
 								'default' => '5px',
 								'description' => 'Set the padding between the site title and site description.',
@@ -821,7 +820,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'header_background',
+								'option_name' => 'header_background',
 								'title' => 'Header Background',
 								'default' => array(
 									'color' => '#ffffff',
@@ -835,7 +834,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'header_min_height',
+								'option_name' => 'header_min_height',
 								'title' => 'Header Minimum Height',
 								'default' => '0px',
 								'description' => 'Set the minimum height of your header',
@@ -848,14 +847,14 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'group' => array(
 									array(
-										'option_name' => $prefix . 'header_top_padding',
+										'option_name' => 'header_top_padding',
 										'label' => 'Top',
 										'default' => '30px',
 										'type' => 'positive_pixel',
 										'less' => true,
 									),
 									array(
-										'option_name' => $prefix . 'header_bottom_padding',
+										'option_name' => 'header_bottom_padding',
 										'label' => 'Bottom',
 										'default' => '20px',
 										'type' => 'positive_pixel',
@@ -877,7 +876,7 @@ function wc_shortcodes_options( $options ) {
 						'title' => 'Menu Bar',
 						'options' => array(
 							array(
-								'option_name' => $prefix . 'menu_bar_background',
+								'option_name' => 'menu_bar_background',
 								'title' => 'Menu Bar Background',
 								'default' => array(
 									'color' => '#ffffff',
@@ -891,7 +890,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'menu_bar_bottom_offset',
+								'option_name' => 'menu_bar_bottom_offset',
 								'title' => 'Menu Bar Bottom Offset',
 								'default' => '40',
 								'description' => 'Set the percentage value your menu bar should move up. Should be between 0-100%.',
@@ -899,7 +898,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'menu_bar_font_hover_color',
+								'option_name' => 'menu_bar_font_hover_color',
 								'title' => 'Font Hover Color',
 								'default' => '#444444',
 								'description' => '',
@@ -907,7 +906,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'menu_bar_font_hover_background_color',
+								'option_name' => 'menu_bar_font_hover_background_color',
 								'title' => 'Font Hover Background Color',
 								'default' => '#dddddd',
 								'description' => '',
@@ -915,7 +914,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'menu_bar_font_active_background_color',
+								'option_name' => 'menu_bar_font_active_background_color',
 								'title' => 'Font Active Background Color',
 								'default' => '#f96e5b',
 								'description' => '',
@@ -928,14 +927,14 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'group' => array(
 									array(
-										'option_name' => $prefix . 'menu_bar_font_padding_top',
+										'option_name' => 'menu_bar_font_padding_top',
 										'label' => 'Padding Top',
 										'default' => '18px',
 										'type' => 'positive_pixel',
 										'less' => true,
 									),
 									array(
-										'option_name' => $prefix . 'menu_bar_font_padding_bottom',
+										'option_name' => 'menu_bar_font_padding_bottom',
 										'label' => 'Padding Bottom',
 										'default' => '18px',
 										'type' => 'positive_pixel',
@@ -944,7 +943,7 @@ function wc_shortcodes_options( $options ) {
 								)
 							),
 							array(
-								'option_name' => $prefix . 'sticky_menu',
+								'option_name' => 'sticky_menu',
 								'title' => 'Sticky Menu',
 								'default' => '0',
 								'description' => '',
@@ -959,7 +958,7 @@ function wc_shortcodes_options( $options ) {
 						'title' => 'Dropdown',
 						'options' => array(
 							array(
-								'option_name' => $prefix . 'dropdown_border',
+								'option_name' => 'dropdown_border',
 								'title' => 'Dropdown Border',
 								'default' => array(
 									'width' => '4px',
@@ -971,7 +970,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'dropdown_font_color',
+								'option_name' => 'dropdown_font_color',
 								'title' => 'Dropdown Font Color',
 								'default' => '#444444',
 								'description' => '',
@@ -979,7 +978,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'dropdown_font_background_color',
+								'option_name' => 'dropdown_font_background_color',
 								'title' => 'Dropdown Font Background Color',
 								'default' => '#eeeeee',
 								'description' => '',
@@ -987,7 +986,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'dropdown_font_hover_color',
+								'option_name' => 'dropdown_font_hover_color',
 								'title' => 'Dropdown Font Hover Color',
 								'default' => '#444444',
 								'description' => '',
@@ -995,7 +994,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'dropdown_font_hover_background_color',
+								'option_name' => 'dropdown_font_hover_background_color',
 								'title' => 'Dropdown Font Hover Background Color',
 								'default' => '#dddddd',
 								'description' => '',
@@ -1003,7 +1002,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'dropdown_font_active_background_color',
+								'option_name' => 'dropdown_font_active_background_color',
 								'title' => 'Dropdown Font Active Background Color',
 								'default' => '#eeeeee',
 								'description' => '',
@@ -1011,7 +1010,7 @@ function wc_shortcodes_options( $options ) {
 								'less' => true,
 							),
 							array(
-								'option_name' => $prefix . 'dropdown_width',
+								'option_name' => 'dropdown_width',
 								'title' => 'Dropdown Width',
 								'default' => '300px',
 								'description' => '',
@@ -1024,14 +1023,14 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'group' => array(
 									array(
-										'option_name' => $prefix . 'dropdown_font_padding_top',
+										'option_name' => 'dropdown_font_padding_top',
 										'label' => 'Padding Top',
 										'default' => '12px',
 										'type' => 'positive_pixel',
 										'less' => true,
 									),
 									array(
-										'option_name' => $prefix . 'dropdown_font_padding_bottom',
+										'option_name' => 'dropdown_font_padding_bottom',
 										'label' => 'Padding Bottom',
 										'default' => '12px',
 										'type' => 'positive_pixel',
@@ -1053,35 +1052,35 @@ function wc_shortcodes_options( $options ) {
 						'title' => '',
 						'options' => array(
 							array(
-								'option_name' => $prefix . 'favicon',
+								'option_name' => 'favicon',
 								'title' => 'Favicon',
 								'default' => '',
 								'description' => 'Go <a href="http://www.favicon.cc/" target="_blank">here</a> if you need help creating a favicon.',
 								'type' => 'image',
 							),
 							array(
-								'option_name' => $prefix . 'jshtml_head',
+								'option_name' => 'jshtml_head',
 								'title' => 'Head',
 								'default' => '',
 								'description' => '',
 								'type' => 'textarea',
 							),
 							array(
-								'option_name' => $prefix . 'jshtml_top_of_page',
+								'option_name' => 'jshtml_top_of_page',
 								'title' => 'Top of Page',
 								'default' => '',
 								'description' => '',
 								'type' => 'textarea',
 							),
 							array(
-								'option_name' => $prefix . 'jshtml_footer',
+								'option_name' => 'jshtml_footer',
 								'title' => 'Footer',
 								'default' => '',
 								'description' => '',
 								'type' => 'wp_editor',
 							),
 							array(
-								'option_name' => $prefix . 'show_bio_in_post',
+								'option_name' => 'show_bio_in_post',
 								'title' => 'Show Bio',
 								'default' => '1',
 								'label' => 'Show your bio at the bottom of each post.',
@@ -1089,7 +1088,7 @@ function wc_shortcodes_options( $options ) {
 								'type' => 'checkbox',
 							),
 							array(
-								'option_name' => $prefix . 'font_render',
+								'option_name' => 'font_render',
 								'title' => 'Font Rendering',
 								'default' => 'smooth',
 								'options' => array(
@@ -1100,7 +1099,7 @@ function wc_shortcodes_options( $options ) {
 								'type' => 'dropdown',
 							),
 							array(
-								'option_name' => $prefix . 'blog_use_excerpt',
+								'option_name' => 'blog_use_excerpt',
 								'title' => 'For each article in blog, show',
 								'default' => '1',
 								'options' => array(
@@ -1111,7 +1110,7 @@ function wc_shortcodes_options( $options ) {
 								'type' => 'radio',
 							),
 							array(
-								'option_name' => $prefix . 'enable_auto_updates',
+								'option_name' => 'enable_auto_updates',
 								'title' => 'Updates',
 								'default' => '1',
 								'label' => 'Enable automatic updates of your theme.',
@@ -1119,7 +1118,7 @@ function wc_shortcodes_options( $options ) {
 								'type' => 'checkbox',
 							),
 							array(
-								'option_name' => $prefix . 'support_wordpress_canvas',
+								'option_name' => 'support_wordpress_canvas',
 								'title' => 'Support Us!',
 								'default' => '1',
 								'label' => 'Support WordPress Canvas with a link in your footer. Thank you!',

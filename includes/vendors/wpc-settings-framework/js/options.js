@@ -11,30 +11,32 @@
 		$('.wpcsf-color-field').wpColorPicker();
 
 		var $nav = $('.wpcsf-navigation');
-		var $navTab = $nav.find('.nav-tab');
-		var $pageTab = $('.wpcsf-tab');
+		if ( $nav.length > 0 ) {
+			var $navTab = $nav.find('.nav-tab');
+			var $pageTab = $('.wpcsf-tab');
 
-		var cookieName = $nav.data('cookieName');
+			var cookieName = $nav.data('cookieName');
 
-		$navTab.click( function( event ) {
-			event.preventDefault();
+			$navTab.click( function( event ) {
+				event.preventDefault();
 
-			var $this = $(this);
+				var $this = $(this);
 
-			var target = $this.data('target');
-			if ( 'string' == typeof target ) {
-				$navTab.removeClass('nav-tab-active');
-				$pageTab.removeClass('wpcsf-active-tab');
+				var target = $this.data('target');
+				if ( 'string' == typeof target ) {
+					$navTab.removeClass('nav-tab-active');
+					$pageTab.removeClass('wpcsf-active-tab');
 
-				$navTab.filter('#nav-'+target).addClass('nav-tab-active');
-				$pageTab.filter('#'+target).addClass('wpcsf-active-tab');
+					$navTab.filter('#nav-'+target).addClass('nav-tab-active');
+					$pageTab.filter('#'+target).addClass('wpcsf-active-tab');
 
-				if ( 'string' == typeof cookieName ) {
-					wpCookies.set( cookieName, target, 7 * 24 * 60 * 60 );
+					if ( 'string' == typeof cookieName ) {
+						wpCookies.set( cookieName, target, 7 * 24 * 60 * 60 );
+					}
 				}
-			}
 
-			return false;
-		});
+				return false;
+			});
+		}
 	});
 }(jQuery));

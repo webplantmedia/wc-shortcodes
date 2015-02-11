@@ -52,6 +52,7 @@ class WPC_Settings_Framework {
 	 */
 	protected $plugin_slug = null;
 	protected $plugin_prefix = null;
+	protected $plugin_version = 0;
 	protected $options = array();
 	protected $wp_settings_tabs = array();
 	protected $tabs = array();
@@ -70,8 +71,11 @@ class WPC_Settings_Framework {
 
 		$this->set_slug_prefix();
 
+		add_action( 'admin_init', array( $this, 'set_plugin_info' ) );
+
 		add_action( 'init', array( $this, 'set_options' ), 100 );
 		add_action( 'admin_init', array( $this, 'options_init' ) );
+		// add_action( 'admin_init', array( $this, 'options_activation' ), 200 );
 		add_action( 'admin_menu', array( $this, 'options_admin_menu' ) );
 
 		// Load admin style sheet and JavaScript.
@@ -104,11 +108,57 @@ class WPC_Settings_Framework {
 		}
 
 		$this->plugin_slug = $this->sanitize->id( $plugin_name );
-		$this->plugin_prefix = $this->sanitize->key( $plugin_name );
+		$this->plugin_prefix = $this->sanitize->key( $plugin_name ) . '_';
+	}
+	
+	public function set_plugin_info() {
+		$this->plugin_current_version = get_option( $this->plugin_prefix . 'current_version' );
+
+		$active_plugins = get_option( 'active_plugins' );
+		$plugin = get_plugins( '/' . $this->plugin_slug );
+		if ( ! empty( $plugin ) ) {
+			$plugin = array_shift( $plugin );
+			$this->plugin_version = $plugin['Version'];
+		}
 	}
 
 	public function set_options() {
-		$this->options = apply_filters ( $this->plugin_prefix . '_wpcsf_options' , $this->options );
+		$this->options = apply_filters ( $this->plugin_prefix . 'wpcsf_options' , $this->options );
+	}
+
+	public function options_activation() {
+
+		$initialize = false;
+
+		if ( ! $this->plugin_current_version ) {
+			$initialize = true;
+		}
+		else if ( version_compare( $this->plugin_version, $this->plugin_current_version ) > 0 ) {
+			$initialize = true;
+		}
+
+		if ( $initialize ) {
+			update_option( $this->plugin_prefix . 'current_version', $this->plugin_version );
+
+			foreach ( $this->options as $o ) {
+				foreach ( $o['sections'] as $oo ) {
+					$this->loop_and_init_options( $oo );
+				}
+			}
+		} 
+	}
+
+	public function loop_and_init_options( $o ) {
+		foreach ( $o['options'] as $oo ) {
+			$option_name = $this->plugin_prefix . $oo['option_name'];
+			if ( $this->plugin_prefix . 'social_icons_display' == $option_name ) {
+				// $default = wc_shortcodes_default_social_icons();
+				// add_option( $option_name, $default );
+			}
+			else {
+				add_option( $option_name, $oo['default'] );
+			}
+		}
 	}
 
 	/**
@@ -156,9 +206,13 @@ class WPC_Settings_Framework {
 
 				foreach( $ooo['options'] as $oooo ) {
 					if ( isset( $oooo['group'] ) && is_array( $oooo['group'] ) ) {
-						foreach ( $oooo['group'] as $ooooo ) {
+						foreach ( $oooo['group'] as $key => $ooooo ) {
 							if ( isset( $ooooo['option_name'] ) ) {
+								$ooooo['option_name'] = $this->plugin_prefix . $ooooo['option_name'];
+								$oooo['group'][ $key ]['option_name'] = $ooooo['option_name'];
+
 								$callback = $this->sanitize->callback( $ooooo['type'] );
+
 								// register_setting( $option_group, $option_name, $callback );
 								register_setting( $option_group, $ooooo['option_name'], array( $this->sanitize, $callback ) );
 							}
@@ -172,14 +226,17 @@ class WPC_Settings_Framework {
 					}
 					else {
 						if ( isset( $oooo['option_name'] ) ) {
+							$oooo['option_name'] = $this->plugin_prefix . $oooo['option_name'];
+
 							$callback = $this->sanitize->callback( $oooo['type'] );
+
 							// register_setting( $option_group, $option_name, $callback );
 							register_setting( $option_group, $oooo['option_name'], array( $this->sanitize, $callback ) );
 
 							// add_settings_field( $id, $title, $callback, $page, $section, $args );
 							// @page should match @menu_slug from add_theme_page
 							// @section the section you added with add_settings_section
-							add_settings_field($oooo['option_name'], '<label for="'.$oooo['option_name'].'">'.$oooo['title'].'</label>' , array( $this, 'display_setting' ), $menu_slug, $ooo['id'], $oooo );
+							add_settings_field( $oooo['option_name'], '<label for="'.$oooo['option_name'].'">'.$oooo['title'].'</label>' , array( $this, 'display_setting' ), $menu_slug, $ooo['id'], $oooo );
 						}
 					}
 				}
