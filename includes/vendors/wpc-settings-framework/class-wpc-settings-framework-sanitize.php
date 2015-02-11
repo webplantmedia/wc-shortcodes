@@ -52,14 +52,6 @@ class WPC_Settings_Framework_Sanitize {
 		switch ( $type ) {
 			case 'color' :
 				return 'hex_color';
-			case 'font' :
-				return 'font';
-			case 'font_appearance' :
-				return 'font_appearance';
-			case 'font_hover' :
-				return 'font_hover';
-			case 'font_weight' :
-				return 'font_weight';
 			case 'image' :
 				return 'esc_url_raw';
 			case 'positive_pixel' :
@@ -76,14 +68,8 @@ class WPC_Settings_Framework_Sanitize {
 				return 'background_css';
 			case 'checkbox' :
 				return 'checkbox';
-			case 'google_fonts' :
-				return 'google_fonts';
-			case 'upload_fonts' :
-				return 'upload_fonts';
 			case 'gallery' :
 				return 'gallery';
-			case 'sidebar' :
-				return 'sidebar';
 			case 'emails' :
 				return 'emails';
 		}

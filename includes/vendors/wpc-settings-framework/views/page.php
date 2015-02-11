@@ -1,4 +1,4 @@
-<div class="wrap">
+<div class="wrap wpcsf-wrap">
 	<?php screen_icon(); ?>
 	<h2 id="theme-options-heading"><?php echo esc_html( $o['page_title'] ); ?></h2>
 
@@ -24,6 +24,7 @@
 
 		<p class="submit">
 			<?php submit_button( null, 'primary', 'submit', false ); ?>
+			<?php //submit_button( 'Restore Default Settings', 'delete', 'submit', false ); ?>
 		</p>
 	</form>
 </div>

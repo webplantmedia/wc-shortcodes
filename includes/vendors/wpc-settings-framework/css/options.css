@@ -113,6 +113,19 @@
 }
 
 /**
+* Nav Tabs
+*/
+
+.wpcsf-navigation .nav-tab {
+	border-bottom: 1px solid #ccc;
+	outline: none;
+	box-shadow: none;
+}
+.wpcsf-navigation .nav-tab.nav-tab-active {
+	border-bottom: 1px solid #f1f1f1;
+}
+
+/**
 * Tabs
 */
 
@@ -122,3 +135,4 @@
 .wpcsf-tab.wpcsf-active-tab {
 	display: block;
 }
+

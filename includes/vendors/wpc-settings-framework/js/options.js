@@ -10,6 +10,8 @@
 	$(document).ready(function() {
 		$('.wpcsf-color-field').wpColorPicker();
 
+		$('.wpcsf-order-show-hide').sortable({ axis: "y" });
+
 		var $nav = $('.wpcsf-navigation');
 		if ( $nav.length > 0 ) {
 			var $navTab = $nav.find('.nav-tab');
@@ -34,6 +36,8 @@
 						wpCookies.set( cookieName, target, 7 * 24 * 60 * 60 );
 					}
 				}
+				
+				// $('.wpcsf-tab-wrap #message').hide();
 
 				return false;
 			});

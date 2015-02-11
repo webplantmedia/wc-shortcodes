@@ -75,7 +75,7 @@ class WPC_Settings_Framework {
 
 		add_action( 'init', array( $this, 'set_options' ), 100 );
 		add_action( 'admin_init', array( $this, 'options_init' ) );
-		// add_action( 'admin_init', array( $this, 'options_activation' ), 200 );
+		add_action( 'admin_init', array( $this, 'options_activation' ), 200 );
 		add_action( 'admin_menu', array( $this, 'options_admin_menu' ) );
 
 		// Load admin style sheet and JavaScript.
@@ -140,24 +140,59 @@ class WPC_Settings_Framework {
 		if ( $initialize ) {
 			update_option( $this->plugin_prefix . 'current_version', $this->plugin_version );
 
-			foreach ( $this->options as $o ) {
-				foreach ( $o['sections'] as $oo ) {
-					$this->loop_and_init_options( $oo );
+			foreach ( $this->options as $menu_slug => $o ) {
+				if ( isset( $o['option_group'] ) ) {
+					if ( isset( $o['tabs'] ) &&
+					is_array( $o['tabs'] ) ) {
+						foreach( $o['tabs'] as $key => $oo ) {
+							if ( isset( $oo['sections'] ) &&
+							is_array( $oo['sections'] ) ) {
+								$this->loop_and_init_options( $oo['sections'] );
+							}
+						}
+					}
+					else if ( isset( $o['sections'] ) &&
+					is_array( $o['sections'] ) ) {
+						$this->loop_and_init_options( $o['sections'] );
+					}
 				}
 			}
 		} 
 	}
 
-	public function loop_and_init_options( $o ) {
-		foreach ( $o['options'] as $oo ) {
-			$option_name = $this->plugin_prefix . $oo['option_name'];
-			if ( $this->plugin_prefix . 'social_icons_display' == $option_name ) {
-				// $default = wc_shortcodes_default_social_icons();
-				// add_option( $option_name, $default );
+	public function loop_and_init_options( $sections ) {
+		foreach( $sections as $o ) {
+			if ( isset( $o['id'] ) &&
+			isset( $o['title'] ) &&
+			isset( $o['options'] ) &&
+			is_array( $o['options'] ) ) {
+				foreach( $o['options'] as $oo ) {
+					if ( isset( $oo['group'] ) && is_array( $oo['group'] ) ) {
+						foreach ( $oo['group'] as $key => $ooo ) {
+							if ( isset( $ooo['option_name'] ) ) {
+								$ooo['option_name'] = $this->plugin_prefix . $ooo['option_name'];
+								$this->add_option( $ooo['option_name'], $ooo['default'] );
+							}
+						}
+					}
+					else {
+						if ( isset( $oo['option_name'] ) ) {
+							$oo['option_name'] = $this->plugin_prefix . $oo['option_name'];
+							$this->add_option( $oo['option_name'], $oo['default'] );
+						}
+					}
+				}
 			}
-			else {
-				add_option( $option_name, $oo['default'] );
-			}
+		}
+	}
+
+	public function add_option( $option_name, $default ) {
+		if ( $this->plugin_prefix . 'social_icons_display' == $option_name ) {
+			// $default = wc_shortcodes_default_social_icons();
+			// add_option( $option_name, $default );
+		}
+		else {
+			add_option( $option_name, $default );
 		}
 	}
 
@@ -190,53 +225,53 @@ class WPC_Settings_Framework {
 	}
 
 	public function loop_sections( $menu_slug, $option_group, &$sections, $tab_id = null, $tab_title = null ) {
-		foreach( $sections as $ooo ) {
-			if ( isset( $ooo['id'] ) &&
-			isset( $ooo['title'] ) &&
-			isset( $ooo['options'] ) &&
-			is_array( $ooo['options'] ) ) {
+		foreach( $sections as $o ) {
+			if ( isset( $o['id'] ) &&
+			isset( $o['title'] ) &&
+			isset( $o['options'] ) &&
+			is_array( $o['options'] ) ) {
 				// add_settings_section( $id, $title, $callback, $page );
 				// @page should match @menu_slug from add_theme_page
-				if ( isset( $ooo['add_section'] ) && $ooo['add_section'] ) {
+				if ( isset( $o['add_section'] ) && $o['add_section'] ) {
 					if ( ! empty( $tab_id ) && ! empty( $tab_title ) ) {
-						$this->add_settings_tabs( $tab_id, $tab_title, $ooo['id'], $ooo['title'], $menu_slug );
+						$this->add_settings_tabs( $tab_id, $tab_title, $o['id'], $o['title'], $menu_slug );
 					}
-					add_settings_section( $ooo['id'], $ooo['title'], '', $menu_slug );
+					add_settings_section( $o['id'], $o['title'], '', $menu_slug );
 				}
 
-				foreach( $ooo['options'] as $oooo ) {
-					if ( isset( $oooo['group'] ) && is_array( $oooo['group'] ) ) {
-						foreach ( $oooo['group'] as $key => $ooooo ) {
-							if ( isset( $ooooo['option_name'] ) ) {
-								$ooooo['option_name'] = $this->plugin_prefix . $ooooo['option_name'];
-								$oooo['group'][ $key ]['option_name'] = $ooooo['option_name'];
+				foreach( $o['options'] as $oo ) {
+					if ( isset( $oo['group'] ) && is_array( $oo['group'] ) ) {
+						foreach ( $oo['group'] as $key => $ooo ) {
+							if ( isset( $ooo['option_name'] ) ) {
+								$ooo['option_name'] = $this->plugin_prefix . $ooo['option_name'];
+								$oo['group'][ $key ]['option_name'] = $ooo['option_name'];
 
-								$callback = $this->sanitize->callback( $ooooo['type'] );
+								$callback = $this->sanitize->callback( $ooo['type'] );
 
 								// register_setting( $option_group, $option_name, $callback );
-								register_setting( $option_group, $ooooo['option_name'], array( $this->sanitize, $callback ) );
+								register_setting( $option_group, $ooo['option_name'], array( $this->sanitize, $callback ) );
 							}
 						}
-						if ( isset( $oooo['id'] ) && isset( $oooo['title'] ) ) {
+						if ( isset( $oo['id'] ) && isset( $oo['title'] ) ) {
 							// add_settings_field( $id, $title, $callback, $page, $section, $args );
 							// @page should match @menu_slug from add_theme_page
 							// @section the section you added with add_settings_section
-							add_settings_field($oooo['id'], $oooo['title'], array( $this, 'display_group' ), $menu_slug, $ooo['id'], $oooo );
+							add_settings_field($oo['id'], $oo['title'], array( $this, 'display_group' ), $menu_slug, $o['id'], $oo );
 						}
 					}
 					else {
-						if ( isset( $oooo['option_name'] ) ) {
-							$oooo['option_name'] = $this->plugin_prefix . $oooo['option_name'];
+						if ( isset( $oo['option_name'] ) ) {
+							$oo['option_name'] = $this->plugin_prefix . $oo['option_name'];
 
-							$callback = $this->sanitize->callback( $oooo['type'] );
+							$callback = $this->sanitize->callback( $oo['type'] );
 
 							// register_setting( $option_group, $option_name, $callback );
-							register_setting( $option_group, $oooo['option_name'], array( $this->sanitize, $callback ) );
+							register_setting( $option_group, $oo['option_name'], array( $this->sanitize, $callback ) );
 
 							// add_settings_field( $id, $title, $callback, $page, $section, $args );
 							// @page should match @menu_slug from add_theme_page
 							// @section the section you added with add_settings_section
-							add_settings_field( $oooo['option_name'], '<label for="'.$oooo['option_name'].'">'.$oooo['title'].'</label>' , array( $this, 'display_setting' ), $menu_slug, $ooo['id'], $oooo );
+							add_settings_field( $oo['option_name'], '<label for="'.$oo['option_name'].'">'.$oo['title'].'</label>' , array( $this, 'display_setting' ), $menu_slug, $o['id'], $oo );
 						}
 					}
 				}
@@ -451,18 +486,6 @@ class WPC_Settings_Framework {
 			case 'checkbox' :
 				require( 'views/settings/checkbox-field.php' );
 				break;
-			case 'font' :
-				require( 'views/settings/font-fields.php' );
-				break;
-			case 'font_appearance' :
-				require( 'views/settings/font-appearance-fields.php' );
-				break;
-			case 'font_hover' :
-				require( 'views/settings/font-hover-fields.php' );
-				break;
-			case 'font_weight' :
-				require( 'views/settings/font-weight-field.php' );
-				break;
 			case 'border' :
 				require( 'views/settings/border-fields.php' );
 				break;
@@ -475,8 +498,8 @@ class WPC_Settings_Framework {
 			case 'wp_editor' :
 				require( 'views/settings/wp-editor.php' );
 				break;
-			case 'sidebar' :
-				require( 'views/settings/sidebar-field.php' );
+			case 'order_show_hide' :
+				require( 'views/settings/order-show-hide.php' );
 				break;
 			case 'emails' :
 			default :

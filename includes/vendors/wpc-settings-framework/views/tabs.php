@@ -10,7 +10,7 @@ if ( empty( $active_tab ) && isset( $_COOKIE[ $cookie_name ] ) && ! empty( $_COO
 	}
 }
 ?>
-<div class="wrap">
+<div class="wrap wpcsf-wrap wpcsf-tab-wrap">
 	<?php screen_icon(); ?>
 	<?php
 		$links = array();
@@ -81,6 +81,7 @@ if ( empty( $active_tab ) && isset( $_COOKIE[ $cookie_name ] ) && ! empty( $_COO
 
 		<p class="submit">
 			<?php submit_button( null, 'primary', 'submit', false ); ?>
+			<?php //submit_button( 'Restore Default Settings', 'delete', 'submit', false ); ?>
 		</p>
 	</form>
 </div>

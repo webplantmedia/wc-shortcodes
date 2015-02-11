@@ -712,6 +712,10 @@ add_action( 'init', 'wc_shortcodes_set_options', 100 );
 
 
 function wc_shortcodes_options( $options ) {
+	global $wc_shortcodes_share_buttons;
+	global $wc_shortcodes_social_icons;
+	global $wc_shortcodes_theme_support;
+
 	$menu_slug = 'wc-shortcodes';
 
 	// Grid Option
@@ -722,6 +726,37 @@ function wc_shortcodes_options( $options ) {
 		'capability' => 'manage_options',
 		'option_group' => 'wc-grid-options-group',
 		'tabs' => array(
+			array(
+				'id' => 'wc-social-media-options-tab',
+				'title' => 'Social Media',
+				'sections' => array(
+					array(
+						'id' => 'wc-social-media-display-section',
+						'add_section' => true, // Add a new section? Or does it already exists?
+						'title' => 'Display',
+						'options' => array(
+							array(
+								'option_name' => 'social_icons_display',
+								'title' => 'Order / Show / Hide',
+								'default' => $wc_shortcodes_social_icons,
+								'description' => '',
+								'type' => 'order_show_hide',
+							),
+							array(
+								'option_name' => 'social_icons_format',
+								'title' => 'Format',
+								'default' => $wc_shortcodes_theme_support['social_icons_format'],
+								'description' => '',
+								'type' => 'dropdown',
+								'options' => array(
+									'icon' => 'Icon',
+									'image' => 'Image',
+								),
+							),
+						),
+					),
+				),
+			),
 			array(
 				'id' => 'wc-grid-options-tab',
 				'title' => 'Grid',
