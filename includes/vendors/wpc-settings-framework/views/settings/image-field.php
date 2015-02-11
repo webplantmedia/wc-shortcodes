@@ -6,6 +6,10 @@ if ( empty( $val['image'] ) )
 ?>
 
 <div class="wpcsf-image-field">
+	<?php if ( isset( $label ) ) : ?>
+		<label for="<?php echo esc_attr($option_name); ?>"><?php echo $label; ?></label>&nbsp;
+	<?php endif; ?>
+
 	<input name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>" class="regular-text ltr upload-input" type="text" value="<?php echo esc_attr($val); ?>" />
 	<br />
 	<a class="button wpcsf-image-upload" data-target="#<?php echo $option_name; ?>" data-preview=".wpcsf-preview-image" data-frame="select" data-state="wpc_settings_framework_insert_single" data-fetch="url" data-title="Insert Image" data-button="Insert" data-class="media-frame wpcsf-custom-uploader" title="Add Media"><span class="wp-media-buttons-icon"></span> Add Media</a>

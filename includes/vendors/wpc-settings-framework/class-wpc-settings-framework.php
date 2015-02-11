@@ -440,14 +440,17 @@ class WPC_Settings_Framework {
 	 * @return void
 	 */
 	function display_setting( $args ) {
-		if ( !isset( $args['type'] ) )
+		if ( ! isset( $args['type'] ) )
 			return;
 
-		if ( !isset( $args['option_name'] ) )
+		if ( ! isset( $args['option_name'] ) )
 			return;
 
-		if ( !isset( $args['default'] ) )
+		if ( ! isset( $args['default'] ) )
 			return;
+
+		if ( ! isset( $args['display'] ) || empty( $args['display'] ) )
+			$args['display'] = 'default';
 
 		extract( $args );
 		$val = get_option( $option_name, $default );
