@@ -35,6 +35,7 @@ function wc_shortcodes_options( $options ) {
 								'default' => $wc_shortcodes_social_icons,
 								'description' => '',
 								'type' => 'order_show_hide',
+								'callback' => 'wc_shortcodes_sanitize_social_icons',
 							),
 							array(
 								'option_name' => 'social_icons_format',
@@ -789,3 +790,20 @@ function wc_shortcodes_sanitize_share_buttons( $value ) {
 	return $valid;
 }
 
+function wc_shortcodes_sanitize_social_icons( $value ) {
+	global $wc_shortcodes_social_icons;
+
+	$whitelist = $wc_shortcodes_social_icons;
+
+	$valid = array();
+
+	if ( ! is_array( $value ) || empty( $value ) )
+		return null;
+
+	foreach ( $value as $k => $v ) {
+		if ( array_key_exists( $k, $whitelist ) )
+			$valid[ $k ] = $v;
+	}
+
+	return $valid;
+}
