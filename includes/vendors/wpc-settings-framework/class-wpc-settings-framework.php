@@ -205,6 +205,8 @@ class WPC_Settings_Framework {
 	 * @return void
 	 */
 	public function options_init() {
+		register_setting( $this->plugin_slug . '-wpcsf-current-version', $this->plugin_prefix . 'current_version' );
+
 		foreach ( $this->options as $menu_slug => $o ) {
 			if ( isset( $o['option_group'] ) ) {
 				if ( isset( $o['tabs'] ) &&
