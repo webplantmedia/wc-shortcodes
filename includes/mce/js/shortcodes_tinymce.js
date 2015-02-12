@@ -347,7 +347,7 @@
 					
 					//Testimonial
 					if(id === "testimonial") {
-						tinyMCE.activeEditor.selection.setContent('[wc_testimonial by="Wordpress Canvas" url="" position="left"]' + wcDummyContent + '[/wc_testimonial]');
+						tinyMCE.activeEditor.selection.setContent('[wc_testimonial by="Author" url="" position="left"]' + wcDummyContent + '[/wc_testimonial]');
 					}
 					
 					

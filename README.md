@@ -56,7 +56,7 @@ Thank you so much for even considering supporting my work. If you have benefited
 1. Uzip the `wc-shortcodes.zip` folder.
 2. Upload the `wc-shortcodes` folder to your `/wp-content/plugins` directory.
 3. In your WordPress dashboard, head over to the *Plugins* section.
-4. Activate *WordPress Canvas Shortcodes*.
+4. Activate *WP Canvas - Shortcodes*.
 
 ## Frequently Asked Questions ##
 
