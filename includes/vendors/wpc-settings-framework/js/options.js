@@ -37,7 +37,7 @@
 					}
 				}
 				
-				// $('.wpcsf-tab-wrap #message').hide();
+				$('.wpcsf-tab-wrap .updated.settings-error').hide();
 
 				return false;
 			});

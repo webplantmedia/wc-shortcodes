@@ -33,9 +33,7 @@ if ( empty( $active_tab ) && isset( $_COOKIE[ $cookie_name ] ) && ! empty( $_COO
 	<?php echo implode( '', $links ); ?>
 	</h2>
 
-	<?php if ( isset( $_GET['settings-updated'] ) ) : ?>
-		<div id="message" class="updated"><p><strong><?php _e( 'Settings saved.', 'wpc-settings-framework' ) ?></strong></p></div>
-	<?php endif; ?>
+	<?php require( 'settings-error.php' ); ?>
 
 	<form id="wpcsf-options" method="post" action="options.php">
 		<?php

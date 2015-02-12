@@ -419,10 +419,10 @@ class WPC_Settings_Framework {
 
 		$o = $this->options[$menu_slug];
 		if ( ! empty( $this->wp_settings_tabs ) ) {
-			include_once( 'views/tabs.php' );
+			require( 'views/tabs.php' );
 		}
 		else {
-			include_once( 'views/page.php' );
+			require( 'views/page.php' );
 		}
 	}
 
@@ -437,11 +437,7 @@ class WPC_Settings_Framework {
 	 * @return void
 	 */
 	function display_group( $args ) {
-		foreach ( $args['group'] as $g ) {
-			$this->display_setting( $g );
-		}
-
-		include_once( 'views/group.php' );
+		require( 'views/group.php' );
 	}
 
 	/**

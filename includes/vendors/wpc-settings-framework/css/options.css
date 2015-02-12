@@ -136,3 +136,16 @@
 	display: block;
 }
 
+/**
+ * Groups
+ */
+.wpcsf-group .wpcsf-input-field label,
+.wpcsf-group .wpcsf-image-field label {
+	display: inline-block;
+}
+.wpcsf-group .wpcsf-input-field {
+	margin-bottom: 5px;
+}
+.wpcsf-group .wpcsf-input-field .description {
+	display: inline-block;
+}
