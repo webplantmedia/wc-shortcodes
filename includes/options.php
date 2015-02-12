@@ -54,400 +54,7 @@ function wc_shortcodes_options( $options ) {
 						'id' => 'wc-shortcodes-options-social-media-configure-section',
 						'add_section' => true,
 						'title' => 'Customize',
-						'options' => array(
-							array(
-								'id' => 'facebook',
-								'title' => 'Facebook',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'facebook_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'facebook_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['facebook_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'facebook_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['facebook_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'twitter',
-								'title' => 'Twitter',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'twitter_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'twitter_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['twitter_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'twitter_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['twitter_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'pinterest',
-								'title' => 'Pinterest',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'pinterest_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'pinterest_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['pinterest_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'pinterest_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['pinterest_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'google',
-								'title' => 'Google',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'google_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'google_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['google_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'google_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['google_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'bloglovin',
-								'title' => 'BlogLovin',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'bloglovin_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'bloglovin_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['bloglovin_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'bloglovin_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['bloglovin_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'email',
-								'title' => 'Email',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'email_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'email_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['email_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'email_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['email_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'flickr',
-								'title' => 'Flickr',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'flickr_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'flickr_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['flickr_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'flickr_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['flickr_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'instagram',
-								'title' => 'Instagram',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'instagram_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'instagram_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['instagram_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'instagram_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['instagram_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'rss',
-								'title' => 'RSS',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'rss_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'rss_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['rss_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'rss_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['rss_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'custom1',
-								'title' => 'Custom 1',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'custom1_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom1_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['custom1_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom1_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['custom1_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'custom2',
-								'title' => 'Custom 2',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'custom2_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom2_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['custom2_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom2_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['custom2_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'custom3',
-								'title' => 'Custom 3',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'custom3_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom3_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['custom3_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom3_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['custom3_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'custom4',
-								'title' => 'Custom 4',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'custom4_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom4_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['custom4_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom4_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['custom4_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'custom5',
-								'title' => 'Custom 5',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'custom5_link',
-										'label' => 'Link',
-										'default' => '',
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom5_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['custom5_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'custom5_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['custom5_social_icon'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-						),
+						'options' => wc_shortcodes_get_social_icons_options(),
 					),
 				),
 			),
@@ -487,148 +94,7 @@ function wc_shortcodes_options( $options ) {
 						'id' => 'wc-shortcodes-options-share-buttons-configure-section',
 						'add_section' => true,
 						'title' => 'Customize',
-						'options' => array(
-							array(
-								'id' => 'facebook-share',
-								'title' => 'Facebook',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'facebook_share_text',
-										'label' => 'Share Text',
-										'default' => $wc_shortcodes_theme_support['facebook_share_text'],
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'facebook_share_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['facebook_share_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'facebook_share_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['facebook_share_button'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'twitter-share',
-								'title' => 'Twitter',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'twitter_share_text',
-										'label' => 'Share Text',
-										'default' => $wc_shortcodes_theme_support['twitter_share_text'],
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'twitter_share_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['twitter_share_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'twitter_share_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['twitter_share_button'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'pinterest-share',
-								'title' => 'Pinterest',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'pinterest_share_text',
-										'label' => 'Share Text',
-										'default' => $wc_shortcodes_theme_support['pinterest_share_text'],
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'pinterest_share_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['pinterest_share_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'pinterest_share_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['pinterest_share_button'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'google-share',
-								'title' => 'Google',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'google_share_text',
-										'label' => 'Share Text',
-										'default' => $wc_shortcodes_theme_support['google_share_text'],
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'google_share_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['google_share_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'google_share_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['google_share_button'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-							array(
-								'id' => 'email-share',
-								'title' => 'Email',
-								'description' => '',
-								'group' => array(
-									array(
-										'option_name' => 'email_share_text',
-										'label' => 'Share Text',
-										'default' => $wc_shortcodes_theme_support['email_share_text'],
-										'description' => '',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'email_share_font_icon',
-										'label' => 'Font Icon',
-										'default' => $wc_shortcodes_theme_support['email_share_font_icon'],
-										'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
-										'type' => 'input',
-									),
-									array(
-										'option_name' => 'email_share_icon',
-										'label' => 'Image Icon',
-										'default' => $wc_shortcodes_theme_support['email_share_button'],
-										'description' => '',
-										'type' => 'image',
-									),
-								),
-							),
-						),
+						'options' => wc_shortcodes_get_share_buttons_options(),
 					),
 				),
 			),
@@ -771,6 +237,83 @@ function wc_shortcodes_options( $options ) {
 	return $options;
 }
 add_filter( 'wc_shortcodes_wpcsf_options', 'wc_shortcodes_options', 10, 1 );
+
+function wc_shortcodes_get_share_buttons_options() {
+	global $wc_shortcodes_theme_support;
+	global $wc_shortcodes_share_buttons;
+
+	$options = array();
+	foreach ( $wc_shortcodes_share_buttons as $key => $value ) {
+		$options[] = array(
+			'id' => $key . '-share',
+			'title' => $value,
+			'description' => '',
+			'group' => array(
+				array(
+					'option_name' => $key . '_share_text',
+					'label' => 'Share Text',
+					'default' => $wc_shortcodes_theme_support[ $key . '_share_text'],
+					'description' => '',
+					'type' => 'input',
+				),
+				array(
+					'option_name' => $key . '_share_font_icon',
+					'label' => 'Font Icon',
+					'default' => $wc_shortcodes_theme_support[ $key . '_share_font_icon'],
+					'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
+					'type' => 'input',
+				),
+				array(
+					'option_name' => $key . '_share_icon',
+					'label' => 'Image Icon',
+					'default' => $wc_shortcodes_theme_support[ $key . '_share_button'],
+					'description' => '',
+					'type' => 'image',
+				),
+			),
+		);
+	}
+
+	return $options;
+}
+function wc_shortcodes_get_social_icons_options() {
+	global $wc_shortcodes_theme_support;
+	global $wc_shortcodes_social_icons;
+
+	$options = array();
+	foreach ( $wc_shortcodes_social_icons as $key => $value ) {
+		$options[] = array(
+			'id' => $key,
+			'title' => $value,
+			'description' => '',
+			'group' => array(
+				array(
+					'option_name' => $key . '_link',
+					'label' => 'Link',
+					'default' => '',
+					'description' => '',
+					'type' => 'input',
+				),
+				array(
+					'option_name' => $key . '_font_icon',
+					'label' => 'Font Icon',
+					'default' => $wc_shortcodes_theme_support[ $key . '_font_icon'],
+					'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
+					'type' => 'input',
+				),
+				array(
+					'option_name' => $key . '_icon',
+					'label' => 'Image Icon',
+					'default' => $wc_shortcodes_theme_support[ $key . '_social_icon'],
+					'description' => '',
+					'type' => 'image',
+				),
+			),
+		);
+	}
+
+	return $options;
+}
 
 function wc_shortcodes_sanitize_share_buttons( $value ) {
 	global $wc_shortcodes_share_buttons;
