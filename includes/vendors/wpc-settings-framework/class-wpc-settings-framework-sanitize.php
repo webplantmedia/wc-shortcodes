@@ -616,24 +616,6 @@ class WPC_Settings_Framework_Sanitize {
 		return null;
 	}
 
-	public function share_buttons( $value ) {
-		global $wc_shortcodes_share_buttons;
-
-		$whitelist = $wc_shortcodes_share_buttons;
-
-		$valid = array();
-
-		if ( ! is_array( $value ) || empty( $value ) )
-			return null;
-
-		foreach ( $value as $k => $v ) {
-			if ( array_key_exists( $k, $whitelist ) )
-				$valid[ $k ] = $v;
-		}
-
-		return $valid;
-	}
-
 	public function esc_url_raw( $value ) {
 		return esc_url_raw( $value );
 	}

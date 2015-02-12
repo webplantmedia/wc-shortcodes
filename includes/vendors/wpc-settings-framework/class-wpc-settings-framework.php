@@ -246,10 +246,10 @@ class WPC_Settings_Framework {
 								$ooo['option_name'] = $this->plugin_prefix . $ooo['option_name'];
 								$oo['group'][ $key ]['option_name'] = $ooo['option_name'];
 
-								$callback = $this->sanitize->callback( $ooo['type'] );
+								$callback = $this->get_callback( $ooo );
 
 								// register_setting( $option_group, $option_name, $callback );
-								register_setting( $option_group, $ooo['option_name'], array( $this->sanitize, $callback ) );
+								register_setting( $option_group, $ooo['option_name'], $callback );
 							}
 						}
 						if ( isset( $oo['id'] ) && isset( $oo['title'] ) ) {
@@ -263,10 +263,10 @@ class WPC_Settings_Framework {
 						if ( isset( $oo['option_name'] ) ) {
 							$oo['option_name'] = $this->plugin_prefix . $oo['option_name'];
 
-							$callback = $this->sanitize->callback( $oo['type'] );
+							$callback = $this->get_callback( $oo );
 
 							// register_setting( $option_group, $option_name, $callback );
-							register_setting( $option_group, $oo['option_name'], array( $this->sanitize, $callback ) );
+							register_setting( $option_group, $oo['option_name'], $callback );
 
 							// add_settings_field( $id, $title, $callback, $page, $section, $args );
 							// @page should match @menu_slug from add_theme_page
@@ -277,6 +277,21 @@ class WPC_Settings_Framework {
 				}
 			}
 		}
+	}
+
+	public function get_callback( &$o ) {
+		if ( isset( $o['callback'] ) && ! empty( $o['callback'] ) ) {
+			if ( function_exists( $o['callback'] ) ) {
+				return $o['callback'];
+			}
+		}
+
+		$callback = array(
+			$this->sanitize,
+			$this->sanitize->callback( $o['type'] ),
+		);
+
+		return $callback;
 	}
 
 	/**
