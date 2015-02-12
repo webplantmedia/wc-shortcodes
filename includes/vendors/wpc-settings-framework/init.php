@@ -1,6 +1,8 @@
 <?php
 /*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
+ *
+ * TODO: You must change the namespace here, and in the two class files.
  *----------------------------------------------------------------------------*/
 
 if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
