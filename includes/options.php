@@ -10,7 +10,7 @@ function wc_shortcodes_options( $options ) {
 	$admin_email = get_option( 'admin_email' );
 
 	// page
-	$menu_slug = 'wc-shortcodes-options';
+	$menu_slug = 'wc-shortcodes';
 
 	// Option
 	$options[ $menu_slug ] = array(
