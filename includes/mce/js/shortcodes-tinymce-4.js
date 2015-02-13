@@ -158,25 +158,25 @@
 							{
 								text: "Masonry - Box",
 								onclick: function(){
-									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="20" heading_type="h2" layout="masonry" template="box" excerpt_length="30"][/wc_posts]');
+									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" date_format="M j, Y" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="20" heading_type="h2" layout="masonry" template="box" excerpt_length="30"][/wc_posts]');
 								}
 							},
 							{
 								text: "Masonry - Borderless",
 								onclick: function(){
-									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="40" heading_type="h2" layout="masonry" template="borderless" excerpt_length="30"][/wc_posts]');
+									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" date_format="M j, Y" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="large" filtering="yes" columns="3" gutter_space="40" heading_type="h2" layout="masonry" template="borderless" excerpt_length="30"][/wc_posts]');
 								}
 							},
 							{
 								text: "Grid - Box",
 								onclick: function(){
-									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="wccarousel" filtering="yes" columns="3" gutter_space="20" heading_type="h2" layout="grid" template="box" excerpt_length="15"][/wc_posts]');
+									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" date_format="M j, Y" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="wccarousel" filtering="yes" columns="3" gutter_space="20" heading_type="h2" layout="grid" template="box" excerpt_length="15"][/wc_posts]');
 								}
 							},
 							{
 								text: "Grid - Borderless",
 								onclick: function(){
-									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="wccarousel" filtering="yes" columns="3" gutter_space="40" heading_type="h2" layout="grid" template="borderless" excerpt_length="15"][/wc_posts]');
+									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" date_format="M j, Y" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="wccarousel" filtering="yes" columns="3" gutter_space="40" heading_type="h2" layout="grid" template="borderless" excerpt_length="15"][/wc_posts]');
 								}
 							}
 						]

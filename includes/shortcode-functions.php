@@ -1141,6 +1141,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			'layout' => 'masonry', // blog layout
 			'template' => 'box',
 			'excerpt_length' => '55',
+			'date_format' => 'M j, Y',
 		), $atts );
 
 		// changed default layout name. Let's catch old inputs
