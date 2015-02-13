@@ -1549,8 +1549,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 							break;
 						case 'google' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
-								$html .='<a href="https://plus.google.com/share?url='.urlencode(get_permalink()).'" onclick="javascript:window.open(this.href,
-\'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;">';
+								$html .='<a href="https://plus.google.com/share?url='.urlencode(get_permalink()).'" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;">';
 									switch ( $format ) {
 										case 'image' :
 											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
