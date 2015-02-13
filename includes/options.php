@@ -10,12 +10,12 @@ function wc_shortcodes_options( $options ) {
 	$admin_email = get_option( 'admin_email' );
 
 	// page
-	$menu_slug = 'wc-shortcodes';
+	$menu_slug = 'wc-shortcodes-options';
 
 	// Option
 	$options[ $menu_slug ] = array(
 		'parent_slug' => 'themes.php',
-		'page_title' => '',
+		'page_title' => 'Shortcodes',
 		'menu_title' => 'Shortcodes',
 		'capability' => 'manage_options',
 		'option_group' => 'wc-shortcodes-options-group',
