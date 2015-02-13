@@ -1,7 +1,7 @@
 <?php
 // preview image default style
 $style = '';
-if ( empty( $val['image'] ) )
+if ( empty( $val ) )
 	$style = ' style="display:none"';
 ?>
 
