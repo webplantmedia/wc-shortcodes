@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.59
+
+* minor bug fix
+
 ### Version 1.58
 
 * Added date_format attribute to posts shortcode
