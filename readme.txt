@@ -88,6 +88,16 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.58 =
+
+* Added date_format attribute to posts shortcode
+* Added alt text to social icon images thus fixing validation errors
+* adding settings link in plugin list page
+* Added Print Share Button Option
+* New options framework library
+* Changed name of social media image icon widget
+* Code cleanup
+
 = Version 1.57 =
 
 * Fixed overflow style bug with wc_posts
