@@ -14,6 +14,16 @@ function wc_shortcodes_check_supports() {
 }
 add_action( 'init', 'wc_shortcodes_check_supports' );
 
+function wc_shortcodes_add_action_links( $links ) {
+	return array_merge(
+		array(
+			'settings' => '<a href="' . admin_url( 'themes.php?page=wc-shortcodes' ) . '">' . __( 'Settings', 'wc-shortcodes' ) . '</a>'
+		),
+		$links
+	);
+}
+add_filter( 'plugin_action_links_' . WC_SHORTCODES_PLUGIN_BASENAME, 'wc_shortcodes_add_action_links' );
+
 /**
  * filter social url. For example, we want to add
  * mailto: to an email address.
