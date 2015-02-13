@@ -93,7 +93,7 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 
 					$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . $key . $first_class . '">';
 						$html .='<a target="_blank" href="'.$social_link.'">';
-							$html .= '<img src="'.$icon_url.'">';
+							$html .= '<img src="'.$icon_url.'" alt="'.$name.'">';
 						$html .= '</a>';
 					$html .= '</li>';
 				}
