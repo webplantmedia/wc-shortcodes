@@ -45,6 +45,7 @@ $wc_shortcodes_share_buttons = array(
 	'twitter' => 'Twitter',
 	'google' => 'Google',
 	'email' => 'Email',
+	'print' => 'Print',
 );
 $wc_shortcodes_theme_support = array(
 	'fullwidth_container' => '#main',
@@ -93,6 +94,9 @@ $wc_shortcodes_theme_support = array(
 	'email_share_text' => 'Email',
 	'email_share_font_icon' => 'fa-envelope',
 	'email_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/email.png',
+	'print_share_text' => 'Print',
+	'print_share_font_icon' => 'fa-print',
+	'print_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/print.png',
 );
 
 require_once( plugin_dir_path( __FILE__ ) . 'includes/vendors/wpc-settings-framework/init.php' );

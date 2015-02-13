@@ -1564,6 +1564,28 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 								$html .= '</a>';
 							$html .= '</li>';
 							break;
+						case 'print' :
+							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
+								if ( is_single() ) {
+									$html .='<a href="#" onclick="javascript:window.print();return false;">';
+								}
+								else {
+									$html .='<a href="#" onclick="javascript:w=window.open(\''.get_permalink().'\');w.print();w.close();return false;">';
+								}
+										switch ( $format ) {
+											case 'image' :
+												$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+												break;
+											case 'icon' :
+												$html .= '<i class="fa '.$icon_class.'"></i>';
+												break;
+											default :
+												$html .= '<i class="fa '.$icon_class.'"></i><span class="wc-share-button-'.$key.'">'.$icon_text.'</span>';
+												break;
+										}
+								$html .= '</a>';
+							$html .= '</li>';
+							break;
 					}
 				}
 			$html .= '</ul>';
