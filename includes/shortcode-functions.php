@@ -1448,9 +1448,9 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 		$size = sizeof( $share_buttons );
 		$format = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_format', 'image' );
 
-		if ( empty( $share_buttons ) )
+		if ( empty( $share_buttons ) || ! is_array( $share_buttons ) )
 			return '';
-
+		
 		// classes
 		$classes = array();
 
@@ -1571,7 +1571,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 									$html .='<a href="#" onclick="javascript:window.print();return false;">';
 								}
 								else {
-									$html .='<a href="#" onclick="javascript:w=window.open(\''.get_permalink().'\');w.print();w.close();return false;">';
+									$html .='<a href="#" onclick="javascript:void((function($){w=window.open(\''.get_permalink().'\');$(w).load(function(){setTimeout(function(){w.print();},1000);});})(jQuery));return false;">';
 								}
 										switch ( $format ) {
 											case 'image' :
