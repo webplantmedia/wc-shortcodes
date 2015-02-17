@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.61 =
+
+* Fixed bug with print share link
+
 = Version 1.60 =
 
 * Removed namespace which is not supported in php 5.2
