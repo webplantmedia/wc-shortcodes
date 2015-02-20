@@ -25,6 +25,7 @@
 
 				$( document.body ).trigger( 'wcs-toggled' );
 				
+				return false;
 			});
 		});
 	});
