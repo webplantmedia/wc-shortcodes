@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.62 =
+
+* Fixed bug with accordion and tabs refreshing when inside customizer preview
+
 = Version 1.61 =
 
 * Fixed bug with print share link
