@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.63 =
+
+* Fixed bug with masonry posts show scroll bar when loading
+
 = Version 1.62 =
 
 * Fixed bug with accordion and tabs refreshing when inside customizer preview
