@@ -69,7 +69,7 @@ class WC_Shortcodes_Settings_Framework {
 		add_action( 'admin_init', array( $this, 'set_plugin_info' ) );
 
 		add_action( 'init', array( $this, 'set_options' ), 100 );
-		add_action( 'admin_init', array( $this, 'options_init' ) );
+		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_init', array( $this, 'options_activation' ), 200 );
 		add_action( 'admin_menu', array( $this, 'options_admin_menu' ) );
 
@@ -109,7 +109,6 @@ class WC_Shortcodes_Settings_Framework {
 	public function set_plugin_info() {
 		$this->plugin_current_version = get_option( $this->plugin_prefix . 'current_version' );
 
-		$active_plugins = get_option( 'active_plugins' );
 		$plugin = get_plugins( '/' . $this->plugin_slug );
 		if ( ! empty( $plugin ) ) {
 			$plugin = array_shift( $plugin );
@@ -125,7 +124,7 @@ class WC_Shortcodes_Settings_Framework {
 
 		$initialize = false;
 
-		if ( ! $this->plugin_current_version ) {
+		if ( ! isset( $this->plugin_current_version ) || empty( $this->plugin_current_version ) ) {
 			$initialize = true;
 		}
 		else if ( version_compare( $this->plugin_version, $this->plugin_current_version ) > 0 ) {
@@ -199,7 +198,7 @@ class WC_Shortcodes_Settings_Framework {
 	 *
 	 * @return void
 	 */
-	public function options_init() {
+	public function register_settings() {
 		register_setting( $this->plugin_slug . '-wpcsf-current-version', $this->plugin_prefix . 'current_version' );
 
 		foreach ( $this->options as $menu_slug => $o ) {
@@ -470,6 +469,9 @@ class WC_Shortcodes_Settings_Framework {
 			case 'positive_pixel' :
 				require( 'views/settings/positive-pixel-input-field.php' );
 				break;
+			case 'positive_number' :
+				require( 'views/settings/positive-number-input-field.php' );
+				break;
 			case 'pixel' :
 				require( 'views/settings/pixel-input-field.php' );
 				break;
@@ -542,6 +544,8 @@ class WC_Shortcodes_Settings_Framework {
 				return 'sanitize_esc_url_raw';
 			case 'positive_pixel' :
 				return 'sanitize_positive_pixel';
+			case 'positive_number' :
+				return 'sanitize_positive_number';
 			case 'pixel' :
 				return 'sanitize_pixel';
 			case 'number' :
@@ -647,6 +651,16 @@ class WC_Shortcodes_Settings_Framework {
 			$value = '0';
 
 		return $value."px";
+	}
+
+	public function sanitize_positive_number( $value ) {
+		$value = preg_replace("/[^0-9]/", "",$value);
+		$value = intval( $value );
+
+		if ( empty( $value ) )
+			$value = '0';
+
+		return $value;
 	}
 
 	/**
