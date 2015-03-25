@@ -66,6 +66,13 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.64
+
+* Update to latest version of font awesome 4.3.0
+* Fixed bug with order options not being saved on update
+* Updated settings framework
+* Updated css for double borders
+
 ### Version 1.63
 
 * Fixed bug with masonry posts show scroll bar when loading
