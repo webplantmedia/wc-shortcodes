@@ -845,7 +845,8 @@ if( !function_exists('wc_shortcodes_heading') ) {
 			'color'			=> '',
 			'class'			=> '',
 			'icon_left'		=> '',
-			'icon_right'	=> ''
+			'icon_right'	=> '',
+			'icon_spacing'	=> '',
 		), $atts ) );
 
 		$style_attr = '';
@@ -873,9 +874,15 @@ if( !function_exists('wc_shortcodes_heading') ) {
 			$class = trim( 'entry-title ' . $class );
 
 	 	$output = '<'.$type.' class="wc-shortcodes-heading '. $text_align .' '. $class .'" style="'.$style_attr.'"><span>';
-		if ( $icon_left ) $output .= '<i class="wc-shortcodes-button-icon-left icon-'. $icon_left .'"></i>';
-			$output .= $title;
-		if ( $icon_right ) $output .= '<i class="wc-shortcodes-button-icon-right icon-'. $icon_right .'"></i>';
+
+		if ( $icon_left )
+			$output .= '<i class="wc-shortcodes-button-icon-left fa fa-'. $icon_left .'" style="margin-right:'.$icon_spacing.'"></i>';
+
+		$output .= $title;
+
+		if ( $icon_right )
+			$output .= '<i class="wc-shortcodes-button-icon-right fa fa-'. $icon_right .'" style="margin-left:'.$icon_spacing.'"></i>';
+
 		$output .= '</span></'.$type.'>';
 
 		if ( 'h1' == $type )
