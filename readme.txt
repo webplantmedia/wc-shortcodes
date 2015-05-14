@@ -88,6 +88,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.65 =
+
+* improved heading shortcode
+* css improvement for social icons
+
 = Version 1.64 =
 
 * Update to latest version of font awesome 4.3.0
