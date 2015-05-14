@@ -845,6 +845,9 @@
 .wc-shortcodes-social-icons.wc-shortcodes-maxheight-68 i { font-size: 34px; line-height: 68px; height: 68px; width: 68px; }
 .wc-shortcodes-social-icons.wc-shortcodes-maxheight-70 i { font-size: 36px; line-height: 70px; height: 70px; width: 70px; }
 
+.wc-shortcodes-social-icons li:first-child {
+	margin-left: 0;
+}
 .wc-shortcodes-social-icons li:last-child {
 	margin-right: 0;
 }
