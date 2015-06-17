@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.66
+
+* Updated images loaded library to 3.1.8
+
 ### Version 1.65
 
 * improved heading shortcode
