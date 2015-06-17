@@ -22,7 +22,7 @@ if( ! function_exists('wc_shortcodes_scripts') ) :
 		wp_enqueue_script( 'jquery-masonry' );
 
 		// images loaded
-		wp_register_script( 'wordpresscanvas-imagesloaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array (), '3.1.5', true );
+		wp_register_script( 'wordpresscanvas-imagesloaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array (), '3.1.8', true );
 
 		// slider
 		wp_register_script( 'wordpresscanvas-rslides', plugin_dir_url( __FILE__ ) . 'js/responsiveslides.js', array ( 'jquery' ), '1.0', true );
