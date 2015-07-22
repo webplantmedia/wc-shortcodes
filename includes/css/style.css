@@ -1419,7 +1419,6 @@ pre.pre-wrap {
 }
 .wc-shortcodes-posts {
 	position: relative;
-	visibility: hidden;
 	overflow: hidden;
 }
 .wc-shortcodes-post-box {

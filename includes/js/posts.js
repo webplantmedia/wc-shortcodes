@@ -1,10 +1,36 @@
 ( function( $ ) {
 	"use strict";
 
+	$.fn.wcShortcodesMasonryImagesReveal = function( $items ) {
+		var msnry = this.data('masonry');
+		var itemSelector = msnry.options.itemSelector;
+
+		// hide by default
+		$items.hide();
+
+		// append to container
+		this.append( $items );
+
+		$.each( $items, function( key, item ) {
+			var $item = $(this);
+
+			// un-hide item
+			$item.show();
+
+			$item.imagesLoaded().always( function( instance ) {
+				// masonry does its thing
+				msnry.appended( $item );
+			});
+		});
+
+		return this;
+	};
+
 	var calculateGrid = function($container) {
 		var columns = parseInt( $container.data('columns') );
 		var gutterWidth = $container.data('gutterSpace');
-		var containerWidth = $container.width();
+		// need to return exact decimal width
+		var containerWidth = Math.floor($container[0].getBoundingClientRect().width);
 
 		if ( isNaN( gutterWidth ) ) {
 			gutterWidth = 20;
@@ -43,19 +69,12 @@
 		return {columnWidth: columnWidth, gutterWidth: gutterWidth, columns: columns};
 	}
 
-	var runMasonry = function( duration, $container) {
-		var $postBox = $container.children('.wc-shortcodes-post-box');
-
+	var runMasonry = function( duration, $container, $posts ) {
 		var o = calculateGrid($container);
 
-		var marginBottom = o.gutterWidth;
-		/* if ( 1 == o.columns ) {
-			marginBottom = 20;
-		} */
+		$posts.css({'width':o.columnWidth+'px', 'margin-bottom':o.gutterWidth+'px', 'padding':'0'});
 
-		$postBox.css({'width':o.columnWidth+'px', 'margin-bottom':marginBottom+'px', 'padding':'0'});
-
-		$container.masonry( {
+		$container = $container.masonry( {
 			itemSelector: '.wc-shortcodes-post-box',
 			columnWidth: o.columnWidth,
 			gutter: o.gutterWidth,
@@ -66,21 +85,20 @@
 	$(document).ready(function(){
 		$('.wc-shortcodes-posts').each( function() {
 			var $container = $(this);
-			var $postBox = $container.children('.wc-shortcodes-post-box');
+			var $posts = $container.children('.wc-shortcodes-post-box');
 
+			// remove posts from element
+			$container.empty();
 
 			// keeps the media elements from calculating for the full width of the post
-			runMasonry(0, $container);
+			runMasonry(0, $container, $posts);
 
-			imagesLoaded( $container, function() {
-				runMasonry(0, $container);
-
-				$container.css('visibility', 'visible');
-			});
+			// we are going to append masonry items as the images load
+			$container.wcShortcodesMasonryImagesReveal( $posts );
 
 			$(window).resize(function() {
-				runMasonry(0, $container);
-			});
+				runMasonry(0, $container, $posts);
+			}); 
 
 			$container.find(".wc-shortcodes-post-box .rslides").responsiveSlides({
 				auto: false,             // Boolean: Animate automatically, true or false
@@ -99,7 +117,7 @@
 				namespace: "rslides",   // String: Change the default namespace used
 				before: function(){},   // Function: Before callback
 				after: function(){
-					runMasonry(0, $container);
+					runMasonry(0, $container, $posts);
 				}// Function: After callback
 			});
 		});
@@ -116,11 +134,12 @@
 			var target = $filterNav.data('target');
 			var $target = $(target);
 			$target.animate({opacity: 0}, 300, function() {
+				var $targetPosts = $container.children('.wc-shortcodes-post-box');
 				if ( '*' == selector ) {
-					$target.find('.wc-shortcodes-post-box').show();
+					$targetPosts.show();
 				}
 				else {
-					$target.find('.wc-shortcodes-post-box').hide();
+					$targetPosts.hide();
 					$target.find(selector).show();
 				}
 
