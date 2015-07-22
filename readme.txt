@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.67 =
+
+* Masonry post items now load in series when each image is loaded
+
 = Version 1.66 =
 
 * Updated images loaded library to 3.1.8
