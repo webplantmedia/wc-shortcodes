@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.72 =
+
+* Fixed bug with post filtering
+
 = Version 1.71 =
 
 * Fixed bug with responsive style for post grid layout
