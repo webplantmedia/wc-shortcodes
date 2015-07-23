@@ -1709,27 +1709,29 @@ pre.pre-wrap {
 .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-gutter-space-49 { margin-right: -49px; }
 .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-gutter-space-50 { margin-right: -50px; }
 
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box { width: 50%; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box { width: 33.33%; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-4 .wc-shortcodes-post-box { width: 25%; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-5 .wc-shortcodes-post-box { width: 20%; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-6 .wc-shortcodes-post-box { width: 16.66%; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-7 .wc-shortcodes-post-box { width: 14.28%; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-8 .wc-shortcodes-post-box { width: 12.5%; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-9 .wc-shortcodes-post-box { width: 11.11%; }
-
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box:nth-child(2n+3) { clear: left; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box:nth-child(3n+4) { clear: left; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-4 .wc-shortcodes-post-box:nth-child(4n+5) { clear: left; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-5 .wc-shortcodes-post-box:nth-child(5n+6) { clear: left; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-6 .wc-shortcodes-post-box:nth-child(6n+7) { clear: left; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-7 .wc-shortcodes-post-box:nth-child(7n+8) { clear: left; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-8 .wc-shortcodes-post-box:nth-child(8n+9) { clear: left; }
-.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-9 .wc-shortcodes-post-box:nth-child(9n+10) { clear: left; }
-
 .wc-shortcodes-posts-layout-grid .wc-shortcodes-post-box { float: left; }
 .wc-shortcodes-posts.wc-shortcodes-posts-layout-grid .wc-shortcodes-post-box { margin-bottom: 50px; }
 .wc-shortcodes-posts-template-borderless .wc-shortcodes-post-box .wc-shortcodes-post-border { padding-bottom: 20px; }
+
+@media (min-width: 991px) {
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box { width: 50%; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box { width: 33.33%; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-4 .wc-shortcodes-post-box { width: 25%; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-5 .wc-shortcodes-post-box { width: 20%; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-6 .wc-shortcodes-post-box { width: 16.66%; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-7 .wc-shortcodes-post-box { width: 14.28%; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-8 .wc-shortcodes-post-box { width: 12.5%; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-9 .wc-shortcodes-post-box { width: 11.11%; }
+
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box:nth-child(2n+3) { clear: left; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-3 .wc-shortcodes-post-box:nth-child(3n+4) { clear: left; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-4 .wc-shortcodes-post-box:nth-child(4n+5) { clear: left; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-5 .wc-shortcodes-post-box:nth-child(5n+6) { clear: left; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-6 .wc-shortcodes-post-box:nth-child(6n+7) { clear: left; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-7 .wc-shortcodes-post-box:nth-child(7n+8) { clear: left; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-8 .wc-shortcodes-post-box:nth-child(8n+9) { clear: left; }
+	.wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-9 .wc-shortcodes-post-box:nth-child(9n+10) { clear: left; }
+}
 
 @media (max-width: 990px) {
 	body .wc-shortcodes-posts-layout-grid.wc-shortcodes-posts-col-2 .wc-shortcodes-post-box { width: 50%; }
