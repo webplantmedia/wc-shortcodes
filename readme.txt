@@ -88,7 +88,7 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
-= Version 1.68 =
+= Version 1.69 =
 
 * Bug fix with masonry
 
