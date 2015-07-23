@@ -114,7 +114,7 @@
 			});
 		});
 
-		var $filterNav = $('.wc-shortcodes-filtering');
+		var $filterNav = $('.wc-shortcodes-filtering.wc-shortcodes-filtering-layout-masonry');
 		var $term = $filterNav.find('.wc-shortcodes-term');
 		$term.click( function( event ) {
 			event.preventDefault();
@@ -126,7 +126,7 @@
 			var target = $filterNav.data('target');
 			var $target = $(target);
 			$target.animate({opacity: 0}, 300, function() {
-				var $targetPosts = $container.children('.wc-shortcodes-post-box');
+				var $targetPosts = $target.children('.wc-shortcodes-post-box');
 				if ( '*' == selector ) {
 					$targetPosts.show();
 				}

@@ -1158,9 +1158,13 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		}
 
 		$is_masonry =  'masonry' == $atts['layout'] ? true : false;
+		$is_grid =  'grid' == $atts['layout'] ? true : false;
 
 		if ( $is_masonry ) {
 			wp_enqueue_script('wc-shortcodes-posts');
+		}
+		else if ( $is_grid ) {
+			wp_enqueue_script('wc-shortcodes-posts-grid');
 		}
 
 		$valid_templates = array( 'box', 'borderless' );

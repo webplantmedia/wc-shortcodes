@@ -29,6 +29,7 @@ if( ! function_exists('wc_shortcodes_scripts') ) :
 
 		// posts
 		wp_register_script( 'wc-shortcodes-posts', plugin_dir_url( __FILE__ ) . 'js/posts.js', array ( 'jquery', 'wordpresscanvas-rslides', 'jquery-masonry', 'wordpresscanvas-imagesloaded' ), $ver, true );
+		wp_register_script( 'wc-shortcodes-posts-grid', plugin_dir_url( __FILE__ ) . 'js/posts-grid.js', array ( 'jquery', 'wordpresscanvas-rslides' ), $ver, true );
 
 		// countdown
 		wp_register_script( 'wc-shortcodes-jquery-countdown-js', plugin_dir_url( __FILE__ ) . 'js/jquery.countdown.js', array ( 'jquery' ), $ver, true );
