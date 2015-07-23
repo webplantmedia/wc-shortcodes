@@ -135,7 +135,7 @@
 					$target.find(selector).show();
 				}
 
-				runMasonry(0, $target);
+				runMasonry(0, $target, $targetPosts);
 
 				$target.animate({opacity: 1}, 300);
 			});
