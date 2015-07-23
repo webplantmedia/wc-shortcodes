@@ -1425,6 +1425,8 @@ pre.pre-wrap {
 	background-color: #ffffff;
 	margin-bottom: 20px;
 	padding: 0;
+}
+.wc-shortcodes-posts-layout-masonry .wc-shortcodes-post-box {
 	display: none;
 }
 .wc-shortcodes-sep {
