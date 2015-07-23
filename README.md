@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.68
+
+* Bug fix with masonry
+
 ### Version 1.67
 
 * Masonry post items now load in series when each image is loaded
