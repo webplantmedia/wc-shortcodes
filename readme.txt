@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.70 =
+
+* Fixed style bug with post grid layout being hidden
+
 = Version 1.69 =
 
 * Bug fix with masonry
