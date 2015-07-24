@@ -37,8 +37,8 @@
 			var selector = $(this).attr('data-filter');
 			var target = $filterNav.data('target');
 			var $target = $(target);
+			var $targetPosts = $target.children('.wc-shortcodes-post-box');
 			$target.animate({opacity: 0}, 300, function() {
-				var $targetPosts = $target.children('.wc-shortcodes-post-box');
 				if ( '*' == selector ) {
 					$targetPosts.show();
 				}
