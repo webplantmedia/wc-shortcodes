@@ -32,20 +32,20 @@ add_filter( 'plugin_action_links_' . WC_SHORTCODES_PLUGIN_BASENAME, 'wc_shortcod
  * @return void
  */
 function wc_shortcodes_smart_social_link( $social_link, $name ) {
-    switch ( $name ) {
-        case 'email' :
-            // some users may have already inserted mailto:, so let's remove it.
+	switch ( $name ) {
+		case 'email' :
+			// some users may have already inserted mailto:, so let's remove it.
 			if ( is_email( $social_link ) ) {
 				$social_link = str_replace( 'mailto:', '', $social_link );
 				$social_link = 'mailto:'.$social_link;
 			}
-            break;
+			break;
 		default :
 			$social_link = esc_url( $social_link );
 			break;
-    }
+	}
 
-    return $social_link;
+	return $social_link;
 }
 add_filter( 'wc_shortcodes_social_link' , 'wc_shortcodes_smart_social_link', 10, 2 );
 
@@ -83,68 +83,68 @@ function wc_shortcodes_default_social_icons() {
  * @return void
  */
 function wc_shortcodes_send_rsvp_email() {
-    // get the submitted parameters
-    $error = array();
-    $emailSent = false;
+	// get the submitted parameters
+	$error = array();
+	$emailSent = false;
 	$message = array();
 
-    $email_to = get_option( WC_SHORTCODES_PREFIX . 'rsvp_email');
-    $email_title = trim( get_option( WC_SHORTCODES_PREFIX . 'rsvp_email_title') );
-    $email_success_message = trim( get_option( WC_SHORTCODES_PREFIX . 'rsvp_success_message') );
+	$email_to = get_option( WC_SHORTCODES_PREFIX . 'rsvp_email');
+	$email_title = trim( get_option( WC_SHORTCODES_PREFIX . 'rsvp_email_title') );
+	$email_success_message = trim( get_option( WC_SHORTCODES_PREFIX . 'rsvp_success_message') );
 	$email_success_message = empty( $email_success_message ) ? 'Message Sent' : $email_success_message;
 
 	$admin_email = get_option('admin_email');
-    if ( empty( $email_to ) ) {
-        $email_to = $admin_email;
+	if ( empty( $email_to ) ) {
+		$email_to = $admin_email;
 	}
 
 	$rsvp_name = trim( $_POST['rsvp_name'] );
-    if ( $rsvp_name === '') {
-        $error[] = 'Please enter your name.';
-        $hasError = true;
-    } else {
+	if ( $rsvp_name === '') {
+		$error[] = 'Please enter your name.';
+		$hasError = true;
+	} else {
 		$message[] = 'Name: ' . esc_html( $rsvp_name );
-    }
+	}
 
 	$rsvp_number = trim( $_POST['rsvp_number'] );
-    if ( $rsvp_number === '') {
-        $error[] = 'Please select a number.';
-        $hasError = true;
-    } else {
+	if ( $rsvp_number === '') {
+		$error[] = 'Please select a number.';
+		$hasError = true;
+	} else {
 		$message[] = 'Number: ' . esc_html( $rsvp_number );
-    }
+	}
 
 	$rsvp_event = trim( $_POST['rsvp_event'] );
-    if ( $rsvp_event === '') {
-        $error[] = 'Please select event.';
-        $hasError = true;
-    } else {
+	if ( $rsvp_event === '') {
+		$error[] = 'Please select event.';
+		$hasError = true;
+	} else {
 		$message[] = 'Event: ' . esc_html( $rsvp_event );
-    }
+	}
 
-    $status = trim(implode("<br />", $error));
+	$status = trim(implode("<br />", $error));
 
-    if ( empty( $error ) ) {
-        $subject = $email_title;
-        $name = $rsvp_name;
-        $body = implode( "\n\n", $message );
-        $body .= "\n\n\n\nThis message was sent through the contact form via ".get_bloginfo('url');
-        $headers = "From: " . $admin_email . "\r\n";
+	if ( empty( $error ) ) {
+		$subject = $email_title;
+		$name = $rsvp_name;
+		$body = implode( "\n\n", $message );
+		$body .= "\n\n\n\nThis message was sent through the contact form via ".get_bloginfo('url');
+		$headers = "From: " . $admin_email . "\r\n";
 
-        wp_mail($email_to, $subject, $body, $headers);
-        $emailSent = true;
+		wp_mail($email_to, $subject, $body, $headers);
+		$emailSent = true;
 		$status = $email_success_message;
-    }
+	}
  
-    // generate the response
-    $response = json_encode( array( 'success' => (int) $emailSent, 'message' => $status ) );
+	// generate the response
+	$response = json_encode( array( 'success' => (int) $emailSent, 'message' => $status ) );
  
-    // response output
-    header( "Content-Type: application/json" );
-    echo $response;
+	// response output
+	header( "Content-Type: application/json" );
+	echo $response;
  
-    // IMPORTANT: don't forget to "exit"
-    exit;
+	// IMPORTANT: don't forget to "exit"
+	exit;
 }
 // send email when logged out
 add_action( 'wp_ajax_nopriv_wc-send-rsvp-email', 'wc_shortcodes_send_rsvp_email' );
@@ -361,7 +361,7 @@ function wc_shortcodes_wp_trim_excerpt($text = '') {
 	 *
 	 * @since 2.8.0
 	 *
-	 * @param string $text        The trimmed text.
+	 * @param string $text		  The trimmed text.
 	 * @param string $raw_excerpt The text prior to trimming.
 	 */
 	return apply_filters( 'wp_trim_excerpt', $text, $raw_excerpt );
