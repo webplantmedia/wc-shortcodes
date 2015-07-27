@@ -1,8 +1,7 @@
 <?php $classes[] = 'wc-shortcodes-post-box'; ?>
 <div id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
 	<div class="wc-shortcodes-post-border">
-		<?php if ( get_post_gallery() ) : ?>
-			<?php $gallery = get_post_gallery( get_the_ID(), false ); ?>
+		<?php if ( $gallery = get_post_gallery( get_the_ID(), false ) ) : ?>
             
 			<div class="rslides-wrapper">
 				<ul class="rslides">
