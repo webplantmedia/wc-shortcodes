@@ -17,21 +17,24 @@ if ( ! empty( $taxonomy ) ) {
 
 		$links = array();
 		$link = $nav_filter_hard_links ? $permalink : '#';
-		$links[] = "<a href='{$link}' data-filter='*' title='All Tags' class='wc-shortcodes-term wc-shortcodes-all-tags wc-shortcodes-term-active'>" . __( 'All', 'wordpresscanvas' ) . "</a>";
+		$term_class = empty( $wpc_term ) ? ' wc-shortcodes-term-active' : '';
+		$links[] = "<a href='{$link}' data-filter='*' title='All Tags' class='wc-shortcodes-term wc-shortcodes-all-tags{$term_class}'>" . __( 'All', 'wordpresscanvas' ) . "</a>";
 
 		if ( ! is_array( $whitelist ) || empty( $whitelist ) ) {
 			foreach ( $terms as $term ) {
-				$link = $nav_filter_hard_links ? $permalink . '?wpc_terms=' . $term->slug : '#';
+				$link = $nav_filter_hard_links ? $permalink . '?wpc_term=' . $term->slug : '#';
 						
-				$links[] = "<a href='{$link}' data-filter='.wc-shortcodes-filter-{$term->slug}' title='{$term->name} Tag' class='wc-shortcodes-term wc-shortcodes-term-slug-{$term->slug}'>" . $term->name . "</a>";
+				$term_class = $term->slug == $wpc_term ? ' wc-shortcodes-term-active' : '';
+				$links[] = "<a href='{$link}' data-filter='.wc-shortcodes-filter-{$term->slug}' title='{$term->name} Tag' class='wc-shortcodes-term wc-shortcodes-term-slug-{$term->slug}{$term_class}'>" . $term->name . "</a>";
 			}
 		}
 		else {
 			foreach ( $terms as $term ) {
 				if ( in_array( $term->slug, $whitelist ) ) {
-					$link = $nav_filter_hard_links ? $permalink . '?wpc_terms=' . $term->slug : '#';
+					$link = $nav_filter_hard_links ? $permalink . '?wpc_term=' . $term->slug : '#';
 							
-					$links[] = "<a href='{$link}' data-filter='.wc-shortcodes-filter-{$term->slug}' title='{$term->name} Tag' class='wc-shortcodes-term wc-shortcodes-term-slug-{$term->slug}'>" . $term->name . "</a>";
+					$term_class = $term->slug == $wpc_term ? ' wc-shortcodes-term-active' : '';
+					$links[] = "<a href='{$link}' data-filter='.wc-shortcodes-filter-{$term->slug}' title='{$term->name} Tag' class='wc-shortcodes-term wc-shortcodes-term-slug-{$term->slug}{$term_class}'>" . $term->name . "</a>";
 				}
 			}
 		}

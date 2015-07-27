@@ -1174,9 +1174,9 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 		// clean input values
 		$atts['terms'] = wc_shortcodes_comma_delim_to_array( $atts['terms'] );
-		$wpc_terms = null;
-		if ( isset( $_GET['wpc_terms'] ) && ! empty( $_GET['wpc_terms'] ) ) {
-			$wpc_terms = $_GET['wpc_terms'];
+		$wpc_term = null;
+		if ( isset( $_GET['wpc_term'] ) && ! empty( $_GET['wpc_term'] ) ) {
+			$wpc_term = $_GET['wpc_term'];
 		}
 		$atts['post__in'] = wc_shortcodes_comma_delim_to_array( $atts['post__in'] );
 		$atts['columns'] == (int) $atts['columns'];
@@ -1205,12 +1205,12 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 
 		// add tax query if user specified
-		if ( ! empty( $wpc_terms ) ) {
+		if ( ! empty( $wpc_term ) ) {
 			$atts['tax_query'] = array(
 				array(
 					'taxonomy' => $atts['taxonomy'],
 					'field' => $atts['field'],
-					'terms' => $wpc_terms,
+					'terms' => $wpc_term,
 				),
 			);
 		}
