@@ -1174,6 +1174,10 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 		// clean input values
 		$atts['terms'] = wc_shortcodes_comma_delim_to_array( $atts['terms'] );
+		$wpc_terms = null;
+		if ( isset( $_GET['wpc_terms'] ) && ! empty( $_GET['wpc_terms'] ) ) {
+			$wpc_terms = $_GET['wpc_terms'];
+		}
 		$atts['post__in'] = wc_shortcodes_comma_delim_to_array( $atts['post__in'] );
 		$atts['columns'] == (int) $atts['columns'];
 		$atts['excerpt_length'] = (int) $atts['excerpt_length'];
@@ -1201,7 +1205,16 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 
 		// add tax query if user specified
-		if ( ! empty( $atts['terms'] ) ) {
+		if ( ! empty( $wpc_terms ) ) {
+			$atts['tax_query'] = array(
+				array(
+					'taxonomy' => $atts['taxonomy'],
+					'field' => $atts['field'],
+					'terms' => $wpc_terms,
+				),
+			);
+		}
+		else if ( ! empty( $atts['terms'] ) ) {
 			$atts['tax_query'] = array(
 				array(
 					'taxonomy' => $atts['taxonomy'],
@@ -1230,9 +1243,14 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		($atts['meta_comments'] == "yes") ? ($atts['meta_comments'] = true) : ($atts['meta_comments'] = false);
 		($atts['thumbnail'] == "yes") ? ($atts['thumbnail'] = true) : ($atts['thumbnail'] = false);
 		($atts['content'] == "yes") ? ($atts['content'] = true) : ($atts['content'] = false);
-		($atts['paging'] == "yes") ? ($atts['paging'] = true) : ($atts['paging'] = false);
+		($atts['paging'] == "yes" && ! $atts['nopaging']) ? ($atts['paging'] = true) : ($atts['paging'] = false);
 		($atts['filtering'] == "yes") ? ($atts['filtering'] = true) : ($atts['filtering'] = false);
 		($atts['order'] == "ASC") ? ($atts['order'] = "ASC") : ($atts['order'] = "DESC");
+
+		$nav_filter_hard_links = false;
+		if ( $atts['paging'] ) {
+			$nav_filter_hard_links = true;
+		}
 
 		$wc_shortcodes_posts_query = new WP_Query($atts);
 		$wc_shortcodes_posts_query->excerpt_length = $atts['excerpt_length'];

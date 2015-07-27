@@ -26,7 +26,7 @@
 			});
 		});
 
-		var $filterNav = $('.wc-shortcodes-filtering.wc-shortcodes-filtering-layout-grid');
+		var $filterNav = $('.wc-shortcodes-filtering.wc-shortcodes-filtering-dynamic.wc-shortcodes-filtering-layout-grid');
 		var $term = $filterNav.find('.wc-shortcodes-term');
 		$term.click( function( event ) {
 			event.preventDefault();
