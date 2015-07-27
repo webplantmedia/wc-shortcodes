@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.74 =
+
+* Fixed style bug with wc_posts category links
+
 = Version 1.73 =
 
 * Added support for navigation filter to also link to category pages if there is pagination.
