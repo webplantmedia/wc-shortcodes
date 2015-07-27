@@ -88,6 +88,12 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.73 =
+
+* Added support for navigation filter to also link to category pages if there is pagination.
+* Improved speed when loading gallery format
+* Code cleanup
+
 = Version 1.72 =
 
 * Fixed bug with post filtering
