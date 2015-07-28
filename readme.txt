@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.75 =
+
+* Improved logic for calculating colums of masonry grid for mobile and tablet devices.
+
 = Version 1.74 =
 
 * Fixed style bug with wc_posts category links
