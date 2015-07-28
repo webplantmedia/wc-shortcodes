@@ -24,6 +24,7 @@
 		var gutterWidth = $container.data('gutterSpace');
 		// need to return exact decimal width
 		var containerWidth = Math.floor($container[0].getBoundingClientRect().width);
+		var minColumnWidth = 200;
 
 		if ( isNaN( gutterWidth ) ) {
 			gutterWidth = 20;
@@ -32,32 +33,25 @@
 			gutterWidth = 20;
 		}
 
-		if ( containerWidth < 568 ) {
-			columns = 1;
-		}
-		else if ( containerWidth < 768 ) { 
-			columns -= 2;
-			if ( columns < 2 ) {
-				columns = 2;
-			}
-		}
-		else if ( containerWidth < 991 ) { 
-			columns -= 1;
-			if ( columns < 2 ) {
-				columns = 2;
-			}
-		}
-
-		if ( columns < 1 ) {
-			columns = 1;
-		}
-
 		gutterWidth = parseInt( gutterWidth );
 
 		var allGutters = gutterWidth * ( columns - 1 );
 		var contentWidth = containerWidth - allGutters;
 
 		var columnWidth = Math.floor( contentWidth / columns );
+
+		if ( columnWidth < minColumnWidth ) {
+			columns = Math.floor( contentWidth / minColumnWidth );
+
+			if ( columns < 1 ) {
+				columns = 1;
+			}
+
+			allGutters = gutterWidth * ( columns - 1 );
+			contentWidth = containerWidth - allGutters;
+
+			columnWidth = Math.floor( contentWidth / columns );
+		}
 
 		return {columnWidth: columnWidth, gutterWidth: gutterWidth, columns: columns};
 	}
