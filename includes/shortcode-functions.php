@@ -595,7 +595,7 @@ if( !function_exists('wc_shortcodes_column') ) {
  */
 if( !function_exists('wc_shortcodes_row') ) {
 	function wc_shortcodes_row( $atts, $content = null ){
-		return '<div class="wc-shortcodes-row wc-shortcodes-item"><div class="wc-shortcodes-clearfix">' . do_shortcode($content) . '</div></div>';
+		return '<div class="wc-shortcodes-row wc-shortcodes-item wc-shortcodes-clearfix">' . do_shortcode($content) . '</div>';
 	}
 }
 
@@ -1070,11 +1070,11 @@ if( !function_exists('wc_shortcodes_rsvp') ) {
 		// Style
 
 		if ( 3 == $columns ) {
-			$html .= '<div class="wc-shortcodes-row wc-shortcodes-item"><div class="wc-shortcodes-clearfix">';
+			$html .= '<div class="wc-shortcodes-row wc-shortcodes-item wc-shortcodes-clearfix">';
 			$html .= '	<div class="wc-shortcodes-column wc-shortcodes-one-third wc-shortcodes-column-first ">'.$name_html.'</div>';
 			$html .= '	<div class="wc-shortcodes-column wc-shortcodes-one-third wc-shortcodes-column- ">'.$number_html.'</div>';
 			$html .= '	<div class="wc-shortcodes-column wc-shortcodes-one-third wc-shortcodes-column-last ">'.$event_html.'</div>';
-			$html .= '</div></div>';
+			$html .= '</div>';
 			$html .= $action_html;
 			$html .= $message_html;
 			$html .= $button_html;
