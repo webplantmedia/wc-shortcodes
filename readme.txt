@@ -4,7 +4,7 @@ Contributors: cbaldelomar
 Donate link: http://webplantmedia.com/donate/
 Tags: shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, image, flags, banners, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type, font awesome, icons, fontawesome, fa icons
 Requires at least: 3.7
-Tested up to: 3.9
+Tested up to: 4.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -87,6 +87,12 @@ Use the shortcode manager in the TinyMCE text editor
 19. Font Awesome Icons
 
 == Changelog ==
+
+= Version 1.76 =
+
+* minor update to shortcodes row structure
+* Made sure rslider CSS is not applied to other plugins
+* Updated version number for rslides script
 
 = Version 1.75 =
 
