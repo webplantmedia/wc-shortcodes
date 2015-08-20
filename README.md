@@ -66,7 +66,7 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
-### Version 1.76
+### Version 1.77
 
 * minor update to shortcodes row structure
 * Made sure rslider CSS is not applied to other plugins
