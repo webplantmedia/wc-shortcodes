@@ -1528,7 +1528,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 							break;
 						case 'facebook' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
-								$html .='<a target="_blank" onclick="return !window.open(this.href, \'Facebook\', \'width=640,height=300\')" href="http://www.facebook.com/sharer/sharer.php?u='.urlencode(get_permalink()).'">';
+								$html .='<a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='.get_permalink().'&amp;t='.urlencode(get_the_title()).'">';
 									switch ( $format ) {
 										case 'image' :
 											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
@@ -1545,7 +1545,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 							break;
 						case 'twitter' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
-								$html .='<a target="_blank" onclick="return !window.open(this.href, \'Twitter\', \'width=500,height=430\')" href="https://twitter.com/share?url='.urlencode(get_permalink()).'" class="share-button-twitter" data-lang="en">';
+								$html .='<a target="_blank" onclick="return !window.open(this.href, \'Twitter\', \'width=500,height=430\')" href="https://twitter.com/share?text='.urlencode(get_the_title()).'&amp;url='.get_permalink().'" class="share-button-twitter" data-lang="en">';
 									switch ( $format ) {
 										case 'image' :
 											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
@@ -1562,7 +1562,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 							break;
 						case 'email' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
-								$html .='<a title="Share by Email" target="_self" href="mailto:?subject=&amp;body='.urlencode(get_permalink()).'">';
+								$html .='<a title="Share by Email" href="mailto:?subject='.urlencode(get_the_title()).'&amp;body='.get_permalink().'">';
 									switch ( $format ) {
 										case 'image' :
 											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
@@ -1579,7 +1579,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 							break;
 						case 'google' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
-								$html .='<a href="https://plus.google.com/share?url='.urlencode(get_permalink()).'" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;">';
+								$html .='<a target="_blank" href="https://plus.google.com/share?url='.get_permalink().'">';
 									switch ( $format ) {
 										case 'image' :
 											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';

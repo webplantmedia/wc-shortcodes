@@ -56,7 +56,10 @@ if( ! function_exists('wc_shortcodes_scripts_override') ) :
 			wp_register_style( 'wordpresscanvas-font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array( ), '4.3.0' );
 			wp_enqueue_style( 'wordpresscanvas-font-awesome' );
 		}
-
+		
+		/* if ( ! wp_script_is( 'pinit', 'registered' ) ) {
+			wp_register_script( 'pinit', '//assets.pinterest.com/js/pinit.js', array(), false, true);
+		} */
 	}
 	add_action('wp_enqueue_scripts', 'wc_shortcodes_scripts_override', 9999 );
 endif;
