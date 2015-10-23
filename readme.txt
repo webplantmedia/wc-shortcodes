@@ -88,7 +88,7 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
-= Version 1.79 =
+= Version 1.80 =
 
 * changed urlencode to rawurlencode
 * Updated share links
