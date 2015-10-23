@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.78
+
+* Updated share links
+
 ### Version 1.77
 
 * minor update to shortcodes row structure
