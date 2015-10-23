@@ -1480,6 +1480,8 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 		if ( empty( $share_buttons ) || ! is_array( $share_buttons ) )
 			return '';
 		
+		$charset = get_bloginfo('charset');
+		
 		// classes
 		$classes = array();
 
@@ -1528,7 +1530,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 							break;
 						case 'facebook' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
-								$html .='<a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='.get_permalink().'&amp;t='.rawurlencode(get_the_title()).'">';
+								$html .='<a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='.get_permalink().'&amp;t='.rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, $charset ) ).'">';
 									switch ( $format ) {
 										case 'image' :
 											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
@@ -1545,7 +1547,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 							break;
 						case 'twitter' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
-								$html .='<a target="_blank" href="https://twitter.com/share?text='.rawurlencode(get_the_title()).'&amp;url='.get_permalink().'" class="share-button-twitter" data-lang="en">';
+								$html .='<a target="_blank" href="https://twitter.com/share?text='.rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, $charset ) ).'&amp;url='.get_permalink().'" class="share-button-twitter" data-lang="en">';
 									switch ( $format ) {
 										case 'image' :
 											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
@@ -1562,7 +1564,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 							break;
 						case 'email' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
-								$html .='<a title="Share by Email" href="mailto:?subject='.rawurlencode(get_the_title()).'&amp;body='.get_permalink().'">';
+								$html .='<a title="Share by Email" href="mailto:?subject='.rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, $charset ) ).'&amp;body='.get_permalink().'">';
 									switch ( $format ) {
 										case 'image' :
 											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
