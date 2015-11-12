@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.81
+
+* Load all sharing service scripts over SSL
+
 ### Version 1.80
 
 * changed urlencode to rawurlencode
