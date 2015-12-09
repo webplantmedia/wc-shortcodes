@@ -1151,14 +1151,41 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			'date_format' => 'M j, Y',
 		), $atts );
 
-		// changed default layout name. Let's catch old inputs
-		$valid_layouts = array( 'masonry', 'grid' );
-		if ( ! in_array( $atts['layout'], $valid_layouts ) ) {
-			$atts['layout'] = "masonry";
+		// fix bug with title argument being added to WP_Query() in 4.4
+		$keys = array(
+			'title',
+			'meta_all',
+			'meta_author',
+			'meta_date',
+			'meta_comments',
+			'thumbnail',
+			'content',
+			'paging',
+			'size',
+			'filtering',
+			'columns',
+			'gutter_space',
+			'heading_type',
+			'layout',
+			'template',
+			'excerpt_length',
+			'date_format',
+		);
+
+		$display = array();
+		foreach ( $keys as $key ) {
+			$display[ $key ] = $atts[ $key ];
+			unset( $atts[ $key ] );
 		}
 
-		$is_masonry =  'masonry' == $atts['layout'] ? true : false;
-		$is_grid =  'grid' == $atts['layout'] ? true : false;
+		// changed default layout name. Let's catch old inputs
+		$valid_layouts = array( 'masonry', 'grid' );
+		if ( ! in_array( $display['layout'], $valid_layouts ) ) {
+			$display['layout'] = "masonry";
+		}
+
+		$is_masonry =  'masonry' == $display['layout'] ? true : false;
+		$is_grid =  'grid' == $display['layout'] ? true : false;
 
 		if ( $is_masonry ) {
 			wp_enqueue_script('wc-shortcodes-posts');
@@ -1168,8 +1195,8 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		}
 
 		$valid_templates = array( 'box', 'borderless' );
-		if ( ! in_array( $atts['template'], $valid_templates ) ) {
-			$atts['template'] = "box";
+		if ( ! in_array( $display['template'], $valid_templates ) ) {
+			$display['template'] = "box";
 		}
 
 		// clean input values
@@ -1179,20 +1206,20 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			$wpc_term = $_GET['wpc_term'];
 		}
 		$atts['post__in'] = wc_shortcodes_comma_delim_to_array( $atts['post__in'] );
-		$atts['columns'] == (int) $atts['columns'];
-		$atts['excerpt_length'] = (int) $atts['excerpt_length'];
+		$display['columns'] == (int) $display['columns'];
+		$display['excerpt_length'] = (int) $display['excerpt_length'];
 		$atts['order'] = strtoupper( $atts['order'] );
-		$atts['heading_type'] = strtolower( $atts['heading_type'] );
+		$display['heading_type'] = strtolower( $display['heading_type'] );
 
-		if ( ! is_numeric( $atts['gutter_space'] ) ) {
-			$atts['gutter_space'] = 20;
+		if ( ! is_numeric( $display['gutter_space'] ) ) {
+			$display['gutter_space'] = 20;
 		}
-		if ( $atts['gutter_space'] > 0 && $atts['gutter_space'] < 1 ) {
-			$atts['gutter_space'] = (int) ( $atts['gutter_space'] * 1000 );
+		if ( $display['gutter_space'] > 0 && $display['gutter_space'] < 1 ) {
+			$display['gutter_space'] = (int) ( $display['gutter_space'] * 1000 );
 		}
-		$atts['gutter_space'] = (int) $atts['gutter_space'];
-		if ( $atts['gutter_space'] > 50 || $atts['gutter_space'] < 0 ) {
-			$atts['gutter_space'] = 20;
+		$display['gutter_space'] = (int) $display['gutter_space'];
+		if ( $display['gutter_space'] > 50 || $display['gutter_space'] < 0 ) {
+			$display['gutter_space'] = 20;
 		}
 
 		if (isset($atts['posts_per_page']) && $atts['posts_per_page']) {
@@ -1231,59 +1258,59 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 
 		// setting attributes right for the php script
 		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
-		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
+		$display['heading_type'] = in_array( $display['heading_type'], $valid_headings ) ? $display['heading_type'] : 'h2';
 
 		$valid_columns = array( 2, 3, 4, 5, 6, 7, 8, 9 );
-		$atts['columns'] = in_array( $atts['columns'], $valid_columns ) ? $atts['columns'] : 2;
+		$display['columns'] = in_array( $display['columns'], $valid_columns ) ? $display['columns'] : 2;
 		
-		($atts['title'] == "yes") ? ($atts['title'] = true) : ($atts['title'] = false);
-		($atts['meta_all'] == "yes") ? ($atts['meta_all'] = true) : ($atts['meta_all'] = false);
-		($atts['meta_author'] == "yes") ? ($atts['meta_author'] = true) : ($atts['meta_author'] = false);
-		($atts['meta_date'] == "yes") ? ($atts['meta_date'] = true) : ($atts['meta_date'] = false);
-		($atts['meta_comments'] == "yes") ? ($atts['meta_comments'] = true) : ($atts['meta_comments'] = false);
-		($atts['thumbnail'] == "yes") ? ($atts['thumbnail'] = true) : ($atts['thumbnail'] = false);
-		($atts['content'] == "yes") ? ($atts['content'] = true) : ($atts['content'] = false);
-		($atts['paging'] == "yes" && ! $atts['nopaging']) ? ($atts['paging'] = true) : ($atts['paging'] = false);
-		($atts['filtering'] == "yes") ? ($atts['filtering'] = true) : ($atts['filtering'] = false);
+		($display['title'] == "yes") ? ($display['title'] = true) : ($display['title'] = false);
+		($display['meta_all'] == "yes") ? ($display['meta_all'] = true) : ($display['meta_all'] = false);
+		($display['meta_author'] == "yes") ? ($display['meta_author'] = true) : ($display['meta_author'] = false);
+		($display['meta_date'] == "yes") ? ($display['meta_date'] = true) : ($display['meta_date'] = false);
+		($display['meta_comments'] == "yes") ? ($display['meta_comments'] = true) : ($display['meta_comments'] = false);
+		($display['thumbnail'] == "yes") ? ($display['thumbnail'] = true) : ($display['thumbnail'] = false);
+		($display['content'] == "yes") ? ($display['content'] = true) : ($display['content'] = false);
+		($display['paging'] == "yes" && ! $atts['nopaging']) ? ($display['paging'] = true) : ($display['paging'] = false);
+		($display['filtering'] == "yes") ? ($display['filtering'] = true) : ($display['filtering'] = false);
 		($atts['order'] == "ASC") ? ($atts['order'] = "ASC") : ($atts['order'] = "DESC");
 
 		$nav_filter_hard_links = false;
-		if ( $atts['paging'] ) {
+		if ( $display['paging'] ) {
 			$nav_filter_hard_links = true;
 		}
 
 		$wc_shortcodes_posts_query = new WP_Query($atts);
-		$wc_shortcodes_posts_query->excerpt_length = $atts['excerpt_length'];
+		$wc_shortcodes_posts_query->excerpt_length = $display['excerpt_length'];
 
 		$html = '';
 
 		$class = array();
 		$class[] = 'wc-shortcodes-posts';
 		$class[] = 'wc-shortcodes-clearfix';
-		$class[] = 'wc-shortcodes-posts-col-' . $atts["columns"];
-		$class[] = 'wc-shortcodes-posts-layout-' . $atts['layout'];
-		$class[] = 'wc-shortcodes-posts-template-' . $atts['template'];
-		$class[] = 'wc-shortcodes-posts-gutter-space-' . $atts['gutter_space'];
+		$class[] = 'wc-shortcodes-posts-col-' . $display["columns"];
+		$class[] = 'wc-shortcodes-posts-layout-' . $display['layout'];
+		$class[] = 'wc-shortcodes-posts-template-' . $display['template'];
+		$class[] = 'wc-shortcodes-posts-gutter-space-' . $display['gutter_space'];
 		if ( ! $is_masonry ) {
 			$class[] = 'wc-shortcodes-posts-no-masonry';
 		}
-		if ( $atts['filtering'] ) {
+		if ( $display['filtering'] ) {
 			ob_start();
 			include( 'templates/nav-filtering.php' );
 			$html .= ob_get_clean();
 		}
 
 		$html .= '<div class="wc-shortcodes-posts-wrapper">';
-		$html .= '<div id="wc-shortcodes-posts-'.$instance.'" data-gutter-space="'.$atts["gutter_space"].'" data-columns="'.$atts["columns"].'" class="' . implode( ' ', $class ) . '">';
+		$html .= '<div id="wc-shortcodes-posts-'.$instance.'" data-gutter-space="'.$display["gutter_space"].'" data-columns="'.$display["columns"].'" class="' . implode( ' ', $class ) . '">';
 
 			while( $wc_shortcodes_posts_query->have_posts() ) :
 				$wc_shortcodes_posts_query->the_post();
 				
-				if ( $atts['content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) )
-					$atts['content'] = false;
+				if ( $display['content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) )
+					$display['content'] = false;
 
 				ob_start();
-				include('templates/'.$atts['template'].'/index.php');
+				include('templates/'.$display['template'].'/index.php');
 				$html .= ob_get_clean();
 
 			endwhile;
@@ -1292,7 +1319,7 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		$html .= '</div>';
 
 		//no paging if only the latest posts are shown
-		if ( $atts['paging'] ) {
+		if ( $display['paging'] ) {
 			ob_start();
 			include('templates/nav-pagination.php');
 			$html .= ob_get_clean();

@@ -41,7 +41,7 @@ if ( ! empty( $taxonomy ) ) {
 		?>
 
 		<?php if ( sizeof( $links ) > 2 ) : ?>
-			<nav data-target="#wc-shortcodes-posts-<?php echo $instance; ?>" class="wc-shortcodes-filtering<?php echo $nav_filter_class; ?> wc-shortcodes-filtering-layout-<?php echo $atts['layout']; ?> wc-shortcodes-nav-<?php echo $taxonomy; ?>">
+			<nav data-target="#wc-shortcodes-posts-<?php echo $instance; ?>" class="wc-shortcodes-filtering<?php echo $nav_filter_class; ?> wc-shortcodes-filtering-layout-<?php echo $display['layout']; ?> wc-shortcodes-nav-<?php echo $taxonomy; ?>">
 				<?php echo implode( "<span class='tag-divider'>/</span>", $links ); ?>
 			</nav>
 		<?php endif; ?>

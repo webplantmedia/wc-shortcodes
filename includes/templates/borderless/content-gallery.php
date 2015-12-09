@@ -15,13 +15,13 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( $atts['title'] ) : ?>
-			<<?php echo $atts['heading_type']; ?> class="wc-shortcodes-entry-title">
+		<?php if ( $display['title'] ) : ?>
+			<<?php echo $display['heading_type']; ?> class="wc-shortcodes-entry-title">
 				<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-			</<?php echo $atts['heading_type']; ?>>
+			</<?php echo $display['heading_type']; ?>>
 		<?php endif; ?>
 
-		<?php if ( $atts['content'] ) : ?>
+		<?php if ( $display['content'] ) : ?>
 			<?php wc_shortcodes_the_excerpt(); ?>
 		<?php endif; ?>
 

@@ -5,15 +5,15 @@
 			<?php wc_shortcodes_the_media_content(); ?>
 		</div><!-- .entry-summary -->
 
-		<?php if ( $atts['title'] ) : ?>
+		<?php if ( $display['title'] ) : ?>
 		<div class="wc-shortcodes-entry-header">
-			<<?php echo $atts['heading_type']; ?> class="wc-shortcodes-entry-title">
+			<<?php echo $display['heading_type']; ?> class="wc-shortcodes-entry-title">
 				<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-			</<?php echo $atts['heading_type']; ?>>
+			</<?php echo $display['heading_type']; ?>>
 		</div><!-- .entry-header -->
 		<?php endif; ?>
 
-		<?php if ( $atts['content'] ) : ?>
+		<?php if ( $display['content'] ) : ?>
 			<?php wc_shortcodes_the_excerpt(); ?>
 		<?php endif; ?>
 
