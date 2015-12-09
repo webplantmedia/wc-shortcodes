@@ -4,7 +4,7 @@
 **Donate link:** http://webplantmedia.com/donate/
 **Tags:** shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, image, flags, banners, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type, font awesome, icons, fontawesome, fa icons
 **Requires at least:** 3.7  
-**Tested up to:** 4.3
+**Tested up to:** 4.4
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -65,6 +65,10 @@ Thank you so much for even considering supporting my work. If you have benefited
 Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
+
+### Version 1.82
+
+* Fixed bug with restructured WP_Query class in WordPress 4.4
 
 ### Version 1.81
 
