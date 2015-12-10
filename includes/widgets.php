@@ -35,6 +35,11 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 		if ( !empty($instance['title']) )
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 
+		if ( empty( $instance['format'] ) ) {
+			$instance['format'] = 'default';
+		}
+		$format = $instance['format'];
+
 		// set class with the number of columns the user selected
 		$columns = $instance['columns'];
 		if ( empty($columns) ) {
@@ -46,7 +51,18 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 		}
 
 		$order = get_option( WC_SHORTCODES_PREFIX . 'social_icons_display' );
-		$format = get_option( WC_SHORTCODES_PREFIX . 'social_icons_format', 'image' );
+
+		switch ( $format ) {
+			case 'default' :
+				$format = get_option( WC_SHORTCODES_PREFIX . 'social_icons_format', 'icon' );
+				break;
+			case 'icon' :
+				$format = 'icon';	
+				break;
+			default :
+				$format = 'image';	
+		}
+
 		$show_image = 'image' == $format ? true : false;
 
 		if ( ! is_array( $order ) || empty( $order ) ) {
@@ -116,6 +132,7 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance['title'] = strip_tags( stripslashes($new_instance['title']) );
+		$instance['format'] = $new_instance['format'];
 		$instance['columns'] = $new_instance['columns'];
 		$instance['maxheight'] = $new_instance['maxheight'];
 		return $instance;
@@ -123,12 +140,21 @@ class WC_Shortcodes_Social_Icons_Widget extends WP_Widget {
 
 	function form( $instance ) {
 		$title = isset( $instance['title'] ) ? $instance['title'] : 'Follow Me!';
+		$format = isset( $instance['format'] ) ? $instance['format'] : 'default';
 		$columns = isset( $instance['columns'] ) ? $instance['columns'] : 'float-left';
 		$maxheight = isset( $instance['maxheight'] ) ? $instance['maxheight'] : 'none';
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('format'); ?>"><?php _e('Format:'); ?></label>
+			<select id="<?php echo $this->get_field_id('format'); ?>" name="<?php echo $this->get_field_name('format'); ?>">
+				<option value="default"<?php selected( $format, 'default' ); ?>>Default</option>';
+				<option value="icon"<?php selected( $format, 'icon' ); ?>>Icon</option>';
+				<option value="image"<?php selected( $format, 'image' ); ?>>Image</option>';
+			</select>
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id('columns'); ?>"><?php _e('Display:'); ?></label>
