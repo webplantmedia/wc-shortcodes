@@ -53,7 +53,7 @@ if( ! function_exists('wc_shortcodes_scripts_override') ) :
 		
 		if ( WC_SHORTCODES_FONT_AWESOME_ENABLED ) {
 			wp_deregister_style( 'wordpresscanvas-font-awesome' );
-			wp_register_style( 'wordpresscanvas-font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array( ), '4.3.0' );
+			wp_register_style( 'wordpresscanvas-font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.min.css', array( ), '4.5.0' );
 			wp_enqueue_style( 'wordpresscanvas-font-awesome' );
 		}
 		
