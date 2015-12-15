@@ -868,11 +868,13 @@
 }
 .wc-shortcodes-share-buttons li {
 	display: inline-block;
-	margin-right: 7px;
+	margin-right: 0.625em;
 }
 .wc-shortcodes-share-buttons li a {
 	display: block;
 	line-height: 1;
+	text-decoration: none;
+	box-shadow: none;
 }
 .wc-shortcodes-share-buttons li a img {
 	vertical-align: top;
@@ -881,7 +883,7 @@
 .wc-shortcodes-share-buttons ul li:last-child {
 	margin-right: 0;
 }
-.wc-shortcodes-share-buttons li i {
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i {
 	font-size: 20px;
 	width: 36px;
 	height: 36px;
@@ -893,26 +895,41 @@
 	color: #ffffff;
 }
 .wc-shortcodes-share-buttons-format-icon-text li span {
-	margin-left: 0.4em;
+	margin-left: 0.3125em;
 }
 .wc-shortcodes-share-buttons-format-text li a i {
 	display: none;
 }
-.wc-shortcodes-share-buttons li i.fa-facebook { background-color: #305999; }
-.wc-shortcodes-share-buttons li i.fa-google-plus { background-color: #ee7321; }
-.wc-shortcodes-share-buttons li i.fa-twitter { background-color: #00a7f1; }
-.wc-shortcodes-share-buttons li i.fa-pinterest { background-color: #d64800; }
-.wc-shortcodes-share-buttons li i.fa-instagram { background-color: #b2b2b4; }
-.wc-shortcodes-share-buttons li i.fa-plus-square { background-color: #00b5fc; }
-.wc-shortcodes-share-buttons li i.fa-flickr { background-color: #ff6182; }
-.wc-shortcodes-share-buttons li i.fa-rss { background-color: #facf4c; }
-.wc-shortcodes-share-buttons li i.fa-envelope { background-color: #ebe180; }
-.wc-shortcodes-share-buttons li i.fa-dollar { background-color: #d46000; }
-.wc-shortcodes-share-buttons li i.fa-camera { background-color: #333333; }
-.wc-shortcodes-share-buttons li i.fa-shopping-cart { background-color: #a5d488; }
-.wc-shortcodes-share-buttons li i.fa-youtube { background-color: #c74a00; }
-.wc-shortcodes-share-buttons li i.fa-tumblr { background-color: #426b8a; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-facebook { background-color: #305999; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-google-plus { background-color: #ee7321; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-twitter { background-color: #00a7f1; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-pinterest { background-color: #d64800; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-instagram { background-color: #b2b2b4; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-plus-square { background-color: #00b5fc; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-flickr { background-color: #ff6182; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-rss { background-color: #facf4c; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-envelope { background-color: #ebe180; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-dollar { background-color: #d46000; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-camera { background-color: #333333; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-shopping-cart { background-color: #a5d488; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-youtube { background-color: #c74a00; }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon li i.fa-tumblr { background-color: #426b8a; }
 
+/* filtered share button */
+.wc-share-buttons-container {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	clear: both;
+}
+.wc-share-buttons-container .share-text {
+	margin-bottom: 0.3em;
+	display: none;
+}
+.wc-share-buttons-container .wc-shortcodes-share-buttons-format-icon-text li {
+	margin-right: 1em;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+}
 
 /**
  * [wc_skillbar]

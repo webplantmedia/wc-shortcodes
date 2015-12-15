@@ -366,3 +366,77 @@ function wc_shortcodes_wp_trim_excerpt($text = '') {
 	 */
 	return apply_filters( 'wp_trim_excerpt', $text, $raw_excerpt );
 }
+
+function wc_shortcodes_display_share_buttons( $content ) {
+	$display = false;
+
+	if ( is_single() && 'post' == get_post_type() ) {
+		$display = true;
+	}
+	else if ( ( is_home() || is_archive() ) && 'post' == get_post_type() ) {
+		$display = true;
+	}
+
+	if ( ! $display ) {
+		return $content;
+	}
+
+	$share = wc_shortcodes_get_share_buttons();
+
+	if ( empty( $share ) ) {
+		return $content;
+	}
+
+	$content .= $share;
+
+	return apply_filters( 'wc_shortcodes_display_share_buttons', $content );
+}
+function wc_shortcodes_share_buttons_filters() {
+	global $wc_shortcodes_theme_support;
+
+	$share_buttons_on_post_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_post_page' );
+	$share_buttons_on_blog_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_blog_page' );
+	$share_buttons_on_archive_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_archive_page' );
+
+	if ( $share_buttons_on_post_page ) {
+		if ( is_single() && 'post' == get_post_type() ) {
+			add_filter( 'the_content', 'wc_shortcodes_display_share_buttons', 38, 1 );
+		}
+	}
+
+	if ( $share_buttons_on_blog_page ) {
+		if ( is_home() ) {
+			add_filter( 'the_content', 'wc_shortcodes_display_share_buttons', 38, 1 );
+			add_filter( 'the_excerpt', 'wc_shortcodes_display_share_buttons', 38, 1 );
+		}
+	}
+
+	if ( $share_buttons_on_archive_page ) {
+		if ( is_category() || is_tag() || is_author() || is_date() ) {
+			add_filter( 'the_content', 'wc_shortcodes_display_share_buttons', 38, 1 );
+			add_filter( 'the_excerpt', 'wc_shortcodes_display_share_buttons', 38, 1 );
+		}
+	}
+}
+add_action( 'wp', 'wc_shortcodes_share_buttons_filters', 11 );
+
+function wc_shortcodes_get_share_buttons() {
+	$html = null;
+	$share_buttons = null;
+
+	$share_buttons = do_shortcode( '[wc_share]' );
+
+	if ( empty( $share_buttons ) ) {
+		return '';
+	}
+
+	$html .= '<div class="wc-share-buttons-container">';
+		$html .= apply_filters( 'wc_shortcodes_before_share_buttons', '' );
+		$html .= '<div class="share-buttons">';
+			$html .= '<div class="share-text">' . __( 'Share', 'wpcanvas2' ) . '</div>';
+			$html .= $share_buttons;
+		$html .= '</div>';
+	$html .= '</div>';
+
+	return $html;
+}
