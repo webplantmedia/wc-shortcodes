@@ -88,6 +88,15 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.83 =
+
+* fixed style bug with part of the social icon was clipped
+* Fixed style bug with Google Chome icon being cut off
+* update icon css
+* Added support for share buttons
+* Added format option for social icons widget.
+* Updated Font Awesome library to version 4.5.0
+
 = Version 1.82 =
 
 * Fixed bug with restructured WP_Query class in WordPress 4.4
