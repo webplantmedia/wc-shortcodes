@@ -119,6 +119,12 @@
 								}
 							},
 							{
+								text: "Share Buttons",
+								onclick: function(){
+									editor.insertContent('[wc_share class=""]');
+								}
+							},
+							{
 								text: "Testimonial",
 								onclick: function(){
 									editor.insertContent('[wc_testimonial by="Author" url="" position="left"]' + wcDummyContent + '[/wc_testimonial]');
