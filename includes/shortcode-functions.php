@@ -1184,16 +1184,6 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 			$display['layout'] = "masonry";
 		}
 
-		$is_masonry =  'masonry' == $display['layout'] ? true : false;
-		$is_grid =  'grid' == $display['layout'] ? true : false;
-
-		if ( $is_masonry ) {
-			wp_enqueue_script('wc-shortcodes-posts');
-		}
-		else if ( $is_grid ) {
-			wp_enqueue_script('wc-shortcodes-posts-grid');
-		}
-
 		$valid_templates = array( 'box', 'borderless' );
 		if ( ! in_array( $display['template'], $valid_templates ) ) {
 			$display['template'] = "box";
@@ -1260,8 +1250,11 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
 		$display['heading_type'] = in_array( $display['heading_type'], $valid_headings ) ? $display['heading_type'] : 'h2';
 
-		$valid_columns = array( 2, 3, 4, 5, 6, 7, 8, 9 );
+		$valid_columns = array( 1, 2, 3, 4, 5, 6, 7, 8, 9 );
 		$display['columns'] = in_array( $display['columns'], $valid_columns ) ? $display['columns'] : 2;
+		if ( $display['columns'] == 1 ) {
+			$display['layout'] = 'single-column';
+		}
 		
 		($display['title'] == "yes") ? ($display['title'] = true) : ($display['title'] = false);
 		($display['meta_all'] == "yes") ? ($display['meta_all'] = true) : ($display['meta_all'] = false);
@@ -1273,6 +1266,16 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 		($display['paging'] == "yes" && ! $atts['nopaging']) ? ($display['paging'] = true) : ($display['paging'] = false);
 		($display['filtering'] == "yes") ? ($display['filtering'] = true) : ($display['filtering'] = false);
 		($atts['order'] == "ASC") ? ($atts['order'] = "ASC") : ($atts['order'] = "DESC");
+
+		$is_masonry =  'masonry' == $display['layout'] ? true : false;
+		$is_grid =  'grid' == $display['layout'] ? true : false;
+
+		if ( $is_masonry ) {
+			wp_enqueue_script('wc-shortcodes-posts');
+		}
+		else if ( $is_grid ) {
+			wp_enqueue_script('wc-shortcodes-posts-grid');
+		}
 
 		$nav_filter_hard_links = false;
 		if ( $display['paging'] ) {
