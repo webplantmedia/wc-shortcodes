@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 1.85
+
+* add support for single column in wc_posts
+
 ### Version 1.84
 
 * Added share buttons shortcode
