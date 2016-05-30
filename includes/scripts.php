@@ -25,7 +25,7 @@ if( ! function_exists('wc_shortcodes_scripts') ) :
 		wp_register_script( 'wordpresscanvas-imagesloaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array (), '3.1.8', true );
 
 		// slider
-		wp_register_script( 'wordpresscanvas-rslides', plugin_dir_url( __FILE__ ) . 'js/responsiveslides.js', array ( 'jquery' ), '1.54', true );
+		wp_register_script( 'wordpresscanvas-rslides', plugin_dir_url( __FILE__ ) . 'js/responsiveslides.min.js', array ( 'jquery' ), '1.54', true );
 
 		// posts
 		wp_register_script( 'wc-shortcodes-posts', plugin_dir_url( __FILE__ ) . 'js/posts.js', array ( 'jquery', 'wordpresscanvas-rslides', 'jquery-masonry', 'wordpresscanvas-imagesloaded' ), $ver, true );
