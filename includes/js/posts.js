@@ -1,25 +1,11 @@
 ( function( $ ) {
 	"use strict";
 
-	$.fn.wcShortcodesMasonryImagesReveal = function( $items ) {
-		var msnry = this.data('masonry');
-
-		$.each( $items, function( key, item ) {
-			var $item = $(this);
-
-			$item.imagesLoaded().always( function( instance ) {
-				// un-hide item
-				$item.show();
-
-				// masonry does its thing
-				msnry.layout();
-			});
-		});
-
-		return this;
-	};
-
+	var body = $( 'body' ),
+		_window = $( window );
+	
 	var calculateGrid = function($container) {
+		var windowWidth = _window.width();
 		var columns = parseInt( $container.data('columns') );
 		var gutterWidth = $container.data('gutterSpace');
 		// need to return exact decimal width
@@ -53,20 +39,51 @@
 			columnWidth = Math.floor( contentWidth / columns );
 		}
 
+		if ( windowWidth <= 568 ) {
+			columns = 1;
+
+			allGutters = gutterWidth * ( columns - 1 );
+			contentWidth = containerWidth - allGutters;
+
+			columnWidth = Math.floor( contentWidth / columns );
+		}
+
 		return {columnWidth: columnWidth, gutterWidth: gutterWidth, columns: columns};
 	}
 
-	var runMasonry = function( duration, $container, $posts ) {
+	var runMasonry = function( duration, $container, $posts, method) {
 		var o = calculateGrid($container);
 
-		$posts.css({'width':o.columnWidth+'px', 'margin-bottom':o.gutterWidth+'px', 'padding':'0'});
+		if ( o.columns == 1 ) {
+			if ( $container.hasClass('masonry') ) {
+				$container.masonry('destroy');
+			}
 
-		$container = $container.masonry( {
-			itemSelector: '.wc-shortcodes-post-box',
-			columnWidth: o.columnWidth,
-			gutter: o.gutterWidth,
-			transitionDuration: duration 
-		} );
+			$container.removeAttr("style");
+			$container.children().removeAttr("style");
+			$container.css('height', 'auto');
+
+			return;
+		}
+		else if ( 'layout' == method ) {
+			$container.masonry('layout');
+
+			return;
+		}
+		else {
+			var marginBottom = o.gutterWidth;
+
+			$posts.css({'width':o.columnWidth+'px', 'margin-bottom':o.gutterWidth+'px', 'padding':'0'});
+
+			$container.masonry( {
+				itemSelector: '.wc-shortcodes-post-box',
+				columnWidth: o.columnWidth,
+				gutter: o.gutterWidth,
+				transitionDuration: duration 
+			} );
+
+			return;
+		}
 	}
 
 	$(document).ready(function(){
@@ -74,17 +91,34 @@
 			var $container = $(this);
 			var $posts = $container.children('.wc-shortcodes-post-box');
 
-			$posts.hide();
+			// remove posts from element
+			// $container.css('height',0);
 
-			// keeps the media elements from calculating for the full width of the post
-			runMasonry(0, $container, $posts);
+			$(document).ready(function(){
+				// we are going to append masonry items as the images load
+				runMasonry(0, $container, $posts, 'masonry');
 
-			// we are going to append masonry items as the images load
-			$container.wcShortcodesMasonryImagesReveal( $posts );
+				$container.imagesLoaded().always( function( instance ) {
+					// masonry does its thing
+					runMasonry(0, $container, $posts, 'layout');
+				});
+			});
 
 			$(window).resize(function() {
-				runMasonry(0, $container, $posts);
+				runMasonry(0, $container, $posts, 'masonry');
 			}); 
+
+			// $(window).load(function() {
+			// }); 
+
+			if (window.twttr !== undefined) {
+				twttr.ready(function (twttr) {
+					twttr.events.bind('loaded', function (event) {
+						//DO A MASONRY RELAYOUT HERE
+						runMasonry(0, $container, $posts, 'layout');
+					});
+				});
+			}
 
 			$container.find(".wc-shortcodes-post-box .rslides").responsiveSlides({
 				auto: false,             // Boolean: Animate automatically, true or false
@@ -103,7 +137,7 @@
 				namespace: "rslides",   // String: Change the default namespace used
 				before: function(){},   // Function: Before callback
 				after: function(){
-					runMasonry(0, $container, $posts);
+					runMasonry(0, $container, $posts, 'layout');
 				}// Function: After callback
 			});
 		});
@@ -129,7 +163,7 @@
 					$target.find(selector).show();
 				}
 
-				runMasonry(0, $target, $targetPosts);
+				runMasonry(0, $target, $targetPosts, 'layout');
 
 				$target.animate({opacity: 1}, 300);
 			});

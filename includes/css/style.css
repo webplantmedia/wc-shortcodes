@@ -1445,8 +1445,15 @@ pre.pre-wrap {
 	margin-bottom: 20px;
 	padding: 0;
 }
+.wc-shortcodes-post-box .wc-shortcodes-entry-video > p,
+.wc-shortcodes-post-box .twitter-tweet,
+.wc-shortcodes-post-box .mejs-container {
+	margin-top: 0 !important;
+}
+.wc-shortcodes-posts-layout-masonry {
+	height: 0;
+}
 .wc-shortcodes-posts-layout-masonry .wc-shortcodes-post-box {
-	display: none;
 }
 .wc-shortcodes-sep {
 	padding-left: 5px;
