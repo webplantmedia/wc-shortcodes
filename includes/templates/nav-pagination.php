@@ -3,7 +3,7 @@
 if ( $wc_shortcodes_posts_query->max_num_pages < 2 )
 	return;
 ?>
-<nav class="navigation paging-navigation" role="navigation">
+<nav class="navigation paging-navigation wc-shortcodes-posts-navigation" role="navigation">
 	<h3 class="screen-reader-text"><?php _e( 'Posts Navigation', 'wordpresscanvas' ); ?></h3>
 	<div class="nav-links">
 		<?php 
