@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.88 =
+
+* updated share button shortcode
+
 = Version 1.87 =
 
 * Added class name to paginate navigation
