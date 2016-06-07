@@ -381,7 +381,7 @@ function wc_shortcodes_display_share_buttons( $content ) {
 		return $content;
 	}
 
-	$share = wc_shortcodes_get_share_buttons();
+	$share = do_shortcode( '[wc_share_buttons]' );
 
 	if ( empty( $share ) ) {
 		return $content;
@@ -420,23 +420,3 @@ function wc_shortcodes_share_buttons_filters() {
 }
 add_action( 'wp', 'wc_shortcodes_share_buttons_filters', 11 );
 
-function wc_shortcodes_get_share_buttons() {
-	$html = null;
-	$share_buttons = null;
-
-	$share_buttons = do_shortcode( '[wc_share]' );
-
-	if ( empty( $share_buttons ) ) {
-		return '';
-	}
-
-	$html .= '<div class="wc-share-buttons-container">';
-		$html .= apply_filters( 'wc_shortcodes_before_share_buttons', '' );
-		$html .= '<div class="share-buttons">';
-			$html .= '<div class="share-text">' . __( 'Share', 'wpcanvas2' ) . '</div>';
-			$html .= $share_buttons;
-		$html .= '</div>';
-	$html .= '</div>';
-
-	return $html;
-}

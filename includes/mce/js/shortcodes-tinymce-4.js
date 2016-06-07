@@ -121,7 +121,7 @@
 							{
 								text: "Share Buttons",
 								onclick: function(){
-									editor.insertContent('[wc_share class=""]');
+									editor.insertContent('[wc_share_buttons]');
 								}
 							},
 							{

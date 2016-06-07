@@ -1657,3 +1657,26 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 	}
 	add_shortcode( 'wc_share', 'wc_shortcodes_share_buttons' );
 }
+if ( ! function_exists('wc_shortcodes_get_share_buttons') ) {
+	function wc_shortcodes_get_share_buttons() {
+		$html = null;
+		$share_buttons = null;
+
+		$share_buttons = wc_shortcodes_share_buttons( null );
+
+		if ( empty( $share_buttons ) ) {
+			return '';
+		}
+
+		$html .= '<div class="wc-share-buttons-container">';
+			$html .= apply_filters( 'wc_shortcodes_before_share_buttons', '' );
+			$html .= '<div class="share-buttons">';
+				$html .= '<div class="share-text">' . __( 'Share', 'wpcanvas2' ) . '</div>';
+				$html .= $share_buttons;
+			$html .= '</div>';
+		$html .= '</div>';
+
+		return $html;
+	}
+	add_shortcode( 'wc_share_buttons', 'wc_shortcodes_get_share_buttons' );
+}
