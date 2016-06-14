@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.89 =
+
+* removed paginate text span element
+
 = Version 1.88 =
 
 * updated share button shortcode
