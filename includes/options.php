@@ -112,6 +112,14 @@ function wc_shortcodes_options( $options ) {
 								'label' => 'Add share buttons to the bottom of your posts in your category, tag, date, and author archive pages.',
 								'type' => 'checkbox',
 							),
+							array(
+								'option_name' => 'share_buttons_on_product_page',
+								'title' => 'Product Page',
+								'default' => $wc_shortcodes_theme_support['share_buttons_on_product_page'],
+								'description' => '',
+								'label' => 'Add share buttons to the bottom of your WooCommerce product page.',
+								'type' => 'checkbox',
+							),
 						),
 					),
 					array(

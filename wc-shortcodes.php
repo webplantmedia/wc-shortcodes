@@ -54,6 +54,7 @@ $wc_shortcodes_theme_support = array(
 	'share_buttons_on_post_page' => false,
 	'share_buttons_on_blog_page' => false,
 	'share_buttons_on_archive_page' => false,
+	'share_buttons_on_product_page' => false,
 	'facebook_font_icon' => 'fa-facebook',
 	'facebook_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/facebook.png',
 	'twitter_font_icon' => 'fa-twitter',

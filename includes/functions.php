@@ -367,6 +367,13 @@ function wc_shortcodes_wp_trim_excerpt($text = '') {
 	return apply_filters( 'wp_trim_excerpt', $text, $raw_excerpt );
 }
 
+function wc_shortcodes_echo_share_buttons() {
+	$share = do_shortcode( '[wc_share_buttons]' );
+
+	if ( ! empty( $share ) ) {
+		echo $share;
+	}
+}
 function wc_shortcodes_display_share_buttons( $content ) {
 	$display = false;
 
@@ -392,11 +399,10 @@ function wc_shortcodes_display_share_buttons( $content ) {
 	return apply_filters( 'wc_shortcodes_display_share_buttons', $content );
 }
 function wc_shortcodes_share_buttons_filters() {
-	global $wc_shortcodes_theme_support;
-
 	$share_buttons_on_post_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_post_page' );
 	$share_buttons_on_blog_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_blog_page' );
 	$share_buttons_on_archive_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_archive_page' );
+	$share_buttons_on_product_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_product_page' );
 
 	if ( $share_buttons_on_post_page ) {
 		if ( is_single() && 'post' == get_post_type() ) {
@@ -417,6 +423,11 @@ function wc_shortcodes_share_buttons_filters() {
 			add_filter( 'the_excerpt', 'wc_shortcodes_display_share_buttons', 38, 1 );
 		}
 	}
+
+	if ( $share_buttons_on_product_page ) {
+		add_action( 'woocommerce_single_product_summary', 'wc_shortcodes_echo_share_buttons', 99 );
+	}
+
 }
 add_action( 'wp', 'wc_shortcodes_share_buttons_filters', 11 );
 
