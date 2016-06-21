@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.90 =
+
+* added option for share buttons on woocommerce product page
+
 = Version 1.89 =
 
 * removed paginate text span element
