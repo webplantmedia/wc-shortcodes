@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.91 =
+
+* Don't output Share flair on excerpts
+
 = Version 1.90 =
 
 * added option for share buttons on woocommerce product page
