@@ -375,6 +375,8 @@ function wc_shortcodes_echo_share_buttons() {
 	}
 }
 function wc_shortcodes_display_share_buttons( $content ) {
+	global $wp_current_filter;
+
 	$display = false;
 
 	if ( is_single() && 'post' == get_post_type() ) {
@@ -383,12 +385,17 @@ function wc_shortcodes_display_share_buttons( $content ) {
 	else if ( ( is_home() || is_archive() ) && 'post' == get_post_type() ) {
 		$display = true;
 	}
+	// Don't output flair on excerpts
+	if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
+		$display = false;
+	}
 
 	if ( ! $display ) {
 		return $content;
 	}
 
 	$share = do_shortcode( '[wc_share_buttons]' );
+	$share = apply_filters( 'wc_shortcodes_display_share_buttons', $share );
 
 	if ( empty( $share ) ) {
 		return $content;
@@ -396,7 +403,7 @@ function wc_shortcodes_display_share_buttons( $content ) {
 
 	$content .= $share;
 
-	return apply_filters( 'wc_shortcodes_display_share_buttons', $content );
+	return $content;
 }
 function wc_shortcodes_share_buttons_filters() {
 	$share_buttons_on_post_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_post_page' );
