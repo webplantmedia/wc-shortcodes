@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.92 =
+
+* removed the_excerpt filter for share buttons
+
 = Version 1.91 =
 
 * Don't output Share flair on excerpts
