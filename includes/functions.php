@@ -420,14 +420,14 @@ function wc_shortcodes_share_buttons_filters() {
 	if ( $share_buttons_on_blog_page ) {
 		if ( is_home() ) {
 			add_filter( 'the_content', 'wc_shortcodes_display_share_buttons', 38, 1 );
-			add_filter( 'the_excerpt', 'wc_shortcodes_display_share_buttons', 38, 1 );
+			// add_filter( 'the_excerpt', 'wc_shortcodes_display_share_buttons', 38, 1 );
 		}
 	}
 
 	if ( $share_buttons_on_archive_page ) {
 		if ( is_category() || is_tag() || is_author() || is_date() ) {
 			add_filter( 'the_content', 'wc_shortcodes_display_share_buttons', 38, 1 );
-			add_filter( 'the_excerpt', 'wc_shortcodes_display_share_buttons', 38, 1 );
+			// add_filter( 'the_excerpt', 'wc_shortcodes_display_share_buttons', 38, 1 );
 		}
 	}
 
