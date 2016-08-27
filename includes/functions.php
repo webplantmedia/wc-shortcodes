@@ -406,6 +406,12 @@ function wc_shortcodes_display_share_buttons( $content ) {
 	return $content;
 }
 function wc_shortcodes_share_buttons_filters() {
+	global $wc_shortcodes_theme_support;
+
+	if ( $wc_shortcodes_theme_support[ 'share_buttons_filter_disable' ] ) {
+		return;
+	}
+
 	$share_buttons_on_post_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_post_page' );
 	$share_buttons_on_blog_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_blog_page' );
 	$share_buttons_on_archive_page = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_on_archive_page' );

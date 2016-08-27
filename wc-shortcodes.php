@@ -51,6 +51,7 @@ $wc_shortcodes_share_buttons = array(
 $wc_shortcodes_theme_support = array(
 	'fullwidth_container' => '#main',
 	'social_icons_format' => 'image',
+	'share_buttons_filter_disable' => false,
 	'share_buttons_on_post_page' => false,
 	'share_buttons_on_blog_page' => false,
 	'share_buttons_on_archive_page' => false,

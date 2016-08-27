@@ -233,6 +233,9 @@ class WC_Shortcodes_Settings_Framework {
 					if ( isset( $oo['group'] ) && is_array( $oo['group'] ) ) {
 						foreach ( $oo['group'] as $key => $ooo ) {
 							if ( isset( $ooo['option_name'] ) ) {
+								if ( isset( $ooo['hide'] ) && $ooo['hide'] )
+									continue;
+
 								$ooo['option_name'] = $this->plugin_prefix . $ooo['option_name'];
 								$oo['group'][ $key ]['option_name'] = $ooo['option_name'];
 
@@ -251,6 +254,9 @@ class WC_Shortcodes_Settings_Framework {
 					}
 					else {
 						if ( isset( $oo['option_name'] ) ) {
+							if ( isset( $oo['hide'] ) && $oo['hide'] )
+								continue;
+
 							$oo['option_name'] = $this->plugin_prefix . $oo['option_name'];
 
 							$callback = $this->get_callback( $oo );

@@ -95,6 +95,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Add share buttons to the bottom of your post pages',
 								'type' => 'checkbox',
+								'hide' => $wc_shortcodes_theme_support['share_buttons_filter_disable'],
 							),
 							array(
 								'option_name' => 'share_buttons_on_blog_page',
@@ -103,6 +104,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Add share buttons to the bottom of your posts in your blog',
 								'type' => 'checkbox',
+								'hide' => $wc_shortcodes_theme_support['share_buttons_filter_disable'],
 							),
 							array(
 								'option_name' => 'share_buttons_on_archive_page',
@@ -111,6 +113,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Add share buttons to the bottom of your posts in your category, tag, date, and author archive pages.',
 								'type' => 'checkbox',
+								'hide' => $wc_shortcodes_theme_support['share_buttons_filter_disable'],
 							),
 							array(
 								'option_name' => 'share_buttons_on_product_page',
@@ -119,6 +122,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Add share buttons to the bottom of your WooCommerce product page.',
 								'type' => 'checkbox',
+								'hide' => $wc_shortcodes_theme_support['share_buttons_filter_disable'],
 							),
 						),
 					),

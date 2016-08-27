@@ -896,6 +896,9 @@
 	background-color: #999999;
 	color: #ffffff;
 }
+.wc-shortcodes-share-buttons.wc-shortcodes-share-buttons-format-icon-text li i {
+	text-align: center;
+}
 .wc-shortcodes-share-buttons-format-icon-text li span {
 	margin-left: 0.3125em;
 }
