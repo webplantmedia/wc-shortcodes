@@ -4,15 +4,27 @@
 	var wcShortcodeManager = function(editor, url) {
 		var wcDummyContent = 'Sample Content';
 		var wcParagraphContent = '<p>Sample Content</p>';
-
+		var wcDummyParagraphContent = '<p>Sample Content</p>';
 
 		editor.addButton('wpc_shortcodes_button', function() {
+			
 			return {
 				title: "",
 				text: "[ ]",
 				image: url + "/images/shortcodes.png",
 				type: 'menubutton',
 				icons: false,
+				onclick: function() {
+					var mceSelected = editor.selection.getContent({format: 'text'});
+					if ( mceSelected ) {
+						wcDummyContent = mceSelected;
+						wcParagraphContent = '<p>' + mceSelected + '</p>';
+					}
+					else {
+						wcDummyContent = 'Sample Content';
+						wcParagraphContent = '<p>Sample Content</p>';
+					}
+				},
 				menu: [
 					{
 						text: 'Columns',
@@ -20,61 +32,61 @@
 							{
 								text: "1/2 + 1/2",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-half" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="one-half" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							},
 							{
 								text: "1/3 + 1/3 + 1/3",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-third" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="one-third" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-third" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							},
 							{
 								text: "1/3 + 2/3",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-third" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="two-third" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="one-third" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="two-third" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							},
 							{
 								text: "2/3 + 1/3",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="two-third" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="two-third" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							},
 							{
 								text: "1/4 + 1/4 + 1/4 + 1/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							},
 							{
 								text: "1/4 + 1/2 + 1/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							},
 							{
 								text: "1/2 + 1/4 + 1/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-half" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="one-half" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							},
 							{
 								text: "1/4 + 1/4 + 1/2",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-half" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							},
 							{
 								text: "1/4 + 3/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="three-fourth" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="three-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							},
 							{
 								text: "3/4 + 1/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="three-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row][wc_column size="three-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
 								}
 							}
 						]
@@ -183,6 +195,12 @@
 								text: "Grid - Borderless",
 								onclick: function(){
 									editor.insertContent('[wc_posts author="" author_name="" p="" post__in="" order="DESC" orderby="date" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" title="yes" meta_all="yes" meta_author="yes" meta_date="yes" date_format="M j, Y" meta_comments="yes" thumbnail="yes" content="yes" paging="yes" size="wccarousel" filtering="yes" columns="3" gutter_space="40" heading_type="h2" layout="grid" template="borderless" excerpt_length="15"][/wc_posts]');
+								}
+							},
+							{
+								text: "Post Slider",
+								onclick: function(){
+									editor.insertContent('[wc_post_slider author="" author_name="" p="" post__in="" order="DESC" orderby="name" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" meta_category="yes" title="yes" content="yes" readmore="Continue Reading" size="full" heading_type="h2" heading_size="30" excerpt_length="30" height="500" text_color="#ffffff"][/wc_post_slider]');
 								}
 							}
 						]
@@ -322,13 +340,13 @@
 							{
 								text: "Accordion",
 								onclick: function(){
-									editor.insertContent('[wc_accordion collapse="0" leaveopen="0" layout="box"]<p>[wc_accordion_section title="Section 1"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section]</p><p>[wc_accordion_section title="Section 2"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section]</p>[/wc_accordion]');
+									editor.insertContent('[wc_accordion collapse="0" leaveopen="0" layout="box"]<p>[wc_accordion_section title="Section 1"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section]</p><p>[wc_accordion_section title="Section 2"]</p>' + wcDummyParagraphContent + '<p>[/wc_accordion_section]</p>[/wc_accordion]');
 								}
 							},
 							{
 								text: "Tabs",
 								onclick: function(){
-									editor.insertContent('[wc_tabgroup layout="box"]<p>[wc_tab title="First Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab]</p><p>[wc_tab title="Second Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab]</p>[/wc_tabgroup]');
+									editor.insertContent('[wc_tabgroup layout="box"]<p>[wc_tab title="First Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab]</p><p>[wc_tab title="Second Tab"]</p>'+wcDummyParagraphContent+'<p>[/wc_tab]</p>[/wc_tabgroup]');
 								}
 							},
 							{
