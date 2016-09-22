@@ -88,6 +88,12 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.94 =
+
+* Added post_slider shortcode
+* Added text selection to shortcode inserts
+* Fixed bug with width of social icon square
+
 = Version 1.93 =
 
 * added ability for themes to disable share buttons filter
