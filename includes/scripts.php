@@ -26,6 +26,9 @@ if( ! function_exists('wc_shortcodes_scripts') ) :
 
 		// slider
 		wp_register_script( 'wordpresscanvas-rslides', plugin_dir_url( __FILE__ ) . 'js/responsiveslides.min.js', array ( 'jquery' ), '1.54', true );
+		wp_register_style( 'wc-shortcodes-bxslider', plugin_dir_url( __FILE__ ) . 'vendors/bxslider/jquery.bxslider.min.css', array( ), '4.2.5' );
+		wp_register_script( 'wc-shortcodes-bxslider', plugin_dir_url( __FILE__ ) . 'vendors/bxslider/jquery.bxslider.min.js', array ( 'jquery' ), '4.2.5', true );
+		wp_register_script( 'wc-shortcodes-post-slider', plugin_dir_url( __FILE__ ) . 'js/post-slider.js', array ( 'jquery' ), $ver, true );
 
 		// posts
 		wp_register_script( 'wc-shortcodes-posts', plugin_dir_url( __FILE__ ) . 'js/posts.js', array ( 'jquery', 'wordpresscanvas-rslides', 'jquery-masonry', 'wordpresscanvas-imagesloaded' ), $ver, true );

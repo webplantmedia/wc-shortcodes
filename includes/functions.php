@@ -444,3 +444,17 @@ function wc_shortcodes_share_buttons_filters() {
 }
 add_action( 'wp', 'wc_shortcodes_share_buttons_filters', 11 );
 
+function wc_shortcodes_get_posted_category() {
+	$html = null;
+	$cats = get_the_category_list( ', ' );
+
+	if ( ! empty( $cats ) ) {
+		$html .= '<div class="wc-shortcodes-entry-category">';
+			if ( ! empty( $cats ) ) {
+				$html .= '<span class="wc-shortcodes-cat-posted-text">' . __( 'Posted in', 'wpcanvas2' ) . ' </span><span class="wc-shortcodes-post-in-cat-links">' . $cats . '</span>';
+			}
+		$html .= '</div>';
+	}
+
+	return $html;
+}

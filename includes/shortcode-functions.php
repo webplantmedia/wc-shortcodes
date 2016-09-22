@@ -1333,6 +1333,214 @@ if( ! function_exists( 'wc_shortcodes_posts' ) ) {
 }
 add_shortcode( 'wc_posts', 'wc_shortcodes_posts' );
 
+if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
+	/**
+	 * Display posts in various formats
+	 *
+	 * @since 3.8
+	 * @access public
+	 *
+	 * @param mixed $atts
+	 * @return void
+	 */
+	function wc_shortcodes_post_slider( $atts ) {
+		global $data;
+		global $post;
+		global $wc_shortcodes_posts_query;
+
+		static $instance = 0;
+		$instance++;
+
+		$atts = shortcode_atts( array(
+			'author' => '', //use author id
+			'author_name' => '', //use 'user_nicename' (NOT name).
+			'p' => false, //use post id.
+			'post__in' => false, //use post ids
+			'order' => 'DESC', // DESC, ASC
+			'orderby' => 'date',
+			'post_status' => 'publish',
+			'post_type' => 'post', // post, page, wc_portfolio_item, etc
+			'posts_per_page' => 10, //number of post to show per page
+			'nopaging' => true, //show all posts or use pagination. Default value is 'false', use paging.
+			'ignore_sticky_posts' => 0,
+
+			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
+			'field' => 'slug', // slug or id
+			'terms' => '', // taxonomy terms.
+
+			'meta_category' => true, // show heading?
+			'title' => true, // show heading?
+			'content' => true, // show main content?
+			'readmore' => 'Continue Reading', // show main content?
+
+			'size' => 'full', // default thumbnail size
+
+			'heading_type' => 'h2', // heading tag for title
+			'heading_size' => '30',
+			'mobile_heading_size' => '24',
+			'layout' => 'bxslider', // blog layout
+			'template' => 'slider',
+			'excerpt_length' => '55',
+			'desktop_height' => '650',
+			'laptop_height' => '500',
+			'mobile_height' => '350',
+			'text_color' => '#ffffff',
+		), $atts );
+
+		// fix bug with title argument being added to WP_Query() in 4.4
+		$keys = array(
+			'meta_category',
+			'title',
+			'content',
+			'readmore',
+
+			'size',
+
+			'heading_type',
+			'heading_size',
+			'mobile_heading_size',
+			'layout',
+			'template',
+			'excerpt_length',
+			'desktop_height',
+			'laptop_height',
+			'mobile_height',
+			'text_color',
+		);
+
+		$display = array();
+		foreach ( $keys as $key ) {
+			$display[ $key ] = $atts[ $key ];
+			unset( $atts[ $key ] );
+		}
+
+		// changed default layout name. Let's catch old inputs
+		$valid_layouts = array( 'bxslider' );
+		if ( ! in_array( $display['layout'], $valid_layouts ) ) {
+			$display['layout'] = 'bxslider';
+		}
+
+		$valid_templates = array( 'slider' );
+		if ( ! in_array( $display['template'], $valid_templates ) ) {
+			$display['template'] = 'slider';
+		}
+
+		// clean input values
+		$atts['terms'] = wc_shortcodes_comma_delim_to_array( $atts['terms'] );
+		$wpc_term = null;
+		if ( isset( $_GET['wpc_term'] ) && ! empty( $_GET['wpc_term'] ) ) {
+			$wpc_term = $_GET['wpc_term'];
+		}
+		$atts['post__in'] = wc_shortcodes_comma_delim_to_array( $atts['post__in'] );
+		$display['excerpt_length'] = (int) $display['excerpt_length'];
+		$atts['order'] = strtoupper( $atts['order'] );
+		$display['heading_type'] = strtolower( $display['heading_type'] );
+
+		if (isset($atts['posts_per_page']) && $atts['posts_per_page']) {
+			$atts['posts_per_page'] = (int) $atts['posts_per_page'];
+		}
+		else {
+			$atts['posts_per_page'] = 0;
+		}
+
+		$display['desktop_height'] = (int) $display['desktop_height'];
+		$display['laptop_height'] = (int) $display['laptop_height'];
+		$display['mobile_height'] = (int) $display['mobile_height'];
+		$display['heading_size'] = (int) $display['heading_size'];
+		$display['mobile_heading_size'] = (int) $display['mobile_heading_size'];
+
+
+		// add tax query if user specified
+		if ( ! empty( $wpc_term ) ) {
+			$atts['tax_query'] = array(
+				array(
+					'taxonomy' => $atts['taxonomy'],
+					'field' => $atts['field'],
+					'terms' => $wpc_term,
+				),
+			);
+		}
+		else if ( ! empty( $atts['terms'] ) ) {
+			$atts['tax_query'] = array(
+				array(
+					'taxonomy' => $atts['taxonomy'],
+					'field' => $atts['field'],
+					'terms' => $atts['terms'],
+				),
+			);
+		}
+
+		// setting attributes right for the php script
+		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
+		$display['heading_type'] = in_array( $display['heading_type'], $valid_headings ) ? $display['heading_type'] : 'h2';
+
+		($display['title'] == "yes") ? ($display['title'] = true) : ($display['title'] = false);
+		($display['content'] == "yes") ? ($display['content'] = true) : ($display['content'] = false);
+		($atts['order'] == "ASC") ? ($atts['order'] = "ASC") : ($atts['order'] = "DESC");
+
+		$is_grid =  'grid' == $display['layout'] ? true : false;
+
+		if ( 'bxslider' == $display['layout'] ) {
+			wp_enqueue_script('wc-shortcodes-bxslider');
+			wp_enqueue_script('wc-shortcodes-post-slider');
+		}
+
+		$wc_shortcodes_posts_query = new WP_Query($atts);
+		$wc_shortcodes_posts_query->excerpt_length = $display['excerpt_length'];
+
+		$html = '';
+
+		$html .= '<style>';
+		$html .= '#wc-shortcodes-post-slider-'.$instance.' .wc-shortcodes-post-slide {';
+			$html .= 'height: ' . $display['desktop_height'] . 'px;';
+		$html .= '}';
+		$html .= '#wc-shortcodes-post-slider-'.$instance.' .wc-shortcodes-entry-title {';
+			$html .= 'font-size: ' . $display['heading_size'] . 'px;';
+		$html .= '}';
+		$html .= '@media (max-width: 1150px) {';
+			$html .= '#wc-shortcodes-post-slider-'.$instance.' .wc-shortcodes-post-slide {';
+				$html .= 'height: ' . $display['laptop_height'] . 'px;';
+			$html .= '}';
+		$html .= '}';
+		$html .= '@media (max-width: 767px) {';
+			$html .= '#wc-shortcodes-post-slider-'.$instance.' .wc-shortcodes-post-slide {';
+				$html .= 'height: ' . $display['mobile_height'] . 'px;';
+			$html .= '}';
+			$html .= '#wc-shortcodes-post-slider-'.$instance.' .wc-shortcodes-entry-title {';
+				$html .= 'font-size: ' . $display['mobile_heading_size'] . 'px;';
+			$html .= '}';
+		$html .= '}';
+		$html .= '</style>';
+
+		$class = array();
+		$class[] = 'wc-shortcodes-post-slider';
+		$class[] = 'wc-shortcodes-clearfix';
+		$class[] = 'wc-shortcodes-posts-layout-' . $display['layout'];
+		$class[] = 'wc-shortcodes-posts-template-' . $display['template'];
+
+		$html .= '<div id="" class="wc-shortcodes-post-slider-wrapper" style="color:'.$display['text_color'].';">';
+		$html .= '<div id="wc-shortcodes-post-slider-'.$instance.'" class="' . implode( ' ', $class ) . '">';
+
+			while( $wc_shortcodes_posts_query->have_posts() ) :
+				$wc_shortcodes_posts_query->the_post();
+				
+				if ( $display['content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) )
+					$display['content'] = false;
+
+				ob_start();
+				include('templates/'.$display['template'].'/index.php');
+				$html .= ob_get_clean();
+
+			endwhile;
+
+		$html .= '</div>';
+		$html .= '</div>';
+
+		wp_reset_query();
+		return $html;
+	}
+}
+add_shortcode( 'wc_post_slider', 'wc_shortcodes_post_slider' );
 
 if( !function_exists('wc_shortcodes_image') ) {
 	function wc_shortcodes_image( $atts ) {
