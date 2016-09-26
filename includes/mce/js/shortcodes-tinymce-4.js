@@ -198,9 +198,15 @@
 								}
 							},
 							{
-								text: "Post Slider",
+								text: "Post Slider 1",
 								onclick: function(){
-									editor.insertContent('[wc_post_slider author="" author_name="" p="" post__in="" order="DESC" orderby="name" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" meta_category="yes" title="yes" content="yes" readmore="Continue Reading" size="full" heading_type="h2" heading_size="30" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" text_color="#ffffff"][/wc_post_slider]');
+									editor.insertContent('[wc_post_slider author="" author_name="" p="" post__in="" order="DESC" orderby="name" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" meta_category="yes" title="yes" content="yes" readmore="Continue Reading" button_class="" size="full" heading_type="h2" heading_size="30" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" template="slider1"][/wc_post_slider]');
+								}
+							},
+							{
+								text: "Post Slider 2",
+								onclick: function(){
+									editor.insertContent('[wc_post_slider author="" author_name="" p="" post__in="" order="DESC" orderby="name" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" meta_category="no" title="yes" content="yes" readmore="Continue Reading" button_class="button secondary-button" size="full" heading_type="h2" heading_size="30" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" template="slider2"][/wc_post_slider]');
 								}
 							}
 						]

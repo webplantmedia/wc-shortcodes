@@ -1372,6 +1372,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			'title' => true, // show heading?
 			'content' => true, // show main content?
 			'readmore' => 'Continue Reading', // show main content?
+			'button_class' => 'button', // show main content?
 
 			'size' => 'full', // default thumbnail size
 
@@ -1379,12 +1380,11 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			'heading_size' => '30',
 			'mobile_heading_size' => '24',
 			'layout' => 'bxslider', // blog layout
-			'template' => 'slider',
+			'template' => 'slider1',
 			'excerpt_length' => '55',
 			'desktop_height' => '650',
 			'laptop_height' => '500',
 			'mobile_height' => '350',
-			'text_color' => '#ffffff',
 		), $atts );
 
 		// fix bug with title argument being added to WP_Query() in 4.4
@@ -1393,6 +1393,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			'title',
 			'content',
 			'readmore',
+			'button_class',
 
 			'size',
 
@@ -1405,7 +1406,6 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			'desktop_height',
 			'laptop_height',
 			'mobile_height',
-			'text_color',
 		);
 
 		$display = array();
@@ -1420,9 +1420,9 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			$display['layout'] = 'bxslider';
 		}
 
-		$valid_templates = array( 'slider' );
+		$valid_templates = array( 'slider1', 'slider2' );
 		if ( ! in_array( $display['template'], $valid_templates ) ) {
-			$display['template'] = 'slider';
+			$display['template'] = 'slider1';
 		}
 
 		// clean input values
@@ -1449,6 +1449,9 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 		$display['heading_size'] = (int) $display['heading_size'];
 		$display['mobile_heading_size'] = (int) $display['mobile_heading_size'];
 
+		$display['button_class'] = trim( $display['button_class'] );
+		$display['button_class'] = empty( $display['button_class'] ) ? 'wc-shortcodes-post-slide-button' : $display['button_class'];
+
 
 		// add tax query if user specified
 		if ( ! empty( $wpc_term ) ) {
@@ -1474,6 +1477,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
 		$display['heading_type'] = in_array( $display['heading_type'], $valid_headings ) ? $display['heading_type'] : 'h2';
 
+		($display['meta_category'] == "yes") ? ($display['meta_category'] = true) : ($display['meta_category'] = false);
 		($display['title'] == "yes") ? ($display['title'] = true) : ($display['title'] = false);
 		($display['content'] == "yes") ? ($display['content'] = true) : ($display['content'] = false);
 		($atts['order'] == "ASC") ? ($atts['order'] = "ASC") : ($atts['order'] = "DESC");
@@ -1518,7 +1522,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 		$class[] = 'wc-shortcodes-posts-layout-' . $display['layout'];
 		$class[] = 'wc-shortcodes-posts-template-' . $display['template'];
 
-		$html .= '<div id="" class="wc-shortcodes-post-slider-wrapper" style="color:'.$display['text_color'].';">';
+		$html .= '<div id="" class="wc-shortcodes-post-slider-wrapper">';
 		$html .= '<div id="wc-shortcodes-post-slider-'.$instance.'" class="' . implode( ' ', $class ) . '">';
 
 			while( $wc_shortcodes_posts_query->have_posts() ) :

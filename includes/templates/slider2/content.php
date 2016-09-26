@@ -14,11 +14,11 @@
 				<?php endif; ?>
 
 				<?php if ( $display['title'] ) : ?>
-				<div class="wc-shortcodes-entry-header">
-					<<?php echo $display['heading_type']; ?> class="wc-shortcodes-entry-title">
-						<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-					</<?php echo $display['heading_type']; ?>>
-				</div><!-- .entry-header -->
+					<div class="wc-shortcodes-entry-header">
+						<<?php echo $display['heading_type']; ?> class="wc-shortcodes-entry-title">
+							<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+						</<?php echo $display['heading_type']; ?>>
+					</div><!-- .entry-header -->
 				<?php endif; ?>
 
 				<?php if ( $display['content'] ) : ?>
@@ -29,7 +29,7 @@
 
 				<?php if ( $display['readmore'] ) : ?>
 				<div class="wc-shortcodes-read-more">
-					<a class="wc-shortcodes-post-slide-button" href="<?php the_permalink(); ?>"><?php echo $display['readmore']; ?></a>
+					<a class="<?php echo $display['button_class']; ?>" href="<?php the_permalink(); ?>"><?php echo $display['readmore']; ?></a>
 				</div><!-- .entry-summary -->
 				<?php endif; ?>
 			</div>
