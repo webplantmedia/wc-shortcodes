@@ -49,6 +49,7 @@ $wc_shortcodes_share_buttons = array(
 	'print' => 'Print',
 );
 $wc_shortcodes_theme_support = array(
+	'theme_reset' => false,
 	'fullwidth_container' => '#main',
 	'social_icons_format' => 'image',
 	'share_buttons_filter_disable' => false,

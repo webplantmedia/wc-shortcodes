@@ -47,6 +47,7 @@ function wc_shortcodes_options( $options ) {
 									'icon' => 'Icon',
 									'image' => 'Image',
 								),
+								'theme_reset' => true,
 							),
 						),
 					),
@@ -87,6 +88,7 @@ function wc_shortcodes_options( $options ) {
 									'icon-text' => 'Icon + Text',
 									'text' => 'Text',
 								),
+								'theme_reset' => true,
 							),
 							array(
 								'option_name' => 'share_buttons_on_post_page',
@@ -95,6 +97,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Add share buttons to the bottom of your post pages',
 								'type' => 'checkbox',
+								'theme_reset' => true,
 								'hide' => $wc_shortcodes_theme_support['share_buttons_filter_disable'],
 							),
 							array(
@@ -104,6 +107,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Add share buttons to the bottom of your posts in your blog',
 								'type' => 'checkbox',
+								'theme_reset' => true,
 								'hide' => $wc_shortcodes_theme_support['share_buttons_filter_disable'],
 							),
 							array(
@@ -113,6 +117,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Add share buttons to the bottom of your posts in your category, tag, date, and author archive pages.',
 								'type' => 'checkbox',
+								'theme_reset' => true,
 								'hide' => $wc_shortcodes_theme_support['share_buttons_filter_disable'],
 							),
 							array(
@@ -122,6 +127,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Add share buttons to the bottom of your WooCommerce product page.',
 								'type' => 'checkbox',
+								'theme_reset' => true,
 								'hide' => $wc_shortcodes_theme_support['share_buttons_filter_disable'],
 							),
 						),
@@ -254,6 +260,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Use shortcode CSS provided by plugin',
 								'type' => 'checkbox',
+								'theme_reset' => true,
 							),
 							array(
 								'option_name' => 'enable_font_awesome',
@@ -262,6 +269,7 @@ function wc_shortcodes_options( $options ) {
 								'description' => '',
 								'label' => 'Use font icons provided by FontAwesome',
 								'type' => 'checkbox',
+								'theme_reset' => true,
 							),
 						),
 					),
@@ -273,6 +281,13 @@ function wc_shortcodes_options( $options ) {
 	return $options;
 }
 add_filter( 'wc_shortcodes_wpcsf_options', 'wc_shortcodes_options', 10, 1 );
+
+function wc_shortcodes_theme_support() {
+	global $wc_shortcodes_theme_support;
+
+	return $wc_shortcodes_theme_support;
+}
+add_filter( 'wc_shortcodes_wpcsf_theme_support', 'wc_shortcodes_theme_support', 10, 1 );
 
 function wc_shortcodes_get_share_buttons_options() {
 	global $wc_shortcodes_theme_support;
@@ -291,6 +306,7 @@ function wc_shortcodes_get_share_buttons_options() {
 					'default' => $wc_shortcodes_theme_support[ $key . '_share_text'],
 					'description' => '',
 					'type' => 'input',
+					'theme_reset' => true,
 				),
 				array(
 					'option_name' => $key . '_share_font_icon',
@@ -298,6 +314,7 @@ function wc_shortcodes_get_share_buttons_options() {
 					'default' => $wc_shortcodes_theme_support[ $key . '_share_font_icon'],
 					'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
 					'type' => 'input',
+					'theme_reset' => true,
 				),
 				array(
 					'option_name' => $key . '_share_icon',
@@ -305,6 +322,7 @@ function wc_shortcodes_get_share_buttons_options() {
 					'default' => $wc_shortcodes_theme_support[ $key . '_share_button'],
 					'description' => '',
 					'type' => 'image',
+					'theme_reset' => true,
 				),
 			),
 		);
@@ -336,6 +354,7 @@ function wc_shortcodes_get_social_icons_options() {
 					'default' => $wc_shortcodes_theme_support[ $key . '_font_icon'],
 					'description' => '<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">See All Icons</a>',
 					'type' => 'input',
+					'theme_reset' => true,
 				),
 				array(
 					'option_name' => $key . '_icon',
@@ -343,6 +362,7 @@ function wc_shortcodes_get_social_icons_options() {
 					'default' => $wc_shortcodes_theme_support[ $key . '_social_icon'],
 					'description' => '',
 					'type' => 'image',
+					'theme_reset' => true,
 				),
 			),
 		);
