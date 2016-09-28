@@ -17,7 +17,7 @@
  */
 class WC_Shortcodes_Settings_Framework {
 
-	protected $version = '1.0.0';
+	protected $version = '1.0.2';
 
 	/**
 	 * Instance of this class.
