@@ -88,6 +88,12 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 1.95 =
+
+* settings framework 1.0.2
+* theme reset option when supported themes are activated
+* Updated post slider function and style
+
 = Version 1.94 =
 
 * Added post_slider shortcode
