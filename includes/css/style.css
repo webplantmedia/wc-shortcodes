@@ -1867,6 +1867,9 @@ pre.pre-wrap {
 	color: #ffffff !important;
 	border-color: #ffffff !important;
 }
+.wc-shortcodes-posts-template-slider1 .wc-shortcodes-read-more > a {
+	background-color: transparent !important;
+}
 .wc-shortcodes-posts-template-slider1 .wc-shortcodes-post-slide-button {
 	padding: 0.625em 0.8125em;
 	border-width: 2px;
