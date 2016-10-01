@@ -1966,6 +1966,25 @@ pre.pre-wrap {
 	.wc-shortcodes-post-slider-wrapper .wc-shortcodes-entry-summary {
 		display: none;
 	}
+	.wc-shortcodes-post-slide-content .wc-shortcodes-entry-header {
+		margin-bottom: 0;
+	}
+}
+/**
+ * 
+ * ----------------------------------------------------------------------------
+ */
+.wc-shortcodes-entry-summary > *:first-child,
+.wc-shortcodes-content > *:first-child {
+	margin-top: 0 !important;
+}
+.wc-shortcodes-entry-summary > *:last-child,
+.wc-shortcodes-content > *:last-child {
+	margin-bottom: 0 !important;
+}
+.wc-shortcodes-item {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
 }
 
 /**
