@@ -1903,14 +1903,14 @@ pre.pre-wrap {
 .bx-wrapper .bx-controls-direction a {
 	position: absolute;
 	top: 50%;
-	margin-top: -17px;
+	margin-top: -30px;
 	outline: 0;
-	width: 34px;
-	height: 34px;
-	line-height: 30px;
+	line-height: 1;
+	padding: 10px;
+	font-size: 50px;
 	z-index: 9999;
-	border: 2px solid #ffffff;
-	border-radius: 9999px;
+	border: 0px solid #ffffff;
+	border-radius: 0;
 	text-align:center;
     opacity: 0;
 	color: #ffffff;
@@ -1941,8 +1941,10 @@ pre.pre-wrap {
 .bx-wrapper:hover .bx-controls-direction a {
     opacity: 1;
 }
-.wc-shortcodes-read-more {
+/* END DIRECTION */
+.wc-shortcodes-post-slider .wc-shortcodes-read-more {
 	display: block;
+	margin-top: 20px;
 }
 .wc-shortcodes-post-slide-button:hover {
 	text-decoration: none;
