@@ -66,3 +66,10 @@ if( ! function_exists('wc_shortcodes_scripts_override') ) :
 	}
 	add_action('wp_enqueue_scripts', 'wc_shortcodes_scripts_override', 9999 );
 endif;
+
+function wc_shortcodes_admin_enqueue_scripts( $hook ) {
+	$ver = WC_SHORTCODES_VERSION;
+
+	wp_register_script( 'wc-shortcodes-wpdb-autocomplete', plugin_dir_url( __FILE__ ) . 'js/wpdb-autocomplete.js', array ( 'jquery', 'jquery-ui-autocomplete' ), $ver, true );
+}
+add_action( 'admin_enqueue_scripts', 'wc_shortcodes_admin_enqueue_scripts' );

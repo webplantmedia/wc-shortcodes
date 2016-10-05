@@ -1431,7 +1431,9 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 		if ( isset( $_GET['wpc_term'] ) && ! empty( $_GET['wpc_term'] ) ) {
 			$wpc_term = $_GET['wpc_term'];
 		}
+		$atts['p'] = (int) $atts['p'];
 		$atts['post__in'] = wc_shortcodes_comma_delim_to_array( $atts['post__in'] );
+		$atts['ignore_sticky_posts'] = empty( $atts['post__in'] ) ? 0 : 1;
 		$display['excerpt_length'] = (int) $display['excerpt_length'];
 		$atts['order'] = strtoupper( $atts['order'] );
 		$display['heading_type'] = strtolower( $display['heading_type'] );
