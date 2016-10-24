@@ -207,10 +207,24 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
+		foreach ( $instance as $key => $value ) {
+			switch ( $key ) {
+				case 'post_title' :
+					$shortcode[] = 'title="' . $value . '"';
+					break;
+				case 'pids' :
+				case 'term_slugs' :
+					break;
+				default :
+					$shortcode[] = $key . '="' . $value . '"';
+			}
+		}
 
-		echo '[wc_post_slider p="' . $instance['p'] . '" post__in="' . $instance['post__in'] . '" order="' . $instance['order'] . '" orderby="' . $instance['orderby'] . '" post_type="' . $instance['post_type'] . '" posts_per_page="' . $instance['posts_per_page'] . '" taxonomy="' . $instance['taxonomy'] . '" field="' . $instance['field'] . '" terms="' . $instance['terms'] . '" meta_category="' . $instance['meta_category'] . '" title="' . $instance['title'] . '" content="' . $instance['content'] . '" readmore="' . $instance['readmore'] . '" button_class="' . $instance['button_class'] . '" size="' . $instance['size'] . '" heading_type="' . $instance['heading_type'] . '" heading_size="' . $instance['heading_size'] . '" mobile_heading_size="' . $instance['mobile_heading_size'] . '" excerpt_length="' . $instance['excerpt_length'] . '" desktop_height="' . $instance['desktop_height'] . '" laptop_height="' . $instance['laptop_height'] . '" mobile_height="' . $instance['mobile_height'] . '" template="' . $instance['template'] . '"][/wc_post_slider]';
+		$shortcode = implode( " ", $shortcode );
+		$shortcode = '[wc_post_slider ' . $shortcode . '][/wc_post_slider]';
+
 		echo $args['before_widget'];
-		echo do_shortcode( '[wc_post_slider p="' . $instance['p'] . '" post__in="' . $instance['post__in'] . '" order="' . $instance['order'] . '" orderby="' . $instance['orderby'] . '" post_type="' . $instance['post_type'] . '" posts_per_page="' . $instance['posts_per_page'] . '" taxonomy="' . $instance['taxonomy'] . '" field="' . $instance['field'] . '" terms="' . $instance['terms'] . '" meta_category="' . $instance['meta_category'] . '" title="' . $instance['title'] . '" content="' . $instance['content'] . '" readmore="' . $instance['readmore'] . '" button_class="' . $instance['button_class'] . '" size="' . $instance['size'] . '" heading_type="' . $instance['heading_type'] . '" heading_size="' . $instance['heading_size'] . '" mobile_heading_size="' . $instance['mobile_heading_size'] . '" excerpt_length="' . $instance['excerpt_length'] . '" desktop_height="' . $instance['desktop_height'] . '" laptop_height="' . $instance['laptop_height'] . '" mobile_height="' . $instance['mobile_height'] . '" template="' . $instance['template'] . '"][/wc_post_slider]' );
+		echo do_shortcode( $shortcode );
 		echo $args['after_widget'];
 	}
 
@@ -248,51 +262,73 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		$instance['post_type'] = $new_instance['post_type'];
 		$instance['posts_per_page'] = (int) $new_instance['posts_per_page'];
 		$instance['taxonomy'] = $new_instance['taxonomy'];
-		$instance['field'] = $new_instance['field'];
-		$instance['terms'] = $new_instance['terms'];
-		$instance['meta_category'] = $new_instance['meta_category'];
-		$instance['title'] = $new_instance['title'];
-		$instance['content'] = $new_instance['content'];
+
+		$terms = explode( ',', $new_instance['term_slugs'] );
+		$t = array();
+		if ( ! empty( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$term = trim( $term );
+				if ( ! empty( $term ) ) {
+					$t[] = $term;
+				}
+			}
+		}
+		$instance['terms'] = implode( ',', $t );
+		$instance['term_slugs'] = ! empty( $instance['terms'] ) ? $instance['terms'] . ',' : '';
+
+		$instance['meta_category'] = (int) $new_instance['meta_category'];
+		$instance['post_title'] = (int) $new_instance['post_title'];
+		$instance['content'] = (int) $new_instance['content'];
 		$instance['readmore'] = $new_instance['readmore'];
 		$instance['button_class'] = strip_tags( stripslashes( $new_instance['button_class'] ) );
 		$instance['size'] = $new_instance['size'];
 		$instance['heading_type'] = $new_instance['heading_type'];
-		$instance['heading_size'] = $new_instance['heading_size'];
-		$instance['mobile_heading_size'] = $new_instance['mobile_heading_size'];
-		$instance['excerpt_length'] = $new_instance['excerpt_length'];
-		$instance['desktop_height'] = $new_instance['desktop_height'];
-		$instance['laptop_height'] = $new_instance['laptop_height'];
-		$instance['mobile_height'] = $new_instance['mobile_height'];
+		$instance['heading_size'] = (int) $new_instance['heading_size'];
+		$instance['mobile_heading_size'] = (int) $new_instance['mobile_heading_size'];
+		$instance['excerpt_length'] = (int) $new_instance['excerpt_length'];
+		$instance['desktop_height'] = (int) $new_instance['desktop_height'];
+		$instance['laptop_height'] = (int) $new_instance['laptop_height'];
+		$instance['mobile_height'] = (int) $new_instance['mobile_height'];
 		$instance['template'] = $new_instance['template'];
+		$instance['slider_mode'] = $new_instance['slider_mode'];
+		$instance['slider_pause'] = (int) $new_instance['slider_pause'];
+		$instance['slider_auto'] = (int) $new_instance['slider_auto'];
 
 		return $instance;
 	}
 
 	function form( $instance ) {
-		wp_enqueue_script( 'wc-shortcodes-wpdb-autocomplete' );
+		global $wc_shortcodes_widget_ops;
+
+		wp_enqueue_script( 'jquery-ui-accordion' );
+		wp_enqueue_style( 'wc-shortcodes-post-slider-widget-style' );
+		wp_enqueue_script( 'wc-shortcodes-post-slider-widget' );
 
 		$pids = isset( $instance['pids'] ) ? $instance['pids'] : '';
 		$order = isset( $instance['order'] ) ? $instance['order'] : '';
 		$orderby = isset( $instance['orderby'] ) ? $instance['orderby'] : 'name';
 		$post_type = isset( $instance['post_type'] ) ? $instance['post_type'] : 'post';
-		$posts_per_page = isset( $instance['posts_per_page'] ) ? $instance['posts_per_page'] : '10';
+		$posts_per_page = isset( $instance['posts_per_page'] ) ? $instance['posts_per_page'] : 10;
 		$taxonomy = isset( $instance['taxonomy'] ) ? $instance['taxonomy'] : '';
-		$field = isset( $instance['field'] ) ? $instance['field'] : 'slug';
-		$terms = isset( $instance['terms'] ) ? $instance['terms'] : '';
-		$meta_category = isset( $instance['meta_category'] ) ? $instance['meta_category'] : 'no';
-		$title = isset( $instance['title'] ) ? $instance['title'] : 'yes';
-		$content = isset( $instance['content'] ) ? $instance['content'] : 'yes';
+		$term_slugs = isset( $instance['term_slugs'] ) ? $instance['term_slugs'] : '';
+		$meta_category = isset( $instance['meta_category'] ) ? $instance['meta_category'] : 0;
+		$post_title = isset( $instance['post_title'] ) ? $instance['post_title'] : 1;
+		$content = isset( $instance['content'] ) ? $instance['content'] : 1;
 		$readmore = isset( $instance['readmore'] ) ? $instance['readmore'] : 'Coninue Reading';
 		$button_class = isset( $instance['button_class'] ) ? $instance['button_class'] : 'button secondary-button';
-		$size = isset( $instance['size'] ) ? $instance['size'] : 'h2';
-		$heading_type = isset( $instance['heading_type'] ) ? $instance['heading_type'] : '30';
-		$heading_size = isset( $instance['heading_size'] ) ? $instance['heading_size'] : '24';
-		$mobile_heading_size = isset( $instance['mobile_heading_size'] ) ? $instance['mobile_heading_size'] : '24';
-		$excerpt_length = isset( $instance['excerpt_length'] ) ? $instance['excerpt_length'] : '30';
-		$desktop_height = isset( $instance['desktop_height'] ) ? $instance['desktop_height'] : '600';
-		$laptop_height = isset( $instance['laptop_height'] ) ? $instance['laptop_height'] : '500';
-		$mobile_height = isset( $instance['mobile_height'] ) ? $instance['mobile_height'] : '350';
+		$size = isset( $instance['size'] ) ? $instance['size'] : 'full';
+		$heading_type = isset( $instance['heading_type'] ) ? $instance['heading_type'] : 'h2';
+		$heading_size = isset( $instance['heading_size'] ) ? $instance['heading_size'] : 24;
+		$mobile_heading_size = isset( $instance['mobile_heading_size'] ) ? $instance['mobile_heading_size'] : 24;
+		$excerpt_length = isset( $instance['excerpt_length'] ) ? $instance['excerpt_length'] : 30;
+		$desktop_height = isset( $instance['desktop_height'] ) ? $instance['desktop_height'] : 600;
+		$instance['desktop_height'] = '600';
+		$laptop_height = isset( $instance['laptop_height'] ) ? $instance['laptop_height'] : 500;
+		$mobile_height = isset( $instance['mobile_height'] ) ? $instance['mobile_height'] : 350;
 		$template = isset( $instance['template'] ) ? $instance['template'] : 'slider2';
+		$slider_mode = isset( $instance['slider_mode'] ) ? $instance['slider_mode'] : 'fade';
+		$slider_pause = isset( $instance['slider_pause'] ) ? $instance['slider_pause'] : 4000;
+		$slider_auto = isset( $instance['slider_auto'] ) ? $instance['slider_auto'] : 0;
 
 		$args = array(
 		   'public'   => true,
@@ -301,101 +337,214 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		unset( $post_types['attachment'] );
 		?>
 
-		<div id="wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>">
-			<p>
-				<label for="<?php echo $this->get_field_id('pids'); ?>"><?php _e('Post IDs:') ?></label>
-				<input type="text" class="widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('pids'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="post" name="<?php echo $this->get_field_name('pids'); ?>" value="<?php echo $pids; ?>" />
-			</p>
-			<p>
-				<label for="<?php echo $this->get_field_id('order'); ?>"><?php _e('Order:'); ?></label>
-				<select id="<?php echo $this->get_field_id('order'); ?>" name="<?php echo $this->get_field_name('order'); ?>">
-					<?php
-					$options = array(
-						'DESC' => 'DESC',
-						'ASC' => 'ASC',
-					);
-					?>
-					<?php foreach ( $options as $key => $value ) : ?>
-						<option value="<?php echo $key; ?>"<?php selected( $order, $key ); ?>><?php echo $value; ?></option>';
-					<?php endforeach; ?>
-				</select>
-			</p>
-			<p>
-				<label for="<?php echo $this->get_field_id('orderby'); ?>"><?php _e('Order By:'); ?></label>
-				<select id="<?php echo $this->get_field_id('orderby'); ?>" name="<?php echo $this->get_field_name('orderby'); ?>">
-					<?php
-					$options = array(
-						'none' => 'No Order',
-						'ID' => 'Post ID',
-						'author' => 'Author',
-						'title' => 'Title',
-						'name' => 'Post Name',
-						'type' => 'Post Type',
-						'date' => 'Date',
-						'modified' => 'Last Modified Date',
-						'parent' => 'Post/Page Parent ID',
-						'rand' => 'Random',
-						'comment_count' => 'Number of Comments',
-						'menu_order' => 'Menu Order',
-						'post__in' => 'Preserve Post ID Order',
-					);
-					?>
-					<?php foreach ( $options as $key => $value ) : ?>
-						<option value="<?php echo $key; ?>"<?php selected( $orderby, $key ); ?>><?php echo $value; ?></option>';
-					<?php endforeach; ?>
-				</select>
-			</p>
-			<p>
-				<label for="<?php echo $this->get_field_id('post_type'); ?>"><?php _e('Post Type:'); ?></label>
-				<select id="<?php echo $this->get_field_id('post_type'); ?>" class="wc-shortcodes-widget-post-type-selector" name="<?php echo $this->get_field_name('post_type'); ?>">
-					<?php foreach ( $post_types as $key => $value ) : ?>
-						<option value="<?php echo $key; ?>"<?php selected( $post_type, $key ); ?>><?php echo $value; ?></option>';
-					<?php endforeach; ?>
-				</select>
-			</p>
-			<p>
-				<label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:'); ?></label>
-				<select id="<?php echo $this->get_field_id('taxonomy'); ?>" class="wc-shortcodes-widget-taxonomy-selector" name="<?php echo $this->get_field_name('taxonomy'); ?>">
-					<option value=""<?php selected( $taxonomy, "" ); ?>>No Taxonomy</option>';
-					<?php foreach ( $post_types as $post_type_name ) : ?>
-						<?php $taxonomies = get_object_taxonomies( $post_type_name, 'names' ); ?>
-						<?php if ( $taxonomies ) : ?>
-							<?php foreach ( $taxonomies  as $key ) : ?>
-								<option value="<?php echo $key; ?>"<?php selected( $taxonomy, $key ); ?> data-post-type="<?php echo $post_type_name; ?>"><?php echo $post_type_name; ?> => <?php echo $key; ?></option>
-							<?php endforeach; ?>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				</select>
-			</p>
-			<p>
-				<label for="<?php echo $this->get_field_id('posts_per_page'); ?>"><?php _e('Posts Per Page:') ?></label>
-				<input type="text" class="widefat" id="<?php echo $this->get_field_id('posts_per_page'); ?>" name="<?php echo $this->get_field_name('posts_per_page'); ?>" value="<?php echo $posts_per_page; ?>" />
-			</p>
-			<p>
-				<label for="<?php echo $this->get_field_id('button_class'); ?>"><?php _e('Button Class:') ?></label>
-				<input type="text" class="widefat" id="<?php echo $this->get_field_id('button_class'); ?>" name="<?php echo $this->get_field_name('button_class'); ?>" value="<?php echo $button_class; ?>" />
-			</p>
-			<p>
-				<label for="<?php echo $this->get_field_id('template'); ?>"><?php _e('Template:'); ?></label>
-				<select id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
-					<?php
-					$options = array(
-						'slider1' => 'Slider 1',
-						'slider2' => 'Slider 2',
-					);
-					?>
-					<?php foreach ( $options as $key => $value ) : ?>
-						<option value="<?php echo $key; ?>"<?php selected( $template, $key ); ?>><?php echo $value; ?></option>';
-					<?php endforeach; ?>
-				</select>
-			</p>
+		<div id="wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>" class="wc-shortcodes-post-slider-widget">
+			<h3>Select Posts</h3>
+			<div>
+				<p>
+					<label for="<?php echo $this->get_field_id('pids'); ?>"><?php _e('Post IDs:') ?></label>
+					<input type="text" class="widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('pids'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="post" name="<?php echo $this->get_field_name('pids'); ?>" value="<?php echo $pids; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('order'); ?>"><?php _e('Order:'); ?></label>
+					<select id="<?php echo $this->get_field_id('order'); ?>" name="<?php echo $this->get_field_name('order'); ?>">
+						<?php
+						$options = array(
+							'DESC' => 'DESC',
+							'ASC' => 'ASC',
+						);
+						?>
+						<?php foreach ( $options as $key => $value ) : ?>
+							<option value="<?php echo $key; ?>"<?php selected( $order, $key ); ?>><?php echo $value; ?></option>';
+						<?php endforeach; ?>
+					</select>
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('orderby'); ?>"><?php _e('Order By:'); ?></label>
+					<select id="<?php echo $this->get_field_id('orderby'); ?>" name="<?php echo $this->get_field_name('orderby'); ?>">
+						<?php
+						$options = array(
+							'none' => 'No Order',
+							'ID' => 'Post ID',
+							'author' => 'Author',
+							'title' => 'Title',
+							'name' => 'Post Name',
+							'type' => 'Post Type',
+							'date' => 'Date',
+							'modified' => 'Last Modified Date',
+							'parent' => 'Post/Page Parent ID',
+							'rand' => 'Random',
+							'comment_count' => 'Number of Comments',
+							'menu_order' => 'Menu Order',
+							'post__in' => 'Preserve Post ID Order',
+						);
+						?>
+						<?php foreach ( $options as $key => $value ) : ?>
+							<option value="<?php echo $key; ?>"<?php selected( $orderby, $key ); ?>><?php echo $value; ?></option>';
+						<?php endforeach; ?>
+					</select>
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('post_type'); ?>"><?php _e('Post Type:'); ?></label>
+					<select id="<?php echo $this->get_field_id('post_type'); ?>" class="wc-shortcodes-widget-post-type-selector" name="<?php echo $this->get_field_name('post_type'); ?>">
+						<?php foreach ( $post_types as $key => $value ) : ?>
+							<option value="<?php echo $key; ?>"<?php selected( $post_type, $key ); ?>><?php echo $value; ?></option>';
+						<?php endforeach; ?>
+					</select>
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:'); ?></label>
+					<select id="<?php echo $this->get_field_id('taxonomy'); ?>" class="wc-shortcodes-widget-taxonomy-selector" name="<?php echo $this->get_field_name('taxonomy'); ?>">
+						<option value=""<?php selected( $taxonomy, "" ); ?>>No Taxonomy</option>';
+						<?php foreach ( $post_types as $post_type_name ) : ?>
+							<?php $taxonomies = get_object_taxonomies( $post_type_name, 'names' ); ?>
+							<?php if ( $taxonomies ) : ?>
+								<?php foreach ( $taxonomies  as $key ) : ?>
+									<option value="<?php echo $key; ?>"<?php selected( $taxonomy, $key ); ?> data-post-type="<?php echo $post_type_name; ?>"><?php echo $key; ?></option>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</select>
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('term_slugs'); ?>"><?php _e('Terms: (Leave Blank to Display All)') ?></label>
+					<input type="text" class="widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('term_slugs'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="terms" name="<?php echo $this->get_field_name('term_slugs'); ?>" value="<?php echo $term_slugs; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('posts_per_page'); ?>"><?php _e('Posts Per Page: (-1 for Unlimited)') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('posts_per_page'); ?>" name="<?php echo $this->get_field_name('posts_per_page'); ?>" value="<?php echo $posts_per_page; ?>" />
+				</p>
+			</div>
+			<h3>Content</h3>
+			<div>
+				<p>
+					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('meta_category'); ?>" name="<?php echo $this->get_field_name('meta_category'); ?>" value="1" <?php checked( $meta_category, 1 ); ?> />
+					<label for="<?php echo $this->get_field_id('meta_category'); ?>"><?php _e('Show Meta Category') ?></label>
+				</p>
+				<p>
+					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('post_title'); ?>" name="<?php echo $this->get_field_name('post_title'); ?>" value="1" <?php checked( $post_title, 1 ); ?> />
+					<label for="<?php echo $this->get_field_id('post_title'); ?>"><?php _e('Show Post Title') ?></label>
+				</p>
+				<p>
+					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('content'); ?>" name="<?php echo $this->get_field_name('content'); ?>" value="1" <?php checked( $content, 1 ); ?> />
+					<label for="<?php echo $this->get_field_id('content'); ?>"><?php _e('Show Content') ?></label>
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('readmore'); ?>"><?php _e('Read More Text:') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('readmore'); ?>" name="<?php echo $this->get_field_name('readmore'); ?>" value="<?php echo $readmore; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('button_class'); ?>"><?php _e('Button Class:') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('button_class'); ?>" name="<?php echo $this->get_field_name('button_class'); ?>" value="<?php echo $button_class; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('size'); ?>"><?php _e('Image Size:'); ?></label>
+					<select id="<?php echo $this->get_field_id('size'); ?>" name="<?php echo $this->get_field_name('size'); ?>">
+						<?php
+						$sizes = apply_filters( 'image_size_names_choose', array(
+							'thumbnail' => __('Thumbnail'),
+							'medium'    => __('Medium'),
+							'large'     => __('Large'),
+							'full'      => __('Full Size'),
+						));
+						?>
+						<?php foreach ( $sizes as $key => $value ) : ?>
+							<option value="<?php echo $key; ?>"<?php selected( $size, $key ); ?>><?php echo $value; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('heading_type'); ?>"><?php _e('Heading Type:'); ?></label>
+					<select id="<?php echo $this->get_field_id('heading_type'); ?>" name="<?php echo $this->get_field_name('heading_type'); ?>">
+						<?php
+						$options = array(
+							'h1' => 'H1',
+							'h2' => 'H2',
+							'h3' => 'H3',
+							'h4' => 'H4',
+							'h5' => 'H5',
+							'h6' => 'H6',
+						);
+						?>
+						<?php foreach ( $options as $key => $value ) : ?>
+							<option value="<?php echo $key; ?>"<?php selected( $heading_type, $key ); ?>><?php echo $value; ?></option>';
+						<?php endforeach; ?>
+					</select>
+				</p>
+			</div>
+			<h3>Style</h3>
+			<div>
+				<p>
+					<label for="<?php echo $this->get_field_id('template'); ?>"><?php _e('Template:'); ?></label>
+					<select id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
+						<?php
+						$options = array(
+							'slider1' => 'Slider 1',
+							'slider2' => 'Slider 2',
+						);
+						?>
+						<?php foreach ( $options as $key => $value ) : ?>
+							<option value="<?php echo $key; ?>"<?php selected( $template, $key ); ?>><?php echo $value; ?></option>';
+						<?php endforeach; ?>
+					</select>
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('heading_size'); ?>"><?php _e('Heading Size:') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('heading_size'); ?>" name="<?php echo $this->get_field_name('heading_size'); ?>" value="<?php echo $heading_size; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('mobile_heading_size'); ?>"><?php _e('Mobile Heading Size:') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('mobile_heading_size'); ?>" name="<?php echo $this->get_field_name('mobile_heading_size'); ?>" value="<?php echo $mobile_heading_size; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('excerpt_length'); ?>"><?php _e('Excerpt Length:') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('excerpt_length'); ?>" name="<?php echo $this->get_field_name('excerpt_length'); ?>" value="<?php echo $excerpt_length; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('desktop_height'); ?>"><?php _e('Desktop Height:') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('desktop_height'); ?>" name="<?php echo $this->get_field_name('desktop_height'); ?>" value="<?php echo $desktop_height; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('laptop_height'); ?>"><?php _e('Laptop Height:') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('laptop_height'); ?>" name="<?php echo $this->get_field_name('laptop_height'); ?>" value="<?php echo $laptop_height; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('mobile_height'); ?>"><?php _e('Mobile Height:') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('mobile_height'); ?>" name="<?php echo $this->get_field_name('mobile_height'); ?>" value="<?php echo $mobile_height; ?>" />
+				</p>
+			</div>
+			<h3>Slider Settings</h3>
+			<div>
+				<p>
+					<label for="<?php echo $this->get_field_id('slider_mode'); ?>"><?php _e('Slider Mode:'); ?></label>
+					<select id="<?php echo $this->get_field_id('slider_mode'); ?>" name="<?php echo $this->get_field_name('slider_mode'); ?>">
+						<?php
+						$options = array(
+							'fade' => 'Fade',
+							'horizontal' => 'Horizontal',
+							'vertical' => 'Vertical',
+						);
+						?>
+						<?php foreach ( $options as $key => $value ) : ?>
+							<option value="<?php echo $key; ?>"<?php selected( $slider_mode, $key ); ?>><?php echo $value; ?></option>';
+						<?php endforeach; ?>
+					</select>
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('slider_pause'); ?>"><?php _e('Slider Pause: (in milliseconds)') ?></label>
+					<input type="text" class="widefat" id="<?php echo $this->get_field_id('slider_pause'); ?>" name="<?php echo $this->get_field_name('slider_pause'); ?>" value="<?php echo $slider_pause; ?>" />
+				</p>
+				<p>
+					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('slider_auto'); ?>" name="<?php echo $this->get_field_name('slider_auto'); ?>" value="1" <?php checked( $slider_auto, 1 ); ?> />
+					<label for="<?php echo $this->get_field_id('slider_auto'); ?>"><?php _e('Enable Auto Transition') ?></label>
+				</p>
+			</div>
 		</div>
 
 		<?php if ( is_integer( $this->number ) ) : ?>
 			<script type="text/javascript">
 				/* <![CDATA[ */
 				jQuery(document).ready(function($){
-					$('#wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>').wcPostSliderWidget();
+					$('#wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"}).wcPostSliderWidget();
 				});
 				/* ]]> */
 			</script>
@@ -403,56 +552,3 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		<?php
 	}
 }
-
-function wc_shortcodes_cat_lookup_callback() {
-	global $wpdb; //get access to the WordPress database object variable
-
-	//get names of all businesses
-	$request = $wpdb->esc_like(stripslashes($_POST['request'])).'%'; //escape for use in LIKE statement
-	$sql = "select ID, post_title from $wpdb->posts where post_title like %s and post_type='post' and post_status='publish'";
-
-	$sql = $wpdb->prepare($sql, $request);
-	
-	$results = $wpdb->get_results($sql);
-
-	//copy the business titles to a simple array
-	$titles = array();
-	$i = 0;
-	foreach( $results as $r ) {
-		$titles[ $i ][ 'label' ] = $r->post_title . " (" . $r->ID . ")";
-		$titles[ $i ][ 'value' ] = $r->ID;
-		$i++;
-	}
-		
-	echo json_encode($titles); //encode into JSON format and output
-
-	die(); //stop "0" from being output
-}
-add_action( 'wp_ajax_wc_cat_lookup', 'wc_shortcodes_cat_lookup_callback' );
-
-function wc_shortcodes_post_lookup_callback() {
-	global $wpdb; //get access to the WordPress database object variable
-
-	//get names of all businesses
-	$request = $wpdb->esc_like( stripslashes( $_POST['request'] ) ) . '%'; //escape for use in LIKE statement
-	$post_type = stripslashes( $_POST['post_type'] );
-	$sql = "select ID, post_title from $wpdb->posts where post_title like %s and post_type='%s' and post_status='publish' order by post_title ASC limit 0,30 ";
-
-	$sql = $wpdb->prepare($sql, $request, $post_type);
-
-	$results = $wpdb->get_results($sql);
-
-	//copy the business titles to a simple array
-	$titles = array();
-	$i = 0;
-	foreach( $results as $r ) {
-		$titles[ $i ][ 'label' ] = $r->post_title . " (" . $r->ID . ")";
-		$titles[ $i ][ 'value' ] = $r->ID;
-		$i++;
-	}
-		
-	echo json_encode($titles); //encode into JSON format and output
-
-	die(); //stop "0" from being output
-}
-add_action( 'wp_ajax_wc_post_lookup', 'wc_shortcodes_post_lookup_callback' );

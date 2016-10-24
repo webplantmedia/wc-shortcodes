@@ -1838,6 +1838,7 @@ pre.pre-wrap {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #cccccc;
+	margin: 0 !important;
 }
 .wc-shortcodes-post-slide-border {
 	display: table;

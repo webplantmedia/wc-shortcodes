@@ -70,6 +70,7 @@ endif;
 function wc_shortcodes_admin_enqueue_scripts( $hook ) {
 	$ver = WC_SHORTCODES_VERSION;
 
-	wp_register_script( 'wc-shortcodes-wpdb-autocomplete', plugin_dir_url( __FILE__ ) . 'js/wpdb-autocomplete.js', array ( 'jquery', 'jquery-ui-autocomplete' ), $ver, true );
+	wp_register_style( 'wc-shortcodes-post-slider-widget-style', plugin_dir_url( __FILE__ ) . 'admin/css/wcpostsliderwidget.css', array( ), $ver );
+	wp_register_script( 'wc-shortcodes-post-slider-widget', plugin_dir_url( __FILE__ ) . 'admin/js/wcpostsliderwidget.js', array ( 'jquery', 'jquery-ui-autocomplete' ), $ver, true );
 }
 add_action( 'admin_enqueue_scripts', 'wc_shortcodes_admin_enqueue_scripts' );
