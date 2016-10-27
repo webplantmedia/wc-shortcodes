@@ -182,3 +182,12 @@ function wc_shortcodes_terms_lookup_callback() {
 	die(); //stop "0" from being output
 }
 add_action( 'wp_ajax_wc_terms_lookup', 'wc_shortcodes_terms_lookup_callback' );
+
+function wc_shortcodes_mce_popup() {
+
+	$widget = new WC_Shortcodes_Post_Slider_Widget();
+	$widget->form();
+
+	die();
+}
+add_action( 'wp_ajax_wc_mce_popup', 'wc_shortcodes_mce_popup' );

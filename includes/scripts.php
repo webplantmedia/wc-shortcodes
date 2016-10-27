@@ -70,7 +70,11 @@ endif;
 function wc_shortcodes_admin_enqueue_scripts( $hook ) {
 	$ver = WC_SHORTCODES_VERSION;
 
-	wp_register_style( 'wc-shortcodes-post-slider-widget-style', plugin_dir_url( __FILE__ ) . 'admin/css/wcpostsliderwidget.css', array( ), $ver );
-	wp_register_script( 'wc-shortcodes-post-slider-widget', plugin_dir_url( __FILE__ ) . 'admin/js/wcpostsliderwidget.js', array ( 'jquery', 'jquery-ui-autocomplete' ), $ver, true );
+	if ( $hook == 'post-new.php' || $hook == 'post.php' || $hook == 'widgets.php' ) {
+		wp_enqueue_style( 'wc-shortcodes-admin-style', plugin_dir_url( __FILE__ ) . 'admin/css/wc-shortcodes.css', array( ), $ver );
+		wp_enqueue_style( 'wc-shortcodes-post-slider-widget-style', plugin_dir_url( __FILE__ ) . 'admin/css/wcpostsliderwidget.css', array( ), $ver );
+		wp_enqueue_script( 'wc-shortcodes-post-slider-widget', plugin_dir_url( __FILE__ ) . 'admin/js/wcpostsliderwidget.js', array ( 'jquery', 'jquery-ui-autocomplete', 'jquery-ui-accordion' ), $ver, true );
+		wp_enqueue_script( 'wc-shortcodes', plugin_dir_url( __FILE__ ) . 'admin/js/wc-shortcodes.js', array ( 'jquery' ), $ver, true );
+	}
 }
 add_action( 'admin_enqueue_scripts', 'wc_shortcodes_admin_enqueue_scripts' );

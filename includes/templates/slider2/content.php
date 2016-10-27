@@ -9,11 +9,11 @@
 
 		<div class="wc-shortcodes-post-slide-content">
 			<div class="wc-shortcodes-post-slide-content-inner">
-				<?php if ( $display['meta_category'] ) : ?>
+				<?php if ( $display['show_meta_category'] ) : ?>
 					<?php echo wc_shortcodes_get_posted_category(); ?>
 				<?php endif; ?>
 
-				<?php if ( $display['title'] ) : ?>
+				<?php if ( $display['show_title'] ) : ?>
 					<div class="wc-shortcodes-entry-header">
 						<<?php echo $display['heading_type']; ?> class="wc-shortcodes-entry-title">
 							<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
@@ -21,7 +21,7 @@
 					</div><!-- .entry-header -->
 				<?php endif; ?>
 
-				<?php if ( $display['content'] ) : ?>
+				<?php if ( $display['show_content'] ) : ?>
 				<div class="wc-shortcodes-entry-summary">
 					<?php wc_shortcodes_the_excerpt(); ?>
 				</div><!-- .entry-summary -->

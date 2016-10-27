@@ -4,7 +4,6 @@
 	$.fn.extend({
         // change 'pluginname' to your plugin name (duh)
         wcPostSliderWidget: function(options) {
-
 			// options for the plugin
             var defaults = {
 				postTypeSelector: '.wc-shortcodes-widget-post-type-selector',

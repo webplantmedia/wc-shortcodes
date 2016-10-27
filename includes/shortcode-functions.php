@@ -1345,6 +1345,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 		$atts = shortcode_atts( array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).
+			'pids' => '', //use post id.
 			'p' => '', //use post id.
 			'post__in' => '', //use post ids
 			'order' => 'DESC', // DESC, ASC
@@ -1357,11 +1358,12 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 
 			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
 			'field' => 'slug', // slug or id
+			'term_slugs' => '', // taxonomy terms.
 			'terms' => '', // taxonomy terms.
 
-			'meta_category' => 1, // show heading?
-			'title' => 1, // show heading?
-			'content' => 1, // show main content?
+			'show_meta_category' => 1, // show heading?
+			'show_title' => 1, // show heading?
+			'show_content' => 1, // show main content?
 			'readmore' => 'Continue Reading', // show main content?
 			'button_class' => 'button', // show main content?
 
@@ -1383,7 +1385,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 		), $atts );
 
 		// sanitize bools
-		$bools = array( 'ignore_sticky_posts', 'meta_category', 'title', 'content', 'slider_auto' );
+		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto' );
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {
 				if ( "no" == $key ) {
@@ -1405,6 +1407,33 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 		}
 		$atts['slider_pause'] = abs( $atts['slider_pause'] );
 		$atts['post__in'] = wc_shortcodes_comma_delim_to_array( $atts['post__in'] );
+
+		$pids = explode( ',', $atts['pids'] );
+		$p = array();
+		if ( ! empty( $pids ) ) {
+			foreach ( $pids as $id ) {
+				$id = (int) $id;
+				if ( ! empty( $id ) ) {
+					$p[] = $id;
+				}
+			}
+			$atts['pids'] = implode( ',', $p );
+
+			$size = sizeof( $p );
+			if ( 1 < $size ) {
+				$atts['p'] = '';
+				$atts['post__in'] = implode( ',', $p );
+			}
+			else if ( 1 == $size ) {
+				$atts['p'] = $p[0];
+				$atts['post__in'] = '';
+			}
+			else {
+				$atts['p'] = '';
+				$atts['post__in'] = '';
+			}
+		}
+
 
 		// sanitize dropdown
 		$valid_layouts = array( 'bxslider' );
@@ -1438,16 +1467,31 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 		$atts['button_class'] = trim( $atts['button_class'] );
 		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-slide-button' : $atts['button_class'];
 
+		$terms = explode( ',', trim( $atts['term_slugs'] ) );
+		$t = array();
+		if ( ! empty( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$term = trim( $term );
+				if ( ! empty( $term ) ) {
+					$t[] = $term;
+				}
+			}
+			$atts['terms'] = implode( ',', $t );
+		}
 
 		// fix bug with title argument being added to WP_Query() in 4.4
 		$display_keys = array(
-			'meta_category', 'title', 'content', 'readmore', 'button_class', 'size', 'heading_type', 'heading_size', 'mobile_heading_size', 'layout', 'template', 'excerpt_length', 'desktop_height', 'laptop_height', 'mobile_height', 'slider_mode', 'slider_pause', 'slider_auto',
+			'show_meta_category', 'show_title', 'show_content', 'readmore', 'button_class', 'size', 'heading_type', 'heading_size', 'mobile_heading_size', 'layout', 'template', 'excerpt_length', 'desktop_height', 'laptop_height', 'mobile_height', 'slider_mode', 'slider_pause', 'slider_auto',
 		);
 		$display = array();
 		foreach ( $display_keys as $key ) {
 			$display[ $key ] = $atts[ $key ];
 			unset( $atts[ $key ] );
 		}
+
+		// remove not query keys
+		unset( $atts[ 'pids' ] );
+		unset( $atts[ 'term_slugs' ] );
 
 		// check for get variable
 		$wpc_term = null;
@@ -1524,8 +1568,8 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 				while( $wc_shortcodes_posts_query->have_posts() ) {
 					$wc_shortcodes_posts_query->the_post();
 					
-					if ( $display['content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) )
-						$display['content'] = false;
+					if ( $display['show_content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) )
+						$display['show_content'] = false;
 
 					ob_start();
 					include('templates/'.$display['template'].'/index.php');

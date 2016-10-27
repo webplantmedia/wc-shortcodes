@@ -208,16 +208,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 
 	function widget($args, $instance) {
 		foreach ( $instance as $key => $value ) {
-			switch ( $key ) {
-				case 'post_title' :
-					$shortcode[] = 'title="' . $value . '"';
-					break;
-				case 'pids' :
-				case 'term_slugs' :
-					break;
-				default :
-					$shortcode[] = $key . '="' . $value . '"';
-			}
+			$shortcode[] = $key . '="' . $value . '"';
 		}
 
 		$shortcode = implode( " ", $shortcode );
@@ -229,56 +220,16 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 	}
 
 	function update( $new_instance, $old_instance ) {
-		$pids = explode( ',', $new_instance['pids'] );
-		$p = array();
-		if ( ! empty( $pids ) ) {
-			foreach ( $pids as $id ) {
-				$id = (int) $id;
-				if ( ! empty( $id ) ) {
-					$p[] = $id;
-				}
-			}
-		}
-
-		$instance['pids'] = implode( ',', $p );
-		$instance['pids'] = ! empty( $instance['pids'] ) ? $instance['pids'] . ',' : '';
-
-		$size = sizeof( $p );
-		if ( 1 < $size ) {
-			$instance['p'] = '';
-			$instance['post__in'] = implode( ',', $p );
-		}
-		else if ( 1 == $size ) {
-			$instance['p'] = $p[0];
-			$instance['post__in'] = '';
-		}
-		else {
-			$instance['p'] = '';
-			$instance['post__in'] = '';
-		}
-
+		$instance['pids'] = $new_instance['pids'];
 		$instance['order'] = $new_instance['order'];
 		$instance['orderby'] = $new_instance['orderby'];
 		$instance['post_type'] = $new_instance['post_type'];
 		$instance['posts_per_page'] = (int) $new_instance['posts_per_page'];
 		$instance['taxonomy'] = $new_instance['taxonomy'];
-
-		$terms = explode( ',', $new_instance['term_slugs'] );
-		$t = array();
-		if ( ! empty( $terms ) ) {
-			foreach ( $terms as $term ) {
-				$term = trim( $term );
-				if ( ! empty( $term ) ) {
-					$t[] = $term;
-				}
-			}
-		}
-		$instance['terms'] = implode( ',', $t );
-		$instance['term_slugs'] = ! empty( $instance['terms'] ) ? $instance['terms'] . ',' : '';
-
-		$instance['meta_category'] = (int) $new_instance['meta_category'];
-		$instance['post_title'] = (int) $new_instance['post_title'];
-		$instance['content'] = (int) $new_instance['content'];
+		$instance['term_slugs'] = $new_instance['term_slugs'];
+		$instance['show_meta_category'] = (int) $new_instance['show_meta_category'];
+		$instance['show_title'] = (int) $new_instance['show_title'];
+		$instance['show_content'] = (int) $new_instance['show_content'];
 		$instance['readmore'] = $new_instance['readmore'];
 		$instance['button_class'] = strip_tags( stripslashes( $new_instance['button_class'] ) );
 		$instance['size'] = $new_instance['size'];
@@ -300,10 +251,6 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 	function form( $instance ) {
 		global $wc_shortcodes_widget_ops;
 
-		wp_enqueue_script( 'jquery-ui-accordion' );
-		wp_enqueue_style( 'wc-shortcodes-post-slider-widget-style' );
-		wp_enqueue_script( 'wc-shortcodes-post-slider-widget' );
-
 		$pids = isset( $instance['pids'] ) ? $instance['pids'] : '';
 		$order = isset( $instance['order'] ) ? $instance['order'] : '';
 		$orderby = isset( $instance['orderby'] ) ? $instance['orderby'] : 'name';
@@ -311,9 +258,9 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		$posts_per_page = isset( $instance['posts_per_page'] ) ? $instance['posts_per_page'] : 10;
 		$taxonomy = isset( $instance['taxonomy'] ) ? $instance['taxonomy'] : '';
 		$term_slugs = isset( $instance['term_slugs'] ) ? $instance['term_slugs'] : '';
-		$meta_category = isset( $instance['meta_category'] ) ? $instance['meta_category'] : 0;
-		$post_title = isset( $instance['post_title'] ) ? $instance['post_title'] : 1;
-		$content = isset( $instance['content'] ) ? $instance['content'] : 1;
+		$show_meta_category = isset( $instance['show_meta_category'] ) ? $instance['show_meta_category'] : 0;
+		$show_title = isset( $instance['show_title'] ) ? $instance['show_title'] : 1;
+		$show_content = isset( $instance['show_content'] ) ? $instance['show_content'] : 1;
 		$readmore = isset( $instance['readmore'] ) ? $instance['readmore'] : 'Coninue Reading';
 		$button_class = isset( $instance['button_class'] ) ? $instance['button_class'] : 'button secondary-button';
 		$size = isset( $instance['size'] ) ? $instance['size'] : 'full';
@@ -417,16 +364,16 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 			<h3>Content</h3>
 			<div>
 				<p>
-					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('meta_category'); ?>" name="<?php echo $this->get_field_name('meta_category'); ?>" value="1" <?php checked( $meta_category, 1 ); ?> />
-					<label for="<?php echo $this->get_field_id('meta_category'); ?>"><?php _e('Show Meta Category') ?></label>
+					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_meta_category'); ?>" name="<?php echo $this->get_field_name('show_meta_category'); ?>" value="1" <?php checked( $show_meta_category, 1 ); ?> />
+					<label for="<?php echo $this->get_field_id('show_meta_category'); ?>"><?php _e('Show Meta Category') ?></label>
 				</p>
 				<p>
-					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('post_title'); ?>" name="<?php echo $this->get_field_name('post_title'); ?>" value="1" <?php checked( $post_title, 1 ); ?> />
-					<label for="<?php echo $this->get_field_id('post_title'); ?>"><?php _e('Show Post Title') ?></label>
+					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>" value="1" <?php checked( $show_title, 1 ); ?> />
+					<label for="<?php echo $this->get_field_id('show_title'); ?>"><?php _e('Show Title') ?></label>
 				</p>
 				<p>
-					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('content'); ?>" name="<?php echo $this->get_field_name('content'); ?>" value="1" <?php checked( $content, 1 ); ?> />
-					<label for="<?php echo $this->get_field_id('content'); ?>"><?php _e('Show Content') ?></label>
+					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_content'); ?>" name="<?php echo $this->get_field_name('show_content'); ?>" value="1" <?php checked( $show_content, 1 ); ?> />
+					<label for="<?php echo $this->get_field_id('show_content'); ?>"><?php _e('Show Content') ?></label>
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('readmore'); ?>"><?php _e('Read More Text:') ?></label>
@@ -540,7 +487,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 			</div>
 		</div>
 
-		<?php if ( is_integer( $this->number ) ) : ?>
+		<?php if ( '__i__' != $this->number ) : ?>
 			<script type="text/javascript">
 				/* <![CDATA[ */
 				jQuery(document).ready(function($){
