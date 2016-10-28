@@ -185,8 +185,16 @@ add_action( 'wp_ajax_wc_terms_lookup', 'wc_shortcodes_terms_lookup_callback' );
 
 function wc_shortcodes_mce_popup() {
 
-	$widget = new WC_Shortcodes_Post_Slider_Widget();
-	$widget->form();
+	$tag = $_POST['tag'];
+	$shortcode = stripslashes( $_POST['shortcode'] );
+	$attr = wc_shortcodes_parse_shortcode( $tag, $shortcode );
+	
+	switch ( $tag ) {
+		case 'wc_post_slider' :
+			$widget = new WC_Shortcodes_Post_Slider_Widget();
+			$widget->form( $attr );
+			break;
+	}
 
 	die();
 }

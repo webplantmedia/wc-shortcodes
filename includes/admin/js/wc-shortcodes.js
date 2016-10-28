@@ -1,6 +1,8 @@
 ( function( $ ) {
 	"use strict";
 
+	var mceEditor, mceTag, mceShortcode;
+
 	var $body = jQuery('body');
 
 	var title = '<div class="media-frame-title"><h1></h1></div>';
@@ -29,39 +31,107 @@
 	var getNameValue = function() {
 	}
 	var insertShortcode = function() {
-		var id = $(this).data('id');
 		var data = $innerContent.serialize();
 		var $fields = $innerContent.find("[name^='widget-wc_shortcodes_post_slider[]']");
 
-		var values = {}
+		var values = new Array();
 		$.each( $fields, function( i, el ) {
 			var $el = $(el);
-			var val = $el.val();
+			var val;
+			if ( $el.is(':checkbox') ) {
+				if ( $el.is(':checked') ) {
+					val = $el.val();
+				}
+				else {
+					val = 0;
+				}
+			}
+			else {
+				val = $el.val();
+			}
 			var key = $el.attr('name').split('][').pop();
 			key = key.substring( 0, key.length - 1 );
-			values[key] = val;
+			values.push( key + '="' + val + '"' );
 		});
 		console.log(values);
+		values = values.join(" ");
 
-		/* $.post(ajaxurl, {action: 'wc_mce_get_shortcode', id: id}, function(result){
-			alert(result);
-		});  */
+		var rgxp = new RegExp("^\\["+mceTag+"\\s+.+?\\]", "g");
+		// console.log(rgxp);
+
+		// var shortcode = "["+mceTag+" "+values+"][/"+mceTag+"]";
+		var shortcode = mceShortcode.replace(rgxp,"["+mceTag+" "+values+"]");
+
+		mceEditor.insertContent(shortcode);
+		close();
+	}
+
+	var getTag = function( shortcode ) {
+		var tag = '', last = '';
+
+		var a = shortcode.split('][');
+		if ( a.length > 1 ) {
+			var aa = a[0].split(' ');
+
+			if ( aa.length ) {
+				tag = aa[0];
+				tag = tag.substring(1);
+
+				last = a[a.length-1];
+				last = last.substring(1).slice(0, -1);
+
+				if ( tag == last )
+					return tag;
+			}
+		}
+
+		return '';
 	}
 
 	$close.on('click', close);
 	$backdrop.on('click', close);
 	$insertButton.on('click', insertShortcode);
 
-	window.wcShortcodes = function(id,title,editor) {
-		$title.text(title);
-		$modal.show();
-		$insertButton.data('id', id);
+	window.wcShortcodes = function(shortcode,editor) {
+		mceEditor = editor;
+		mceTag = getTag( shortcode );
+		mceShortcode = shortcode;
+		var error = shortcode;
+		var msg;
+		$modal.addClass('hide-insert-button');
 
-		$.post(ajaxurl, {action: 'wc_mce_popup', id: id}, function(result){
-			$innerContent.html(result);
+		if ( mceTag ) {
+			$title.text("["+mceTag+"]");
+			$modal.show();
+			$.post(ajaxurl, {action: 'wc_mce_popup', tag: mceTag, shortcode: shortcode}, function(result){
+				if ( result.length ) {
+					$modal.removeClass('hide-insert-button');
+					$innerContent.html(result);
+				}
+				else {
+					msg = "<h3>Not One Our Shortcodes</h3>";
+					msg += "<p><code>["+mceTag+"]</code> is not supports by our shortcode manager.</p>";
+					$innerContent.html(msg);
+				}
+			}); 
+		}
+		else {
+			$title.text("[edit_selection]");
+			$modal.show();
 
-		}); 
-		// editor.insertContent('[wc_post_slider author="" author_name="" p="" post__in="" order="DESC" orderby="name" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" meta_category="no" title="yes" content="yes" readmore="Continue Reading" button_class="button secondary-button" size="full" heading_type="h2" heading_size="30" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" template="slider2"][/wc_post_slider]');
+			if ( error.length ) {
+				msg = 'Shortcode Selection Not Editable';
+				error = error.replace(/\n/g,"##newline##");
+				error = error.replace(/\s/g,"<span class='wc-shortcodes-error-yellow'> </span>");
+				error = error.replace(/##newline##/g,"<span class='wc-shortcodes-error-red'>\\n</span>");
+				$innerContent.html("<h4>"+msg+"</h4><p><code style='padding-left:0;padding-right:0'>"+error+"</code></p>");
+			}
+			else {
+				msg = 'No Selection Found';
+				error = 'Please select and highlight a shortcode in your editor to edit.';
+				$innerContent.html("<h4>"+msg+"</h4><p><code style='padding-left:0;padding-right:0'>"+error+"</code></p>");
+			}
+		}
 	}
 
 } )( jQuery );

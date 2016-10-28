@@ -1358,7 +1358,6 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 
 			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
 			'field' => 'slug', // slug or id
-			'term_slugs' => '', // taxonomy terms.
 			'terms' => '', // taxonomy terms.
 
 			'show_meta_category' => 1, // show heading?
@@ -1406,7 +1405,6 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			}
 		}
 		$atts['slider_pause'] = abs( $atts['slider_pause'] );
-		$atts['post__in'] = wc_shortcodes_comma_delim_to_array( $atts['post__in'] );
 
 		$pids = explode( ',', $atts['pids'] );
 		$p = array();
@@ -1417,12 +1415,11 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 					$p[] = $id;
 				}
 			}
-			$atts['pids'] = implode( ',', $p );
 
 			$size = sizeof( $p );
 			if ( 1 < $size ) {
 				$atts['p'] = '';
-				$atts['post__in'] = implode( ',', $p );
+				$atts['post__in'] = $p;
 			}
 			else if ( 1 == $size ) {
 				$atts['p'] = $p[0];
@@ -1462,12 +1459,10 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
 
 		// sanitize inputs
-		$atts['terms'] = wc_shortcodes_comma_delim_to_array( $atts['terms'] );
-
 		$atts['button_class'] = trim( $atts['button_class'] );
 		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-slide-button' : $atts['button_class'];
 
-		$terms = explode( ',', trim( $atts['term_slugs'] ) );
+		$terms = explode( ',', trim( $atts['terms'] ) );
 		$t = array();
 		if ( ! empty( $terms ) ) {
 			foreach ( $terms as $term ) {
@@ -1476,7 +1471,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 					$t[] = $term;
 				}
 			}
-			$atts['terms'] = implode( ',', $t );
+			$atts['terms'] = $t;
 		}
 
 		// fix bug with title argument being added to WP_Query() in 4.4
@@ -1491,7 +1486,6 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 
 		// remove not query keys
 		unset( $atts[ 'pids' ] );
-		unset( $atts[ 'term_slugs' ] );
 
 		// check for get variable
 		$wpc_term = null;

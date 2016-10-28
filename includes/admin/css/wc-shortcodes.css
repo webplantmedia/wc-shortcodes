@@ -13,3 +13,16 @@
 #wc-shortcode-modal .media-frame-content {
 	padding: 20px;
 }
+#wc-shortcode-modal code {
+	white-space: pre-wrap;
+}
+#wc-shortcode-modal .wc-shortcodes-error-yellow {
+	background-color: yellow;
+}
+#wc-shortcode-modal .wc-shortcodes-error-red {
+	background-color: red;
+	color: white;
+}
+#wc-shortcode-modal.hide-insert-button .media-button-insert {
+	display: none;
+}

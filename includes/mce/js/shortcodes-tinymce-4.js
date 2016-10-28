@@ -5,6 +5,7 @@
 		var wcDummyContent = 'Sample Content';
 		var wcParagraphContent = '<p>Sample Content</p>';
 		var wcDummyParagraphContent = '<p>Sample Content</p>';
+		var mceSelected = '';
 
 		editor.addButton('wpc_shortcodes_button', function() {
 			
@@ -13,9 +14,9 @@
 				text: "[ ]",
 				image: url + "/images/shortcodes.png",
 				type: 'menubutton',
-				icons: false,
+				icon: false,
 				onclick: function() {
-					var mceSelected = editor.selection.getContent({format: 'text'});
+					mceSelected = editor.selection.getContent({format: 'text'});
 					if ( mceSelected ) {
 						wcDummyContent = mceSelected;
 						wcParagraphContent = '<p>' + mceSelected + '</p>';
@@ -200,13 +201,15 @@
 							{
 								text: "Post Slider 1",
 								onclick: function(){
-									editor.insertContent('[wc_post_slider author="" author_name="" p="" post__in="" order="DESC" orderby="name" post_status="publish" post_type="post" posts_per_page="10" taxonomy="" field="slug" terms="" meta_category="yes" title="yes" content="yes" readmore="Continue Reading" button_class="" size="full" heading_type="h2" heading_size="30" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" template="slider1"][/wc_post_slider]');
+									var shortcode = '[wc_post_slider pids="" order="DESC" orderby="name" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_meta_category="1" show_title="1" show_content="1" readmore="Continue Reading" button_class="" size="full" heading_type="h2" template="slider1" heading_size="24" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" slider_mode="fade" slider_pause="4000" slider_auto="0"][/wc_post_slider]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
 								text: "Post Slider 2",
 								onclick: function(){
-									wcShortcodes( 'post-slider-2', 'Post Slider 2', editor );
+									var shortcode = '[wc_post_slider pids="" order="DESC" orderby="name" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_meta_category="0" show_title="1" show_content="1" readmore="Continue Reading" button_class="button secondary-button" size="full" heading_type="h2" template="slider2" heading_size="24" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" slider_mode="fade" slider_pause="4000" slider_auto="0"][/wc_post_slider]';
+									wcShortcodes( shortcode, editor );
 								}
 							}
 						]
@@ -404,6 +407,12 @@
 							}
 						]
 					},
+					{
+						text: "[edit_selection]",
+						onclick: function(){
+							wcShortcodes( mceSelected, editor );
+						}
+					}
 				]
 			}
 		});

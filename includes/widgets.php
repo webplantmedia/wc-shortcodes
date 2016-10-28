@@ -225,8 +225,9 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		$instance['orderby'] = $new_instance['orderby'];
 		$instance['post_type'] = $new_instance['post_type'];
 		$instance['posts_per_page'] = (int) $new_instance['posts_per_page'];
+		$instance['ignore_sticky_posts'] = (int) $new_instance['ignore_sticky_posts'];
 		$instance['taxonomy'] = $new_instance['taxonomy'];
-		$instance['term_slugs'] = $new_instance['term_slugs'];
+		$instance['terms'] = $new_instance['terms'];
 		$instance['show_meta_category'] = (int) $new_instance['show_meta_category'];
 		$instance['show_title'] = (int) $new_instance['show_title'];
 		$instance['show_content'] = (int) $new_instance['show_content'];
@@ -256,8 +257,9 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		$orderby = isset( $instance['orderby'] ) ? $instance['orderby'] : 'name';
 		$post_type = isset( $instance['post_type'] ) ? $instance['post_type'] : 'post';
 		$posts_per_page = isset( $instance['posts_per_page'] ) ? $instance['posts_per_page'] : 10;
+		$ignore_sticky_posts = isset( $instance['ignore_sticky_posts'] ) ? $instance['ignore_sticky_posts'] : 1;
 		$taxonomy = isset( $instance['taxonomy'] ) ? $instance['taxonomy'] : '';
-		$term_slugs = isset( $instance['term_slugs'] ) ? $instance['term_slugs'] : '';
+		$terms = isset( $instance['terms'] ) ? $instance['terms'] : '';
 		$show_meta_category = isset( $instance['show_meta_category'] ) ? $instance['show_meta_category'] : 0;
 		$show_title = isset( $instance['show_title'] ) ? $instance['show_title'] : 1;
 		$show_content = isset( $instance['show_content'] ) ? $instance['show_content'] : 1;
@@ -353,12 +355,16 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 					</select>
 				</p>
 				<p>
-					<label for="<?php echo $this->get_field_id('term_slugs'); ?>"><?php _e('Terms: (Leave Blank to Display All)') ?></label>
-					<input type="text" class="widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('term_slugs'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="terms" name="<?php echo $this->get_field_name('term_slugs'); ?>" value="<?php echo $term_slugs; ?>" />
+					<label for="<?php echo $this->get_field_id('terms'); ?>"><?php _e('Terms: (Leave Blank to Display All)') ?></label>
+					<input type="text" class="widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('terms'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="terms" name="<?php echo $this->get_field_name('terms'); ?>" value="<?php echo $terms; ?>" />
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('posts_per_page'); ?>"><?php _e('Posts Per Page: (-1 for Unlimited)') ?></label>
 					<input type="text" class="widefat" id="<?php echo $this->get_field_id('posts_per_page'); ?>" name="<?php echo $this->get_field_name('posts_per_page'); ?>" value="<?php echo $posts_per_page; ?>" />
+				</p>
+				<p>
+					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('ignore_sticky_posts'); ?>" name="<?php echo $this->get_field_name('ignore_sticky_posts'); ?>" value="1" <?php checked( $ignore_sticky_posts, 1 ); ?> />
+					<label for="<?php echo $this->get_field_id('ignore_sticky_posts'); ?>"><?php _e('Ignore Sticky Posts') ?></label>
 				</p>
 			</div>
 			<h3>Content</h3>
