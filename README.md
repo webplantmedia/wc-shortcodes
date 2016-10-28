@@ -66,6 +66,11 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 2.01
+
+* improved post_slider shortcode
+* added gui interface for post_slider shortcode
+
 ### Version 1.97
 
 * updated post slider style
