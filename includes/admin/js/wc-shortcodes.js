@@ -124,12 +124,12 @@
 				error = error.replace(/\n/g,"##newline##");
 				error = error.replace(/\s/g,"<span class='wc-shortcodes-error-yellow'> </span>");
 				error = error.replace(/##newline##/g,"<span class='wc-shortcodes-error-red'>\\n</span>");
-				$innerContent.html("<h4>"+msg+"</h4><p><code style='padding-left:0;padding-right:0'>"+error+"</code></p>");
+				$innerContent.html("<h3>"+msg+"</h3><p><code style='padding-left:0;padding-right:0'>"+error+"</code></p>");
 			}
 			else {
 				msg = 'No Selection Found';
 				error = 'Please select and highlight a shortcode in your editor to edit.';
-				$innerContent.html("<h4>"+msg+"</h4><p><code style='padding-left:0;padding-right:0'>"+error+"</code></p>");
+				$innerContent.html("<h3>"+msg+"</h3><p><code style='padding-left:0;padding-right:0'>"+error+"</code></p>");
 			}
 		}
 	}

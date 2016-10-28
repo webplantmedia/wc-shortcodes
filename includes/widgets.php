@@ -292,6 +292,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('pids'); ?>"><?php _e('Post IDs:') ?></label>
 					<input type="text" class="widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('pids'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="post" name="<?php echo $this->get_field_name('pids'); ?>" value="<?php echo $pids; ?>" />
+					<span class="wcs-description">Leave blank to display all posts.</span>
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('order'); ?>"><?php _e('Order:'); ?></label>
@@ -355,12 +356,14 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 					</select>
 				</p>
 				<p>
-					<label for="<?php echo $this->get_field_id('terms'); ?>"><?php _e('Terms: (Leave Blank to Display All)') ?></label>
+					<label for="<?php echo $this->get_field_id('terms'); ?>"><?php _e('Terms:') ?></label>
 					<input type="text" class="widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('terms'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="terms" name="<?php echo $this->get_field_name('terms'); ?>" value="<?php echo $terms; ?>" />
+					<span class="wcs-description">Leave blank to display all terms.</span>
 				</p>
 				<p>
-					<label for="<?php echo $this->get_field_id('posts_per_page'); ?>"><?php _e('Posts Per Page: (-1 for Unlimited)') ?></label>
+					<label for="<?php echo $this->get_field_id('posts_per_page'); ?>"><?php _e('Posts Per Page:') ?></label>
 					<input type="text" class="widefat" id="<?php echo $this->get_field_id('posts_per_page'); ?>" name="<?php echo $this->get_field_name('posts_per_page'); ?>" value="<?php echo $posts_per_page; ?>" />
+					<span class="wcs-description">Enter -1 for unlimited posts.</span>
 				</p>
 				<p>
 					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('ignore_sticky_posts'); ?>" name="<?php echo $this->get_field_name('ignore_sticky_posts'); ?>" value="1" <?php checked( $ignore_sticky_posts, 1 ); ?> />
@@ -483,8 +486,9 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 					</select>
 				</p>
 				<p>
-					<label for="<?php echo $this->get_field_id('slider_pause'); ?>"><?php _e('Slider Pause: (in milliseconds)') ?></label>
+					<label for="<?php echo $this->get_field_id('slider_pause'); ?>"><?php _e('Slider Pause:') ?></label>
 					<input type="text" class="widefat" id="<?php echo $this->get_field_id('slider_pause'); ?>" name="<?php echo $this->get_field_name('slider_pause'); ?>" value="<?php echo $slider_pause; ?>" />
+					<span class="wcs-description">Enter number in milliseconds.</span>
 				</p>
 				<p>
 					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('slider_auto'); ?>" name="<?php echo $this->get_field_name('slider_auto'); ?>" value="1" <?php checked( $slider_auto, 1 ); ?> />

@@ -26,3 +26,8 @@
 #wc-shortcode-modal.hide-insert-button .media-button-insert {
 	display: none;
 }
+.wc-shortcodes-post-slider-widget .wcs-description {
+	font-style: italic;
+	margin: 2px 0 5px;
+	color: #aaa;
+}
