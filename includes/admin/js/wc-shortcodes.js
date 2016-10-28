@@ -109,8 +109,8 @@
 					$innerContent.html(result);
 				}
 				else {
-					msg = "<h3>Not One Our Shortcodes</h3>";
-					msg += "<p><code>["+mceTag+"]</code> is not supports by our shortcode manager.</p>";
+					msg = "<h3>Not Yet Supported</h3>";
+					msg += "<p><code>["+mceTag+"]</code> is not yet supported by our shortcode manager.</p>";
 					$innerContent.html(msg);
 				}
 			}); 
