@@ -259,8 +259,8 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		global $wc_shortcodes_widget_ops;
 
 		$pids = isset( $instance['pids'] ) ? $instance['pids'] : '';
-		$order = isset( $instance['order'] ) ? $instance['order'] : '';
-		$orderby = isset( $instance['orderby'] ) ? $instance['orderby'] : 'name';
+		$order = isset( $instance['order'] ) ? $instance['order'] : 'DESC';
+		$orderby = isset( $instance['orderby'] ) ? $instance['orderby'] : 'date';
 		$post_type = isset( $instance['post_type'] ) ? $instance['post_type'] : 'post';
 		$posts_per_page = isset( $instance['posts_per_page'] ) ? $instance['posts_per_page'] : 10;
 		$ignore_sticky_posts = isset( $instance['ignore_sticky_posts'] ) ? $instance['ignore_sticky_posts'] : 1;
@@ -273,7 +273,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		$button_class = isset( $instance['button_class'] ) ? $instance['button_class'] : 'button secondary-button';
 		$size = isset( $instance['size'] ) ? $instance['size'] : 'full';
 		$heading_type = isset( $instance['heading_type'] ) ? $instance['heading_type'] : 'h2';
-		$heading_size = isset( $instance['heading_size'] ) ? $instance['heading_size'] : 24;
+		$heading_size = isset( $instance['heading_size'] ) ? $instance['heading_size'] : 30;
 		$mobile_heading_size = isset( $instance['mobile_heading_size'] ) ? $instance['mobile_heading_size'] : 24;
 		$excerpt_length = isset( $instance['excerpt_length'] ) ? $instance['excerpt_length'] : 30;
 		$desktop_height = isset( $instance['desktop_height'] ) ? $instance['desktop_height'] : 600;

@@ -1354,7 +1354,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			'post_type' => 'post', // post, page, wc_portfolio_item, etc
 			'posts_per_page' => 10, //number of post to show per page
 			'nopaging' => true, //show all posts or use pagination. Default value is 'false', use paging.
-			'ignore_sticky_posts' => 0,
+			'ignore_sticky_posts' => 1,
 
 			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
 			'field' => 'slug', // slug or id
@@ -1364,7 +1364,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			'show_title' => 1, // show heading?
 			'show_content' => 1, // show main content?
 			'readmore' => 'Continue Reading', // show main content?
-			'button_class' => 'button', // show main content?
+			'button_class' => 'button secondary-button', // show main content?
 
 			'size' => 'full', // default thumbnail size
 
@@ -1372,9 +1372,9 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			'heading_size' => 30,
 			'mobile_heading_size' => 24,
 			'layout' => 'bxslider', // blog layout
-			'template' => 'slider1',
+			'template' => 'slider2',
 			'excerpt_length' => 55,
-			'desktop_height' => 650,
+			'desktop_height' => 600,
 			'laptop_height' => 500,
 			'mobile_height' => 350,
 
