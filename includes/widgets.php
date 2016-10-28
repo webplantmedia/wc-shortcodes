@@ -207,12 +207,18 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
+		$shortcode = array();
 		foreach ( $instance as $key => $value ) {
 			$shortcode[] = $key . '="' . $value . '"';
 		}
 
-		$shortcode = implode( " ", $shortcode );
-		$shortcode = '[wc_post_slider ' . $shortcode . '][/wc_post_slider]';
+		if ( ! empty( $shortcode ) ) {
+			$shortcode = implode( " ", $shortcode );
+			$shortcode = '[wc_post_slider ' . $shortcode . '][/wc_post_slider]';
+		}
+		else {
+			$shortcode = '[wc_post_slider][/wc_post_slider]';
+		}
 
 		echo $args['before_widget'];
 		echo do_shortcode( $shortcode );
@@ -501,15 +507,13 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 			</div>
 		</div>
 
-		<?php if ( '__i__' != $this->number ) : ?>
-			<script type="text/javascript">
-				/* <![CDATA[ */
-				jQuery(document).ready(function($){
-					$('#wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"}).wcPostSliderWidget();
-				});
-				/* ]]> */
-			</script>
-		<?php endif; ?>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			jQuery(document).ready(function($){
+				$('#wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"}).wcPostSliderWidget();
+			});
+			/* ]]> */
+		</script>
 		<?php
 	}
 }
