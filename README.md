@@ -66,7 +66,7 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
-### Version 2.02
+### Version 2.03
 
 * fixed bug with post_slider shortcode
 
