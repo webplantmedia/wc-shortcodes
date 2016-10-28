@@ -28,8 +28,16 @@
 				<?php endif; ?>
 
 				<?php if ( $display['readmore'] ) : ?>
+				<?php
+					if ( 'wcs_slide' == $post->post_type ) {
+						$url = get_post_meta( $post->ID, '_wc_shortcodes_slide_url', true );
+					}
+					else {
+						$url = get_the_permalink();
+					}
+				?>
 				<div class="wc-shortcodes-read-more">
-					<a class="<?php echo $display['button_class']; ?>" href="<?php the_permalink(); ?>"><?php echo $display['readmore']; ?></a>
+					<a class="<?php echo $display['button_class']; ?>" href="<?php echo esc_url( $url ); ?>"><?php echo $display['readmore']; ?></a>
 				</div><!-- .entry-summary -->
 				<?php endif; ?>
 			</div>

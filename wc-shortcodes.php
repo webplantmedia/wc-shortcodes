@@ -15,6 +15,7 @@ define( '_WC_SHORTCODES_PREFIX', '_wc_shortcodes_' );
 define( 'WC_SHORTCODES_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WC_SHORTCODES_CURRENT_VERSION', get_option( WC_SHORTCODES_PREFIX . 'current_version' ) );
 define( 'WC_SHORTCODES_FONT_AWESOME_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_font_awesome', true ) );
+define( 'WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_slide_post_type', true ) );
 define( 'WC_SHORTCODES_PLUGIN_BASENAME', plugin_basename( plugin_dir_path( realpath( __FILE__ ) ) . 'wc-shortcodes.php' ) );
 
 global $wc_shortcodes_options;
@@ -109,6 +110,9 @@ $wc_shortcodes_theme_support = array(
 require_once( plugin_dir_path( __FILE__ ) . 'includes/vendors/wpc-settings-framework/init.php' );
 require_once( dirname(__FILE__) . '/includes/options.php' ); // define options array
 require_once( dirname(__FILE__) . '/includes/functions.php' ); // Adds basic filters and actions
+if ( WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED ) {
+	require_once( dirname(__FILE__) . '/includes/post-types.php' ); // Adds basic filters and actions
+}
 require_once( dirname(__FILE__) . '/includes/ajax.php' ); // Adds basic filters and actions
 require_once( dirname(__FILE__) . '/includes/scripts.php' ); // Adds plugin JS and CSS
 require_once( dirname(__FILE__) . '/includes/shortcode-functions.php'); // Main shortcode functions

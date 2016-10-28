@@ -280,9 +280,13 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		$slider_auto = isset( $instance['slider_auto'] ) ? $instance['slider_auto'] : 0;
 
 		$args = array(
-		   'public'   => true,
+		   'public' => true,
 		);
 		$post_types = get_post_types( $args );
+		$slide_post_type = 'wcs_slide';
+		if ( post_type_exists( $slide_post_type ) ) {
+			$post_types[ $slide_post_type ] = $slide_post_type;
+		}
 		unset( $post_types['attachment'] );
 		?>
 
