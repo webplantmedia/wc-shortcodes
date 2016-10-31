@@ -1353,7 +1353,7 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			'post_status' => 'publish',
 			'post_type' => 'post', // post, page, wc_portfolio_item, etc
 			'posts_per_page' => 10, //number of post to show per page
-			'nopaging' => true, //show all posts or use pagination. Default value is 'false', use paging.
+			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
 			'ignore_sticky_posts' => 1,
 
 			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
@@ -1431,6 +1431,14 @@ if( ! function_exists( 'wc_shortcodes_post_slider' ) ) {
 			}
 		}
 
+		// sanitize limit
+		if ( $atts['posts_per_page'] < 0 ) {
+			$atts['posts_per_page'] = -1;
+			$atts['nopaging'] = true;
+		}
+		else if ( 0 == $atts['posts_per_page'] ) {
+			return;
+		}
 
 		// sanitize dropdown
 		$valid_layouts = array( 'bxslider' );
