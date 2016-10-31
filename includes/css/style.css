@@ -1933,9 +1933,6 @@ pre.pre-wrap {
 	right: 10px;
 	right: 0.625rem;
 }
-.bx-wrapper .bx-next i {
-	padding-left: 2px;
-}
 .bx-wrapper .bx-next:hover,
 .bx-wrapper .bx-next:focus {
 }
