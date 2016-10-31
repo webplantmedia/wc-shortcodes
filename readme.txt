@@ -88,8 +88,9 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
-= Version 2.04 =
+= Version 2.05 =
 
+* minor style update
 * fixed posts_per_page query
 
 = Version 2.03 =
