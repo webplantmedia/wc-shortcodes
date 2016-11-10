@@ -249,7 +249,7 @@ if( !function_exists('wc_shortcodes_callout') ) {
 		$output .= '</div>';	
 		if ( $button_text !== '' ) {
 			$output .= '<div class="wc-shortcodes-callout-button">';
-				$output .='<a href="'. $button_url .'" title="'. $button_text .'" target="_'. $button_target .'" class="wc-shortcodes-button '.$button_color .'" '. $border_radius_style .'><span class="wc-shortcodes-button-inner">'. $button_text .'</span></a>';
+				$output .='<a href="'. esc_url( $button_url ) .'" title="'. $button_text .'" target="_'. $button_target .'" class="wc-shortcodes-button '.$button_color .'" '. $border_radius_style .'><span class="wc-shortcodes-button-inner">'. $button_text .'</span></a>';
 			$output .='</div>';
 		}
 		$output .= '</div>';
@@ -376,7 +376,7 @@ if( !function_exists('wc_shortcodes_social_icons') ) {
 
 						$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . $key . $first_class . '">';
 							$html .='<a target="_blank" href="'.$social_link.'">';
-								$html .= '<img src="'.$icon_url.'" alt="'.$value.'">';
+								$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.$value.'">';
 							$html .= '</a>';
 						$html .= '</li>';
 					}
@@ -451,7 +451,7 @@ if( !function_exists('wc_shortcodes_button') ) {
 			$class[] = $custom_class;
 		
 		$button = NULL;
-		$button .= '<a href="' . $url . '" class="'.implode( ' ', $class ).'" target="_'.$target.'" title="'. $title .'" '. $rel .'>';
+		$button .= '<a href="' . esc_url( $url ) . '" class="'.implode( ' ', $class ).'" target="_'.$target.'" title="'. $title .'" '. $rel .'>';
 			$button .= '<span class="wc-shortcodes-button-inner">';
 				if ( $icon_left ) $button .= '<span class="wc-shortcodes-button-icon-left icon-'. $icon_left .'"></span>';
 				$button .= $content;
@@ -518,8 +518,7 @@ if( !function_exists('wc_shortcodes_testimonial') ) {
 		), $atts ) );
 
 		if ( ! empty( $url ) ) {
-			$url = esc_url( $url );
-			$by = '<a href="' . $url . '">' . $by . '</a>';
+			$by = '<a href="' . esc_url( $url ) . '">' . $by . '</a>';
 		}
 
 		$testimonial_content = '';
@@ -820,7 +819,7 @@ if( !function_exists('wc_shortcodes_pricing') ) {
 				$pricing_content .= ''. $content. '';
 			$pricing_content .= '</div>';
 			if( $button_url ) {
-				$pricing_content .= '<div class="wc-shortcodes-pricing-button"><a href="'. $button_url .'" class="wc-shortcodes-button wc-shortcodes-button-'.$type.'" target="_'. $button_target .'" rel="'. $button_rel .'"><span class="wc-shortcodes-button-inner">'. $button_text .'</span></a></div>';
+				$pricing_content .= '<div class="wc-shortcodes-pricing-button"><a href="'. esc_url( $button_url ) .'" class="wc-shortcodes-button wc-shortcodes-button-'.$type.'" target="_'. $button_target .'" rel="'. $button_rel .'"><span class="wc-shortcodes-button-inner">'. $button_text .'</span></a></div>';
 			}
 		$pricing_content .= '</div>';  
 		return $pricing_content;
@@ -1681,15 +1680,15 @@ if( !function_exists('wc_shortcodes_image') ) {
 		}
 
 		// check link_to
-		if ( ! empty( $url ) )
-			$url = esc_url( $url ); 
-		else if ( 'file' == $link_to )
-			$url = wp_get_attachment_url( $attachment_id );
-		else if ( 'post' == $link_to )
-			$url = get_attachment_link( $attachment_id );
+		if ( empty( $url ) ) {
+			if ( 'file' == $link_to )
+				$url = wp_get_attachment_url( $attachment_id );
+			else if ( 'post' == $link_to )
+				$url = get_attachment_link( $attachment_id );
+		}
 
 		if ( 'none' != $link_to )
-			$html = '<a class="wc-shortcodes-image-anchor" href="' . $url . '">' . $html . '</a>';
+			$html = '<a class="wc-shortcodes-image-anchor" href="' . esc_url( $url ) . '">' . $html . '</a>';
 
 		// insert caption
 		if ( ! empty( $caption ) ) {
@@ -1801,7 +1800,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 								$html .='<a href="javascript:void((function()%7Bvar%20e=document.createElement(&apos;script&apos;);e.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);e.setAttribute(&apos;charset&apos;,&apos;UTF-8&apos;);e.setAttribute(&apos;src&apos;,&apos;https://assets.pinterest.com/js/pinmarklet.js?r=&apos;+Math.random()*99999999);document.body.appendChild(e)%7D)());">';
 									switch ( $format ) {
 										case 'image' :
-											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.$icon_text.'">';
 											break;
 										case 'icon' :
 											$html .= '<i class="fa '.$icon_class.'"></i>';
@@ -1818,7 +1817,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 								$html .='<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='.get_permalink().'&amp;t='.rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, $charset ) ).'">';
 									switch ( $format ) {
 										case 'image' :
-											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.$icon_text.'">';
 											break;
 										case 'icon' :
 											$html .= '<i class="fa '.$icon_class.'"></i>';
@@ -1835,7 +1834,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 								$html .='<a target="_blank" href="https://twitter.com/share?text='.rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, $charset ) ).'&amp;url='.get_permalink().'" class="share-button-twitter" data-lang="en">';
 									switch ( $format ) {
 										case 'image' :
-											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.$icon_text.'">';
 											break;
 										case 'icon' :
 											$html .= '<i class="fa '.$icon_class.'"></i>';
@@ -1852,7 +1851,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 								$html .='<a title="Share by Email" href="mailto:?subject='.rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, $charset ) ).'&amp;body='.get_permalink().'">';
 									switch ( $format ) {
 										case 'image' :
-											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.$icon_text.'">';
 											break;
 										case 'icon' :
 											$html .= '<i class="fa '.$icon_class.'"></i>';
@@ -1869,7 +1868,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 								$html .='<a target="_blank" href="https://plus.google.com/share?url='.get_permalink().'">';
 									switch ( $format ) {
 										case 'image' :
-											$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.$icon_text.'">';
 											break;
 										case 'icon' :
 											$html .= '<i class="fa '.$icon_class.'"></i>';
@@ -1891,7 +1890,7 @@ if ( ! function_exists('wc_shortcodes_share_buttons') ) {
 								}
 										switch ( $format ) {
 											case 'image' :
-												$html .= '<img src="'.$icon_url.'" alt="'.$icon_text.'">';
+												$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.$icon_text.'">';
 												break;
 											case 'icon' :
 												$html .= '<i class="fa '.$icon_class.'"></i>';
