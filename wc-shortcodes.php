@@ -23,6 +23,7 @@ global $wc_shortcodes_social_icons;
 global $wc_shortcodes_share_buttons;
 global $wc_shortcodes_theme_support;
 global $wc_shortcodes_plugin_screen_hook_suffix;
+global $wc_shortcodes_sanitize;
 
 $wc_shortcodes_options = array();
 $wc_shortcodes_social_icons = array(
@@ -108,13 +109,14 @@ $wc_shortcodes_theme_support = array(
 );
 
 require_once( plugin_dir_path( __FILE__ ) . 'includes/vendors/wpc-settings-framework/init.php' );
-require_once( dirname(__FILE__) . '/includes/options.php' ); // define options array
-require_once( dirname(__FILE__) . '/includes/functions.php' ); // Adds basic filters and actions
+require_once( plugin_dir_path( __FILE__ ) . 'includes/classes/sanitize.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/options.php' ); // define options array
+require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php' ); // Adds basic filters and actions
 if ( WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED ) {
-	require_once( dirname(__FILE__) . '/includes/post-types.php' ); // Adds basic filters and actions
+	require_once( plugin_dir_path( __FILE__ ) . 'includes/post-types.php' ); // Adds basic filters and actions
 }
-require_once( dirname(__FILE__) . '/includes/ajax.php' ); // Adds basic filters and actions
-require_once( dirname(__FILE__) . '/includes/scripts.php' ); // Adds plugin JS and CSS
-require_once( dirname(__FILE__) . '/includes/shortcode-functions.php'); // Main shortcode functions
-require_once( dirname(__FILE__) . '/includes/mce/shortcodes_tinymce.php'); // Add mce buttons to post editor
-require_once( dirname(__FILE__) . '/includes/widgets.php' ); // include any widgets
+require_once( plugin_dir_path( __FILE__ ) . 'includes/ajax.php' ); // Adds basic filters and actions
+require_once( plugin_dir_path( __FILE__ ) . 'includes/scripts.php' ); // Adds plugin JS and CSS
+require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode-functions.php'); // Main shortcode functions
+require_once( plugin_dir_path( __FILE__ ) . 'includes/mce/shortcodes_tinymce.php'); // Add mce buttons to post editor
+require_once( plugin_dir_path( __FILE__ ) . 'includes/widgets.php' ); // include any widgets

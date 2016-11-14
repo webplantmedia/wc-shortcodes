@@ -37,7 +37,7 @@
 					}
 				?>
 				<div class="wc-shortcodes-read-more">
-					<a class="<?php echo $display['button_class']; ?>" href="<?php echo esc_url( $url ); ?>"><?php echo $display['readmore']; ?></a>
+					<a class="<?php echo esc_attr( $display['button_class'] ); ?>" href="<?php echo esc_url( $url ); ?>"><?php echo $display['readmore']; ?></a>
 				</div><!-- .entry-summary -->
 				<?php endif; ?>
 			</div>
