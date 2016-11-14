@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 2.06
+
+* sanitized, escaped, and validated all POST calls
+
 ### Version 2.05
 
 * minor style update
