@@ -25,7 +25,11 @@ function wc_shortcodes_send_rsvp_email() {
 		$email_to = $admin_email;
 	}
 
-	$rsvp_name = trim( $_POST['rsvp_name'] );
+	$email_to = sanitize_email( $email_to );
+	$email_title = sanitize_text_field( $email_to );
+	$email_success_message = sanitize_text_field( $email_to );
+
+	$rsvp_name = trim( sanitize_text_field( $_POST['rsvp_name'] ) );
 	if ( $rsvp_name === '') {
 		$error[] = 'Please enter your name.';
 		$hasError = true;
@@ -33,7 +37,7 @@ function wc_shortcodes_send_rsvp_email() {
 		$message[] = 'Name: ' . esc_html( $rsvp_name );
 	}
 
-	$rsvp_number = trim( $_POST['rsvp_number'] );
+	$rsvp_number = trim( sanitize_text_field( $_POST['rsvp_number'] ) );
 	if ( $rsvp_number === '') {
 		$error[] = 'Please select a number.';
 		$hasError = true;
@@ -41,7 +45,7 @@ function wc_shortcodes_send_rsvp_email() {
 		$message[] = 'Number: ' . esc_html( $rsvp_number );
 	}
 
-	$rsvp_event = trim( $_POST['rsvp_event'] );
+	$rsvp_event = trim( sanitize_text_field( $_POST['rsvp_event'] ) );
 	if ( $rsvp_event === '') {
 		$error[] = 'Please select event.';
 		$hasError = true;
@@ -82,8 +86,9 @@ function wc_shortcodes_post_lookup_callback() {
 	global $wpdb; //get access to the WordPress database object variable
 
 	//get names of all businesses
-	$request = '%' . $wpdb->esc_like( stripslashes( $_POST['request'] ) ) . '%'; //escape for use in LIKE statement
-	$post_type = stripslashes( $_POST['post_type'] );
+	$request = '%' . $wpdb->esc_like( stripslashes( sanitize_text_field( $_POST['request'] ) ) ) . '%'; //escape for use in LIKE statement
+	$post_type = stripslashes( sanitize_text_field( $_POST['post_type'] ) );
+
 	$sql = "
 		select
 			ID,
@@ -128,9 +133,9 @@ function wc_shortcodes_terms_lookup_callback() {
 	global $wpdb; //get access to the WordPress database object variable
 
 	//get names of all businesses
-	$request = '%' . $wpdb->esc_like( stripslashes( $_POST['request'] ) ) . '%'; //escape for use in LIKE statement
-	$post_type = stripslashes( $_POST['post_type'] );
-	$taxonomy = stripslashes( $_POST['taxonomy'] );
+	$request = '%' . $wpdb->esc_like( stripslashes( sanitize_text_field( $_POST['request'] ) ) ) . '%'; //escape for use in LIKE statement
+	$post_type = stripslashes( sanitize_text_field( $_POST['post_type'] ) );
+	$taxonomy = stripslashes( sanitize_text_field( $_POST['taxonomy'] ) );
 
 	if ( empty( $taxonomy ) ) {
 		$titles = array();
@@ -185,8 +190,10 @@ add_action( 'wp_ajax_wc_terms_lookup', 'wc_shortcodes_terms_lookup_callback' );
 
 function wc_shortcodes_mce_popup() {
 
+	// no need to sanitize here.
 	$tag = $_POST['tag'];
 	$shortcode = stripslashes( $_POST['shortcode'] );
+
 	$attr = wc_shortcodes_parse_shortcode( $tag, $shortcode );
 	
 	switch ( $tag ) {
