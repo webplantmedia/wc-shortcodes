@@ -17,7 +17,7 @@
  */
 class WC_Shortcodes_Settings_Framework {
 
-	protected $version = '1.0.2';
+	protected $version = '1.0.3';
 
 	/**
 	 * Instance of this class.
@@ -344,7 +344,7 @@ class WC_Shortcodes_Settings_Framework {
 
 	public function get_callback( &$o ) {
 		if ( isset( $o['callback'] ) && ! empty( $o['callback'] ) ) {
-			if ( function_exists( $o['callback'] ) ) {
+			if ( is_callable( $o['callback'] ) ) {
 				return $o['callback'];
 			}
 		}
