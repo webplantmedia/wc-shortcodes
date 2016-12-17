@@ -1,29 +1,4 @@
 <?php
-function wc_shortcodes_check_supports() {
-	global $wc_shortcodes_theme_support;
-
-	if ( current_theme_supports( 'wpc-shortcodes' ) ) {
-		$supports = get_theme_support( 'wpc-shortcodes' );
-
-		if ( isset( $supports[0] ) && is_array( $supports[0] ) ) {
-			foreach ( $supports[0] as $key => $value ) {
-				$wc_shortcodes_theme_support[ $key ] = $value;
-			}
-		}
-	}
-}
-add_action( 'init', 'wc_shortcodes_check_supports' );
-
-function wc_shortcodes_add_action_links( $links ) {
-	return array_merge(
-		array(
-			'settings' => '<a href="' . admin_url( 'themes.php?page=wc-shortcodes' ) . '">' . __( 'Settings', 'wc-shortcodes' ) . '</a>'
-		),
-		$links
-	);
-}
-add_filter( 'plugin_action_links_' . WC_SHORTCODES_PLUGIN_BASENAME, 'wc_shortcodes_add_action_links' );
-
 /**
  * filter social url. For example, we want to add
  * mailto: to an email address.
@@ -381,38 +356,3 @@ function wc_shortcodes_get_posted_category() {
 	return $html;
 }
 
-function wc_shortcodes_parse_shortcode( $check_tag, $content ) {
-	global $shortcode_tags;
-
-	if ( false === strpos( $content, '[' ) ) {
-		return false;
-	}
-
-	if (empty($shortcode_tags) || !is_array($shortcode_tags))
-		return false;
-
-	// Find all registered tag names in $content.
-	preg_match_all( '@\[([^<>&/\[\]\x00-\x20=]++)@', $content, $matches );
-	$tagnames = array_intersect( array_keys( $shortcode_tags ), $matches[1] );
-
-	if ( empty( $tagnames ) ) {
-		return false;
-	}
-
-	$pattern = get_shortcode_regex( $tagnames );
-	preg_match( "/$pattern/", $content, $m );
-
-	// allow [[foo]] syntax for escaping a tag
-	if ( $m[1] == '[' && $m[6] == ']' ) {
-		return substr($m[0], 1, -1);
-	}
-
-	$tag = $m[2];
-	
-	if ( $tag != $check_tag )
-		return false;
-
-	$attr = shortcode_parse_atts( $m[3] );
-
-	return $attr;
-}
