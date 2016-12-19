@@ -5,75 +5,118 @@ Plugin URI: http://webplantmedia.com/starter-themes/wordpresscanvas/features/sho
 Description: A family of shortcodes to enhance site functionality.
 Author: Chris Baldelomar
 Author URI: http://webplantmedia.com/
-Version: 3.0
+Version: 2.07
 License: GPLv2 or later
 */
 
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+define( 'WC_SHORTCODES_VERSION', '2.07' );
+define( 'WC_SHORTCODES_PREFIX', 'wc_shortcodes_' );
+define( '_WC_SHORTCODES_PREFIX', '_wc_shortcodes_' );
+define( 'WC_SHORTCODES_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'WC_SHORTCODES_CURRENT_VERSION', get_option( WC_SHORTCODES_PREFIX . 'current_version' ) );
+define( 'WC_SHORTCODES_FONT_AWESOME_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_font_awesome', true ) );
+define( 'WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_slide_post_type', true ) );
+define( 'WC_SHORTCODES_PLUGIN_BASENAME', plugin_basename( plugin_dir_path( realpath( __FILE__ ) ) . 'wc-shortcodes.php' ) );
 
-/*----------------------------------------------------------------------------*
- * Public-Facing Functionality
- *----------------------------------------------------------------------------*/
+global $wc_shortcodes_options;
+global $wc_shortcodes_social_icons;
+global $wc_shortcodes_share_buttons;
+global $wc_shortcodes_theme_support;
+global $wc_shortcodes_plugin_screen_hook_suffix;
+global $wc_shortcodes_sanitize;
 
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-vars.php' );
-WPC_Shortcodes_Vars::init_vars();
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-public.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-sanitize.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-register.php' );
+$wc_shortcodes_options = array();
+$wc_shortcodes_social_icons = array(
+	'facebook' => 'Facebook',
+	'google' => 'Google',
+	'twitter' => 'Twitter',
+	'pinterest' => 'Pinterest',
+	'instagram' => 'Instagram',
+	'bloglovin' => 'BlogLovin',
+	'flickr' => 'Flickr',
+	'rss' => 'RSS',
+	'email' => 'Email',
+	'custom1' => 'Custom 1',
+	'custom2' => 'Custom 2',
+	'custom3' => 'Custom 3',
+	'custom4' => 'Custom 4',
+	'custom5' => 'Custom 5',
+);
+$wc_shortcodes_share_buttons = array(
+	'pinterest' => 'Pinterest',
+	'facebook' => 'Facebook',
+	'twitter' => 'Twitter',
+	'google' => 'Google',
+	'email' => 'Email',
+	'print' => 'Print',
+);
+$wc_shortcodes_theme_support = array(
+	'theme_reset' => false,
+	'fullwidth_container' => '#main',
+	'social_icons_format' => 'image',
+	'share_buttons_filter_disable' => false,
+	'share_buttons_on_post_page' => false,
+	'share_buttons_on_blog_page' => false,
+	'share_buttons_on_archive_page' => false,
+	'share_buttons_on_product_page' => false,
+	'facebook_font_icon' => 'fa-facebook',
+	'facebook_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/facebook.png',
+	'twitter_font_icon' => 'fa-twitter',
+	'twitter_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/twitter.png',
+	'pinterest_font_icon' => 'fa-pinterest',
+	'pinterest_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/pinterest.png',
+	'google_font_icon' => 'fa-google-plus',
+	'google_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/google.png',
+	'bloglovin_font_icon' => 'fa-plus-square',
+	'bloglovin_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/bloglovin.png',
+	'email_font_icon' => 'fa-envelope',
+	'email_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/email.png',
+	'flickr_font_icon' => 'fa-flickr',
+	'flickr_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/flickr.png',
+	'instagram_font_icon' => 'fa-instagram',
+	'instagram_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/instagram.png',
+	'rss_font_icon' => 'fa-rss',
+	'rss_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/rss.png',
+	'custom1_font_icon' => 'fa-camera',
+	'custom1_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/picasa.png',
+	'custom2_font_icon' => 'fa-shopping-cart',
+	'custom2_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/shopping.png',
+	'custom3_font_icon' => 'fa-youtube',
+	'custom3_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/youtube.png',
+	'custom4_font_icon' => 'fa-dollar',
+	'custom4_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/etsy.png',
+	'custom5_font_icon' => 'fa-tumblr',
+	'custom5_social_icon' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/tumblr.png',
+	'share_buttons_format' => 'image',
+	'pinterest_share_text' => 'Pin it',
+	'pinterest_share_font_icon' => 'fa-pinterest',
+	'pinterest_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/pinterest.png',
+	'facebook_share_text' => 'Share',
+	'facebook_share_font_icon' => 'fa-facebook',
+	'facebook_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/facebook.png',
+	'twitter_share_text' => 'Tweet',
+	'twitter_share_font_icon' => 'fa-twitter',
+	'twitter_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/twitter.png',
+	'google_share_text' => 'Share',
+	'google_share_font_icon' => 'fa-google-plus',
+	'google_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/google.png',
+	'email_share_text' => 'Email',
+	'email_share_font_icon' => 'fa-envelope',
+	'email_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/email.png',
+	'print_share_text' => 'Print',
+	'print_share_font_icon' => 'fa-print',
+	'print_share_button' => WC_SHORTCODES_PLUGIN_URL . 'includes/img/print.png',
+);
+
+require_once( plugin_dir_path( __FILE__ ) . 'includes/vendors/wpc-settings-framework/init.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/classes/sanitize.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/options.php' ); // define options array
+require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php' ); // Adds basic filters and actions
 if ( WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED ) {
-	require_once( plugin_dir_path( __FILE__ ) . 'public/class-post-types.php' ); //Adds basic filters and actions
-} 
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-ajax-front.php' );
-foreach ( glob( plugin_dir_path( __FILE__ ) . 'public/widgets/widget-*.php' ) as $filename ) {
-    require_once( $filename );
+	require_once( plugin_dir_path( __FILE__ ) . 'includes/post-types.php' ); // Adds basic filters and actions
 }
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-widgets.php' );
-
-
-// Initialize classes.
-add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Public', 'get_instance' ) );
-add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Register', 'get_instance' ) );
-if ( WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED ) {
-	add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Post_Types', 'get_instance' ) );
-} 
-add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Ajax_Front', 'get_instance' ) );
-add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Widgets', 'get_instance' ) );
-
-
-/*
- * Register hooks that are fired when the plugin is activated or deactivated.
- * When the plugin is deleted, the uninstall.php file is loaded.
- */
-// register_activation_hook( __FILE__, array( 'WPC_Insert_Code', 'single_activate' ) );
-// register_deactivation_hook( __FILE__, array( 'WPC_Insert_Code', 'single_deactivate' ) );
-
-/*----------------------------------------------------------------------------*
- * Dashboard and Administrative Functionality
- *----------------------------------------------------------------------------*/
-
-if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
-
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-admin.php' );
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/vendors/wpc-settings-framework/init.php' );
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-options.php' );
-	// require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php' ); // Adds basic filters and actions
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-ajax.php' );
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-tinymce-buttons.php' );
-
-	add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Admin', 'get_instance' ) );
-	add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Options', 'get_instance' ) );
-	add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Ajax', 'get_instance' ) );
-	add_action( 'plugins_loaded', array( 'WPC_Shortcodes_TinyMCE_Buttons', 'get_instance' ) );
-}
-
-/*----------------------------------------------------------------------------*
- * Public Functions to be used by Themes or Plugins
- *----------------------------------------------------------------------------*/
-
-
-// require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode-functions.php'); // Main shortcode functions
-// require_once( plugin_dir_path( __FILE__ ) . 'includes/mce/shortcodes_tinymce.php'); // Add mce buttons to post editor
-// require_once( plugin_dir_path( __FILE__ ) . 'includes/widgets.php' ); // include any widgets
+require_once( plugin_dir_path( __FILE__ ) . 'includes/ajax.php' ); // Adds basic filters and actions
+require_once( plugin_dir_path( __FILE__ ) . 'includes/scripts.php' ); // Adds plugin JS and CSS
+require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode-functions.php'); // Main shortcode functions
+require_once( plugin_dir_path( __FILE__ ) . 'includes/mce/shortcodes_tinymce.php'); // Add mce buttons to post editor
+require_once( plugin_dir_path( __FILE__ ) . 'includes/widgets.php' ); // include any widgets
