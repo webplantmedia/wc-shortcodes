@@ -67,6 +67,7 @@ add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Widgets', 'get_instance' ) 
  * When the plugin is deleted, the uninstall.php file is loaded.
  */
 // register_activation_hook( __FILE__, array( 'WPC_Shortcode_Public', 'single_activate' ) );
+
 // register_deactivation_hook( __FILE__, array( 'WPC_Shortcode_Public', 'single_deactivate' ) );
 
 /*----------------------------------------------------------------------------*
@@ -75,17 +76,27 @@ add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Widgets', 'get_instance' ) 
 
 if ( is_admin() ) {
 	if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
+
 		require_once( plugin_dir_path( __FILE__ ) . 'admin/class-admin.php' );
+
 		require_once( plugin_dir_path( __FILE__ ) . 'includes/vendors/wpc-settings-framework/init.php' );
+
 		require_once( plugin_dir_path( __FILE__ ) . 'admin/class-options.php' );
+
 		require_once( plugin_dir_path( __FILE__ ) . 'admin/class-tinymce-buttons.php' );
 
 		add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Admin', 'get_instance' ) );
+
 		add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Options', 'get_instance' ) );
+
 		add_action( 'plugins_loaded', array( 'WPC_Shortcodes_TinyMCE_Buttons', 'get_instance' ) );
+
 	}
 	else {
+
 		require_once( plugin_dir_path( __FILE__ ) . 'admin/class-ajax.php' );
+
 		add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Ajax', 'get_instance' ) );
+
 	}
 }
