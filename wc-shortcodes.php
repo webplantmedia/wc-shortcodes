@@ -35,10 +35,11 @@ require_once( plugin_dir_path( __FILE__ ) . 'public/class-widgets.php' );
 
 // Initialize classes.
 add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Public', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Sanitize', 'get_instance' ) );
 add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Register', 'get_instance' ) );
 if ( WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED ) {
 	add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Post_Types', 'get_instance' ) );
-} 
+}
 add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Ajax_Front', 'get_instance' ) );
 add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Widgets', 'get_instance' ) );
 

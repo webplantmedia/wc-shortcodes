@@ -1,8 +1,11 @@
 <?php
 class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	protected static $instance = null;
+	protected $sanitize = null;
 
 	private function __construct() {
+		$this->sanitize = WPC_Shortcodes_Sanitize::get_instance();
+
 		add_filter( 'the_content', array( &$this, 'pre_process' ), 7 );
 		add_filter( 'wc_shortcodes_the_content', array( &$this, 'pre_process' ), 7 );
 		add_action( 'wc_shortcodes_add_preprocess', array( &$this, 'add_preprocess' ) );
@@ -136,7 +139,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts));
 
 		// sanitize
-		$name = WCShortcodes_Sanitize::text_field( $name );
+		$name = $this->sanitize->text_field( $name );
 		$name = preg_replace( '/^_/', '', $name );
 
 		if ( empty( $name ) )
@@ -185,11 +188,11 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts));
 
 		// sanitize
-		$scrollable = WCShortcodes_Sanitize::bool( $scrollable );
-		$color = WCShortcodes_Sanitize::bool( $color );
-		$linenums = WCShortcodes_Sanitize::bool( $linenums );
-		$wrap = WCShortcodes_Sanitize::bool( $wrap );
-		$name = WCShortcodes_Sanitize::text_field( $name );
+		$scrollable = $this->sanitize->bool( $scrollable );
+		$color = $this->sanitize->bool( $color );
+		$linenums = $this->sanitize->bool( $linenums );
+		$wrap = $this->sanitize->bool( $wrap );
+		$name = $this->sanitize->text_field( $name );
 
 		$class = array();
 		if ( (int) $color ) {
@@ -247,9 +250,9 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts ) );
 
 		// sanitize
-		$percentage = WCShortcodes_Sanitize::int_float( $percentage );
-		$color = WCShortcodes_Sanitize::hex_color( $color );
-		$show_percent = WCShortcodes_Sanitize::bool( $show_percent );
+		$percentage = $this->sanitize->int_float( $percentage );
+		$color = $this->sanitize->hex_color( $color );
+		$show_percent = $this->sanitize->bool( $show_percent );
 		
 		// Enque scripts
 		wp_enqueue_script('wc-shortcodes-skillbar');
@@ -278,7 +281,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts ) );
 
 		// sanitize
-		$size = WCShortcodes_Sanitize::css_unit( $size );
+		$size = $this->sanitize->css_unit( $size );
 
 		return '<hr class="wc-shortcodes-spacing '. esc_attr( $class ) .'" style="height: '. esc_attr( $size ) .'" />';
 	}
@@ -405,7 +408,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts ) );
 
 		// sanitize
-		$border_radius = WCShortcodes_Sanitize::css_unit( $border_radius );
+		$border_radius = $this->sanitize->css_unit( $border_radius );
 
 		$custom_class = sanitize_title( $class );
 
@@ -457,8 +460,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class'			=> '',
 		), $atts ) );
 
-		$margin_top = WCShortcodes_Sanitize::css_unit( $margin_top );
-		$margin_bottom = WCShortcodes_Sanitize::css_unit( $margin_bottom );
+		$margin_top = $this->sanitize->css_unit( $margin_top );
+		$margin_bottom = $this->sanitize->css_unit( $margin_bottom );
 
 		$style_attr = '';
 
@@ -519,7 +522,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class'			=> '',
 		), $atts ) );
 
-		$max_width = WCShortcodes_Sanitize::css_unit( $max_width );
+		$max_width = $this->sanitize->css_unit( $max_width );
 
 		// $append_clearfix = '<div class="wc-shortcodes-clear-floats"></div>';
 		$style = empty( $max_width ) ? '' : ' style="max-width:'.esc_attr( $max_width ).';"';
@@ -584,7 +587,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'layout' => 'box',
 		), $atts ) );
 
-		$padding = WCShortcodes_Sanitize::css_unit( $padding );
+		$padding = $this->sanitize->css_unit( $padding );
 
 		$classes = array();
 
@@ -632,8 +635,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'layout' => 'box',
 		), $atts ) );
 
-		$collapse = WCShortcodes_Sanitize::bool( $collapse );
-		$leaveopen = WCShortcodes_Sanitize::bool( $leaveopen );
+		$collapse = $this->sanitize->bool( $collapse );
+		$leaveopen = $this->sanitize->bool( $leaveopen );
 
 		$classes = array();
 
@@ -811,7 +814,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'icon_spacing'	=> '',
 		), $atts ) );
 
-		$type = WCShortcodes_Sanitize::heading_type( $type );
+		$type = $this->sanitize->heading_type( $type );
 
 		$style_attr = '';
 
@@ -873,8 +876,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class'		=> '', // add a custom class to your google map
 		), $atts));
 
-		$height = WCShortcodes_Sanitize::pixel( $height );
-		$zoom = WCShortcodes_Sanitize::number( $zoom );
+		$height = $this->sanitize->pixel( $height );
+		$zoom = $this->sanitize->number( $zoom );
 
 		$title_on_load = 'yes' == $title_on_load ? 1 : 0;
 		
@@ -895,7 +898,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$output .= '</div>';
 		
 		return $output;
-	   
 	}
 
 
@@ -912,8 +914,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class'			=> '',
 		), $atts ) );
 
-		$margin_top = WCShortcodes_Sanitize::css_unit( $margin_top );
-		$margin_bottom = WCShortcodes_Sanitize::css_unit( $margin_bottom );
+		$margin_top = $this->sanitize->css_unit( $margin_top );
+		$margin_bottom = $this->sanitize->css_unit( $margin_bottom );
 
 		$style_attr = array();
 
@@ -976,7 +978,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		wp_enqueue_script('wc-shortcodes-rsvp');
 
-		$columns = WCShortcodes_Sanitize::positive_number( $columns );
+		$columns = $this->sanitize->positive_number( $columns );
 		$columns = 3 == $columns ? $columns : 1;
 
 		$html = '';
@@ -1569,14 +1571,14 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class' => '',
 		), $atts ) );
 
-		$font_size = WCShortcodes_Sanitize::css_unit( $font_size );
-		$flag_width = WCShortcodes_Sanitize::css_unit( $flag_width );
+		$font_size = $this->sanitize->css_unit( $font_size );
+		$flag_width = $this->sanitize->css_unit( $flag_width );
 
 		// function options
 		$div_wrapper = false;
 
 		// sanitize
-		$attachment_id = WCShortcodes_Sanitize::number( $attachment_id );
+		$attachment_id = $this->sanitize->number( $attachment_id );
 
 		// classes
 		$classes = array();
@@ -1672,8 +1674,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class' => '',
 		), $atts ) );
 
-		$margin_right = WCShortcodes_Sanitize::css_unit( $margin_right );
-		$margin_left = WCShortcodes_Sanitize::css_unit( $margin_left );
+		$margin_right = $this->sanitize->css_unit( $margin_right );
+		$margin_left = $this->sanitize->css_unit( $margin_left );
 
 		if ( empty( $icon ) )
 			return '';

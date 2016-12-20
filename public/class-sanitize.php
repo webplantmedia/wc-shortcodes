@@ -3,7 +3,22 @@
  * Sanitize Class
  */
 class WPC_Shortcodes_Sanitize {
-	static public function bool( $value ) {
+	protected static $instance = null;
+
+	private function __construct() {
+	}
+
+	public static function get_instance() {
+
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+
+	public function bool( $value ) {
 		if ( 'true' == $value ) {
 			return true;
 		}
@@ -14,17 +29,17 @@ class WPC_Shortcodes_Sanitize {
 		return (bool) $value;
 	}
 
-	static public function text_field( $value ) {
+	public function text_field( $value ) {
 		return trim( sanitize_text_field( $value ) );
 	}
 
-	static public function int_float( $value ) {
+	public function int_float( $value ) {
 		$value = filter_var( $value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
 
 		return $value;
 	}
 
-	static public function positive_number( $value ) {
+	public function positive_number( $value ) {
 		$value = preg_replace("/[^0-9\-]/", "",$value);
 		$value = intval( $value );
 
@@ -37,7 +52,7 @@ class WPC_Shortcodes_Sanitize {
 		return $value;
 	}
 
-	static public function number( $value ) {
+	public function number( $value ) {
 		$value = preg_replace("/[^0-9\-]/", "",$value);
 		$value = intval( $value );
 
@@ -47,7 +62,7 @@ class WPC_Shortcodes_Sanitize {
 		return $value;
 	}
 
-	static public function pixel( $value ) {
+	public function pixel( $value ) {
 		if ( '' == $value )
 			return $value;
 
@@ -60,7 +75,7 @@ class WPC_Shortcodes_Sanitize {
 		return $value."px";
 	}
 
-	static public function css_unit( $value, $css_unit = 'px' ) {
+	public function css_unit( $value, $css_unit = 'px' ) {
 		if ( '' == $value )
 			return $value;
 
@@ -76,7 +91,7 @@ class WPC_Shortcodes_Sanitize {
 		return $value . $css_unit;
 	}
 
-	static public function hex_color( $color ) {
+	public function hex_color( $color ) {
 		if ( '' === $color )
 			return '';
 
@@ -87,7 +102,7 @@ class WPC_Shortcodes_Sanitize {
 		return '';
 	}
 
-	static public function heading_type( $value, $default = 'h2' ) {
+	public function heading_type( $value, $default = 'h2' ) {
 		$whitelist = array(
 			'h1',
 			'h2',

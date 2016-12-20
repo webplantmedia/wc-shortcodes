@@ -32,7 +32,6 @@ class WPC_Shortcodes_Vars {
 	protected static $social_icons;
 	protected static $share_buttons;
 	protected static $theme_support;
-	protected static $sanitize;
 
 	public static function init_vars() {
 		define( 'WC_SHORTCODES_IS_ACTIVATED', true );
