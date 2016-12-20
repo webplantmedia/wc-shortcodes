@@ -1,0 +1,107 @@
+.wpc-ui-theme-override.ui-widget {
+    font-family: inherit;
+    font-size: inherit;
+}
+.wpc-ui-theme-override.ui-helper-reset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    line-height: inherit;
+    text-decoration: none;
+    font-size: inherit;
+    list-style: none;
+}
+.wpc-ui-theme-override.ui-accordion .ui-accordion-header {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+}
+.wpc-ui-theme-override .ui-corner-all,
+.wpc-ui-theme-override .ui-corner-top,
+.wpc-ui-theme-override .ui-corner-right,
+.wpc-ui-theme-override .ui-corner-tr {
+    border-radius: 0;
+}
+.wpc-ui-theme-override .ui-state-hover,
+.wpc-ui-theme-override .ui-widget-content .ui-state-hover,
+.wpc-ui-theme-override .ui-widget-header .ui-state-hover,
+.wpc-ui-theme-override .ui-state-focus,
+.wpc-ui-theme-override .ui-widget-content .ui-state-focus,
+.wpc-ui-theme-override .ui-widget-header .ui-state-focus,
+.wpc-ui-theme-override .ui-button:hover,
+.wpc-ui-theme-override .ui-button:focus {
+    border: 0px solid #e5e5e5;
+    background: #ddd;
+	font-weight: inherit;
+    color: inherit;
+}
+.wpc-ui-theme-override .ui-menu .ui-state-focus,
+.wpc-ui-theme-override .ui-menu .ui-state-active {
+    margin: 0;
+}
+.wpc-ui-theme-override .ui-state-active,
+.wpc-ui-theme-override .ui-widget-content .ui-state-active,
+.wpc-ui-theme-override .ui-widget-header .ui-state-active,
+.wpc-ui-theme-override a.ui-button:active,
+.wpc-ui-theme-override .ui-button:active,
+.wpc-ui-theme-override .ui-button.ui-state-active:hover,
+.wpc-ui-theme-override .ui-state-default,
+.wpc-ui-theme-override .ui-widget-content .ui-state-default,
+.wpc-ui-theme-override .ui-widget-header .ui-state-default,
+.wpc-ui-theme-override .ui-button,
+.wpc-ui-theme-override .ui-button.ui-state-disabled:hover,
+.wpc-ui-theme-override .ui-button.ui-state-disabled:active {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #e5e5e5;
+    background: #ffffff;
+    font-weight: inherit;
+    color: inherit;
+}
+.wpc-ui-theme-override .ui-icon,
+.wpc-ui-theme-override .ui-widget-content .ui-icon {
+	display: none;
+}
+.wpc-ui-theme-override.ui-accordion .ui-accordion-content {
+    padding: 0;
+    border-top: 0;
+    overflow: visible;
+}
+.wpc-ui-theme-override .ui-widget-content {
+    border: 0px solid #e5e5e5;
+    background: #ffffff;
+    color: inherit;
+}
+/* accordion */
+.wpc-ui-theme-override .ui-widget.ui-widget-content {
+    border: 1px solid #e5e5e5;
+}
+.wpc-ui-theme-override .ui-widget .ui-widget {
+    font-size: inherit;
+}
+.wpc-ui-theme-override .ui-menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: block;
+	outline: 0;
+}
+.wpc-ui-theme-override .ui-autocomplete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+}
+.wpc-ui-theme-override .ui-front {
+	z-index: 999999;
+}
+.wpc-ui-theme-override .ui-autocomplete {
+	border: 1px solid #5b9dd9 !important;
+	-webkit-box-shadow: 0 1px 2px rgba(30,140,190,.8) !important;
+	box-shadow: 0 1px 2px rgba(30,140,190,.8) !important;
+	background-color: #fff !important;
+}

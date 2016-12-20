@@ -102,7 +102,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		unset( $post_types['attachment'] );
 		?>
 
-		<div id="wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>" class="wc-shortcodes-post-slider-widget">
+		<div id="wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>" class="wc-shortcodes-post-slider-widget wpc-ui-theme-override">
 			<h3>Select Posts</h3>
 			<div>
 				<p>

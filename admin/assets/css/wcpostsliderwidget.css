@@ -1,15 +1,15 @@
-.wc-shortcodes-post-slider-widget {
+html .wc-shortcodes-post-slider-widget.ui-accordion {
 	margin-bottom: 1.5em;
 }
-.wc-shortcodes-post-slider-widget .ui-autocomplete {
+html .wc-shortcodes-post-slider-widget.ui-accordion .ui-autocomplete {
 	z-index: 999999;
 	max-height: 300px;
 	overflow: auto;
 }
-.wc-shortcodes-post-slider-widget .ui-autocomplete li {
+html .wc-shortcodes-post-slider-widget.ui-accordion .ui-autocomplete li {
 	white-space: normal;
 }
-.wc-shortcodes-post-slider-widget .ui-accordion-header {
+html .wc-shortcodes-post-slider-widget.ui-accordion .ui-accordion-header {
 	border: 1px solid #ddd;
 	position: relative;
 	padding: 10px 15px;
@@ -23,8 +23,9 @@
 	cursor: pointer;
 	font-size: 1em;
 	font-weight: 600;
+	margin-top: 1em;
 }
-.wc-shortcodes-post-slider-widget .ui-accordion-header:before {
+html .wc-shortcodes-post-slider-widget.ui-accordion .ui-accordion-header:before {
 	content: "\f345";
 	border: none;
 	background: 0 0;
@@ -44,6 +45,6 @@
 	vertical-align: bottom;
 	margin-right: 5px;
 }
-.wc-shortcodes-post-slider-widget .ui-accordion-header.ui-accordion-header-active:before {
+html .wc-shortcodes-post-slider-widget.ui-accordion .ui-accordion-header.ui-accordion-header-active:before {
 	content: "\f347";
 }
