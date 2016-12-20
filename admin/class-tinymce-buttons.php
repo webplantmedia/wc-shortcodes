@@ -65,6 +65,6 @@ class WPC_Shortcodes_TinyMCE_Buttons {
 	public function register_plugin_styles() {
         global $wp_styles;
 
-        wp_enqueue_style('wc-font-awesome-styles', WC_SHORTCODES_PLUGIN_URL . 'includes/css/font-awesome.css', array(), WC_SHORTCODES_VERSION, 'all');
+        wp_enqueue_style('wc-font-awesome-styles', WC_SHORTCODES_PLUGIN_URL . 'public/assets/css/font-awesome.css', array(), WC_SHORTCODES_VERSION, 'all');
     }
 }
