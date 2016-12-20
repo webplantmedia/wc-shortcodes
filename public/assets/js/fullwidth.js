@@ -18,7 +18,6 @@
 
 			// get selector names
 			siteWidthId = $(this).data('selector');
-			console.log(siteWidthId);
 
 			// save elements
 			$siteWidth = $( siteWidthId );
