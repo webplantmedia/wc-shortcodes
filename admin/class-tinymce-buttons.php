@@ -2,11 +2,6 @@
 class WPC_Shortcodes_TinyMCE_Buttons {
 	protected static $instance = null;
 
-	private function __construct() {
-    	add_action( 'admin_head', array( &$this,'init' ) );
-		// add_action( 'admin_head', array( &$this, 'localize_script' ) );
-    }
-
 	public static function get_instance() {
 
 		// If the single instance hasn't been set, set it now.
@@ -16,6 +11,11 @@ class WPC_Shortcodes_TinyMCE_Buttons {
 
 		return self::$instance;
 	}
+
+	private function __construct() {
+    	add_action( 'admin_head', array( &$this,'init' ) );
+		// add_action( 'admin_head', array( &$this, 'localize_script' ) );
+    }
 
     public function init() {
 		if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') )

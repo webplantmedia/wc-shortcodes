@@ -5,9 +5,6 @@
 class WPC_Shortcodes_Sanitize {
 	protected static $instance = null;
 
-	private function __construct() {
-	}
-
 	public static function get_instance() {
 
 		// If the single instance hasn't been set, set it now.
@@ -16,6 +13,9 @@ class WPC_Shortcodes_Sanitize {
 		}
 
 		return self::$instance;
+	}
+
+	private function __construct() {
 	}
 
 	public function bool( $value ) {
@@ -120,5 +120,21 @@ class WPC_Shortcodes_Sanitize {
 
 		return $default;
 	}
+	public function comma_delim_to_array( $string ) {
+		$a = explode( ',', $string );
 
+		foreach ( $a as $key => $value ) {
+			$value = trim( $value );
+
+			if ( empty( $value ) )
+				unset( $a[ $key ] );
+			else
+				$a[ $key ] = $value;
+		}
+
+		if ( empty( $a ) )
+			return '';
+		else
+			return $a;
+	}
 }

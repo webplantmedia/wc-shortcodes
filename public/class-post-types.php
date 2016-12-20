@@ -3,6 +3,16 @@ class WPC_Shortcodes_Post_Types {
 	
 	protected static $instance = null;
 
+	public static function get_instance() {
+
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+
 	private function __construct() {
 		/* Register custom post types on the 'init' hook. */
 		add_action( 'init', array( &$this, 'register_post_types' ) );
@@ -13,16 +23,6 @@ class WPC_Shortcodes_Post_Types {
 		add_action( 'save_post', array( &$this, 'save_meta' ), 1, 2 ); // save the custom fields
 
 		add_action( 'add_meta_boxes', array( &$this, 'slide_metabox' ) );
-	}
-
-	public static function get_instance() {
-
-		// If the single instance hasn't been set, set it now.
-		if ( null == self::$instance ) {
-			self::$instance = new self;
-		}
-
-		return self::$instance;
 	}
 
 	/**

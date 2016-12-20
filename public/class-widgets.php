@@ -11,16 +11,6 @@ class WPC_Shortcodes_Widgets extends WPC_Shortcodes_Vars {
 	 */
 	protected static $instance = null;
 
-	/**
-	 * Initialize the plugin by setting localization and loading public scripts
-	 * and styles.
-	 *
-	 * @since     1.0.0
-	 */
-	private function __construct() {
-		add_action( 'widgets_init', array( &$this, 'register_widgets' ) );
-	}
-
 	public static function get_instance() {
 
 		// If the single instance hasn't been set, set it now.
@@ -29,6 +19,16 @@ class WPC_Shortcodes_Widgets extends WPC_Shortcodes_Vars {
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * Initialize the plugin by setting localization and loading public scripts
+	 * and styles.
+	 *
+	 * @since     1.0.0
+	 */
+	private function __construct() {
+		add_action( 'widgets_init', array( &$this, 'register_widgets' ) );
 	}
 
 	public function register_widgets() {

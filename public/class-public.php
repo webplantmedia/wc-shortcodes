@@ -11,6 +11,16 @@ class WPC_Shortcodes_Public extends WPC_Shortcodes_Vars {
 	 */
 	protected static $instance = null;
 
+	public static function get_instance() {
+
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+
 	/**
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
@@ -29,23 +39,6 @@ class WPC_Shortcodes_Public extends WPC_Shortcodes_Vars {
 		// add_action( 'wp_enqueue_scripts', array( &$this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( &$this, 'enqueue_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( &$this, 'scripts_override' ), 9999 );
-	}
-
-	/**
-	 * Return an instance of this class.
-	 *
-	 * @since     1.0.0
-	 *
-	 * @return    object    A single instance of this class.
-	 */
-	public static function get_instance() {
-
-		// If the single instance hasn't been set, set it now.
-		if ( null == self::$instance ) {
-			self::$instance = new self;
-		}
-
-		return self::$instance;
 	}
 
 	public function check_supports() {

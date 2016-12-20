@@ -3,6 +3,16 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	protected static $instance = null;
 	protected $sanitize = null;
 
+	public static function get_instance() {
+
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+
 	private function __construct() {
 		$this->sanitize = WPC_Shortcodes_Sanitize::get_instance();
 
@@ -30,16 +40,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		add_shortcode( 'wc_share_buttons', array( &$this, 'get_share_buttons' ) );
 		// Allow shortcodes in widgets.
 		add_filter( 'widget_text', 'do_shortcode' );
-	}
-
-	public static function get_instance() {
-
-		// If the single instance hasn't been set, set it now.
-		if ( null == self::$instance ) {
-			self::$instance = new self;
-		}
-
-		return self::$instance;
 	}
 
 	/**
@@ -103,14 +103,13 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 * @return void
 	 */
 	public function fullwidth( $atts, $content = null ) {
-		global $wc_shortcodes_theme_support;
 
 		extract(shortcode_atts(array(
-			'selector' => $wc_shortcodes_theme_support[ 'fullwidth_container' ],
+			'selector' => parent::$theme_support[ 'fullwidth_container' ],
 		), $atts));
 
 		if ( empty( $selector ) ) {
-			$selector = $wc_shortcodes_theme_support[ 'fullwidth_container' ];
+			$selector = parent::$theme_support[ 'fullwidth_container' ];
 		}
 
 		wp_enqueue_script('wc-shortcodes-fullwidth');
@@ -1147,12 +1146,12 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		}
 
 		// clean input values
-		$atts['terms'] = wc_shortcodes_comma_delim_to_array( $atts['terms'] );
+		$atts['terms'] = $this->sanitize->comma_delim_to_array( $atts['terms'] );
 		$wpc_term = null;
 		if ( isset( $_GET['wpc_term'] ) && ! empty( $_GET['wpc_term'] ) ) {
 			$wpc_term = $_GET['wpc_term'];
 		}
-		$atts['post__in'] = wc_shortcodes_comma_delim_to_array( $atts['post__in'] );
+		$atts['post__in'] = $this->sanitize->comma_delim_to_array( $atts['post__in'] );
 		$display['columns'] == (int) $display['columns'];
 		$display['excerpt_length'] = (int) $display['excerpt_length'];
 		$atts['order'] = strtoupper( $atts['order'] );
@@ -1866,7 +1865,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$html = null;
 		$share_buttons = null;
 
-		$share_buttons = wc_shortcodes_share_buttons( null );
+		$share_buttons = $this->share_buttons( null );
 
 		if ( empty( $share_buttons ) ) {
 			return '';

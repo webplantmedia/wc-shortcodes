@@ -9,18 +9,6 @@ class WPC_Shortcodes_Options extends WPC_Shortcodes_Vars {
 	 */
 	protected static $instance = null;
 
-	private function __construct() {
-		add_filter( 'wc_shortcodes_wpcsf_options', array( &$this, 'set_options' ), 10, 1 );
-		add_filter( 'wc_shortcodes_wpcsf_theme_support', array( &$this, 'wpcsf_theme_support' ), 10, 1 );
-	}
-
-	/**
-	 * Return an instance of this class.
-	 *
-	 * @since     1.0.0
-	 *
-	 * @return    object    A single instance of this class.
-	 */
 	public static function get_instance() {
 
 		// If the single instance hasn't been set, set it now.
@@ -29,6 +17,11 @@ class WPC_Shortcodes_Options extends WPC_Shortcodes_Vars {
 		}
 
 		return self::$instance;
+	}
+
+	private function __construct() {
+		add_filter( 'wc_shortcodes_wpcsf_options', array( &$this, 'set_options' ), 10, 1 );
+		add_filter( 'wc_shortcodes_wpcsf_theme_support', array( &$this, 'wpcsf_theme_support' ), 10, 1 );
 	}
 
 	public function set_options( $options ) {

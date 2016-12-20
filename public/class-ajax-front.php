@@ -2,13 +2,6 @@
 class WPC_Shortcodes_Ajax_Front {
 	protected static $instance = null;
 
-	private function __construct() {
-		// send email when logged out
-		add_action( 'wp_ajax_nopriv_wc-send-rsvp-email', array( &$this, 'send_rsvp_email' ) );
-		// send email when logged in
-		add_action( 'wp_ajax_wc-send-rsvp-email', array( &$this, 'send_rsvp_email' ) );
-	}
-
 	public static function get_instance() {
 
 		// If the single instance hasn't been set, set it now.
@@ -17,6 +10,13 @@ class WPC_Shortcodes_Ajax_Front {
 		}
 
 		return self::$instance;
+	}
+
+	private function __construct() {
+		// send email when logged out
+		add_action( 'wp_ajax_nopriv_wc-send-rsvp-email', array( &$this, 'send_rsvp_email' ) );
+		// send email when logged in
+		add_action( 'wp_ajax_wc-send-rsvp-email', array( &$this, 'send_rsvp_email' ) );
 	}
 
 	/**

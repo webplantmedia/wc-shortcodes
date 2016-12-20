@@ -2,12 +2,6 @@
 class WPC_Shortcodes_Ajax {
 	protected static $instance = null;
 
-	private function __construct() {
-		add_action( 'wp_ajax_wc_post_lookup', array( &$this, 'post_lookup_callback' ) );
-		add_action( 'wp_ajax_wc_terms_lookup', array( &$this, 'terms_lookup_callback' ) );
-		add_action( 'wp_ajax_wc_mce_popup', array( &$this, 'mce_popup' ) );
-	}
-
 	public static function get_instance() {
 
 		// If the single instance hasn't been set, set it now.
@@ -16,6 +10,12 @@ class WPC_Shortcodes_Ajax {
 		}
 
 		return self::$instance;
+	}
+
+	private function __construct() {
+		add_action( 'wp_ajax_wc_post_lookup', array( &$this, 'post_lookup_callback' ) );
+		add_action( 'wp_ajax_wc_terms_lookup', array( &$this, 'terms_lookup_callback' ) );
+		add_action( 'wp_ajax_wc_mce_popup', array( &$this, 'mce_popup' ) );
 	}
 
 	public function post_lookup_callback() {
