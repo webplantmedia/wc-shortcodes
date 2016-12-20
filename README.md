@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 3.2
+
+* updated old image path to new image path
+
 ### Version 3.1
 
 * updated wpc settings framework to version 1.0.3

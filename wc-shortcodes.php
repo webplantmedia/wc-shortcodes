@@ -5,7 +5,7 @@ Plugin URI: http://webplantmedia.com/starter-themes/wordpresscanvas/features/sho
 Description: A family of shortcodes to enhance site functionality.
 Author: Chris Baldelomar
 Author URI: http://webplantmedia.com/
-Version: 3.1
+Version: 3.2
 License: GPLv2 or later
 */
 
