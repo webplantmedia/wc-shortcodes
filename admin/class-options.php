@@ -266,6 +266,26 @@ class WPC_Shortcodes_Options extends WPC_Shortcodes_Vars {
 					),
 				),
 				array(
+					'id' => 'wc-shortcodes-options-google-maps-options-tab',
+					'title' => 'Maps',
+					'sections' => array(
+						array(
+							'id' => 'wc-shortcodes-options-google-maps-section',
+							'title' => 'Google Maps',
+							'add_section' => true,
+							'options' => array(
+								array(
+									'option_name' => 'google_maps_api_key',
+									'title' => 'Google Maps API Key',
+									'default' => '',
+									'description' => 'Google requires an <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">API key</a> to embed Google Maps.',
+									'type' => 'input',
+								),
+							),
+						),
+					),
+				),
+				array(
 					'id' => 'wc-misc-options-tab',
 					'title' => 'Misc',
 					'sections' => array(
