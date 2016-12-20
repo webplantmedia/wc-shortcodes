@@ -21,7 +21,7 @@ if ( ! defined( 'WPINC' ) ) {
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-vars.php' );
 WPC_Shortcodes_Vars::init_vars();
 
-require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php' ); // Adds basic filters and actions
+require_once( plugin_dir_path( __FILE__ ) . 'public/functions.php' ); // Adds basic filters and actions
 
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public.php' );
 
