@@ -14,8 +14,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	}
 
 	private function __construct() {
-		$this->sanitize = WPC_Shortcodes_Sanitize::get_instance();
-
 		add_filter( 'the_content', array( &$this, 'pre_process' ), 7 );
 		add_filter( 'wc_shortcodes_the_content', array( &$this, 'pre_process' ), 7 );
 		add_action( 'wc_shortcodes_add_preprocess', array( &$this, 'add_preprocess' ) );
@@ -138,7 +136,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts));
 
 		// sanitize
-		$name = $this->sanitize->text_field( $name );
+		$name = WPC_Shortcodes_Sanitize::text_field( $name );
 		$name = preg_replace( '/^_/', '', $name );
 
 		if ( empty( $name ) )
@@ -187,11 +185,11 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts));
 
 		// sanitize
-		$scrollable = $this->sanitize->bool( $scrollable );
-		$color = $this->sanitize->bool( $color );
-		$linenums = $this->sanitize->bool( $linenums );
-		$wrap = $this->sanitize->bool( $wrap );
-		$name = $this->sanitize->text_field( $name );
+		$scrollable = WPC_Shortcodes_Sanitize::bool( $scrollable );
+		$color = WPC_Shortcodes_Sanitize::bool( $color );
+		$linenums = WPC_Shortcodes_Sanitize::bool( $linenums );
+		$wrap = WPC_Shortcodes_Sanitize::bool( $wrap );
+		$name = WPC_Shortcodes_Sanitize::text_field( $name );
 
 		$class = array();
 		if ( (int) $color ) {
@@ -249,9 +247,9 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts ) );
 
 		// sanitize
-		$percentage = $this->sanitize->int_float( $percentage );
-		$color = $this->sanitize->hex_color( $color );
-		$show_percent = $this->sanitize->bool( $show_percent );
+		$percentage = WPC_Shortcodes_Sanitize::int_float( $percentage );
+		$color = WPC_Shortcodes_Sanitize::hex_color( $color );
+		$show_percent = WPC_Shortcodes_Sanitize::bool( $show_percent );
 		
 		// Enque scripts
 		wp_enqueue_script('wc-shortcodes-skillbar');
@@ -280,7 +278,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts ) );
 
 		// sanitize
-		$size = $this->sanitize->css_unit( $size );
+		$size = WPC_Shortcodes_Sanitize::css_unit( $size );
 
 		return '<hr class="wc-shortcodes-spacing '. esc_attr( $class ) .'" style="height: '. esc_attr( $size ) .'" />';
 	}
@@ -407,7 +405,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		), $atts ) );
 
 		// sanitize
-		$border_radius = $this->sanitize->css_unit( $border_radius );
+		$border_radius = WPC_Shortcodes_Sanitize::css_unit( $border_radius );
 
 		$custom_class = sanitize_title( $class );
 
@@ -459,8 +457,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class'			=> '',
 		), $atts ) );
 
-		$margin_top = $this->sanitize->css_unit( $margin_top );
-		$margin_bottom = $this->sanitize->css_unit( $margin_bottom );
+		$margin_top = WPC_Shortcodes_Sanitize::css_unit( $margin_top );
+		$margin_bottom = WPC_Shortcodes_Sanitize::css_unit( $margin_bottom );
 
 		$style_attr = '';
 
@@ -521,7 +519,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class'			=> '',
 		), $atts ) );
 
-		$max_width = $this->sanitize->css_unit( $max_width );
+		$max_width = WPC_Shortcodes_Sanitize::css_unit( $max_width );
 
 		// $append_clearfix = '<div class="wc-shortcodes-clear-floats"></div>';
 		$style = empty( $max_width ) ? '' : ' style="max-width:'.esc_attr( $max_width ).';"';
@@ -586,7 +584,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'layout' => 'box',
 		), $atts ) );
 
-		$padding = $this->sanitize->css_unit( $padding );
+		$padding = WPC_Shortcodes_Sanitize::css_unit( $padding );
 
 		$classes = array();
 
@@ -634,8 +632,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'layout' => 'box',
 		), $atts ) );
 
-		$collapse = $this->sanitize->bool( $collapse );
-		$leaveopen = $this->sanitize->bool( $leaveopen );
+		$collapse = WPC_Shortcodes_Sanitize::bool( $collapse );
+		$leaveopen = WPC_Shortcodes_Sanitize::bool( $leaveopen );
 
 		$classes = array();
 
@@ -813,7 +811,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'icon_spacing'	=> '',
 		), $atts ) );
 
-		$type = $this->sanitize->heading_type( $type );
+		$type = WPC_Shortcodes_Sanitize::heading_type( $type );
 
 		$style_attr = '';
 
@@ -875,8 +873,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class'		=> '', // add a custom class to your google map
 		), $atts));
 
-		$height = $this->sanitize->pixel( $height );
-		$zoom = $this->sanitize->number( $zoom );
+		$height = WPC_Shortcodes_Sanitize::pixel( $height );
+		$zoom = WPC_Shortcodes_Sanitize::number( $zoom );
 
 		$title_on_load = 'yes' == $title_on_load ? 1 : 0;
 		
@@ -913,8 +911,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class'			=> '',
 		), $atts ) );
 
-		$margin_top = $this->sanitize->css_unit( $margin_top );
-		$margin_bottom = $this->sanitize->css_unit( $margin_bottom );
+		$margin_top = WPC_Shortcodes_Sanitize::css_unit( $margin_top );
+		$margin_bottom = WPC_Shortcodes_Sanitize::css_unit( $margin_bottom );
 
 		$style_attr = array();
 
@@ -977,7 +975,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		wp_enqueue_script('wc-shortcodes-rsvp');
 
-		$columns = $this->sanitize->positive_number( $columns );
+		$columns = WPC_Shortcodes_Sanitize::positive_number( $columns );
 		$columns = 3 == $columns ? $columns : 1;
 
 		$html = '';
@@ -1146,12 +1144,12 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		}
 
 		// clean input values
-		$atts['terms'] = $this->sanitize->comma_delim_to_array( $atts['terms'] );
+		$atts['terms'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
 		$wpc_term = null;
 		if ( isset( $_GET['wpc_term'] ) && ! empty( $_GET['wpc_term'] ) ) {
 			$wpc_term = $_GET['wpc_term'];
 		}
-		$atts['post__in'] = $this->sanitize->comma_delim_to_array( $atts['post__in'] );
+		$atts['post__in'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['post__in'] );
 		$display['columns'] == (int) $display['columns'];
 		$display['excerpt_length'] = (int) $display['excerpt_length'];
 		$atts['order'] = strtoupper( $atts['order'] );
@@ -1288,152 +1286,32 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	}
 
 	public function post_slider( $atts ) {
-		global $data;
 		global $post;
 		global $wc_shortcodes_posts_query;
 
 		static $instance = 0;
 		$instance++;
 
-		$atts = shortcode_atts( array(
-			'author' => '', //use author id
-			'author_name' => '', //use 'user_nicename' (NOT name).
-			'pids' => '', //use post id.
-			'p' => '', //use post id.
-			'post__in' => '', //use post ids
-			'order' => 'DESC', // DESC, ASC
-			'orderby' => 'date',
-			'post_status' => 'publish',
-			'post_type' => 'post', // post, page, wc_portfolio_item, etc
-			'posts_per_page' => 10, //number of post to show per page
-			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
-			'ignore_sticky_posts' => 1,
+		$atts = shortcode_atts( parent::$attr->post_slider, $atts );
+		$atts = WPC_Shortcodes_Sanitize::post_slider_attr( $atts );
 
-			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
-			'field' => 'slug', // slug or id
-			'terms' => '', // taxonomy terms.
+		// Convert comma delimeted string to array
+		$p = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
 
-			'show_meta_category' => 1, // show heading?
-			'show_title' => 1, // show heading?
-			'show_content' => 1, // show main content?
-			'readmore' => 'Continue Reading', // show main content?
-			'button_class' => 'button secondary-button', // show main content?
+		$atts['p'] = '';
+		$atts['post__in'] = '';
 
-			'size' => 'full', // default thumbnail size
-
-			'heading_type' => 'h2', // heading tag for title
-			'heading_size' => 30,
-			'mobile_heading_size' => 24,
-			'layout' => 'bxslider', // blog layout
-			'template' => 'slider2',
-			'excerpt_length' => 55,
-			'desktop_height' => 600,
-			'laptop_height' => 500,
-			'mobile_height' => 350,
-
-			'slider_mode' => 'fade',
-			'slider_pause' => 4000,
-			'slider_auto' => 0,
-		), $atts );
-
-		// sanitize bools
-		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto' );
-		foreach ( $bools as $key ) {
-			if ( isset( $atts[ $key ] ) ) {
-				if ( "no" == $key ) {
-					$atts[ $key ] = 0;
-				}
-				else {
-					$atts[ $key ] = (bool) $atts[ $key ];
-					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
-				}
-			}
-		}
-
-		// sanitize ints
-		$ints = array( 'p', 'posts_per_page', 'heading_size', 'mobile_heading_size', 'excerpt_length', 'desktop_height', 'laptop_height', 'mobile_height', 'slider_pause' );
-		foreach ( $ints as $key ) {
-			if ( isset( $atts[ $key ] ) ) {
-				$atts[ $key ] = (int) $atts[ $key ];
-			}
-		}
-		$atts['slider_pause'] = abs( $atts['slider_pause'] );
-
-		$pids = explode( ',', $atts['pids'] );
-		$p = array();
-		if ( ! empty( $pids ) ) {
-			foreach ( $pids as $id ) {
-				$id = (int) $id;
-				if ( ! empty( $id ) ) {
-					$p[] = $id;
-				}
-			}
-
+		if ( is_array( $p ) && ! empty( $p ) ) {
 			$size = sizeof( $p );
 			if ( 1 < $size ) {
-				$atts['p'] = '';
 				$atts['post__in'] = $p;
 			}
 			else if ( 1 == $size ) {
 				$atts['p'] = $p[0];
-				$atts['post__in'] = '';
-			}
-			else {
-				$atts['p'] = '';
-				$atts['post__in'] = '';
 			}
 		}
 
-		// sanitize limit
-		if ( $atts['posts_per_page'] < 0 ) {
-			$atts['posts_per_page'] = -1;
-			$atts['nopaging'] = true;
-		}
-		else if ( 0 == $atts['posts_per_page'] ) {
-			return;
-		}
-
-		// sanitize dropdown
-		$valid_layouts = array( 'bxslider' );
-		if ( ! in_array( $atts['layout'], $valid_layouts ) ) {
-			$atts['layout'] = 'bxslider';
-		}
-
-		$valid_templates = array( 'slider1', 'slider2' );
-		if ( ! in_array( $atts['template'], $valid_templates ) ) {
-			$atts['template'] = 'slider1';
-		}
-
-		$valid_slider_modes = array( 'fade', 'vertical', 'horizontal' );
-		if ( ! in_array( $atts['slider_mode'], $valid_slider_modes ) ) {
-			$atts['slider_mode'] = 'fade';
-		}
-
-		$valid_orders = array( 'ASC', 'DESC' );
-		$atts['order'] = strtoupper( $atts['order'] );
-		if ( ! in_array( $atts['order'], $valid_orders ) ) {
-			$atts['order'] = 'DESC';
-		}
-
-		$atts['heading_type'] = strtolower( $atts['heading_type'] );
-		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
-		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
-
-		// sanitize inputs
-		$atts['button_class'] = trim( $atts['button_class'] );
-		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-slide-button' : $atts['button_class'];
-
-		$terms = explode( ',', trim( $atts['terms'] ) );
-		$t = array();
-		if ( ! empty( $terms ) ) {
-			foreach ( $terms as $term ) {
-				$term = trim( $term );
-				if ( ! empty( $term ) ) {
-					$t[] = $term;
-				}
-			}
-			$atts['terms'] = $t;
-		}
+		$atts['terms'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
 
 		// fix bug with title argument being added to WP_Query() in 4.4
 		$display_keys = array(
@@ -1570,14 +1448,14 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class' => '',
 		), $atts ) );
 
-		$font_size = $this->sanitize->css_unit( $font_size );
-		$flag_width = $this->sanitize->css_unit( $flag_width );
+		$font_size = WPC_Shortcodes_Sanitize::css_unit( $font_size );
+		$flag_width = WPC_Shortcodes_Sanitize::css_unit( $flag_width );
 
 		// function options
 		$div_wrapper = false;
 
 		// sanitize
-		$attachment_id = $this->sanitize->number( $attachment_id );
+		$attachment_id = WPC_Shortcodes_Sanitize::number( $attachment_id );
 
 		// classes
 		$classes = array();
@@ -1673,8 +1551,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'class' => '',
 		), $atts ) );
 
-		$margin_right = $this->sanitize->css_unit( $margin_right );
-		$margin_left = $this->sanitize->css_unit( $margin_left );
+		$margin_right = WPC_Shortcodes_Sanitize::css_unit( $margin_right );
+		$margin_left = WPC_Shortcodes_Sanitize::css_unit( $margin_left );
 
 		if ( empty( $icon ) )
 			return '';

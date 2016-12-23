@@ -32,6 +32,7 @@ class WPC_Shortcodes_Vars {
 	protected static $social_icons;
 	protected static $share_buttons;
 	protected static $theme_support;
+	public static $attr;
 
 	public static function init_vars() {
 		define( 'WC_SHORTCODES_IS_ACTIVATED', true );
@@ -124,6 +125,49 @@ class WPC_Shortcodes_Vars {
 			'print_share_text' => 'Print',
 			'print_share_font_icon' => 'fa-print',
 			'print_share_button' => WC_SHORTCODES_PLUGIN_URL . 'public/assets/img/print.png',
+		);
+
+		// Shortcode Options
+		self::$attr = (object) array();
+		self::$attr->post_slider = array(
+			'author' => '', //use author id
+			'author_name' => '', //use 'user_nicename' (NOT name).
+			'pids' => '', //use post id.
+			'p' => '', //use post id.
+			'post__in' => '', //use post ids
+			'order' => 'DESC', // DESC, ASC
+			'orderby' => 'date',
+			'post_status' => 'publish',
+			'post_type' => 'post', // post, page, wc_portfolio_item, etc
+			'posts_per_page' => 10, //number of post to show per page
+			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
+			'ignore_sticky_posts' => 1,
+
+			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
+			'field' => 'slug', // slug or id
+			'terms' => '', // taxonomy terms.
+
+			'show_meta_category' => 1, // show heading?
+			'show_title' => 1, // show heading?
+			'show_content' => 1, // show main content?
+			'readmore' => 'Continue Reading', // show main content?
+			'button_class' => 'button secondary-button', // show main content?
+
+			'size' => 'full', // default thumbnail size
+
+			'heading_type' => 'h2', // heading tag for title
+			'heading_size' => 30,
+			'mobile_heading_size' => 24,
+			'layout' => 'bxslider', // blog layout
+			'template' => 'slider2',
+			'excerpt_length' => 55,
+			'desktop_height' => 600,
+			'laptop_height' => 500,
+			'mobile_height' => 350,
+
+			'slider_mode' => 'fade',
+			'slider_pause' => 4000,
+			'slider_auto' => 0,
 		);
 	}
 }

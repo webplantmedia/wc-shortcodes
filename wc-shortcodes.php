@@ -47,8 +47,6 @@ require_once( plugin_dir_path( __FILE__ ) . 'public/class-widgets.php' );
 // Initialize classes.
 add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Public', 'get_instance' ) );
 
-add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Sanitize', 'get_instance' ) );
-
 add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Register', 'get_instance' ) );
 
 add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Hooks', 'get_instance' ) );
