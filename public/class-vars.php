@@ -129,6 +129,45 @@ class WPC_Shortcodes_Vars {
 
 		// Shortcode Options
 		self::$attr = (object) array();
+		self::$attr->posts = array(
+			'author' => '', //use author id
+			'author_name' => '', //use 'user_nicename' (NOT name).
+			'pids' => '', //use post id.
+			'p' => '', //use post id.
+			'post__in' => false, //use post ids
+			'order' => 'DESC', // DESC, ASC
+			'orderby' => 'date',
+			'post_status' => 'publish',
+			'post_type' => 'post', // post, page, wc_portfolio_item, etc
+			'posts_per_page' => 10, //number of post to show per page
+			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
+			'paged' => 1, // number of page. Show the posts that would normally show up just on page X when using the "Older Entries" link.
+			'ignore_sticky_posts' => 0,
+
+			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
+			'field' => 'slug', // slug or id
+			'terms' => '', // taxonomy terms.
+
+			'title' => 1, // show heading?
+			'meta_all' => 1, // show all meta info?
+			'meta_author' => 1, // show author?
+			'meta_date' => 1, // show date?
+			'meta_comments' => 1, // show comments?
+			'thumbnail' => 1, // show thumbnail?
+			'content' => 1, // show main content?
+			'paging' => 1, // show pagination navigation?
+
+			'size' => 'large', // default thumbnail size
+
+			'filtering' => 1, // insert isotope filter navigation
+			'columns' => '3', // default number of isotope columns
+			'gutter_space' => '20', // gutter width percentage relative to parent element width
+			'heading_type' => 'h2', // heading tag for title
+			'layout' => 'masonry', // blog layout
+			'template' => 'box',
+			'excerpt_length' => '55',
+			'date_format' => 'M j, Y',
+		);
 		self::$attr->post_slider = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

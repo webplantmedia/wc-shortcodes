@@ -124,9 +124,9 @@ class WPC_Shortcodes_Sanitize {
 		}
 	}
 
-	public static function post_slider_attr( $atts ) {
+	public static function posts_attr( $atts ) {
 		// sanitize bools
-		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto' );
+		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging', 'title', 'meta_all', 'meta_author', 'meta_date', 'meta_comments', 'thumbnail', 'content', 'paging', 'filtering' );
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {
 				if ( "no" == $key ) {
@@ -138,6 +138,91 @@ class WPC_Shortcodes_Sanitize {
 				}
 			}
 		}
+
+		$atts['nopaging'] = (bool) $atts['nopaging'];
+
+		// gutter space
+		if ( ! is_numeric( $atts['gutter_space'] ) ) {
+			$atts['gutter_space'] = 20;
+		}
+		if ( $atts['gutter_space'] > 0 && $atts['gutter_space'] < 1 ) {
+			$atts['gutter_space'] = (int) ( $atts['gutter_space'] * 1000 );
+		}
+		$atts['gutter_space'] = (int) $atts['gutter_space'];
+		if ( $atts['gutter_space'] > 50 || $atts['gutter_space'] < 0 ) {
+			$atts['gutter_space'] = 20;
+		}
+
+		// sanitize ints
+		$ints = array( 'p', 'posts_per_page', 'columns', 'excerpt_length' );
+		foreach ( $ints as $key ) {
+			if ( isset( $atts[ $key ] ) ) {
+				$atts[ $key ] = (int) $atts[ $key ];
+			}
+		}
+
+		$valid_columns = array( 1, 2, 3, 4, 5, 6, 7, 8, 9 );
+		$atts['columns'] = in_array( $atts['columns'], $valid_columns ) ? $atts['columns'] : 2;
+		if ( $atts['columns'] == 1 ) {
+			$atts['layout'] = 'single-column';
+		}
+
+
+		// sanitize limit
+		if ( $atts['posts_per_page'] < 0 ) {
+			$atts['posts_per_page'] = -1;
+			$atts['nopaging'] = true;
+		}
+		else if ( 0 == $atts['posts_per_page'] ) {
+			return;
+		}
+
+		// sanitize dropdown
+		$valid_layouts = array( 'masonry', 'grid', 'single-column' );
+		if ( ! in_array( $atts['layout'], $valid_layouts ) ) {
+			$atts['layout'] = 'masonry';
+		}
+
+		$valid_templates = array( 'box', 'borderless' );
+		if ( ! in_array( $atts['template'], $valid_templates ) ) {
+			$atts['template'] = 'box';
+		}
+
+		$valid_orders = array( 'ASC', 'DESC' );
+		$atts['order'] = strtoupper( $atts['order'] );
+		if ( ! in_array( $atts['order'], $valid_orders ) ) {
+			$atts['order'] = 'DESC';
+		}
+
+		$atts['heading_type'] = strtolower( $atts['heading_type'] );
+		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
+		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
+
+		// sanitize inputs
+		$atts['terms'] = sanitize_text_field( $atts['terms'] );
+		$atts['pids'] = sanitize_text_field( $atts['pids'] );
+		$atts['post__in'] = sanitize_text_field( $atts['post__in'] );
+		$atts['date_format'] = sanitize_text_field( $atts['date_format'] );
+
+		return $atts;
+	}
+
+	public static function post_slider_attr( $atts ) {
+		// sanitize bools
+		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto', 'nopaging' );
+		foreach ( $bools as $key ) {
+			if ( isset( $atts[ $key ] ) ) {
+				if ( "no" == $key ) {
+					$atts[ $key ] = 0;
+				}
+				else {
+					$atts[ $key ] = (bool) $atts[ $key ];
+					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
+				}
+			}
+		}
+
+		$atts['nopaging'] = (bool) $atts['nopaging'];
 
 		// sanitize ints
 		$ints = array( 'p', 'posts_per_page', 'heading_size', 'mobile_heading_size', 'excerpt_length', 'desktop_height', 'laptop_height', 'mobile_height', 'slider_pause' );
@@ -188,6 +273,7 @@ class WPC_Shortcodes_Sanitize {
 		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-slide-button' : $atts['button_class'];
 		$atts['terms'] = sanitize_text_field( $atts['terms'] );
 		$atts['pids'] = sanitize_text_field( $atts['pids'] );
+		$atts['post__in'] = sanitize_text_field( $atts['post__in'] );
 
 		return $atts;
 	}

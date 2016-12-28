@@ -1060,50 +1060,33 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		static $instance = 0;
 		$instance++;
 
+		$atts = shortcode_atts( parent::$attr->posts, $atts );
+		$atts = WPC_Shortcodes_Sanitize::posts_attr( $atts );
+
+		// Set paged variable.
 		if ( (is_front_page() || is_home() ) ) {
-			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
+			$atts['paged'] = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
 		} else {
-			$paged = ( get_query_var('paged') ) ? get_query_var( 'paged' ) : 1;
+			$atts['paged'] = ( get_query_var('paged') ) ? get_query_var( 'paged' ) : 1;
 		}
 
-		$atts = shortcode_atts( array(
-			'author' => '', //use author id
-			'author_name' => '', //use 'user_nicename' (NOT name).
-			'p' => false, //use post id.
-			'post__in' => false, //use post ids
-			'order' => 'DESC', // DESC, ASC
-			'orderby' => 'date',
-			'post_status' => 'publish',
-			'post_type' => 'post', // post, page, wc_portfolio_item, etc
-			'posts_per_page' => 10, //number of post to show per page
-			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
-			'paged' => $paged, // number of page. Show the posts that would normally show up just on page X when using the "Older Entries" link.
-			'ignore_sticky_posts' => 0,
+		// Convert comma delimeted string to array
+		$p = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['pids'] );
 
-			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
-			'field' => 'slug', // slug or id
-			'terms' => '', // taxonomy terms.
+		$atts['p'] = '';
+		$atts['post__in'] = '';
 
-			'title' => true, // show heading?
-			'meta_all' => true, // show all meta info?
-			'meta_author' => true, // show author?
-			'meta_date' => true, // show date?
-			'meta_comments' => true, // show comments?
-			'thumbnail' => true, // show thumbnail?
-			'content' => true, // show main content?
-			'paging' => true, // show pagination navigation?
+		if ( is_array( $p ) && ! empty( $p ) ) {
+			$size = sizeof( $p );
+			if ( 1 < $size ) {
+				$atts['post__in'] = $p;
+			}
+			else if ( 1 == $size ) {
+				$atts['p'] = $p[0];
+			}
+		}
 
-			'size' => 'large', // default thumbnail size
-
-			'filtering' => true, // insert isotope filter navigation
-			'columns' => '3', // default number of isotope columns
-			'gutter_space' => '20', // gutter width percentage relative to parent element width
-			'heading_type' => 'h2', // heading tag for title
-			'layout' => 'masonry', // blog layout
-			'template' => 'box',
-			'excerpt_length' => '55',
-			'date_format' => 'M j, Y',
-		), $atts );
+		$atts['terms'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
 
 		// fix bug with title argument being added to WP_Query() in 4.4
 		$keys = array(
@@ -1132,48 +1115,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			unset( $atts[ $key ] );
 		}
 
-		// changed default layout name. Let's catch old inputs
-		$valid_layouts = array( 'masonry', 'grid' );
-		if ( ! in_array( $display['layout'], $valid_layouts ) ) {
-			$display['layout'] = "masonry";
-		}
-
-		$valid_templates = array( 'box', 'borderless' );
-		if ( ! in_array( $display['template'], $valid_templates ) ) {
-			$display['template'] = "box";
-		}
-
-		// clean input values
-		$atts['terms'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
 		$wpc_term = null;
 		if ( isset( $_GET['wpc_term'] ) && ! empty( $_GET['wpc_term'] ) ) {
 			$wpc_term = $_GET['wpc_term'];
 		}
-		$atts['post__in'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['post__in'] );
-		$display['columns'] == (int) $display['columns'];
-		$display['excerpt_length'] = (int) $display['excerpt_length'];
-		$atts['order'] = strtoupper( $atts['order'] );
-		$display['heading_type'] = strtolower( $display['heading_type'] );
-
-		if ( ! is_numeric( $display['gutter_space'] ) ) {
-			$display['gutter_space'] = 20;
-		}
-		if ( $display['gutter_space'] > 0 && $display['gutter_space'] < 1 ) {
-			$display['gutter_space'] = (int) ( $display['gutter_space'] * 1000 );
-		}
-		$display['gutter_space'] = (int) $display['gutter_space'];
-		if ( $display['gutter_space'] > 50 || $display['gutter_space'] < 0 ) {
-			$display['gutter_space'] = 20;
-		}
-
-		if (isset($atts['posts_per_page']) && $atts['posts_per_page']) {
-			$atts['posts_per_page'] = (int) $atts['posts_per_page'];
-		}
-		else {
-			$atts['posts_per_page'] = 0;
-		}
-
-
 
 		// add tax query if user specified
 		if ( ! empty( $wpc_term ) ) {
@@ -1194,32 +1139,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 				),
 			);
 		}
-
-		// no paging needed when showing all posts
-		if(isset($atts['posts_per_page']) && $atts['posts_per_page'] == -1) {
-			$atts['nopaging'] = true;
-		}
-
-		// setting attributes right for the php script
-		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
-		$display['heading_type'] = in_array( $display['heading_type'], $valid_headings ) ? $display['heading_type'] : 'h2';
-
-		$valid_columns = array( 1, 2, 3, 4, 5, 6, 7, 8, 9 );
-		$display['columns'] = in_array( $display['columns'], $valid_columns ) ? $display['columns'] : 2;
-		if ( $display['columns'] == 1 ) {
-			$display['layout'] = 'single-column';
-		}
-		
-		($display['title'] == "yes") ? ($display['title'] = true) : ($display['title'] = false);
-		($display['meta_all'] == "yes") ? ($display['meta_all'] = true) : ($display['meta_all'] = false);
-		($display['meta_author'] == "yes") ? ($display['meta_author'] = true) : ($display['meta_author'] = false);
-		($display['meta_date'] == "yes") ? ($display['meta_date'] = true) : ($display['meta_date'] = false);
-		($display['meta_comments'] == "yes") ? ($display['meta_comments'] = true) : ($display['meta_comments'] = false);
-		($display['thumbnail'] == "yes") ? ($display['thumbnail'] = true) : ($display['thumbnail'] = false);
-		($display['content'] == "yes") ? ($display['content'] = true) : ($display['content'] = false);
-		($display['paging'] == "yes" && ! $atts['nopaging']) ? ($display['paging'] = true) : ($display['paging'] = false);
-		($display['filtering'] == "yes") ? ($display['filtering'] = true) : ($display['filtering'] = false);
-		($atts['order'] == "ASC") ? ($atts['order'] = "ASC") : ($atts['order'] = "DESC");
 
 		$is_masonry =  'masonry' == $display['layout'] ? true : false;
 		$is_grid =  'grid' == $display['layout'] ? true : false;
@@ -1296,7 +1215,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$atts = WPC_Shortcodes_Sanitize::post_slider_attr( $atts );
 
 		// Convert comma delimeted string to array
-		$p = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
+		$p = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['pids'] );
 
 		$atts['p'] = '';
 		$atts['post__in'] = '';
