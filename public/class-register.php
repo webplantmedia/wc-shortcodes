@@ -1060,6 +1060,18 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		static $instance = 0;
 		$instance++;
 
+		// Rename keys in shortcode options.
+		$renamed = array( 'title', 'meta_all', 'meta_author', 'meta_date', 'meta_comments', 'thumbnail', 'content', 'paging' );
+		foreach ( $renamed as $key ) {
+			if ( isset( $atts[ $key ] ) ) {
+				$new_key = 'show_' . $key;
+				if ( ! isset( $atts[ $new_key ] ) ) {
+					$atts[ $new_key ] = $atts[ $key ];
+				}
+				unset( $atts[ $key ] );
+			}
+		}
+
 		$atts = shortcode_atts( parent::$attr->posts, $atts );
 		$atts = WPC_Shortcodes_Sanitize::posts_attr( $atts );
 

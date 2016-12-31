@@ -124,7 +124,7 @@ class WPC_Shortcodes_Sanitize {
 		}
 	}
 
-	public static function posts_attr( $atts ) {
+	public static function posts_attr( $atts, $empty_is_false = false ) {
 		// sanitize bools
 		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging', 'title', 'meta_all', 'meta_author', 'meta_date', 'meta_comments', 'thumbnail', 'content', 'paging', 'filtering' );
 		foreach ( $bools as $key ) {
@@ -136,6 +136,9 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = (bool) $atts[ $key ];
 					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
 				}
+			}
+			else if ( $empty_is_false ) {
+				$atts[ $key ] = 0;
 			}
 		}
 
@@ -207,7 +210,7 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
-	public static function post_slider_attr( $atts ) {
+	public static function post_slider_attr( $atts, $empty_is_false = false ) {
 		// sanitize bools
 		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto', 'nopaging' );
 		foreach ( $bools as $key ) {
@@ -219,6 +222,9 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = (bool) $atts[ $key ];
 					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
 				}
+			}
+			else if ( $empty_is_false ) {
+				$atts[ $key ] = 0;
 			}
 		}
 

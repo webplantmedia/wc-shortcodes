@@ -1,15 +1,15 @@
 <?php
 /**
- * WC_Shortcodes_Post_Slider_Widget
+ * WC_Shortcodes_Posts_Widget
  *
  * @uses WP
  * @uses _Widget
  */
-class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
+class WC_Shortcodes_Posts_Widget extends WP_Widget {
 	function __construct() {
 
-		$widget_ops = array( 'description' => __('Add a post slider to your widget area.') );
-		parent::__construct( 'wc_shortcodes_post_slider', __('Post Slider'), $widget_ops );
+		$widget_ops = array( 'description' => __('Add your posts to your widget area.') );
+		parent::__construct( 'wc_shortcodes_posts', __('Posts'), $widget_ops );
 	}
 
 	function widget($args, $instance) {
@@ -20,10 +20,10 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 
 		if ( ! empty( $shortcode ) ) {
 			$shortcode = implode( " ", $shortcode );
-			$shortcode = '[wc_post_slider ' . $shortcode . '][/wc_post_slider]';
+			$shortcode = '[wc_posts ' . $shortcode . '][/wc_posts]';
 		}
 		else {
-			$shortcode = '[wc_post_slider][/wc_post_slider]';
+			$shortcode = '[wc_posts][/wc_posts]';
 		}
 
 		echo $args['before_widget'];
@@ -32,13 +32,13 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 	}
 
 	function update( $new_instance, $old_instance ) {
-		$instance = WPC_Shortcodes_Sanitize::post_slider_attr( $new_instance, $empty_is_false = true );
+		$instance = WPC_Shortcodes_Sanitize::posts_attr( $new_instance, $empty_is_false = true );
 
 		return $instance;
 	}
 
 	function form( $instance ) {
-		$o = array_merge( WPC_Shortcodes_Vars::$attr->post_slider, $instance );
+		$o = array_merge( WPC_Shortcodes_Vars::$attr->posts, $instance );
 		
 		$args = array(
 		   'public' => true,
@@ -51,7 +51,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		unset( $post_types['attachment'] );
 		?>
 
-		<div id="wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>" class="wc-shortcodes-post-slider-widget wpc-ui-theme-override">
+		<div id="wc-shortcodes-posts-widget-<?php echo $this->number; ?>" class="wc-shortcodes-posts-widget wpc-ui-theme-override">
 			<h3>Select Posts</h3>
 			<div>
 				<p>
@@ -265,7 +265,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		<script type="text/javascript">
 			/* <![CDATA[ */
 			jQuery(document).ready(function($){
-				$('#wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"}).wcPostSliderWidget();
+				$('#wc-shortcodes-posts-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"}).wcPostSliderWidget();
 			});
 			/* ]]> */
 		</script>
