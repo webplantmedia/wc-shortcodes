@@ -148,14 +148,14 @@ class WPC_Shortcodes_Vars {
 			'field' => 'slug', // slug or id
 			'terms' => '', // taxonomy terms.
 
-			'title' => 1, // show heading?
-			'meta_all' => 1, // show all meta info?
-			'meta_author' => 1, // show author?
-			'meta_date' => 1, // show date?
-			'meta_comments' => 1, // show comments?
-			'thumbnail' => 1, // show thumbnail?
-			'content' => 1, // show main content?
-			'paging' => 1, // show pagination navigation?
+			'show_title' => 1, // show heading?
+			'show_meta_all' => 1, // show all meta info?
+			'show_meta_author' => 1, // show author?
+			'show_meta_date' => 1, // show date?
+			'show_meta_comments' => 1, // show comments?
+			'show_thumbnail' => 1, // show thumbnail?
+			'show_content' => 1, // show main content?
+			'show_paging' => 1, // show pagination navigation?
 
 			'size' => 'large', // default thumbnail size
 
@@ -165,7 +165,7 @@ class WPC_Shortcodes_Vars {
 			'heading_type' => 'h2', // heading tag for title
 			'layout' => 'masonry', // blog layout
 			'template' => 'box',
-			'excerpt_length' => '55',
+			'excerpt_length' => '30',
 			'date_format' => 'M j, Y',
 		);
 		self::$attr->post_slider = array(

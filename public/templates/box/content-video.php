@@ -6,7 +6,7 @@
 		</div><!-- .entry-summary -->
 
 		<div class="wc-shortcodes-post-content">
-			<?php if ( $display['title'] ) : ?>
+			<?php if ( $display['show_title'] ) : ?>
 			<div class="wc-shortcodes-entry-header">
 				<<?php echo $display['heading_type']; ?> class="wc-shortcodes-entry-title">
 					<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
@@ -14,7 +14,7 @@
 			</div><!-- .entry-header -->
 			<?php endif; ?>
 
-			<?php if ( $display['content'] ) : ?>
+			<?php if ( $display['show_content'] ) : ?>
 				<div class="wc-shortcodes-entry-summary">
 					<?php wc_shortcodes_the_excerpt(); ?>
 				</div>

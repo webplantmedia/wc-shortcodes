@@ -124,9 +124,25 @@ class WPC_Shortcodes_Sanitize {
 		}
 	}
 
+	public static function posts_attr_key_change( $atts ) {
+		// Rename keys in shortcode options.
+		$renamed = array( 'title', 'meta_all', 'meta_author', 'meta_date', 'meta_comments', 'thumbnail', 'content', 'paging' );
+		foreach ( $renamed as $key ) {
+			if ( isset( $atts[ $key ] ) ) {
+				$new_key = 'show_' . $key;
+				if ( ! isset( $atts[ $new_key ] ) ) {
+					$atts[ $new_key ] = $atts[ $key ];
+				}
+				unset( $atts[ $key ] );
+			}
+		}
+		
+		return $atts;
+	}
+
 	public static function posts_attr( $atts, $empty_is_false = false ) {
 		// sanitize bools
-		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging', 'title', 'meta_all', 'meta_author', 'meta_date', 'meta_comments', 'thumbnail', 'content', 'paging', 'filtering' );
+		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging', 'show_title', 'show_meta_all', 'show_meta_author', 'show_meta_date', 'show_meta_comments', 'show_thumbnail', 'show_content', 'show_paging', 'filtering' );
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {
 				if ( "no" == $key ) {
@@ -175,9 +191,6 @@ class WPC_Shortcodes_Sanitize {
 		if ( $atts['posts_per_page'] < 0 ) {
 			$atts['posts_per_page'] = -1;
 			$atts['nopaging'] = true;
-		}
-		else if ( 0 == $atts['posts_per_page'] ) {
-			return;
 		}
 
 		// sanitize dropdown
@@ -243,9 +256,6 @@ class WPC_Shortcodes_Sanitize {
 		if ( $atts['posts_per_page'] < 0 ) {
 			$atts['posts_per_page'] = -1;
 			$atts['nopaging'] = true;
-		}
-		else if ( 0 == $atts['posts_per_page'] ) {
-			return;
 		}
 
 		// sanitize dropdown

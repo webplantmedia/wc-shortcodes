@@ -32,7 +32,7 @@
 	}
 	var insertShortcode = function() {
 		var data = $innerContent.serialize();
-		var $fields = $innerContent.find("[name^='widget-wc_shortcodes_post_slider[]']");
+		var $fields = $innerContent.find(".wc-shortcodes-widget-option");
 
 		var values = new Array();
 		$.each( $fields, function( i, el ) {
@@ -53,10 +53,10 @@
 			key = key.substring( 0, key.length - 1 );
 			values.push( key + '="' + val + '"' );
 		});
-		console.log(values);
+		// console.log(values);
 		values = values.join(" ");
 
-		var rgxp = new RegExp("^\\["+mceTag+"\\s+.+?\\]", "g");
+		var rgxp = new RegExp("^\\["+mceTag+"\\s*.*?\\]", "g");
 		// console.log(rgxp);
 
 		// var shortcode = "["+mceTag+" "+values+"][/"+mceTag+"]";

@@ -135,6 +135,10 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WC_Shortcodes_Post_Slider_Widget();
 				$widget->form( $attr );
 				break;
+			case 'wc_posts' :
+				$widget = new WC_Shortcodes_Posts_Widget();
+				$widget->form( $attr );
+				break;
 		}
 
 		die();

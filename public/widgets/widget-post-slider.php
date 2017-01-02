@@ -38,7 +38,13 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
+		// array_merge needs both values to be array.
+		if ( ! is_array( $instance ) ) {
+			$instance = array();
+		}
+
 		$o = array_merge( WPC_Shortcodes_Vars::$attr->post_slider, $instance );
+		$o = WPC_Shortcodes_Sanitize::post_slider_attr( $o );
 		
 		$args = array(
 		   'public' => true,
@@ -51,17 +57,17 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		unset( $post_types['attachment'] );
 		?>
 
-		<div id="wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>" class="wc-shortcodes-post-slider-widget wpc-ui-theme-override">
+		<div id="wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>" class="wc-shortcodes-post-slider-widget wc-shortcodes-visual-manager wpc-ui-theme-override">
 			<h3>Select Posts</h3>
 			<div>
 				<p>
 					<label for="<?php echo $this->get_field_id('pids'); ?>"><?php _e('Post IDs:') ?></label>
-					<input type="text" class="widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('pids'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="post" name="<?php echo $this->get_field_name('pids'); ?>" value="<?php echo $o['pids']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('pids'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="post" name="<?php echo $this->get_field_name('pids'); ?>" value="<?php echo $o['pids']; ?>" />
 					<span class="wcs-description">Leave blank to display all posts.</span>
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('order'); ?>"><?php _e('Order:'); ?></label>
-					<select id="<?php echo $this->get_field_id('order'); ?>" name="<?php echo $this->get_field_name('order'); ?>">
+					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('order'); ?>" name="<?php echo $this->get_field_name('order'); ?>">
 						<?php
 						$options = array(
 							'DESC' => 'DESC',
@@ -75,7 +81,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('orderby'); ?>"><?php _e('Order By:'); ?></label>
-					<select id="<?php echo $this->get_field_id('orderby'); ?>" name="<?php echo $this->get_field_name('orderby'); ?>">
+					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('orderby'); ?>" name="<?php echo $this->get_field_name('orderby'); ?>">
 						<?php
 						$options = array(
 							'none' => 'No Order',
@@ -100,7 +106,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('post_type'); ?>"><?php _e('Post Type:'); ?></label>
-					<select id="<?php echo $this->get_field_id('post_type'); ?>" class="wc-shortcodes-widget-post-type-selector" name="<?php echo $this->get_field_name('post_type'); ?>">
+					<select id="<?php echo $this->get_field_id('post_type'); ?>" class="wc-shortcodes-widget-option wc-shortcodes-widget-post-type-selector" name="<?php echo $this->get_field_name('post_type'); ?>">
 						<?php foreach ( $post_types as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['post_type'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
@@ -108,7 +114,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:'); ?></label>
-					<select id="<?php echo $this->get_field_id('taxonomy'); ?>" class="wc-shortcodes-widget-taxonomy-selector" name="<?php echo $this->get_field_name('taxonomy'); ?>">
+					<select id="<?php echo $this->get_field_id('taxonomy'); ?>" class="wc-shortcodes-widget-option wc-shortcodes-widget-taxonomy-selector" name="<?php echo $this->get_field_name('taxonomy'); ?>">
 						<option value=""<?php selected( $o['taxonomy'], "" ); ?>>No Taxonomy</option>';
 						<?php foreach ( $post_types as $post_type_name ) : ?>
 							<?php $taxonomies = get_object_taxonomies( $post_type_name, 'names' ); ?>
@@ -122,44 +128,44 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('terms'); ?>"><?php _e('Terms:') ?></label>
-					<input type="text" class="widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('terms'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="terms" name="<?php echo $this->get_field_name('terms'); ?>" value="<?php echo $o['terms']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat wc-shortcodes-widget-autocomplete-select" id="<?php echo $this->get_field_id('terms'); ?>" data-autocomplete-type="multi" data-autocomplete-lookup="terms" name="<?php echo $this->get_field_name('terms'); ?>" value="<?php echo $o['terms']; ?>" />
 					<span class="wcs-description">Leave blank to display all terms.</span>
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('posts_per_page'); ?>"><?php _e('Posts Per Page:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('posts_per_page'); ?>" name="<?php echo $this->get_field_name('posts_per_page'); ?>" value="<?php echo $o['posts_per_page']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('posts_per_page'); ?>" name="<?php echo $this->get_field_name('posts_per_page'); ?>" value="<?php echo $o['posts_per_page']; ?>" />
 					<span class="wcs-description">Enter -1 for unlimited posts.</span>
 				</p>
 				<p>
-					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('ignore_sticky_posts'); ?>" name="<?php echo $this->get_field_name('ignore_sticky_posts'); ?>" value="1" <?php checked( $o['ignore_sticky_posts'], 1 ); ?> />
+					<input type="checkbox" class="wc-shortcodes-widget-option checkbox" id="<?php echo $this->get_field_id('ignore_sticky_posts'); ?>" name="<?php echo $this->get_field_name('ignore_sticky_posts'); ?>" value="1" <?php checked( $o['ignore_sticky_posts'], 1 ); ?> />
 					<label for="<?php echo $this->get_field_id('ignore_sticky_posts'); ?>"><?php _e('Ignore Sticky Posts') ?></label>
 				</p>
 			</div>
 			<h3>Content</h3>
 			<div>
 				<p>
-					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_meta_category'); ?>" name="<?php echo $this->get_field_name('show_meta_category'); ?>" value="1" <?php checked( $o['show_meta_category'], 1 ); ?> />
+					<input type="checkbox" class="wc-shortcodes-widget-option checkbox" id="<?php echo $this->get_field_id('show_meta_category'); ?>" name="<?php echo $this->get_field_name('show_meta_category'); ?>" value="1" <?php checked( $o['show_meta_category'], 1 ); ?> />
 					<label for="<?php echo $this->get_field_id('show_meta_category'); ?>"><?php _e('Show Meta Category') ?></label>
 				</p>
 				<p>
-					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>" value="1" <?php checked( $o['show_title'], 1 ); ?> />
+					<input type="checkbox" class="wc-shortcodes-widget-option checkbox" id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>" value="1" <?php checked( $o['show_title'], 1 ); ?> />
 					<label for="<?php echo $this->get_field_id('show_title'); ?>"><?php _e('Show Title') ?></label>
 				</p>
 				<p>
-					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_content'); ?>" name="<?php echo $this->get_field_name('show_content'); ?>" value="1" <?php checked( $o['show_content'], 1 ); ?> />
+					<input type="checkbox" class="wc-shortcodes-widget-option checkbox" id="<?php echo $this->get_field_id('show_content'); ?>" name="<?php echo $this->get_field_name('show_content'); ?>" value="1" <?php checked( $o['show_content'], 1 ); ?> />
 					<label for="<?php echo $this->get_field_id('show_content'); ?>"><?php _e('Show Content') ?></label>
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('readmore'); ?>"><?php _e('Read More Text:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('readmore'); ?>" name="<?php echo $this->get_field_name('readmore'); ?>" value="<?php echo $o['readmore']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('readmore'); ?>" name="<?php echo $this->get_field_name('readmore'); ?>" value="<?php echo $o['readmore']; ?>" />
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('button_class'); ?>"><?php _e('Button Class:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('button_class'); ?>" name="<?php echo $this->get_field_name('button_class'); ?>" value="<?php echo $o['button_class']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('button_class'); ?>" name="<?php echo $this->get_field_name('button_class'); ?>" value="<?php echo $o['button_class']; ?>" />
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('size'); ?>"><?php _e('Image Size:'); ?></label>
-					<select id="<?php echo $this->get_field_id('size'); ?>" name="<?php echo $this->get_field_name('size'); ?>">
+					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('size'); ?>" name="<?php echo $this->get_field_name('size'); ?>">
 						<?php
 						$sizes = apply_filters( 'image_size_names_choose', array(
 							'thumbnail' => __('Thumbnail'),
@@ -175,7 +181,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('heading_type'); ?>"><?php _e('Heading Type:'); ?></label>
-					<select id="<?php echo $this->get_field_id('heading_type'); ?>" name="<?php echo $this->get_field_name('heading_type'); ?>">
+					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('heading_type'); ?>" name="<?php echo $this->get_field_name('heading_type'); ?>">
 						<?php
 						$options = array(
 							'h1' => 'H1',
@@ -196,7 +202,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 			<div>
 				<p>
 					<label for="<?php echo $this->get_field_id('template'); ?>"><?php _e('Template:'); ?></label>
-					<select id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
+					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
 						<?php
 						$options = array(
 							'slider1' => 'Slider 1',
@@ -210,34 +216,34 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('heading_size'); ?>"><?php _e('Heading Size:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('heading_size'); ?>" name="<?php echo $this->get_field_name('heading_size'); ?>" value="<?php echo $o['heading_size']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('heading_size'); ?>" name="<?php echo $this->get_field_name('heading_size'); ?>" value="<?php echo $o['heading_size']; ?>" />
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('mobile_heading_size'); ?>"><?php _e('Mobile Heading Size:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('mobile_heading_size'); ?>" name="<?php echo $this->get_field_name('mobile_heading_size'); ?>" value="<?php echo $o['mobile_heading_size']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('mobile_heading_size'); ?>" name="<?php echo $this->get_field_name('mobile_heading_size'); ?>" value="<?php echo $o['mobile_heading_size']; ?>" />
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('excerpt_length'); ?>"><?php _e('Excerpt Length:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('excerpt_length'); ?>" name="<?php echo $this->get_field_name('excerpt_length'); ?>" value="<?php echo $o['excerpt_length']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('excerpt_length'); ?>" name="<?php echo $this->get_field_name('excerpt_length'); ?>" value="<?php echo $o['excerpt_length']; ?>" />
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('desktop_height'); ?>"><?php _e('Desktop Height:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('desktop_height'); ?>" name="<?php echo $this->get_field_name('desktop_height'); ?>" value="<?php echo $o['desktop_height']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('desktop_height'); ?>" name="<?php echo $this->get_field_name('desktop_height'); ?>" value="<?php echo $o['desktop_height']; ?>" />
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('laptop_height'); ?>"><?php _e('Laptop Height:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('laptop_height'); ?>" name="<?php echo $this->get_field_name('laptop_height'); ?>" value="<?php echo $o['laptop_height']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('laptop_height'); ?>" name="<?php echo $this->get_field_name('laptop_height'); ?>" value="<?php echo $o['laptop_height']; ?>" />
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('mobile_height'); ?>"><?php _e('Mobile Height:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('mobile_height'); ?>" name="<?php echo $this->get_field_name('mobile_height'); ?>" value="<?php echo $o['mobile_height']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('mobile_height'); ?>" name="<?php echo $this->get_field_name('mobile_height'); ?>" value="<?php echo $o['mobile_height']; ?>" />
 				</p>
 			</div>
 			<h3>Slider Settings</h3>
 			<div>
 				<p>
 					<label for="<?php echo $this->get_field_id('slider_mode'); ?>"><?php _e('Slider Mode:'); ?></label>
-					<select id="<?php echo $this->get_field_id('slider_mode'); ?>" name="<?php echo $this->get_field_name('slider_mode'); ?>">
+					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('slider_mode'); ?>" name="<?php echo $this->get_field_name('slider_mode'); ?>">
 						<?php
 						$options = array(
 							'fade' => 'Fade',
@@ -252,11 +258,11 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('slider_pause'); ?>"><?php _e('Slider Pause:') ?></label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id('slider_pause'); ?>" name="<?php echo $this->get_field_name('slider_pause'); ?>" value="<?php echo $o['slider_pause']; ?>" />
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('slider_pause'); ?>" name="<?php echo $this->get_field_name('slider_pause'); ?>" value="<?php echo $o['slider_pause']; ?>" />
 					<span class="wcs-description">Enter number in milliseconds.</span>
 				</p>
 				<p>
-					<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('slider_auto'); ?>" name="<?php echo $this->get_field_name('slider_auto'); ?>" value="1" <?php checked( $o['slider_auto'], 1 ); ?> />
+					<input type="checkbox" class="wc-shortcodes-widget-option checkbox" id="<?php echo $this->get_field_id('slider_auto'); ?>" name="<?php echo $this->get_field_name('slider_auto'); ?>" value="1" <?php checked( $o['slider_auto'], 1 ); ?> />
 					<label for="<?php echo $this->get_field_id('slider_auto'); ?>"><?php _e('Enable Auto Transition') ?></label>
 				</p>
 			</div>
@@ -265,7 +271,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		<script type="text/javascript">
 			/* <![CDATA[ */
 			jQuery(document).ready(function($){
-				$('#wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"}).wcPostSliderWidget();
+				$('#wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"}).wcPostsWidget();
 			});
 			/* ]]> */
 		</script>

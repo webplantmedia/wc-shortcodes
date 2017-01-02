@@ -5,13 +5,13 @@
 			<?php wc_shortcodes_the_media_content(); ?>
 		</div><!-- .entry-summary -->
 
-		<?php if ( $display['title'] ) : ?>
+		<?php if ( $display['show_title'] ) : ?>
 			<<?php echo $display['heading_type']; ?> class="wc-shortcodes-entry-title">
 				<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
 			</<?php echo $display['heading_type']; ?>>
 		<?php endif; ?>
 
-		<?php if ( $display['content'] ) : ?>
+		<?php if ( $display['show_content'] ) : ?>
 			<?php wc_shortcodes_the_excerpt(); ?>
 		<?php endif; ?>
 

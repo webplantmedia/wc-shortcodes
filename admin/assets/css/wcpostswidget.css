@@ -1,0 +1,50 @@
+html .wc-shortcodes-visual-manager.ui-accordion {
+	margin-bottom: 1.5em;
+}
+html .wc-shortcodes-visual-manager.ui-accordion .ui-autocomplete {
+	z-index: 999999;
+	max-height: 300px;
+	overflow: auto;
+}
+html .wc-shortcodes-visual-manager.ui-accordion .ui-autocomplete li {
+	white-space: normal;
+}
+html .wc-shortcodes-visual-manager.ui-accordion .ui-accordion-header {
+	border: 1px solid #ddd;
+	position: relative;
+	padding: 10px 15px;
+	height: auto;
+	line-height: 30px;
+	overflow: hidden;
+	word-wrap: break-word;
+	background: #fafafa;
+	color: #23282d;
+	margin-bottom: 0;
+	cursor: pointer;
+	font-size: 1em;
+	font-weight: 600;
+	margin-top: 1em;
+}
+html .wc-shortcodes-visual-manager.ui-accordion .ui-accordion-header:before {
+	content: "\f345";
+	border: none;
+	background: 0 0;
+	font-size: 1.0em;
+	font-family: dashicons;
+	speak: none;
+	display: inline-block;
+	padding: 0;
+	text-indent: 0;
+	text-align: center;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none !important;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	text-indent: -1px;
+	vertical-align: bottom;
+	margin-right: 5px;
+}
+html .wc-shortcodes-visual-manager.ui-accordion .ui-accordion-header.ui-accordion-header-active:before {
+	content: "\f347";
+}

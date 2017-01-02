@@ -1060,18 +1060,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		static $instance = 0;
 		$instance++;
 
-		// Rename keys in shortcode options.
-		$renamed = array( 'title', 'meta_all', 'meta_author', 'meta_date', 'meta_comments', 'thumbnail', 'content', 'paging' );
-		foreach ( $renamed as $key ) {
-			if ( isset( $atts[ $key ] ) ) {
-				$new_key = 'show_' . $key;
-				if ( ! isset( $atts[ $new_key ] ) ) {
-					$atts[ $new_key ] = $atts[ $key ];
-				}
-				unset( $atts[ $key ] );
-			}
-		}
-
+		$atts = WPC_Shortcodes_Sanitize::posts_attr_key_change( $atts );
 		$atts = shortcode_atts( parent::$attr->posts, $atts );
 		$atts = WPC_Shortcodes_Sanitize::posts_attr( $atts );
 
@@ -1100,16 +1089,21 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		$atts['terms'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
 
+		// Return if posts_per_page is set to 0.
+		if ( 0 == $atts['posts_per_page'] ) {
+			return;
+		}
+
 		// fix bug with title argument being added to WP_Query() in 4.4
 		$keys = array(
-			'title',
-			'meta_all',
-			'meta_author',
-			'meta_date',
-			'meta_comments',
-			'thumbnail',
-			'content',
-			'paging',
+			'show_title',
+			'show_meta_all',
+			'show_meta_author',
+			'show_meta_date',
+			'show_meta_comments',
+			'show_thumbnail',
+			'show_content',
+			'show_paging',
 			'size',
 			'filtering',
 			'columns',
@@ -1163,7 +1157,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		}
 
 		$nav_filter_hard_links = false;
-		if ( $display['paging'] ) {
+		if ( $display['show_paging'] ) {
 			$nav_filter_hard_links = true;
 		}
 
@@ -1194,7 +1188,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			while( $wc_shortcodes_posts_query->have_posts() ) :
 				$wc_shortcodes_posts_query->the_post();
 				
-				if ( $display['content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) )
+				if ( $display['show_content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) )
 					$display['content'] = false;
 
 				ob_start();
@@ -1207,7 +1201,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$html .= '</div>';
 
 		//no paging if only the latest posts are shown
-		if ( $display['paging'] ) {
+		if ( $display['show_paging'] ) {
 			ob_start();
 			include('templates/nav-pagination.php');
 			$html .= ob_get_clean();
@@ -1243,6 +1237,11 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		}
 
 		$atts['terms'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
+
+		// Return if posts_per_page is set to 0.
+		if ( 0 == $atts['posts_per_page'] ) {
+			return;
+		}
 
 		// fix bug with title argument being added to WP_Query() in 4.4
 		$display_keys = array(
