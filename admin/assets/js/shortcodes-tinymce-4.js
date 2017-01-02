@@ -177,25 +177,29 @@
 							{
 								text: "Masonry - Box",
 								onclick: function(){
-									editor.insertContent('[wc_posts pids="" order="DESC" orderby="date" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_title="1" show_meta_all="1" show_meta_author="1" show_meta_date="1" show_meta_comments="1" show_thumbnail="1" show_content="1" show_paging="1" size="large" filtering="1" columns="3" gutter_space="20" heading_type="h2" layout="masonry" template="box" excerpt_length="30" date_format="M j, Y"][/wc_posts]');
+									var shortcode = '[wc_posts pids="" order="DESC" orderby="date" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_title="1" show_meta_all="1" show_meta_author="1" show_meta_date="1" show_meta_comments="1" show_thumbnail="1" show_content="1" show_paging="1" size="large" filtering="1" columns="3" gutter_space="20" heading_type="h2" layout="masonry" template="box" excerpt_length="30" date_format="M j, Y"][/wc_posts]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
 								text: "Masonry - Borderless",
 								onclick: function(){
-									editor.insertContent('[wc_posts pids="" order="DESC" orderby="date" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_title="1" show_meta_all="1" show_meta_author="1" show_meta_date="1" show_meta_comments="1" show_thumbnail="1" show_content="1" show_paging="1" size="large" filtering="1" columns="3" gutter_space="40" heading_type="h2" layout="masonry" template="borderless" excerpt_length="30" date_format="M j, Y"][/wc_posts]');
+									var shortcode = '[wc_posts pids="" order="DESC" orderby="date" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_title="1" show_meta_all="1" show_meta_author="1" show_meta_date="1" show_meta_comments="1" show_thumbnail="1" show_content="1" show_paging="1" size="large" filtering="1" columns="3" gutter_space="40" heading_type="h2" layout="masonry" template="borderless" excerpt_length="30" date_format="M j, Y"][/wc_posts]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
 								text: "Grid - Box",
 								onclick: function(){
-									editor.insertContent('[wc_posts pids="" order="DESC" orderby="date" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_title="1" show_meta_all="1" show_meta_author="1" show_meta_date="1" show_meta_comments="1" show_thumbnail="1" show_content="1" show_paging="1" size="wccarousel" filtering="1" columns="3" gutter_space="20" heading_type="h2" layout="grid" template="box" excerpt_length="15" date_format="M j, Y"][/wc_posts]');
+									var shortcode = '[wc_posts pids="" order="DESC" orderby="date" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_title="1" show_meta_all="1" show_meta_author="1" show_meta_date="1" show_meta_comments="1" show_thumbnail="1" show_content="1" show_paging="1" size="wccarousel" filtering="1" columns="3" gutter_space="20" heading_type="h2" layout="grid" template="box" excerpt_length="15" date_format="M j, Y"][/wc_posts]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
 								text: "Grid - Borderless",
 								onclick: function(){
-									editor.insertContent('[wc_posts pids="" order="DESC" orderby="date" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_title="1" show_meta_all="1" show_meta_author="1" show_meta_date="1" show_meta_comments="1" show_thumbnail="1" show_content="1" show_paging="1" size="wccarousel" filtering="1" columns="3" gutter_space="40" heading_type="h2" layout="grid" template="borderless" excerpt_length="15" date_format="M j, Y"][/wc_posts]');
+									var shortcode = '[wc_posts pids="" order="DESC" orderby="date" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_title="1" show_meta_all="1" show_meta_author="1" show_meta_date="1" show_meta_comments="1" show_thumbnail="1" show_content="1" show_paging="1" size="wccarousel" filtering="1" columns="3" gutter_space="40" heading_type="h2" layout="grid" template="borderless" excerpt_length="15" date_format="M j, Y"][/wc_posts]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
