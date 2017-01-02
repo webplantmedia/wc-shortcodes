@@ -88,6 +88,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 == Changelog ==
 
+= Version 3.3 =
+
+* updated posts shortcode to include visual manager for attributes
+
 = Version 3.2 =
 
 * updated old image path to new image path
