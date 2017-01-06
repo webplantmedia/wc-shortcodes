@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 3.5
+
+* Fixed bug with "no" attribute value not being read correctly.
+
 ### Version 3.4
 
 * Fixed bug with posts menu option not triggering visual manager
