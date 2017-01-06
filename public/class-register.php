@@ -880,7 +880,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		
 		// load scripts
 		wp_enqueue_script('wc-shortcodes-googlemap');
-		wp_enqueue_script('wc-shortcodes-googlemap-api');
 		
 		$class = array();
 		$class[] = 'googlemap';
