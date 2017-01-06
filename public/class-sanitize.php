@@ -145,7 +145,7 @@ class WPC_Shortcodes_Sanitize {
 		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging', 'show_title', 'show_meta_all', 'show_meta_author', 'show_meta_date', 'show_meta_comments', 'show_thumbnail', 'show_content', 'show_paging', 'filtering' );
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {
-				if ( "no" == $key ) {
+				if ( "no" == $atts[ $key ] ) {
 					$atts[ $key ] = 0;
 				}
 				else {
@@ -228,7 +228,7 @@ class WPC_Shortcodes_Sanitize {
 		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto', 'nopaging' );
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {
-				if ( "no" == $key ) {
+				if ( "no" == $atts[ $key ] ) {
 					$atts[ $key ] = 0;
 				}
 				else {
