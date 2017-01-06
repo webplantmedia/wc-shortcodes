@@ -95,7 +95,8 @@ class WPC_Shortcodes_Public extends WPC_Shortcodes_Vars {
 		wp_register_script( 'wc-shortcodes-prettify', WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/prettify.js', array ( ), $ver, true );
 		wp_register_script( 'wc-shortcodes-pre', WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/pre.js', array ( 'jquery' ), $ver, true );
 
-		if ( $api_key = get_option( WC_SHORTCODES_PREFIX . 'google_maps_api_key', true ) ) {
+		if ( $api_key = get_option( WC_SHORTCODES_PREFIX . 'google_maps_api_key' ) ) {
+			parent::$google_map_api_key = $api_key;
 			wp_register_script( 'wc-shortcodes-googlemap-api', 'https://maps.googleapis.com/maps/api/js?key=' . urlencode( $api_key ), array('jquery'), $ver, true);
 			wp_register_script( 'wc-shortcodes-googlemap',  WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/googlemap.js', array('jquery', 'wc-shortcodes-googlemap-api'), $ver, true);
 		}

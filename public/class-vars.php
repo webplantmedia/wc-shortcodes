@@ -32,6 +32,7 @@ class WPC_Shortcodes_Vars {
 	protected static $social_icons;
 	protected static $share_buttons;
 	protected static $theme_support;
+	protected static $google_map_api_key;
 	public static $attr;
 
 	public static function init_vars() {

@@ -864,6 +864,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		static $instance = 0;
 		$instance++;
 		
+		if ( empty( parent::$google_map_api_key ) ) {
+			return '<div class="wc-shortcodes-googlemap-api-key-needed"><p>Google requires an <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">API key</a> to embed Google Maps. Enter your key in your <a href="' . admin_url( 'themes.php?page=' . parent::$plugin_slug ) . '" target="_blank">Shortcodes option</a> page under the "Maps" tab.</p></div>';
+		}
+
 		extract(shortcode_atts(array(
 			'title'		=> '', // content inside the info window
 			'title_on_load' => 'no', // should the info window display on map load
