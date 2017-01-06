@@ -66,8 +66,9 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
-### Version 3.6
+### Version 3.7
 
+* Inserted message to encouarge google map users to enter API key.
 * Fixed bug with JS error being produced when Google API Key was not inserted.
 
 ### Version 3.5
