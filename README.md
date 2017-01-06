@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 3.6
+
+* Fixed bug with JS error being produced when Google API Key was not inserted.
+
 ### Version 3.5
 
 * Fixed bug with "no" attribute value not being read correctly.
