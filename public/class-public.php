@@ -46,6 +46,10 @@ class WPC_Shortcodes_Public extends WPC_Shortcodes_Vars {
 			$supports = get_theme_support( 'wpc-shortcodes' );
 
 			if ( isset( $supports[0] ) && is_array( $supports[0] ) ) {
+				// If theme support options are set, assume theme_reset is true, unless user-defined.
+				if ( ! isset( $supports[0]['theme_reset'] ) ) {
+					parent::$theme_support['theme_reset'] = true;
+				}
 				foreach ( $supports[0] as $key => $value ) {
 					parent::$theme_support[ $key ] = $value;
 				}
