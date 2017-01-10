@@ -66,6 +66,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 3.8
+
+* If theme support options are set, assume theme_reset is true, unless user-defined.
+
 ### Version 3.7
 
 * Inserted message to encouarge google map users to enter API key.
