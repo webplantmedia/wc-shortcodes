@@ -37,6 +37,8 @@ if ( WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED ) {
 
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-ajax-front.php' );
 
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-widget-options.php' );
+
 foreach ( glob( plugin_dir_path( __FILE__ ) . 'public/widgets/widget-*.php' ) as $filename ) {
     require_once( $filename );
 }

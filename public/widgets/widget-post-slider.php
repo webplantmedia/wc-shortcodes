@@ -46,15 +46,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 		$o = array_merge( WPC_Shortcodes_Vars::$attr->post_slider, $instance );
 		$o = WPC_Shortcodes_Sanitize::post_slider_attr( $o );
 		
-		$args = array(
-		   'public' => true,
-		);
-		$post_types = get_post_types( $args );
-		$slide_post_type = 'wcs_slide';
-		if ( post_type_exists( $slide_post_type ) ) {
-			$post_types[ $slide_post_type ] = $slide_post_type;
-		}
-		unset( $post_types['attachment'] );
+		$post_types = WPC_Shortcodes_Widget_Options::post_types('wcs_slide');
 		?>
 
 		<div id="wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>" class="wc-shortcodes-post-slider-widget wc-shortcodes-visual-manager wpc-ui-theme-override">
@@ -68,13 +60,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('order'); ?>"><?php _e('Order:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('order'); ?>" name="<?php echo $this->get_field_name('order'); ?>">
-						<?php
-						$options = array(
-							'DESC' => 'DESC',
-							'ASC' => 'ASC',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::order_fields() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['order'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
@@ -82,24 +68,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('orderby'); ?>"><?php _e('Order By:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('orderby'); ?>" name="<?php echo $this->get_field_name('orderby'); ?>">
-						<?php
-						$options = array(
-							'none' => 'No Order',
-							'ID' => 'Post ID',
-							'author' => 'Author',
-							'title' => 'Title',
-							'name' => 'Post Name',
-							'type' => 'Post Type',
-							'date' => 'Date',
-							'modified' => 'Last Modified Date',
-							'parent' => 'Post/Page Parent ID',
-							'rand' => 'Random',
-							'comment_count' => 'Number of Comments',
-							'menu_order' => 'Menu Order',
-							'post__in' => 'Preserve Post ID Order',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::order_by_fields() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['orderby'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
@@ -166,15 +135,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('size'); ?>"><?php _e('Image Size:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('size'); ?>" name="<?php echo $this->get_field_name('size'); ?>">
-						<?php
-						$sizes = apply_filters( 'image_size_names_choose', array(
-							'thumbnail' => __('Thumbnail'),
-							'medium'    => __('Medium'),
-							'large'     => __('Large'),
-							'full'      => __('Full Size'),
-						));
-						?>
-						<?php foreach ( $sizes as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::image_sizes() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['size'], $key ); ?>><?php echo $value; ?></option>
 						<?php endforeach; ?>
 					</select>
@@ -182,17 +143,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('heading_type'); ?>"><?php _e('Heading Type:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('heading_type'); ?>" name="<?php echo $this->get_field_name('heading_type'); ?>">
-						<?php
-						$options = array(
-							'h1' => 'H1',
-							'h2' => 'H2',
-							'h3' => 'H3',
-							'h4' => 'H4',
-							'h5' => 'H5',
-							'h6' => 'H6',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::heading_tags() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['heading_type'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
@@ -203,13 +154,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('template'); ?>"><?php _e('Template:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
-						<?php
-						$options = array(
-							'slider1' => 'Slider 1',
-							'slider2' => 'Slider 2',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::post_slider_templates() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['template'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
@@ -244,14 +189,7 @@ class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('slider_mode'); ?>"><?php _e('Slider Mode:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('slider_mode'); ?>" name="<?php echo $this->get_field_name('slider_mode'); ?>">
-						<?php
-						$options = array(
-							'fade' => 'Fade',
-							'horizontal' => 'Horizontal',
-							'vertical' => 'Vertical',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::post_slider_modes() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['slider_mode'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>

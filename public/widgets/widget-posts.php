@@ -47,11 +47,7 @@ class WC_Shortcodes_Posts_Widget extends WP_Widget {
 		$o = array_merge( WPC_Shortcodes_Vars::$attr->posts, $instance );
 		$o = WPC_Shortcodes_Sanitize::posts_attr( $o );
 		
-		$args = array(
-		   'public' => true,
-		);
-		$post_types = get_post_types( $args );
-		unset( $post_types['attachment'] );
+		$post_types = WPC_Shortcodes_Widget_Options::post_types();
 		?>
 
 		<div id="wc-shortcodes-posts-widget-<?php echo $this->number; ?>" class="wc-shortcodes-posts-widget wc-shortcodes-visual-manager wpc-ui-theme-override">
@@ -65,13 +61,7 @@ class WC_Shortcodes_Posts_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('order'); ?>"><?php _e('Order:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('order'); ?>" name="<?php echo $this->get_field_name('order'); ?>">
-						<?php
-						$options = array(
-							'DESC' => 'DESC',
-							'ASC' => 'ASC',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::order_fields() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['order'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
@@ -79,24 +69,7 @@ class WC_Shortcodes_Posts_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('orderby'); ?>"><?php _e('Order By:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('orderby'); ?>" name="<?php echo $this->get_field_name('orderby'); ?>">
-						<?php
-						$options = array(
-							'none' => 'No Order',
-							'ID' => 'Post ID',
-							'author' => 'Author',
-							'title' => 'Title',
-							'name' => 'Post Name',
-							'type' => 'Post Type',
-							'date' => 'Date',
-							'modified' => 'Last Modified Date',
-							'parent' => 'Post/Page Parent ID',
-							'rand' => 'Random',
-							'comment_count' => 'Number of Comments',
-							'menu_order' => 'Menu Order',
-							'post__in' => 'Preserve Post ID Order',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::order_by_fields() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['orderby'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
@@ -175,15 +148,7 @@ class WC_Shortcodes_Posts_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('size'); ?>"><?php _e('Image Size:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('size'); ?>" name="<?php echo $this->get_field_name('size'); ?>">
-						<?php
-						$sizes = apply_filters( 'image_size_names_choose', array(
-							'thumbnail' => __('Thumbnail'),
-							'medium'    => __('Medium'),
-							'large'     => __('Large'),
-							'full'      => __('Full Size'),
-						));
-						?>
-						<?php foreach ( $sizes as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::image_sizes() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['size'], $key ); ?>><?php echo $value; ?></option>
 						<?php endforeach; ?>
 					</select>
@@ -198,20 +163,7 @@ class WC_Shortcodes_Posts_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('columns'); ?>"><?php _e('Columns:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('columns'); ?>" name="<?php echo $this->get_field_name('columns'); ?>">
-						<?php
-						$options = array(
-							'1' => '1',
-							'2' => '2',
-							'3' => '3',
-							'4' => '4',
-							'5' => '5',
-							'6' => '6',
-							'7' => '7',
-							'8' => '8',
-							'9' => '9',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::posts_columns() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['columns'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
@@ -224,17 +176,7 @@ class WC_Shortcodes_Posts_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('heading_type'); ?>"><?php _e('Heading Type:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('heading_type'); ?>" name="<?php echo $this->get_field_name('heading_type'); ?>">
-						<?php
-						$options = array(
-							'h1' => 'H1',
-							'h2' => 'H2',
-							'h3' => 'H3',
-							'h4' => 'H4',
-							'h5' => 'H5',
-							'h6' => 'H6',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::heading_tags() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['heading_type'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
@@ -242,13 +184,7 @@ class WC_Shortcodes_Posts_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('layout'); ?>"><?php _e('Layout:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('layout'); ?>" name="<?php echo $this->get_field_name('layout'); ?>">
-						<?php
-						$options = array(
-							'masonry' => 'Masonry',
-							'grid' => 'Grid',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::posts_layouts() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['layout'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
@@ -256,13 +192,7 @@ class WC_Shortcodes_Posts_Widget extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('template'); ?>"><?php _e('Template:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
-						<?php
-						$options = array(
-							'box' => 'Box',
-							'borderless' => 'Borderless',
-						);
-						?>
-						<?php foreach ( $options as $key => $value ) : ?>
+						<?php foreach ( WPC_Shortcodes_Widget_Options::posts_templates() as $key => $value ) : ?>
 							<option value="<?php echo $key; ?>"<?php selected( $o['template'], $key ); ?>><?php echo $value; ?></option>';
 						<?php endforeach; ?>
 					</select>
