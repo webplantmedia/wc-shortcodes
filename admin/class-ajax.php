@@ -132,11 +132,11 @@ class WPC_Shortcodes_Ajax {
 		
 		switch ( $tag ) {
 			case 'wc_post_slider' :
-				$widget = new WC_Shortcodes_Post_Slider_Widget();
+				$widget = new WC_Shortcodes_Widget_Post_Slider();
 				$widget->form( $attr );
 				break;
 			case 'wc_posts' :
-				$widget = new WC_Shortcodes_Posts_Widget();
+				$widget = new WC_Shortcodes_Widget_Posts();
 				$widget->form( $attr );
 				break;
 		}

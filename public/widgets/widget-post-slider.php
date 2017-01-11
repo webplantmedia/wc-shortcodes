@@ -5,7 +5,7 @@
  * @uses WP
  * @uses _Widget
  */
-class WC_Shortcodes_Post_Slider_Widget extends WP_Widget {
+class WC_Shortcodes_Widget_Post_Slider extends WP_Widget {
 	function __construct() {
 
 		$widget_ops = array( 'description' => __('Add a post slider to your widget area.') );

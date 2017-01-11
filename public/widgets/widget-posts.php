@@ -5,7 +5,7 @@
  * @uses WP
  * @uses _Widget
  */
-class WC_Shortcodes_Posts_Widget extends WP_Widget {
+class WC_Shortcodes_Widget_Posts extends WP_Widget {
 	function __construct() {
 
 		$widget_ops = array( 'description' => __('Add your posts to your widget area.') );
