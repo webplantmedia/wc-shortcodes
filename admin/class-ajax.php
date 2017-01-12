@@ -131,6 +131,18 @@ class WPC_Shortcodes_Ajax {
 		$attr = $this->parse_shortcode( $tag, $shortcode );
 		
 		switch ( $tag ) {
+			case 'wc_accordion' :
+				$widget = new WC_Shortcodes_Widget_Accordion_Main();
+				$widget->form( $attr );
+				break;
+			case 'wc_accordion_section' :
+				$widget = new WC_Shortcodes_Widget_Accordion_Section();
+				$widget->form( $attr );
+				break;
+			case 'wc_spacing' :
+				$widget = new WC_Shortcodes_Widget_Spacing();
+				$widget->form( $attr );
+				break;
 			case 'wc_post_slider' :
 				$widget = new WC_Shortcodes_Widget_Post_Slider();
 				$widget->form( $attr );
@@ -145,18 +157,23 @@ class WPC_Shortcodes_Ajax {
 	}
 
 	private function parse_shortcode( $check_tag, $content ) {
-		global $shortcode_tags;
+		// Some shortcodes are not commonly registered. Need to be able to parse them.
+		// global $shortcode_tags;
 
 		if ( false === strpos( $content, '[' ) ) {
 			return false;
 		}
 
+		/*
 		if (empty($shortcode_tags) || !is_array($shortcode_tags))
 			return false;
 
 		// Find all registered tag names in $content.
 		preg_match_all( '@\[([^<>&/\[\]\x00-\x20=]++)@', $content, $matches );
 		$tagnames = array_intersect( array_keys( $shortcode_tags ), $matches[1] );
+		 */
+
+		$tagnames = array( $check_tag );
 
 		if ( empty( $tagnames ) ) {
 			return false;

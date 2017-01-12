@@ -376,7 +376,8 @@
 							{
 								text: "Spacing",
 								onclick: function(){
-									editor.insertContent('[wc_spacing size="40px"]');
+									var shortcode = '[wc_spacing size="40px" class=""][/wc_spacing]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{

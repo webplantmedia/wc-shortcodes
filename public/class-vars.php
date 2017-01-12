@@ -130,6 +130,20 @@ class WPC_Shortcodes_Vars {
 
 		// Shortcode Options
 		self::$attr = (object) array();
+		self::$attr->spacing = array(
+			'size'	=> '20px',
+			'class'	=> '',
+		);
+		self::$attr->accordion_main = array(
+			'class'	=> '',
+			'collapse' => 0,
+			'leaveopen' => 0,
+			'layout' => 'box',
+		);
+		self::$attr->accordion_section = array(
+			'title'	=> 'Title',
+			'class'	=> '',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

@@ -109,4 +109,11 @@ class WPC_Shortcodes_Widget_Options {
 
 		return $post_types;
 	}
+
+	public static function accordion_main_layouts() {
+		return array(
+			'box' => 'Box',
+			'none' => 'None',
+		);
+	}
 }

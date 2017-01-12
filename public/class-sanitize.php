@@ -14,6 +14,18 @@ class WPC_Shortcodes_Sanitize {
 		return (bool) $value;
 	}
 
+	public static function int_bool( $value ) {
+		if ( "no" == $value ) {
+			$value = 0;
+		}
+		else {
+			$value = (bool) $value;
+			$value = $value ? 1 : 0;
+		}
+
+		return $value;
+	}
+
 	public static function text_field( $value ) {
 		return trim( sanitize_text_field( $value ) );
 	}
@@ -105,6 +117,7 @@ class WPC_Shortcodes_Sanitize {
 
 		return $default;
 	}
+
 	public static function comma_delim_to_array( $string ) {
 		$a = explode( ',', $string );
 		$t = array();
@@ -124,6 +137,77 @@ class WPC_Shortcodes_Sanitize {
 		}
 	}
 
+	public static function accordion_main_layout( $value, $default = 'box' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::accordion_main_layouts();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function accordion_section_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'title' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function accordion_main_attr( $atts, $empty_checkbox_is_false = false ) {
+		// sanitize bools
+		$bools = array( 'collapse', 'leaveopen' );
+
+		if ( $empty_checkbox_is_false ) {
+			foreach ( $bools as $key ) {
+				if ( ! isset( $atts[ $key ] ) ) {
+					$atts[ $key ] = 0;
+				}
+			}
+		}
+
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'collapse' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'leaveopen' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'layout' :
+					$atts[ $key ] = self::accordion_main_layout( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function spacing_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'size' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function posts_attr_key_change( $atts ) {
 		// Rename keys in shortcode options.
 		$renamed = array( 'title', 'meta_all', 'meta_author', 'meta_date', 'meta_comments', 'thumbnail', 'content', 'paging' );
@@ -140,9 +224,18 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
-	public static function posts_attr( $atts, $empty_is_false = false ) {
+	public static function posts_attr( $atts, $empty_checkbox_is_false = false ) {
 		// sanitize bools
 		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging', 'show_title', 'show_meta_all', 'show_meta_author', 'show_meta_date', 'show_meta_comments', 'show_thumbnail', 'show_content', 'show_paging', 'filtering' );
+
+		if ( $empty_checkbox_is_false ) {
+			foreach ( $bools as $key ) {
+				if ( ! isset( $atts[ $key ] ) ) {
+					$atts[ $key ] = 0;
+				}
+			}
+		}
+
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {
 				if ( "no" == $atts[ $key ] ) {
@@ -152,9 +245,6 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = (bool) $atts[ $key ];
 					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
 				}
-			}
-			else if ( $empty_is_false ) {
-				$atts[ $key ] = 0;
 			}
 		}
 
@@ -223,9 +313,18 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
-	public static function post_slider_attr( $atts, $empty_is_false = false ) {
+	public static function post_slider_attr( $atts, $empty_checkbox_is_false = false ) {
 		// sanitize bools
 		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto', 'nopaging' );
+
+		if ( $empty_checkbox_is_false ) {
+			foreach ( $bools as $key ) {
+				if ( ! isset( $atts[ $key ] ) ) {
+					$atts[ $key ] = 0;
+				}
+			}
+		}
+
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {
 				if ( "no" == $atts[ $key ] ) {
@@ -235,9 +334,6 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = (bool) $atts[ $key ];
 					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
 				}
-			}
-			else if ( $empty_is_false ) {
-				$atts[ $key ] = 0;
 			}
 		}
 

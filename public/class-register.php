@@ -272,15 +272,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 * @since v1.0
 	 */
 	public function spacing( $atts ) {
-		extract( shortcode_atts( array(
-			'size'	=> '20px',
-			'class'	=> '',
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->spacing, $atts );
+		$atts = WPC_Shortcodes_Sanitize::spacing_attr( $atts );
 
-		// sanitize
-		$size = WPC_Shortcodes_Sanitize::css_unit( $size );
-
-		return '<hr class="wc-shortcodes-spacing '. esc_attr( $class ) .'" style="height: '. esc_attr( $size ) .'" />';
+		return '<hr class="wc-shortcodes-spacing '. esc_attr( $atts['class'] ) .'" style="height: '. esc_attr( $atts['size'] ) .'" />';
 	}
 
 
@@ -625,15 +620,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	// Main
 	public function accordion_main( $atts, $content = null  ) {
 		
-		extract( shortcode_atts( array(
-			'class'	=> '',
-			'collapse' => 0,
-			'leaveopen' => 0,
-			'layout' => 'box',
-		), $atts ) );
-
-		$collapse = WPC_Shortcodes_Sanitize::bool( $collapse );
-		$leaveopen = WPC_Shortcodes_Sanitize::bool( $leaveopen );
+		$atts = shortcode_atts( parent::$attr->accordion_main, $atts );
+		$atts = WPC_Shortcodes_Sanitize::accordion_main_attr( $atts );
 
 		$classes = array();
 
@@ -641,12 +629,12 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$classes[] = 'wc-shortcodes-item';
 
 		$behavior = 'autoclose';
-		if ( $leaveopen ) {
+		if ( $atts['leaveopen'] ) {
 			$behavior = 'leaveopen';
 		}
 
 		$state = 'default';
-		if ( $collapse ) {
+		if ( $atts['collapse'] ) {
 			$classes[] = 'wc-shortcodes-accordion-collapse';
 			$state = 'collapse';
 		}
@@ -654,11 +642,11 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			$classes[] = 'wc-shortcodes-accordion-default';
 		}
 
-		if ( ! empty( $class ) )
+		if ( ! empty( $atts['class'] ) )
 			$classes[] = $class;
 
-		if ( ! empty( $layout ) )
-			$classes[] = 'wc-shortcodes-accordion-layout-' . $layout;
+		if ( ! empty( $atts['layout'] ) )
+			$classes[] = 'wc-shortcodes-accordion-layout-' . $atts['layout'];
 
 		$class = implode( ' ', $classes );
 
@@ -672,12 +660,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 	// Section
 	public function accordion_section( $atts, $content = null  ) {
-		extract( shortcode_atts( array(
-			'title'	=> 'Title',
-			'class'	=> '',
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->accordion_section, $atts );
+		$atts = WPC_Shortcodes_Sanitize::accordion_section_attr( $atts );
 
-		return '<div class="wc-shortcodes-accordion-trigger '. esc_attr( $class ) .'"><a href="#">'. esc_html( $title ) .'</a></div><div class="wc-shortcodes-accordion-content wc-shortcodes-content">' . do_shortcode($content) . '</div>';
+		return '<div class="wc-shortcodes-accordion-trigger '. esc_attr( $atts['class'] ) .'"><a href="#">'. esc_html( $atts['title'] ) .'</a></div><div class="wc-shortcodes-accordion-content wc-shortcodes-content">' . do_shortcode($content) . '</div>';
 	}
 		
 

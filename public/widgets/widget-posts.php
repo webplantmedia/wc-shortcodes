@@ -156,6 +156,7 @@ class WC_Shortcodes_Widget_Posts extends WP_Widget {
 				<p>
 					<input type="checkbox" class="wc-shortcodes-widget-option checkbox" id="<?php echo $this->get_field_id('filtering'); ?>" name="<?php echo $this->get_field_name('filtering'); ?>" value="1" <?php checked( $o['filtering'], 1 ); ?> />
 					<label for="<?php echo $this->get_field_id('filtering'); ?>"><?php _e('Enable Post Filtering') ?></label>
+					<span class="wcs-description">You need to have a Taxonomy set for the filtering to show. Look under "Select Posts" to set your Taxonomy.</span>
 				</p>
 			</div>
 			<h3>Style</h3>
