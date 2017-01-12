@@ -75,32 +75,35 @@
 			return '';
 		}
 
-		a = shortcode.split('][');
-		aa = a[0].split(' ');
-
-		if ( aa.length ) {
-			tag = aa[0];
-			tag = tag.substring(1);
-
-			var size = a.length-1;
-			if ( size > 0 ) {
-				last = a[size];
-				last = last.substring(1).slice(0, -1);
-				last = last.replace(/^\//, ''); // Remove starting slash in case of splitting by newline.
-
-				if ( tag == last )
-					return tag;
-			}
-			else if ( size == 0 ) {
-
-				if( a[0].indexOf("\n") == -1 ) {
-					var last_char = a[0].substr(a[0].length-1);
-					if ( ']' == last_char ) {
-						return tag;
-					}
-				}
+		var regexp = /^\[([A-Za-z0-9\_]+)/g;
+		var match = regexp.exec(shortcode);
+		if ( match !== null ) {
+			if ( match.length > 1 ) {
+				tag = match[1];
 			}
 		}
+
+		regexp = /\[\/([A-Za-z0-9\_]+)\]$/g;
+		match = regexp.exec(shortcode);
+		if ( match !== null ) {
+			if ( match.length > 1 ) {
+				last = match[1];
+			}
+		}
+
+		if ( tag == last )
+			return tag;
+
+		regexp = /(\]$)/g;
+		match = regexp.exec(shortcode);
+		if ( match !== null ) {
+			if ( match.length > 1 ) {
+				last = match[1];
+			}
+		}
+
+		if ( tag.length && ']' == last )
+			return tag;
 
 		return '';
 	}
