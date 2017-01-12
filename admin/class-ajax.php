@@ -139,6 +139,14 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WC_Shortcodes_Widget_Accordion_Section();
 				$widget->form( $attr );
 				break;
+			case 'wc_tabgroup' :
+				$widget = new WC_Shortcodes_Widget_Tabgroup();
+				$widget->form( $attr );
+				break;
+			case 'wc_tab' :
+				$widget = new WC_Shortcodes_Widget_Tab();
+				$widget->form( $attr );
+				break;
 			case 'wc_spacing' :
 				$widget = new WC_Shortcodes_Widget_Spacing();
 				$widget->form( $attr );

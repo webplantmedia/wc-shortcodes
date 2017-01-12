@@ -144,6 +144,13 @@ class WPC_Shortcodes_Vars {
 			'title'	=> 'Title',
 			'class'	=> '',
 		);
+		self::$attr->tabgroup = array(
+			'class'	=> '',
+			'layout' => 'box',
+		);
+		self::$attr->tab = array(
+			'title'	=> 'Tab',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

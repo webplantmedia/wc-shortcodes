@@ -681,22 +681,19 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		wp_enqueue_script('wc-shortcodes-tabs');
 		
 		// Display Tabs
-		$defaults = array(
-			'class'	=> '',
-			'layout' => 'box',
-		);
-		extract( shortcode_atts( $defaults, $atts ) );
+		$atts = shortcode_atts( parent::$attr->tabgroup, $atts );
+		$atts = WPC_Shortcodes_Sanitize::tabgroup_attr( $atts );
 
 		$classes = array();
 
 		$classes[] = 'wc-shortcodes-tabs';
 		$classes[] = 'wc-shortcodes-item';
 
-		if ( ! empty( $class ) )
-			$classes[] = $class;
+		if ( ! empty( $atts['class'] ) )
+			$classes[] = $atts['class'];
 
-		if ( ! empty( $layout ) )
-			$classes[] = 'wc-shortcodes-tabs-layout-' . $layout;
+		if ( ! empty( $atts['layout'] ) )
+			$classes[] = 'wc-shortcodes-tabs-layout-' . $atts['layout'];
 
 		$class = implode( ' ', $classes );
 
@@ -721,10 +718,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	}
 
 	public function tab( $atts, $content = null ) {
-		$defaults = array(
-			'title'	=> 'Tab',
-		);
-		extract( shortcode_atts( $defaults, $atts ) );
+		$atts = shortcode_atts( parent::$attr->tab, $atts );
+		$atts = WPC_Shortcodes_Sanitize::tab_attr( $atts );
 
 		$classes = array();
 
@@ -733,7 +728,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		$class = implode( ' ', $classes );
 
-		return '<div id="wc-shortcodes-tab-'. sanitize_title( $title ) .'" class="'. esc_attr( $class ) .'">'. do_shortcode( $content ) .'</div>';
+		return '<div id="wc-shortcodes-tab-'. sanitize_title( $atts['title'] ) .'" class="'. esc_attr( $class ) .'">'. do_shortcode( $content ) .'</div>';
 	}
 
 

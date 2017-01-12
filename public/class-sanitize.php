@@ -193,6 +193,33 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
+	public static function tabgroup_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'class' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'layout' :
+					$atts[ $key ] = self::accordion_main_layout( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function tab_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'title' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function spacing_attr( $atts ) {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {

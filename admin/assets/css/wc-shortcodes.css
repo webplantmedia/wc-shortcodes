@@ -31,3 +31,8 @@
 	margin: 2px 0 5px;
 	color: #aaa;
 }
+.wc-shortcodes-visual-manager .wcs-instruction {
+	padding: 10px;
+	border: 2px solid #46b450;
+	background-color: white;
+}

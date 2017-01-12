@@ -353,13 +353,29 @@
 							{
 								text: "Accordion",
 								onclick: function(){
-									editor.insertContent('[wc_accordion collapse="0" leaveopen="0" layout="box"]<p>[wc_accordion_section title="Section 1"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section]</p><p>[wc_accordion_section title="Section 2"]</p>' + wcDummyParagraphContent + '<p>[/wc_accordion_section]</p>[/wc_accordion]');
+									var shortcode = '[wc_accordion collapse="0" leaveopen="0" layout="box"]<p>[wc_accordion_section title="Section 1"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section]</p><p>[wc_accordion_section title="Section 2"]</p>' + wcDummyParagraphContent + '<p>[/wc_accordion_section]</p>[/wc_accordion]';
+									wcShortcodes( shortcode, editor );
+								}
+							},
+							{
+								text: "Accordion Section",
+								onclick: function(){
+									var shortcode = '[wc_accordion_section title="New Accordion Section"]<p>' + wcParagraphContent + '</p>[/wc_accordion_section]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
 								text: "Tabs",
 								onclick: function(){
-									editor.insertContent('[wc_tabgroup layout="box"]<p>[wc_tab title="First Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab]</p><p>[wc_tab title="Second Tab"]</p>'+wcDummyParagraphContent+'<p>[/wc_tab]</p>[/wc_tabgroup]');
+									var shortcode = '[wc_tabgroup layout="box" class=""]<p>[wc_tab title="First Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab]</p><p>[wc_tab title="Second Tab"]</p>'+wcDummyParagraphContent+'<p>[/wc_tab]</p>[/wc_tabgroup]';
+									wcShortcodes( shortcode, editor );
+								}
+							},
+							{
+								text: "Tab Section",
+								onclick: function(){
+									var shortcode = '[wc_tab title="New Tab Section"]<p>'+wcParagraphContent+'</p>[/wc_tab]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
