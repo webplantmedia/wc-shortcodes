@@ -1,42 +1,9 @@
 <?php
 /**
- * WC_Shortcodes_Posts_Widget
- *
  * @uses WP
  * @uses _Widget
  */
-class WC_Shortcodes_Widget_Posts extends WP_Widget {
-	function __construct() {
-
-		$widget_ops = array( 'description' => __('Add your posts to your widget area.') );
-		parent::__construct( 'wc_shortcodes_posts', __('Posts'), $widget_ops );
-	}
-
-	function widget($args, $instance) {
-		$shortcode = array();
-		foreach ( $instance as $key => $value ) {
-			$shortcode[] = $key . '="' . $value . '"';
-		}
-
-		if ( ! empty( $shortcode ) ) {
-			$shortcode = implode( " ", $shortcode );
-			$shortcode = '[wc_posts ' . $shortcode . '][/wc_posts]';
-		}
-		else {
-			$shortcode = '[wc_posts][/wc_posts]';
-		}
-
-		echo $args['before_widget'];
-		echo do_shortcode( $shortcode );
-		echo $args['after_widget'];
-	}
-
-	function update( $new_instance, $old_instance ) {
-		$instance = WPC_Shortcodes_Sanitize::posts_attr( $new_instance, $empty_is_false = true );
-
-		return $instance;
-	}
-
+class WPC_Shortcodes_Widget_Posts extends WPC_Shortcodes_Widget_Base {
 	function form( $instance ) {
 		// array_merge needs both values to be array.
 		if ( ! is_array( $instance ) ) {

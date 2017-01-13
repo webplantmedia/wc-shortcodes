@@ -530,26 +530,22 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 *
 	 */
 	public function column( $atts, $content = null ){
-		extract( shortcode_atts( array(
-			'size'		=> 'one-third',
-			'position'	=>'',
-			'class'		=> '',
-			'text_align'=> '',
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->column, $atts );
+		$atts = WPC_Shortcodes_Sanitize::column_attr( $atts );
 
 		$style = '';
-		if ( $text_align ) {
-			if ( 'left' == $text_align )
-				$style = ' style="text-align: '.esc_attr( $text_align ).';"';
-			if ( 'center' == $text_align )
-				$style = ' style="text-align: '.esc_attr( $text_align ).';"';
-			if ( 'right' == $text_align )
-				$style = ' style="text-align: '.esc_attr( $text_align ).';"';
+		if ( $atts['text_align'] ) {
+			if ( 'left' == $atts['text_align'] )
+				$style = ' style="text-align: '.esc_attr( $atts['text_align'] ).';"';
+			if ( 'center' == $atts['text_align'] )
+				$style = ' style="text-align: '.esc_attr( $atts['text_align'] ).';"';
+			if ( 'right' == $atts['text_align'] )
+				$style = ' style="text-align: '.esc_attr( $atts['text_align'] ).';"';
 		}
 
-		$append_clearfix = 'last' == $position ? '<div class="wc-shortcodes-clear-floats"></div>' : '';
+		$append_clearfix = 'last' == $atts['position'] ? '<div class="wc-shortcodes-clear-floats"></div>' : '';
 
-		return '<div'.$style.' class="wc-shortcodes-column wc-shortcodes-content wc-shortcodes-' . esc_attr( $size ) . ' wc-shortcodes-column-'.esc_attr( $position ).' '. esc_attr( $class ) .'">' . do_shortcode($content) . '</div>';
+		return '<div'.$style.' class="wc-shortcodes-column wc-shortcodes-content wc-shortcodes-' . esc_attr( $atts['size'] ) . ' wc-shortcodes-column-'.esc_attr( $atts['position'] ).' '. esc_attr( $atts['class'] ) .'">' . do_shortcode($content) . '</div>';
 	}
 
 
@@ -571,35 +567,28 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 * @since v1.0
 	 */
 	public function toggle( $atts, $content = null ) {
-		extract( shortcode_atts( array(
-			'title'	=> 'Toggle Title',
-			'class'	=> '',
-			'padding'	=> '',
-			'border_width'	=> '',
-			'layout' => 'box',
-		), $atts ) );
-
-		$padding = WPC_Shortcodes_Sanitize::css_unit( $padding );
+		$atts = shortcode_atts( parent::$attr->toggle, $atts );
+		$atts = WPC_Shortcodes_Sanitize::toggle_attr( $atts );
 
 		$classes = array();
 
 		$classes[] = 'wc-shortcodes-toggle';
 		$classes[] = 'wc-shortcodes-item';
 
-		if ( ! empty( $class ) )
-			$classes[] = $class;
+		if ( ! empty( $atts['class'] ) )
+			$classes[] = $atts['class'];
 
-		if ( ! empty( $layout ) )
-			$classes[] = 'wc-shortcodes-toggle-layout-' . $layout;
+		if ( ! empty( $atts['layout'] ) )
+			$classes[] = 'wc-shortcodes-toggle-layout-' . $atts['layout'];
 
 		$class = implode( ' ', $classes );
 
 		$style = array();
 
-		if ( ! empty( $padding ) || '0' === $padding )
-			$style[] = 'padding:'.$padding;
-		if ( ! empty( $border_width ) || '0' === $border_width )
-			$style[] = 'border-width:'.$border_width;
+		if ( ! empty( $atts['padding'] ) || '0' === $atts['padding'] )
+			$style[] = 'padding:'.$atts['padding'];
+		if ( ! empty( $atts['border_width'] ) || '0' === $atts['border_width'] )
+			$style[] = 'border-width:'.$atts['border_width'];
 
 		$style = implode( ';', $style );
 		 
@@ -607,7 +596,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		wp_enqueue_script('wc-shortcodes-toggle');
 		
 		// Display the Toggle
-		return '<div class="'. esc_attr( $class ) .'"><div class="wc-shortcodes-toggle-trigger"><a href="#">'. esc_html( $title ) .'</a></div><div style="'.esc_attr( $style ).'" class="wc-shortcodes-toggle-container wc-shortcodes-content">' . do_shortcode($content) . '</div></div>';
+		return '<div class="'. esc_attr( $class ) .'"><div class="wc-shortcodes-toggle-trigger"><a href="#">'. esc_html( $atts['title'] ) .'</a></div><div style="'.esc_attr( $style ).'" class="wc-shortcodes-toggle-container wc-shortcodes-content">' . do_shortcode($content) . '</div></div>';
 	}
 
 

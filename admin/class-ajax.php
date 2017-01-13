@@ -132,31 +132,43 @@ class WPC_Shortcodes_Ajax {
 		
 		switch ( $tag ) {
 			case 'wc_accordion' :
-				$widget = new WC_Shortcodes_Widget_Accordion_Main();
+				$widget = new WPC_Shortcodes_Widget_Accordion_Main();
 				$widget->form( $attr );
 				break;
 			case 'wc_accordion_section' :
-				$widget = new WC_Shortcodes_Widget_Accordion_Section();
+				$widget = new WPC_Shortcodes_Widget_Accordion_Section();
 				$widget->form( $attr );
 				break;
 			case 'wc_tabgroup' :
-				$widget = new WC_Shortcodes_Widget_Tabgroup();
+				$widget = new WPC_Shortcodes_Widget_Tabgroup();
 				$widget->form( $attr );
 				break;
 			case 'wc_tab' :
-				$widget = new WC_Shortcodes_Widget_Tab();
+				$widget = new WPC_Shortcodes_Widget_Tab();
+				$widget->form( $attr );
+				break;
+			case 'wc_toggle' :
+				$widget = new WPC_Shortcodes_Widget_Toggle();
+				$widget->form( $attr );
+				break;
+			case 'wc_row' :
+				echo 0;
+				die();
+				break;
+			case 'wc_column' :
+				$widget = new WPC_Shortcodes_Widget_Column();
 				$widget->form( $attr );
 				break;
 			case 'wc_spacing' :
-				$widget = new WC_Shortcodes_Widget_Spacing();
+				$widget = new WPC_Shortcodes_Widget_Spacing();
 				$widget->form( $attr );
 				break;
 			case 'wc_post_slider' :
-				$widget = new WC_Shortcodes_Widget_Post_Slider();
+				$widget = new WPC_Shortcodes_Widget_Post_Slider();
 				$widget->form( $attr );
 				break;
 			case 'wc_posts' :
-				$widget = new WC_Shortcodes_Widget_Posts();
+				$widget = new WPC_Shortcodes_Widget_Posts();
 				$widget->form( $attr );
 				break;
 		}

@@ -77,6 +77,10 @@ class WPC_Shortcodes_Sanitize {
 			return $value;
 
 		$value = trim( $value );
+
+		if ( 0 == $value )
+			return $value;
+
 		if ( preg_match( '/(px|em|rem)$/', $value, $match ) ) {
 			$css_unit = $match[1];
 		}
@@ -111,6 +115,33 @@ class WPC_Shortcodes_Sanitize {
 			'strong',
 			'span',
 		);
+
+		if ( in_array( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function column_size( $value, $default = 'one-third' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::column_sizes();
+
+		if ( in_array( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function column_position( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::column_positions();
+
+		if ( in_array( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function text_align( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::text_align_values();
 
 		if ( in_array( $value, $whitelist ) )
 			return $value;
@@ -213,6 +244,52 @@ class WPC_Shortcodes_Sanitize {
 			switch( $key ) {
 				case 'title' :
 					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function toggle_attr( $atts ) {
+
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'title' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'padding' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'border_width' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'layout' :
+					$atts[ $key ] = self::accordion_main_layout( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function column_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'size' :
+					$atts[ $key ] = self::column_size( $value );
+					break;
+				case 'position' :
+					$atts[ $key ] = self::column_position( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'text_align' :
+					$atts[ $key ] = self::text_align( $value );
 					break;
 			}
 		}

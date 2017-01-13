@@ -1,11 +1,9 @@
 <?php
 /**
- * WC_Shortcodes_Posts_Widget
- *
  * @uses WP
  * @uses _Widget
  */
-class WC_Shortcodes_Widget_Accordion_Main extends WP_Widget {
+class WPC_Shortcodes_Widget_Accordion_Main extends WPC_Shortcodes_Widget_Base {
 	function form( $instance ) {
 		// array_merge needs both values to be array.
 		if ( ! is_array( $instance ) ) {

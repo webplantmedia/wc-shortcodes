@@ -151,6 +151,19 @@ class WPC_Shortcodes_Vars {
 		self::$attr->tab = array(
 			'title'	=> 'Tab',
 		);
+		self::$attr->toggle = array(
+			'title'	=> 'Toggle Title',
+			'class'	=> '',
+			'padding'	=> '',
+			'border_width'	=> '',
+			'layout' => 'box',
+		);
+		self::$attr->column = array(
+			'size'		=> 'one-third',
+			'position'	=>'',
+			'class'		=> '',
+			'text_align'=> '',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

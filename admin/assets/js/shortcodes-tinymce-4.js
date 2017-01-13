@@ -33,61 +33,70 @@
 							{
 								text: "1/2 + 1/2",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-half" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									var shortcode = '[wc_row]<p>[wc_column size="one-half" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-half" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]';
+									editor.insertContent( shortcode );
 								}
 							},
 							{
 								text: "1/3 + 1/3 + 1/3",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-third" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-third" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									var shortcode = '[wc_row]<p>[wc_column size="one-third" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-third"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-third" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]';
+									editor.insertContent( shortcode );
 								}
 							},
 							{
 								text: "1/3 + 2/3",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-third" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="two-third" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									var shortcode = '[wc_row]<p>[wc_column size="one-third" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="two-third" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]';
+									editor.insertContent( shortcode );
 								}
 							},
 							{
 								text: "2/3 + 1/3",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="two-third" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-third" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									var shortcode = '[wc_row]<p>[wc_column size="two-third" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-third" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]';
+									editor.insertContent( shortcode );
 								}
 							},
 							{
 								text: "1/4 + 1/4 + 1/4 + 1/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									editor.insertContent('[wc_row]<p>[wc_column size="one-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]');
 								}
 							},
 							{
 								text: "1/4 + 1/2 + 1/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-half"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									var shortcode = '[wc_row]<p>[wc_column size="one-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-half"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]';
+									editor.insertContent( shortcode );
 								}
 							},
 							{
 								text: "1/2 + 1/4 + 1/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-half" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									var shortcode = '[wc_row]<p>[wc_column size="one-half" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]';
+									editor.insertContent( shortcode );
 								}
 							},
 							{
 								text: "1/4 + 1/4 + 1/2",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column][wc_column size="one-half" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									var shortcode = '[wc_row]<p>[wc_column size="one-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-fourth"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-half" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]';
+									editor.insertContent( shortcode );
 								}
 							},
 							{
 								text: "1/4 + 3/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="one-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="three-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									var shortcode = '[wc_row]<p>[wc_column size="one-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="three-fourth" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]';
+									editor.insertContent( shortcode );
 								}
 							},
 							{
 								text: "3/4 + 1/4",
 								onclick: function(){
-									editor.insertContent('[wc_row][wc_column size="three-fourth" position="first"]' + wcParagraphContent + '<p>[/wc_column][wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '[/wc_column][/wc_row]');
+									var shortcode = '[wc_row]<p>[wc_column size="three-fourth" position="first"]</p>' + wcParagraphContent + '<p>[/wc_column]</p><p>[wc_column size="one-fourth" position="last"]</p>' + wcDummyParagraphContent + '<p>[/wc_column]</p>[/wc_row]';
+									editor.insertContent( shortcode );
 								}
 							}
 						]
@@ -381,7 +390,8 @@
 							{
 								text: "Toggle",
 								onclick: function(){
-									editor.insertContent('[wc_toggle title="This Is Your Toggle Title" layout="box"]' + wcParagraphContent + '[/wc_toggle]');
+									var shortcode = '[wc_toggle title="This Is Your Toggle Title" layout="box"]' + wcParagraphContent + '[/wc_toggle]';
+									wcShortcodes( shortcode, editor );
 								}
 							}
 						]

@@ -1,13 +1,9 @@
 <?php
 /**
- * WC_Shortcodes_Social_Icons_Widget
- *
- * This displays a sidebar widget of social media icons.
- *
  * @uses WP
  * @uses _Widget
  */
-class WC_Shortcodes_Widget_Social_Icons extends WP_Widget {
+class WPC_Shortcodes_Widget_Social_Icons extends WP_Widget {
 	function __construct() {
 		$widget_ops = array( 'description' => __('Add your social icons to your sidebar.') );
 		parent::__construct( 'wc_shortcodes_social_icons', __('WP Canvas - Social Media Icons'), $widget_ops );

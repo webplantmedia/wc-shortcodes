@@ -116,4 +116,29 @@ class WPC_Shortcodes_Widget_Options {
 			'none' => 'None',
 		);
 	}
+
+	public static function column_sizes() {
+		return array(
+			'one-half' => 'One Half',
+			'one-third' => 'One Third',
+			'one-fourth' => 'One Fourth',
+		);
+	}
+
+	public static function column_positions() {
+		return array(
+			'first' => 'First',
+			'' => 'None',
+			'last' => 'Last',
+		);
+	}
+
+	public static function text_align_values() {
+		return array(
+			'' => 'None',
+			'left' => 'Left',
+			'center' => 'Center',
+			'right' => 'Right',
+		);
+	}
 }

@@ -33,6 +33,7 @@
 	var insertShortcode = function() {
 		var data = $innerContent.serialize();
 		var $fields = $innerContent.find(".wc-shortcodes-widget-option");
+		var shortcode;
 
 		var values = new Array();
 		$.each( $fields, function( i, el ) {
@@ -51,7 +52,10 @@
 			}
 			var key = $el.attr('name').split('][').pop();
 			key = key.substring( 0, key.length - 1 );
-			values.push( key + '="' + val + '"' );
+			if ( val || 0 === val ) {
+				// console.log( "NOT EMPTY == KEY: " + key + "  VAL: " + val )
+				values.push( key + '="' + val + '"' );
+			}
 		});
 		// console.log(values);
 		values = values.join(" ");
@@ -60,7 +64,12 @@
 		// console.log(rgxp);
 
 		// var shortcode = "["+mceTag+" "+values+"][/"+mceTag+"]";
-		var shortcode = mceShortcode.replace(rgxp,"["+mceTag+" "+values+"]");
+		if ( values.length ) {
+			shortcode = mceShortcode.replace(rgxp,"["+mceTag+" "+values+"]");
+		}
+		else {
+			shortcode = mceShortcode.replace(rgxp,"["+mceTag+"]");
+		}
 
 		mceEditor.insertContent(shortcode);
 		close();
@@ -125,8 +134,15 @@
 			$modal.show();
 			$.post(ajaxurl, {action: 'wc_mce_popup', tag: mceTag, shortcode: shortcode}, function(result){
 				if ( result.length ) {
-					$modal.removeClass('hide-insert-button');
-					$innerContent.html(result);
+					if ( 0 == result ) {
+						msg = "<h3>No Attributes</h3>";
+						msg += "<p><code>["+mceTag+"]</code> has no attributes to configure.</p>";
+						$innerContent.html(msg);
+					}
+					else {
+						$modal.removeClass('hide-insert-button');
+						$innerContent.html(result);
+					}
 				}
 				else {
 					msg = "<h3>Not Yet Supported</h3>";
