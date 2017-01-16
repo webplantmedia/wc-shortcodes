@@ -104,28 +104,51 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function heading_type( $value, $default = 'h2' ) {
-		$whitelist = array(
-			'h1',
-			'h2',
-			'h3',
-			'h4',
-			'h5',
-			'h6',
-			'p',
-			'strong',
-			'span',
-		);
+		$whitelist = WPC_Shortcodes_Widget_Options::heading_type_values();
 
-		if ( in_array( $value, $whitelist ) )
+		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
 
 		return $default;
 	}
 
+	public static function button_type( $value, $default = 'primary' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::button_types();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function url_target( $value, $default = 'self' ) {
+		$value = ltrim( trim( $value ), '_' );
+
+		$whitelist = WPC_Shortcodes_Widget_Options::url_target_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function url_rel( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::url_rel_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function fa_icon( $value ) {
+		return sanitize_html_class( $value );
+	}
+
 	public static function column_size( $value, $default = 'one-third' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::column_sizes();
 
-		if ( in_array( $value, $whitelist ) )
+		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
 
 		return $default;
@@ -134,7 +157,7 @@ class WPC_Shortcodes_Sanitize {
 	public static function column_position( $value, $default = '' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::column_positions();
 
-		if ( in_array( $value, $whitelist ) )
+		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
 
 		return $default;
@@ -143,7 +166,7 @@ class WPC_Shortcodes_Sanitize {
 	public static function text_align( $value, $default = '' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::text_align_values();
 
-		if ( in_array( $value, $whitelist ) )
+		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
 
 		return $default;
@@ -184,7 +207,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = sanitize_text_field( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_text_field( $value );
+					$atts[ $key ] = sanitize_html_class( $value );
 					break;
 			}
 		}
@@ -213,7 +236,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = self::int_bool( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_text_field( $value );
+					$atts[ $key ] = sanitize_html_class( $value );
 					break;
 				case 'layout' :
 					$atts[ $key ] = self::accordion_main_layout( $value );
@@ -228,7 +251,7 @@ class WPC_Shortcodes_Sanitize {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {
 				case 'class' :
-					$atts[ $key ] = sanitize_text_field( $value );
+					$atts[ $key ] = sanitize_html_class( $value );
 					break;
 				case 'layout' :
 					$atts[ $key ] = self::accordion_main_layout( $value );
@@ -259,7 +282,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = sanitize_text_field( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_text_field( $value );
+					$atts[ $key ] = sanitize_html_class( $value );
 					break;
 				case 'padding' :
 					$atts[ $key ] = self::css_unit( $value );
@@ -286,7 +309,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = self::column_position( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_text_field( $value );
+					$atts[ $key ] = sanitize_html_class( $value );
 					break;
 				case 'text_align' :
 					$atts[ $key ] = self::text_align( $value );
@@ -304,7 +327,43 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = self::css_unit( $value );
 					break;
 				case 'class' :
+					$atts[ $key ] = sanitize_html_class( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function button_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'type' :
+					$atts[ $key ] = self::button_type( $value );
+					break;
+				case 'url' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'title' :
 					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'target' :
+					$atts[ $key ] = self::url_target( $value );
+					break;
+				case 'rel' :
+					$atts[ $key ] = self::url_rel( $value );
+					break;
+				case 'icon_left' :
+					$atts[ $key ] = self::fa_icon( $value );
+					break;
+				case 'icon_right' :
+					$atts[ $key ] = self::fa_icon( $value );
+					break;
+				case 'position' :
+					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = sanitize_html_class( $value );
 					break;
 			}
 		}
@@ -485,7 +544,7 @@ class WPC_Shortcodes_Sanitize {
 		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
 
 		// sanitize inputs
-		$atts['button_class'] = sanitize_text_field( $atts['button_class'] );
+		$atts['button_class'] = sanitize_html_class( $atts['button_class'] );
 		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-slide-button' : $atts['button_class'];
 		$atts['terms'] = sanitize_text_field( $atts['terms'] );
 		$atts['pids'] = sanitize_text_field( $atts['pids'] );

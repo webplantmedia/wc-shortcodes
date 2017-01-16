@@ -107,7 +107,8 @@
 							{
 								text: "Button",
 								onclick: function(){
-									editor.insertContent('[wc_button type="primary" url="http://webplantmedia.com" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]');
+									var shortcode = '[wc_button type="primary" url="http://angiemakes.com" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{

@@ -133,6 +133,46 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function button_types() {
+		return array(
+			'primary' => 'Primary',
+			'secondary' => 'Secondary',
+			'inverse' => 'Inverse',
+			'success' => 'Success',
+			'warning' => 'Warning',
+			'danger' => 'Danger',
+			'info' => 'Info',
+		);
+	}
+
+	public static function url_rel_values() {
+		return array(
+			'' => 'None',
+			'nofollow' => 'No Follow',
+		);
+	}
+
+	public static function url_target_values() {
+		return array(
+			'' => 'Same Window',
+			'blank' => 'New Tab',
+		);
+	}
+
+	public static function heading_type_values() {
+		return array(
+			'h1' => 'h1',
+			'h2' => 'h2',
+			'h3' => 'h3',
+			'h4' => 'h4',
+			'h5' => 'h5',
+			'h6' => 'h6',
+			'p' => 'p',
+			'strong' => 'strong',
+			'span' => 'span',
+		);
+	}
+
 	public static function text_align_values() {
 		return array(
 			'' => 'None',

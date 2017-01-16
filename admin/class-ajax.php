@@ -163,6 +163,10 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WPC_Shortcodes_Widget_Spacing();
 				$widget->form( $attr );
 				break;
+			case 'wc_button' :
+				$widget = new WPC_Shortcodes_Widget_Button();
+				$widget->form( $attr );
+				break;
 			case 'wc_post_slider' :
 				$widget = new WPC_Shortcodes_Widget_Post_Slider();
 				$widget->form( $attr );

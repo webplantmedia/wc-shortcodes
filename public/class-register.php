@@ -386,51 +386,38 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 * @since v1.0
 	 */
 	public function button( $atts, $content = null ) {
-		extract( shortcode_atts( array(
-			'type'			=> 'primary', // or inverse
-			'url'			=> 'http://www.wordpresscanvas.com',
-			'title'			=> 'Visit Site',
-			'target'		=> 'self',
-			'rel'			=> '',
-			'border_radius'	=> '',
-			'icon_left'		=> '',
-			'icon_right'	=> '',
-			'position'		=> 'float',
-			'class'			=> '',
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->button, $atts );
+		$atts = WPC_Shortcodes_Sanitize::button_attr( $atts );
 
-		// sanitize
-		$border_radius = WPC_Shortcodes_Sanitize::css_unit( $border_radius );
+		$custom_class = sanitize_title( $atts['class'] );
 
-		$custom_class = sanitize_title( $class );
-
-		// $border_radius_style = ( $border_radius ) ? 'style="border-radius:'. $border_radius .'"' : NULL;		
-		$rel = ( $rel ) ? 'rel="'.$rel.'"' : NULL;
-		$type = 'wc-shortcodes-button-' . $type;
+		$url_rel = ! empty( $atts['rel'] ) ? ' rel="'.esc_attr( $atts['rel'] ).'"' : '';
+		$url_target = ! empty( $atts['target'] ) ? ' target="_'.esc_attr( $atts['target'] ).'"' : '';
+		$atts['type'] = 'wc-shortcodes-button-' . $atts['type'];
 		
+		pr($atts);
 		$class = array();
 		$class[] = 'wc-shortcodes-button';
-		$class[] = $type;
-		$class[] = 'wc-shortcodes-button-position-' . $position;
+		$class[] = $atts['type'];
+		$class[] = 'wc-shortcodes-button-position-' . $atts['position'];
 		if ( ! empty( $custom_class ) )
 			$class[] = $custom_class;
 		
 		$button = null;
-		$button .= '<a href="' . esc_url( $url ) . '" class="'.esc_attr( implode( ' ', $class ) ).'" target="_'.esc_attr( $target ).'" title="'. esc_attr( $title ) .'" rel="'. esc_attr( $rel ) .'">';
+		$button .= '<a href="' . esc_url( $atts['url'] ) . '" class="'.esc_attr( implode( ' ', $class ) ).'"'.$url_rel.$url_target.'" title="'. esc_attr( $atts['title'] ) .'">';
 			$button .= '<span class="wc-shortcodes-button-inner">';
-			if ( $icon_left ) {
-				$button .= '<span class="wc-shortcodes-button-icon-left icon-'. esc_attr( $icon_left ) .'"></span>';
+			if ( $atts['icon_left'] ) {
+				$button .= '<span class="wc-shortcodes-button-icon-left icon-'. esc_attr( $atts['icon_left'] ) .'"></span>';
 			}
 			$button .= $content;
-			if ( $icon_right ) {
-				$button .= '<span class="wc-shortcodes-button-icon-right icon-'. esc_attr( $icon_right ) .'"></span>';
+			if ( $atts['icon_right'] ) {
+				$button .= '<span class="wc-shortcodes-button-icon-right icon-'. esc_attr( $atts['icon_right'] ) .'"></span>';
 			}
 			$button .= '</span>';			
 		$button .= '</a>';
 
-		$whitelist = array( 'center', 'left', 'right' );
-		if ( in_array( $position, $whitelist ) ) {
-			$button = '<div class="wc-shortcodes-item wc-shortcodes-button-'.$position.'">'. $button .'</div>';
+		if ( ! empty( $atts['position'] ) ) {
+			$button = '<div class="wc-shortcodes-item wc-shortcodes-button-'.$atts['position'].'">'. $button .'</div>';
 		}
 
 		return $button;
