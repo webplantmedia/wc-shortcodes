@@ -31,12 +31,14 @@ class WPC_Shortcodes_Widget_Toggle extends WPC_Shortcodes_Widget_Base {
 				<label for="<?php echo $this->get_field_id('class'); ?>"><?php _e('Class Name:') ?></label>
 				<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('class'); ?>" name="<?php echo $this->get_field_name('class'); ?>" value="<?php echo $o['class']; ?>" />
 			</p>
-			<label for="<?php echo $this->get_field_id('layout'); ?>"><?php _e('Layout:'); ?></label>
-			<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('layout'); ?>" name="<?php echo $this->get_field_name('layout'); ?>">
-				<?php foreach ( WPC_Shortcodes_Widget_Options::accordion_main_layouts() as $key => $value ) : ?>
-					<option value="<?php echo $key; ?>"<?php selected( $o['layout'], $key ); ?>><?php echo $value; ?></option>';
-				<?php endforeach; ?>
-			</select>
+			<p>
+				<label for="<?php echo $this->get_field_id('layout'); ?>"><?php _e('Layout:'); ?></label>
+				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('layout'); ?>" name="<?php echo $this->get_field_name('layout'); ?>">
+					<?php foreach ( WPC_Shortcodes_Widget_Options::accordion_main_layouts() as $key => $value ) : ?>
+						<option value="<?php echo $key; ?>"<?php selected( $o['layout'], $key ); ?>><?php echo $value; ?></option>';
+					<?php endforeach; ?>
+				</select>
+			</p>
 		</div>
 		<?php
 	}
