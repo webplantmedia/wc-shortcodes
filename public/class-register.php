@@ -395,7 +395,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$url_target = ! empty( $atts['target'] ) ? ' target="_'.esc_attr( $atts['target'] ).'"' : '';
 		$atts['type'] = 'wc-shortcodes-button-' . $atts['type'];
 		
-		pr($atts);
 		$class = array();
 		$class[] = 'wc-shortcodes-button';
 		$class[] = $atts['type'];
@@ -407,11 +406,11 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$button .= '<a href="' . esc_url( $atts['url'] ) . '" class="'.esc_attr( implode( ' ', $class ) ).'"'.$url_rel.$url_target.'" title="'. esc_attr( $atts['title'] ) .'">';
 			$button .= '<span class="wc-shortcodes-button-inner">';
 			if ( $atts['icon_left'] ) {
-				$button .= '<span class="wc-shortcodes-button-icon-left icon-'. esc_attr( $atts['icon_left'] ) .'"></span>';
+				$button .= '<span class="wc-shortcodes-button-icon-left fa fa-'. esc_attr( $atts['icon_left'] ) .'"></span>';
 			}
 			$button .= $content;
 			if ( $atts['icon_right'] ) {
-				$button .= '<span class="wc-shortcodes-button-icon-right icon-'. esc_attr( $atts['icon_right'] ) .'"></span>';
+				$button .= '<span class="wc-shortcodes-button-icon-right fa fa-'. esc_attr( $atts['icon_right'] ) .'"></span>';
 			}
 			$button .= '</span>';			
 		$button .= '</a>';

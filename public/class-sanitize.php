@@ -142,6 +142,7 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function fa_icon( $value ) {
+		$value = preg_replace( '/^fa\-/', '', $value );
 		return sanitize_html_class( $value );
 	}
 

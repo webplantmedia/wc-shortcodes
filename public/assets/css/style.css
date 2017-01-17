@@ -507,6 +507,13 @@
 	margin-left: 10px;
 }
 
+.wc-shortcodes-button-icon-left {
+	margin-right: 0.5em;
+}
+.wc-shortcodes-button-icon-right {
+	margin-left: 0.5em;
+}
+
 /* Secondary */
 .wc-shortcodes-button.wc-shortcodes-button-secondary:visited,
 .wc-shortcodes-button.wc-shortcodes-button-secondary {

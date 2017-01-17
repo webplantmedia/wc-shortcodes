@@ -72,8 +72,9 @@ class WPC_Shortcodes_Admin extends WPC_Shortcodes_Vars {
 		if ( $hook == 'post-new.php' || $hook == 'post.php' || $hook == 'widgets.php' ) {
 			wp_enqueue_style( 'wc-shortcodes-admin-style', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/css/wc-shortcodes.css', array( ), $ver );
 			wp_enqueue_style( 'wc-shortcodes-ui-theme-override-style', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/css/ui-theme-override.css', array( ), $ver );
-			wp_enqueue_style( 'wc-shortcodes-posts-widget-style', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/css/wcpostswidget.css', array( ), $ver );
+			wp_enqueue_style( 'wc-shortcodes-visual-manager-style', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/css/wcvisualmanager.css', array( ), $ver );
 			wp_enqueue_script( 'wc-shortcodes-posts-widget', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wcpostswidget.js', array ( 'jquery', 'jquery-ui-autocomplete', 'jquery-ui-accordion' ), $ver, true );
+			wp_enqueue_script( 'wc-shortcodes-font-awesome-widget', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wcfontawesomewidget.js', array ( 'jquery', 'jquery-ui-autocomplete' ), $ver, true );
 			wp_enqueue_script( 'wc-shortcodes', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wc-shortcodes.js', array ( 'jquery' ), $ver, true );
 		}
 	}

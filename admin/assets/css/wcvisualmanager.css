@@ -1,11 +1,14 @@
+html .wc-shortcodes-visual-manager,
 html .wc-shortcodes-visual-manager.ui-accordion {
 	margin-bottom: 1.5em;
 }
+html .wc-shortcodes-visual-manager .ui-autocomplete,
 html .wc-shortcodes-visual-manager.ui-accordion .ui-autocomplete {
 	z-index: 999999;
 	max-height: 300px;
 	overflow: auto;
 }
+html .wc-shortcodes-visual-manager .ui-autocomplete li,
 html .wc-shortcodes-visual-manager.ui-accordion .ui-autocomplete li {
 	white-space: normal;
 }
