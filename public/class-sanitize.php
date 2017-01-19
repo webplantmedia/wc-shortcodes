@@ -36,6 +36,24 @@ class WPC_Shortcodes_Sanitize {
 		return $value;
 	}
 
+	public static function html_classes( $value ) {
+		if ( empty( $value ) ) {
+			return '';
+		}
+
+		$a = explode( ' ', $value );
+
+		if ( ! empty( $a ) && is_array( $a ) ) {
+			foreach( $a as $k => $v ) {
+				$a[ $k ] = sanitize_html_class( $v );
+			}
+		}
+
+		$value = implode( ' ', $a );
+
+		return $value;
+	}
+
 	public static function positive_number( $value ) {
 		$value = preg_replace("/[^0-9\-]/", "",$value);
 		$value = intval( $value );
@@ -208,7 +226,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = sanitize_text_field( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_html_class( $value );
+					$atts[ $key ] = self::html_classes( $value );
 					break;
 			}
 		}
@@ -237,7 +255,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = self::int_bool( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_html_class( $value );
+					$atts[ $key ] = self::html_classes( $value );
 					break;
 				case 'layout' :
 					$atts[ $key ] = self::accordion_main_layout( $value );
@@ -252,7 +270,7 @@ class WPC_Shortcodes_Sanitize {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {
 				case 'class' :
-					$atts[ $key ] = sanitize_html_class( $value );
+					$atts[ $key ] = self::html_classes( $value );
 					break;
 				case 'layout' :
 					$atts[ $key ] = self::accordion_main_layout( $value );
@@ -283,7 +301,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = sanitize_text_field( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_html_class( $value );
+					$atts[ $key ] = self::html_classes( $value );
 					break;
 				case 'padding' :
 					$atts[ $key ] = self::css_unit( $value );
@@ -310,7 +328,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = self::column_position( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_html_class( $value );
+					$atts[ $key ] = self::html_classes( $value );
 					break;
 				case 'text_align' :
 					$atts[ $key ] = self::text_align( $value );
@@ -328,7 +346,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = self::css_unit( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_html_class( $value );
+					$atts[ $key ] = self::html_classes( $value );
 					break;
 			}
 		}
@@ -364,7 +382,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = self::text_align( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_html_class( $value );
+					$atts[ $key ] = self::html_classes( $value );
 					break;
 			}
 		}
@@ -385,7 +403,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = self::css_unit( $value );
 					break;
 				case 'class' :
-					$atts[ $key ] = sanitize_html_class( $value );
+					$atts[ $key ] = self::html_classes( $value );
 					break;
 			}
 		}
@@ -566,7 +584,7 @@ class WPC_Shortcodes_Sanitize {
 		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
 
 		// sanitize inputs
-		$atts['button_class'] = sanitize_html_class( $atts['button_class'] );
+		$atts['button_class'] = self::html_classes( $atts['button_class'] );
 		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-slide-button' : $atts['button_class'];
 		$atts['terms'] = sanitize_text_field( $atts['terms'] );
 		$atts['pids'] = sanitize_text_field( $atts['pids'] );
