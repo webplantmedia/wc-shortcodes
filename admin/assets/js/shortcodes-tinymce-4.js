@@ -112,6 +112,13 @@
 								}
 							},
 							{
+								text: "Font Awesome Icon",
+								onclick: function(){
+									var shortcode = '[wc_fa icon="" margin_left="" margin_right=""][/wc_fa]';
+									wcShortcodes( shortcode, editor );
+								}
+							},
+							{
 								text: "Google Map",
 								onclick: function(){
 									editor.insertContent('[wc_googlemap title="St. Paul\'s Chapel" location="209 Broadway, New York, NY 10007" zoom="10" height="250" title_on_load="no" class=""]');

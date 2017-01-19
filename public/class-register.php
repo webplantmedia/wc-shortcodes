@@ -389,8 +389,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$atts = shortcode_atts( parent::$attr->button, $atts );
 		$atts = WPC_Shortcodes_Sanitize::button_attr( $atts );
 
-		$custom_class = sanitize_title( $atts['class'] );
-
 		$url_rel = ! empty( $atts['rel'] ) ? ' rel="'.esc_attr( $atts['rel'] ).'"' : '';
 		$url_target = ! empty( $atts['target'] ) ? ' target="_'.esc_attr( $atts['target'] ).'"' : '';
 		$atts['type'] = 'wc-shortcodes-button-' . $atts['type'];
@@ -1430,20 +1428,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	}
 
 	public function fa( $atts ) {
-		extract( shortcode_atts( array(
-			// icon options
-			'icon' => '',
-			'margin_right' => '0',
-			'margin_left' => '0',
+		$atts = shortcode_atts( parent::$attr->fa, $atts );
+		$atts = WPC_Shortcodes_Sanitize::fa_attr( $atts );
 
-			// misc options
-			'class' => '',
-		), $atts ) );
-
-		$margin_right = WPC_Shortcodes_Sanitize::css_unit( $margin_right );
-		$margin_left = WPC_Shortcodes_Sanitize::css_unit( $margin_left );
-
-		if ( empty( $icon ) )
+		if ( empty( $atts['icon'] ) )
 			return '';
 
 		// classes
@@ -1451,17 +1439,17 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		$classes[] = 'wc-shortcodes-fa';
 		$classes[] = 'fa';
-		$classes[] = 'fa-' . $icon;
-		if ( empty( $class ) )
-			$classes[] = $class;
+		$classes[] = 'fa-' . $atts['icon'];
+		if ( empty( $atts['class'] ) )
+			$classes[] = $atts['class'];
 
 		$style_attr = '';
 
-		if( $margin_right ) {
-			$style_attr .= 'margin-right: '. $margin_right .';';
+		if( $atts['margin_right'] ) {
+			$style_attr .= 'margin-right: '. $atts['margin_right'] .';';
 		}
-		if ( $margin_left ) {
-			$style_attr .= 'margin-left: '. $margin_left .';';
+		if ( $atts['margin_left'] ) {
+			$style_attr .= 'margin-left: '. $atts['margin_left'] .';';
 		}
 
 		$html = '<i class="' . esc_attr( implode( ' ', $classes ) ) . '" style="'.esc_attr( $style_attr ).'"></i>';

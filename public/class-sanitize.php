@@ -372,6 +372,27 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
+	public static function fa_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'icon' :
+					$atts[ $key ] = self::fa_icon( $value );
+					break;
+				case 'margin_left' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'margin_right' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = sanitize_html_class( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function posts_attr_key_change( $atts ) {
 		// Rename keys in shortcode options.
 		$renamed = array( 'title', 'meta_all', 'meta_author', 'meta_date', 'meta_comments', 'thumbnail', 'content', 'paging' );

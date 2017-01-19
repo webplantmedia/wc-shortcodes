@@ -175,6 +175,12 @@ class WPC_Shortcodes_Vars {
 			'position'		=> 'float',
 			'class'			=> '',
 		);
+		self::$attr->fa = array(
+			'icon' => '',
+			'margin_right' => '',
+			'margin_left' => '',
+			'class' => '',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).
