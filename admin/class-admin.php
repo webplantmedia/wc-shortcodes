@@ -77,6 +77,10 @@ class WPC_Shortcodes_Admin extends WPC_Shortcodes_Vars {
 			wp_enqueue_script( 'wc-shortcodes-font-awesome-widget', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wcfontawesomewidget.js', array ( 'jquery', 'jquery-ui-autocomplete' ), $ver, true );
 			wp_enqueue_script( 'wc-shortcodes', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wc-shortcodes.js', array ( 'jquery' ), $ver, true );
 		}
+
+		if ( $hook == 'post-new.php' || $hook == 'post.php' ) {
+			wp_enqueue_style('wc-font-awesome-styles', WC_SHORTCODES_PLUGIN_URL . 'public/assets/css/font-awesome.css', array(), WC_SHORTCODES_VERSION, 'all');
+		}
 	}
 
 	/**

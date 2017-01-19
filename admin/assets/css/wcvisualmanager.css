@@ -12,6 +12,16 @@ html .wc-shortcodes-visual-manager .ui-autocomplete li,
 html .wc-shortcodes-visual-manager.ui-accordion .ui-autocomplete li {
 	white-space: normal;
 }
+html .wc-shortcodes-visual-manager .wc-shortcodes-widget-fa .ui-autocomplete li i {
+	margin-right: 0.5em;
+	min-width: 1.5em;
+	text-align: center;
+	font-size: 200%;
+	vertical-align: middle;
+}
+html .wc-shortcodes-visual-manager .wc-shortcodes-widget-fa .ui-autocomplete li span {
+	line-height: 2;
+}
 html .wc-shortcodes-visual-manager.ui-accordion .ui-accordion-header {
 	border: 1px solid #ddd;
 	position: relative;

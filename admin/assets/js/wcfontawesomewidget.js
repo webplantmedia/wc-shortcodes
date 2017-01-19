@@ -29,6 +29,7 @@
 						var $el = $(el);
 						var $parent = $el.parent();
 						$parent.css({'position':'relative'});
+						$parent.addClass('wc-shortcodes-widget-fa');
 						var options = '';
 
 						options = {
@@ -44,7 +45,13 @@
 							}
 						};
 
-						$el.autocomplete( options ).bind('focus', function(){ $(this).autocomplete("search"); } );
+						$el.autocomplete( options )
+							.bind('focus', function(){ $(this).autocomplete("search"); } )
+							.autocomplete("instance")._renderItem = function(ul, item) {
+								return $("<li>")
+									.append("<i class='fa fa-" + item.value + "'></i><span>" + item.label + "</span>")
+									.appendTo(ul);
+							};
 					});
 				}
 			});
