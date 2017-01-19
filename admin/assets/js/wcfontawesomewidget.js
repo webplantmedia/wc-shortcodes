@@ -38,9 +38,9 @@
 							close: function ( event, ui ) {
 								var $t = $(this);
 								$t.trigger('change');
-								setTimeout(function(){
-									$t.blur();
-								}, 0);
+								// setTimeout(function(){
+									// $t.blur();
+								// }, 0);
 							}
 						};
 

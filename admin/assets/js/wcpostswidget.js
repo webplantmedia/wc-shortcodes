@@ -72,12 +72,15 @@
 
 									return false;
 								},
+								focus: function( event, ui ) {
+									return false; // Prevent comma delim value from being replace by single value.
+								},
 								close: function( event, ui ) {
 									var $t = $(this);
 									$t.trigger('change');
-									setTimeout(function(){
-										$t.blur();
-									}, 0);
+									// setTimeout(function(){
+										// $t.blur();
+									// }, 0);
 								}
 							}
 						}
@@ -106,9 +109,9 @@
 								close: function ( event, ui ) {
 									var $t = $(this);
 									$t.trigger('change');
-									setTimeout(function(){
-										$t.blur();
-									}, 0);
+									// setTimeout(function(){
+										// $t.blur();
+									// }, 0);
 								}
 							};
 						}
