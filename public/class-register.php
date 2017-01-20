@@ -714,31 +714,21 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 */
 	/*section*/
 	public function pricing( $atts, $content = null  ) {
-		
-		extract( shortcode_atts( array(
-			'type'					=> 'primary', // primary, secondary, inverse
-			'plan'					=> 'Basic', // string
-			'cost'					=> '$20', // string
-			'per'					=> 'month', // month, day, year, week, etc
-			'button_url'			=> '', // url to payment gateway
-			'button_text'			=> 'Purchase', // call to action button
-			'button_target'			=> 'self', // self, blank
-			'button_rel'			=> 'nofollow', // alternate, author, bookmark, help, license, next, nofollow, noreferrer, prefetch, prev, search, tag
-			'class'					=> '', // add your own css class for customization.
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->pricing, $atts );
+		$atts = WPC_Shortcodes_Sanitize::pricing_attr( $atts );
 		
 		//start content  
 		$pricing_content ='';
-		$pricing_content .= '<div class="wc-shortcodes-pricing wc-shortcodes-pricing-type-'. esc_attr( $type ) .' '. esc_attr( $class ) .'">';
+		$pricing_content .= '<div class="wc-shortcodes-pricing wc-shortcodes-pricing-type-'. esc_attr( $atts['type'] ) .' '. esc_attr( $atts['class'] ) .'">';
 			$pricing_content .= '<div class="wc-shortcodes-pricing-header">';
-				$pricing_content .= '<h5>'. esc_html( $plan ). '</h5>';
-				$pricing_content .= '<div class="wc-shortcodes-pricing-cost">'. esc_html( $cost ) .'</div><div class="wc-shortcodes-pricing-per">'. esc_html( $per ) .'</div>';
+				$pricing_content .= '<h5>'. esc_html( $atts['plan'] ). '</h5>';
+				$pricing_content .= '<div class="wc-shortcodes-pricing-cost">'. esc_html( $atts['cost'] ) .'</div><div class="wc-shortcodes-pricing-per">'. esc_html( $atts['per'] ) .'</div>';
 			$pricing_content .= '</div>';
 			$pricing_content .= '<div class="wc-shortcodes-pricing-content">';
 				$pricing_content .= ''. $content. '';
 			$pricing_content .= '</div>';
-			if( $button_url ) {
-				$pricing_content .= '<div class="wc-shortcodes-pricing-button"><a href="'. esc_url( $button_url ) .'" class="wc-shortcodes-button wc-shortcodes-button-'.esc_attr( $type ).'" target="_'. esc_attr( $button_target ) .'" rel="'. esc_attr( $button_rel ) .'"><span class="wc-shortcodes-button-inner">'. esc_html( $button_text ) .'</span></a></div>';
+			if( $atts['button_url'] ) {
+				$pricing_content .= '<div class="wc-shortcodes-pricing-button"><a href="'. esc_url( $atts['button_url'] ) .'" class="wc-shortcodes-button wc-shortcodes-button-'.esc_attr( $atts['type'] ).'" target="_'. esc_attr( $atts['button_target'] ) .'" rel="'. esc_attr( $atts['button_rel'] ) .'"><span class="wc-shortcodes-button-inner">'. esc_html( $atts['button_text'] ) .'</span></a></div>';
 			}
 		$pricing_content .= '</div>';  
 		return $pricing_content;

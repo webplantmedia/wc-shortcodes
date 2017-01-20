@@ -202,6 +202,17 @@ class WPC_Shortcodes_Vars {
 			'icon_right'	=> '',
 			'icon_spacing'	=> '',
 		);
+		self::$attr->pricing = array(
+			'type'					=> 'primary', // primary, secondary, inverse
+			'plan'					=> 'Basic', // string
+			'cost'					=> '$20', // string
+			'per'					=> 'month', // month, day, year, week, etc
+			'button_url'			=> '', // url to payment gateway
+			'button_text'			=> 'Purchase', // call to action button
+			'button_target'			=> 'self', // self, blank
+			'button_rel'			=> 'nofollow', // alternate, author, bookmark, help, license, next, nofollow, noreferrer, prefetch, prev, search, tag
+			'class'					=> '', // add your own css class for customization.
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

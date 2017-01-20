@@ -388,6 +388,42 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
+	public static function pricing_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'type' :
+					$atts[ $key ] = self::button_type( $value );
+					break;
+				case 'plan' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'cost' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'per' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'button_url' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'button_text' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'button_target' :
+					$atts[ $key ] = self::url_target( $value );
+					break;
+				case 'button_rel' :
+					$atts[ $key ] = self::url_rel( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function fa_attr( $atts ) {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {
