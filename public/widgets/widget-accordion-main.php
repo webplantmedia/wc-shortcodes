@@ -24,8 +24,9 @@ class WPC_Shortcodes_Widget_Accordion_Main extends WPC_Shortcodes_Widget_Base {
 				<label for="<?php echo $this->get_field_id('leaveopen'); ?>"><?php _e('Leave Open?') ?></label>
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('class'); ?>"><?php _e('Class Name:') ?></label>
+				<label for="<?php echo $this->get_field_id('class'); ?>"><?php _e('Class:') ?></label>
 				<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('class'); ?>" name="<?php echo $this->get_field_name('class'); ?>" value="<?php echo $o['class']; ?>" />
+				<span class="wcs-description">Enter class name for custom CSS styling.</span>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('layout'); ?>"><?php _e('Layout:'); ?></label>

@@ -28,8 +28,9 @@ class WPC_Shortcodes_Widget_Toggle extends WPC_Shortcodes_Widget_Base {
 				<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('border_width'); ?>" name="<?php echo $this->get_field_name('border_width'); ?>" value="<?php echo $o['border_width']; ?>" />
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('class'); ?>"><?php _e('Class Name:') ?></label>
+				<label for="<?php echo $this->get_field_id('class'); ?>"><?php _e('Class:') ?></label>
 				<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('class'); ?>" name="<?php echo $this->get_field_name('class'); ?>" value="<?php echo $o['class']; ?>" />
+				<span class="wcs-description">Enter class name for custom CSS styling.</span>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('layout'); ?>"><?php _e('Layout:'); ?></label>

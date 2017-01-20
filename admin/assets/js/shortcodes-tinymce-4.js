@@ -128,7 +128,8 @@
 							{
 								text: "Heading",
 								onclick: function(){
-									editor.insertContent('[wc_heading type="h1" title="' + wcDummyContent + '" margin_top="" margin_bottom="" text_align="left" font_size="" color="" class="" icon_left="" icon_right="" icon_spacing=""]');
+									var shortcode = '[wc_heading type="h1" title="' + wcDummyContent + '" margin_top="" margin_bottom="" text_align="left" font_size="" color="" class="" icon_left="" icon_right="" icon_spacing=""]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{

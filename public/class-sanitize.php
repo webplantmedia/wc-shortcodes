@@ -131,7 +131,7 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function heading_type( $value, $default = 'h2' ) {
-		$whitelist = WPC_Shortcodes_Widget_Options::heading_type_values();
+		$whitelist = WPC_Shortcodes_Widget_Options::heading_tags();
 
 		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
@@ -442,17 +442,32 @@ class WPC_Shortcodes_Sanitize {
 				case 'title' :
 					$atts[ $key ] = sanitize_text_field( $value );
 					break;
-				case 'title_on_load' :
-					$atts[ $key ] = self::int_bool( $value );
+				case 'type' :
+					$atts[ $key ] = self::heading_type( $value );
 					break;
-				case 'location' :
-					$atts[ $key ] = sanitize_text_field( $value );
-					break;
-				case 'height' :
+				case 'margin_top' :
 					$atts[ $key ] = self::css_unit( $value );
 					break;
-				case 'zoom' :
-					$atts[ $key ] = self::google_map_zoom( $value );
+				case 'margin_bottom' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'text_align' :
+					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'font_size' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'color' :
+					$atts[ $key ] = self::hex_color( $value );
+					break;
+				case 'icon_left' :
+					$atts[ $key ] = self::fa_icon( $value );
+					break;
+				case 'icon_right' :
+					$atts[ $key ] = self::fa_icon( $value );
+					break;
+				case 'icon_spacing' :
+					$atts[ $key ] = self::css_unit( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
