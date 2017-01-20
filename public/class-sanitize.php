@@ -121,6 +121,15 @@ class WPC_Shortcodes_Sanitize {
 		return '';
 	}
 
+	public static function google_map_zoom( $value, $default = 8 ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::google_map_zoom_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function heading_type( $value, $default = 'h2' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::heading_type_values();
 
@@ -234,18 +243,7 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
-	public static function accordion_main_attr( $atts, $empty_checkbox_is_false = false ) {
-		// sanitize bools
-		$bools = array( 'collapse', 'leaveopen' );
-
-		if ( $empty_checkbox_is_false ) {
-			foreach ( $bools as $key ) {
-				if ( ! isset( $atts[ $key ] ) ) {
-					$atts[ $key ] = 0;
-				}
-			}
-		}
-
+	public static function accordion_main_attr( $atts ) {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {
 				case 'collapse' :
@@ -411,6 +409,60 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
+	public static function googlemap_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'title' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'title_on_load' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'location' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'height' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'zoom' :
+					$atts[ $key ] = self::google_map_zoom( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function heading_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'title' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'title_on_load' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'location' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'height' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'zoom' :
+					$atts[ $key ] = self::google_map_zoom( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function posts_attr_key_change( $atts ) {
 		// Rename keys in shortcode options.
 		$renamed = array( 'title', 'meta_all', 'meta_author', 'meta_date', 'meta_comments', 'thumbnail', 'content', 'paging' );
@@ -427,17 +479,9 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
-	public static function posts_attr( $atts, $empty_checkbox_is_false = false ) {
+	public static function posts_attr( $atts ) {
 		// sanitize bools
 		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging', 'show_title', 'show_meta_all', 'show_meta_author', 'show_meta_date', 'show_meta_comments', 'show_thumbnail', 'show_content', 'show_paging', 'filtering' );
-
-		if ( $empty_checkbox_is_false ) {
-			foreach ( $bools as $key ) {
-				if ( ! isset( $atts[ $key ] ) ) {
-					$atts[ $key ] = 0;
-				}
-			}
-		}
 
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {
@@ -516,17 +560,22 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
-	public static function post_slider_attr( $atts, $empty_checkbox_is_false = false ) {
-		// sanitize bools
+	// Fixes bools on widget update when checkbox is empty, and thus blank. We don't want to revert to the default value, but false.
+	public static function post_slider_attr_fix_bools( $atts ) {
 		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto', 'nopaging' );
 
-		if ( $empty_checkbox_is_false ) {
-			foreach ( $bools as $key ) {
-				if ( ! isset( $atts[ $key ] ) ) {
-					$atts[ $key ] = 0;
-				}
+		foreach ( $bools as $key ) {
+			if ( ! isset( $atts[ $key ] ) ) {
+				$atts[ $key ] = 0;
 			}
 		}
+
+		return $atts;
+	}
+
+	public static function post_slider_attr( $atts ) {
+		// sanitize bools
+		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto', 'nopaging' );
 
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {

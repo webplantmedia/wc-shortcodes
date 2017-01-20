@@ -30,7 +30,8 @@ class WPC_Shortcodes_Widget_Post_Slider extends WP_Widget {
 	}
 
 	function update( $new_instance, $old_instance ) {
-		$instance = WPC_Shortcodes_Sanitize::post_slider_attr( $new_instance, $empty_is_false = true );
+		$new_instance = WPC_Shortcodes_Sanitize::post_slider_attr_fix_bools( $new_instance );
+		$instance = WPC_Shortcodes_Sanitize::post_slider_attr( $new_instance );
 
 		return $instance;
 	}

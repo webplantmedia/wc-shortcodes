@@ -26,7 +26,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		add_shortcode( 'wc_highlight', array( &$this, 'highlight' ) );
 		add_shortcode( 'wc_button', array( &$this, 'button' ) );
 		add_shortcode( 'wc_heading', array( &$this, 'heading' ) );
-		add_shortcode( 'wc_googlemap', array( &$this, 'googlemaps' ) );
+		add_shortcode( 'wc_googlemap', array( &$this, 'googlemap' ) );
 		add_shortcode( 'wc_divider', array( &$this, 'divider' ) );
 		add_shortcode( 'wc_countdown', array( &$this, 'countdown' ) );
 		add_shortcode( 'wc_rsvp', array( &$this, 'rsvp' ) );
@@ -751,59 +751,47 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 * @since v1.1
 	 */
 	public function heading( $atts ) {
-		extract( shortcode_atts( array(
-			'title'			=> __('Sample Heading', 'wc'),
-			'type'			=> 'h2',
-			'margin_top'	=> '',
-			'margin_bottom'	=> '',
-			'text_align'	=> '',
-			'font_size'		=> '',
-			'color'			=> '',
-			'class'			=> '',
-			'icon_left'		=> '',
-			'icon_right'	=> '',
-			'icon_spacing'	=> '',
-		), $atts ) );
-
-		$type = WPC_Shortcodes_Sanitize::heading_type( $type );
-
+		$atts = shortcode_atts( parent::$attr->heading, $atts );
+		$atts = WPC_Shortcodes_Sanitize::heading_attr( $atts );
+		
 		$style_attr = '';
 
-		if ( $font_size ) {
-			$style_attr .= 'font-size: '. $font_size .';';
+		if ( $atts['font_size'] ) {
+			$style_attr .= 'font-size: '. $atts['font_size'] .';';
 		}
-		if ( $color ) {
-			$style_attr .= 'color: '. $color .';';
+		if ( $atts['color'] ) {
+			$style_attr .= 'color: '. $atts['color'] .';';
 		}
-		if( $margin_bottom ) {
-			$style_attr .= 'margin-bottom: '. $margin_bottom .';';
+		if( $atts['margin_bottom'] ) {
+			$style_attr .= 'margin-bottom: '. $atts['margin_bottom'] .';';
 		}
-		if ( $margin_top ) {
-			$style_attr .= 'margin-top: '. $margin_top .';';
+		if ( $atts['margin_top'] ) {
+			$style_attr .= 'margin-top: '. $atts['margin_top'] .';';
 		}
 		
-		if ( $text_align ) {
-			$text_align = 'text-align-'. $text_align;
+		if ( $atts['text_align'] ) {
+			$text_align = 'text-align-'. $atts['text_align'];
 		} else {
 			$text_align = 'text-align-left';
 		}
 		
-		if ( 'h1' == $type )
-			$class = trim( 'entry-title ' . $class );
+		if ( 'h1' == $atts['type'] ) {
+			$atts['class'] = trim( 'entry-title ' . $atts['class'] );
+		}
 
-		$output = '<'.$type.' class="wc-shortcodes-heading '. esc_attr( $text_align ) .' '. esc_attr( $class ) .'" style="'.esc_attr( $style_attr ).'"><span>';
+		$output = '<'.$atts['type'].' class="wc-shortcodes-heading '. esc_attr( $text_align ) .' '. esc_attr( $atts['class'] ) .'" style="'.esc_attr( $style_attr ).'"><span>';
 
-		if ( $icon_left )
-			$output .= '<i class="wc-shortcodes-button-icon-left fa fa-'. esc_attr( $icon_left ) .'" style="margin-right:'.esc_attr( $icon_spacing ).'"></i>';
+		if ( $atts['icon_left'] )
+			$output .= '<i class="wc-shortcodes-button-icon-left fa fa-'. esc_attr( $atts['icon_left'] ) .'" style="margin-right:'.esc_attr( $atts['icon_spacing'] ).'"></i>';
 
-		$output .= esc_html( $title );
+		$output .= esc_html( $atts['title'] );
 
-		if ( $icon_right )
-			$output .= '<i class="wc-shortcodes-button-icon-right fa fa-'. esc_attr( $icon_right ) .'" style="margin-left:'.esc_attr( $icon_spacing ).'"></i>';
+		if ( $atts['icon_right'] )
+			$output .= '<i class="wc-shortcodes-button-icon-right fa fa-'. esc_attr( $atts['icon_right'] ) .'" style="margin-left:'.esc_attr( $atts['icon_spacing'] ).'"></i>';
 
-		$output .= '</span></'.$type.'>';
+		$output .= '</span></'.$atts['type'].'>';
 
-		if ( 'h1' == $type )
+		if ( 'h1' == $atts['type'] )
 			$output = '<header class="entry-header">'. $output . '</header>';
 		
 		return $output;
@@ -814,27 +802,16 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 * Google Maps
 	 * @since v1.1
 	 */
-	public function googlemaps($atts, $content = null) {
+	public function googlemap($atts, $content = null) {
 		static $instance = 0;
 		$instance++;
-		
+
 		if ( empty( parent::$google_map_api_key ) ) {
 			return '<div class="wc-shortcodes-googlemap-api-key-needed"><p>Google requires an <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">API key</a> to embed Google Maps. Enter your key in your <a href="' . admin_url( 'themes.php?page=' . parent::$plugin_slug ) . '" target="_blank">Shortcodes option</a> page under the "Maps" tab.</p></div>';
 		}
 
-		extract(shortcode_atts(array(
-			'title'		=> '', // content inside the info window
-			'title_on_load' => 'no', // should the info window display on map load
-			'location'	=> '', // Enter a valid address that Google can geocode.
-			'height'	=> '300', // set the height of your google map in pixels
-			'zoom'		=> 8, // the lower the zoom, the farther away the map appears
-			'class'		=> '', // add a custom class to your google map
-		), $atts));
-
-		$height = WPC_Shortcodes_Sanitize::pixel( $height );
-		$zoom = WPC_Shortcodes_Sanitize::number( $zoom );
-
-		$title_on_load = 'yes' == $title_on_load ? 1 : 0;
+		$atts = shortcode_atts( parent::$attr->googlemap, $atts );
+		$atts = WPC_Shortcodes_Sanitize::googlemap_attr( $atts );
 		
 		// load scripts
 		wp_enqueue_script('wc-shortcodes-googlemap');
@@ -843,11 +820,11 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$class[] = 'googlemap';
 		$class[] = 'wc-shortcodes-item';
 		
-		$output = '<div id="map_canvas_'.$instance.'" class="' . esc_attr( implode( ' ', $class ) ) . '" style="height:'.$height.';width:100%">';
-			$output .= (!empty($title)) ? '<input class="title" type="hidden" value="'.esc_html( $title ).'" />' : '';
-			$output .= '<input class="location" type="hidden" value="'.esc_attr( $location ).'" />';
-			$output .= '<input class="zoom" type="hidden" value="'.$zoom.'" />';
-			$output .= '<input class="title-on-load" type="hidden" value="'.$title_on_load.'" />';
+		$output = '<div id="map_canvas_'.$instance.'" class="' . esc_attr( implode( ' ', $class ) ) . '" style="height:'.$atts['height'].';width:100%">';
+			$output .= (!empty($atts['title'])) ? '<input class="title" type="hidden" value="'.esc_html( $atts['title'] ).'" />' : '';
+			$output .= '<input class="location" type="hidden" value="'.esc_attr( $atts['location'] ).'" />';
+			$output .= '<input class="zoom" type="hidden" value="'.$atts['zoom'].'" />';
+			$output .= '<input class="title-on-load" type="hidden" value="'.$atts['title_on_load'].'" />';
 			$output .= '<div class="map_canvas"></div>';
 		$output .= '</div>';
 		

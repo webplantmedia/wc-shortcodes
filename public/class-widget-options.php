@@ -159,6 +159,31 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function google_map_zoom_values() {
+		return array(
+			'1' => '1 (World)',
+			'2' => '2',
+			'3' => '3',
+			'4' => '4',
+			'5' => '5 (Landmass/continent)',
+			'6' => '6',
+			'7' => '7',
+			'8' => '8',
+			'9' => '9',
+			'10' => '10 (City)',
+			'11' => '11',
+			'12' => '12',
+			'13' => '13',
+			'14' => '14',
+			'15' => '15 (Streets)',
+			'16' => '16',
+			'17' => '17',
+			'18' => '18',
+			'19' => '19',
+			'20' => '20 (Buildings)',
+		);
+	}
+
 	public static function heading_type_values() {
 		return array(
 			'h1' => 'h1',

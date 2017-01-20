@@ -181,6 +181,27 @@ class WPC_Shortcodes_Vars {
 			'margin_left' => '',
 			'class' => '',
 		);
+		self::$attr->googlemap = array(
+			'title'		=> '', // content inside the info window
+			'title_on_load' => 0, // should the info window display on map load
+			'location'	=> '', // Enter a valid address that Google can geocode.
+			'height'	=> '300', // set the height of your google map in pixels
+			'zoom'		=> 10, // the lower the zoom, the farther away the map appears
+			'class'		=> '', // add a custom class to your google map
+		);
+		self::$attr->heading = array(
+			'title'			=> __('Sample Heading', 'wc'),
+			'type'			=> 'h2',
+			'margin_top'	=> '',
+			'margin_bottom'	=> '',
+			'text_align'	=> '',
+			'font_size'		=> '',
+			'color'			=> '',
+			'class'			=> '',
+			'icon_left'		=> '',
+			'icon_right'	=> '',
+			'icon_spacing'	=> '',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).
