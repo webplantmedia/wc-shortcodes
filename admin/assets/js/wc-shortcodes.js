@@ -31,8 +31,6 @@
 		$innerContent.empty();
 		$modal.off('wcShortcodesBeforeModalHide')
 	}
-	var getNameValue = function() {
-	}
 	var insertShortcode = function() {
 		var data = $innerContent.serialize();
 		var $fields = $innerContent.find(".wc-shortcodes-widget-option");
