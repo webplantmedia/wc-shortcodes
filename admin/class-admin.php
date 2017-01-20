@@ -74,6 +74,8 @@ class WPC_Shortcodes_Admin extends WPC_Shortcodes_Vars {
 			wp_enqueue_style( 'wc-shortcodes-ui-theme-override-style', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/css/ui-theme-override.css', array( ), $ver );
 			wp_enqueue_script( 'wc-shortcodes-posts-widget', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wcpostswidget.js', array ( 'jquery', 'jquery-ui-autocomplete', 'jquery-ui-accordion' ), $ver, true );
 			wp_enqueue_script( 'wc-shortcodes-font-awesome-widget', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wcfontawesomewidget.js', array ( 'jquery', 'jquery-ui-autocomplete' ), $ver, true );
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'wc-shortcodes-color-picker-widget', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wccolorpickerwidget.js', array ( 'wp-color-picker' ), $ver, true );
 			wp_enqueue_script( 'wc-shortcodes', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wc-shortcodes.js', array ( 'jquery' ), $ver, true );
 		}
 

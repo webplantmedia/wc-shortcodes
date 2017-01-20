@@ -17,6 +17,7 @@
 	$body.append('<div id="wc-shortcode-modal"><div class="media-modal wp-core-ui">'+button+content+'</div>'+backdrop+'</div>');
 
 	var $modal = $body.find('#wc-shortcode-modal');
+	var $modalFrame = $modal.find('.media-frame');
 	var $title = $modal.find('.media-frame-title h1');
 	var $innerContent = $modal.find('.media-frame-content');
 	var $close = $modal.find('.media-modal-close');
@@ -25,8 +26,10 @@
 	var $backdrop = $modal.find('.media-modal-backdrop');
 
 	var close = function() {
+		$modal.trigger('wcShortcodesBeforeModalHide');
 		$modal.hide();
-		$innerContent.html('');
+		$innerContent.empty();
+		$modal.off('wcShortcodesBeforeModalHide')
 	}
 	var getNameValue = function() {
 	}

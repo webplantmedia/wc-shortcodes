@@ -43,8 +43,8 @@ class WPC_Shortcodes_Widget_Heading extends WPC_Shortcodes_Widget_Base {
 				<span class="wcs-description">Enter CSS unit value.</span>
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('color'); ?>"><?php _e('Color:') ?></label>
-				<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('color'); ?>" name="<?php echo $this->get_field_name('color'); ?>" value="<?php echo $o['color']; ?>" />
+				<label for="<?php echo $this->get_field_id('color'); ?>"><?php _e('Font Color:') ?></label><br />
+				<input type="text" class="wc-shortcodes-widget-option widefat wc-shortcodes-widget-color-picker" id="<?php echo $this->get_field_id('color'); ?>" name="<?php echo $this->get_field_name('color'); ?>" value="<?php echo $o['color']; ?>" />
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('icon_left'); ?>"><?php _e('Icon Left:') ?></label>
@@ -72,6 +72,8 @@ class WPC_Shortcodes_Widget_Heading extends WPC_Shortcodes_Widget_Base {
 			/* <![CDATA[ */
 			jQuery(document).ready(function($){
 				$('#wc-shortcodes-heading-widget-<?php echo $this->number; ?>').wcFontAwesomeWidget();
+				$('#wc-shortcodes-heading-widget-<?php echo $this->number; ?>').wcColorPickerWidget();
+
 			});
 			/* ]]> */
 		</script>
