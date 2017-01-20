@@ -6,6 +6,7 @@
 		var wcParagraphContent = '<p>Sample Content</p>';
 		var wcDummyParagraphContent = '<p>Sample Content</p>';
 		var mceSelected = '';
+		var mceSelectedHTML = '';
 
 		editor.addButton('wpc_shortcodes_button', function() {
 			
@@ -17,9 +18,10 @@
 				icon: false,
 				onclick: function() {
 					mceSelected = editor.selection.getContent({format: 'text'});
+					mceSelectedHTML = editor.selection.getContent({format: 'html'});
 					if ( mceSelected ) {
 						wcDummyContent = mceSelected;
-						wcParagraphContent = '<p>' + mceSelected + '</p>';
+						wcParagraphContent = '<p>' + mceSelectedHTML + '</p>';
 					}
 					else {
 						wcDummyContent = 'Sample Content';
@@ -160,7 +162,7 @@
 							{
 								text: "Testimonial",
 								onclick: function(){
-									editor.insertContent('[wc_testimonial by="Author" url="" position="left"]' + wcDummyContent + '[/wc_testimonial]');
+									editor.insertContent('[wc_testimonial by="Author" url="" position="left"]' + wcParagraphContent + '[/wc_testimonial]');
 								}
 							},
 							{
@@ -432,7 +434,7 @@
 							{
 								text: "Full Width",
 								onclick: function(){
-									editor.insertContent('[wc_fullwidth selector=""]' + wcDummyContent + '[/wc_fullwidth]');
+									editor.insertContent('[wc_fullwidth selector=""]' + wcParagraphContent + '[/wc_fullwidth]');
 								}
 							},
 							{
