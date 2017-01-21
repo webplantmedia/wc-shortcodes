@@ -274,53 +274,51 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	* @since 1.0
 	*/
 	public function social_icons( $atts ){
-		extract(shortcode_atts(array(
-			'class'      => '',
-			'size'		 => 'large', // deprecated. using maxheight now
-			'align'      => 'left',
-			'maxheight'  => '0',
-		), $atts));
-
-		// sanitize
-		$maxheight = (int) $maxheight;
-
-		if ( empty( $maxheight ) ) {
-			switch ( $size ) {
-				case 'small' :
-					$maxheight = 16;
-					break;
-				case 'medium' :
-					$maxheight = 24;
-					break;
-				default :
-					$maxheight = 48;
-			}
-		}
-
-		$class = trim( 'wc-shortcodes-social-icons-wrapper wc-shortcodes-item ' . $class );
+		$atts = shortcode_atts( parent::$attr->social_icons, $atts );
+		$atts = WPC_Shortcodes_Sanitize::social_icons_attr( $atts );
 
 		$order = get_option( WC_SHORTCODES_PREFIX . 'social_icons_display' );
-		$format = get_option( WC_SHORTCODES_PREFIX . 'social_icons_format', 'image' );
-		$show_image = 'image' == $format ? true : false;
+
+		if ( 'default' == $atts['format'] ) {
+			$atts['format'] = get_option( WC_SHORTCODES_PREFIX . 'social_icons_format', 'icon' );
+		}
+
+		$show_image = 'image' == $atts['format'] ? true : false;
 
 		if ( ! is_array( $order ) || empty( $order ) ) {
 			return;
 		}
 
-		// classes
-		$classes = array();
-
-		$classes[] = 'wc-shortcodes-social-icons';
-		$classes[] = 'wc-shortcodes-clearfix';
-		$classes[] = 'wc-shortcodes-social-icons-align-'.$align;
-		$classes[] = 'wc-shortcodes-maxheight-'.$maxheight;
-		$classes[] = 'wc-shortcodes-social-icons-format-'.$format;
-
 		$first = true;
 
-		$html = '<div class="' . esc_attr( $class ) . '">';
-			$html .= '<ul class="'.esc_attr( implode( ' ', $classes ) ).'">';
-				foreach ( $order as $key => $value ) {
+		$column_display = false;
+		if ( is_numeric( $atts['columns'] ) & (int) $atts['columns'] > 0 ) {
+			$column_display = true;
+		}
+
+		$classes = array();
+		$classes[] = 'wc-shortcodes-social-icons';
+		$classes[] = 'wc-shortcodes-clearfix';
+		$classes[] = 'wc-shortcodes-columns-'.$atts['columns'];
+		$classes[] = 'wc-shortcodes-maxheight-'.$atts['maxheight'];
+		$classes[] = 'wc-shortcodes-social-icons-format-'.$atts['format'];
+
+		if ( ! empty( $atts['class'] ) ) {
+			$atts['class'] = ' ' . $atts['class'];
+		}
+
+		$html = '<div class="wc-shortcodes-social-icons-wrapper'.$atts['class'].'">';
+			$html .= '<ul class="'.implode( ' ', $classes ).'">';
+				$i = 0;
+				foreach ($order as $key => $name) {
+					$li_class = array();
+					$li_class[] = 'wc-shortcodes-social-icon';
+					$li_class[] = 'wc-shortcode-social-icon-' . $key;
+
+					if ( $column_display && $i % $atts['columns'] == 0 ) {
+						$li_class[] = 'clear-left';
+					}
+
 					$link_option_name = WC_SHORTCODES_PREFIX . $key . '_link';
 					$image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_icon';
 					$font_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_font_icon';
@@ -336,7 +334,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 						$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . esc_attr( $key . $first_class ) . '">';
 							$html .='<a target="_blank" href="'.esc_url( $social_link ).'">';
-								$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.esc_attr( $value ).'">';
+								$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.esc_attr( $name ).'">';
 							$html .= '</a>';
 						$html .= '</li>';
 					}

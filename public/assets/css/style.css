@@ -1244,7 +1244,7 @@ pre.pre-wrap {
  * Social Media Widget
  * ----------------------------------------------------------------------------
  */
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons {
 	text-align: center;
 }
 .wc-shortcodes-social-icons.wc-shortcodes-columns-float-left {
@@ -1253,7 +1253,7 @@ pre.pre-wrap {
 .wc-shortcodes-social-icons.wc-shortcodes-columns-float-right {
 	text-align: right;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons li {
 	display: inline-block;
 	padding: 3px;
 	margin: 0;
@@ -1261,36 +1261,36 @@ pre.pre-wrap {
 	-moz-box-sizing:    border-box;
 	box-sizing:         border-box;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-float-left li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-float-left li {
 	padding-right: 6px;
 	padding-left: 0;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-float-right li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-float-right li {
 	padding-right: 0;
 	padding-left: 6px;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-8 li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-8 li {
 	width: 12.5%;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-7 li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-7 li {
 	width: 14.28571428%;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-6 li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-6 li {
 	width: 16.66666666%;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-5 li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-5 li {
 	width: 20%;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-4 li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-4 li {
 	width: 25%;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-3 li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-3 li {
 	width: 33.33333333%;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-2 li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-2 li {
 	width: 50%;
 }
-.widget_wc_shortcodes_social_icons .wc-shortcodes-social-icons.wc-shortcodes-columns-1 li {
+.wc-shortcodes-social-icons-wrapper .wc-shortcodes-social-icons.wc-shortcodes-columns-1 li {
 	width: 100%;
 }
 

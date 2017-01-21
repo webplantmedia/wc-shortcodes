@@ -220,6 +220,15 @@ class WPC_Shortcodes_Vars {
 			'class'	=> '',
 			'show_percent'	=> 1
 		);
+		self::$attr->social_icons = array(
+			'title'      => '', // for widget title
+			'format'      => 'default',
+			'columns'      => 'float-left',
+			'class'      => '',
+			'size'		 => 'large', // deprecated. using maxheight now
+			'align'      => 'left', //deprecated?
+			'maxheight'  => '48',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

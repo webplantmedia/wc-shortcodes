@@ -129,6 +129,7 @@ class WPC_Shortcodes_Ajax {
 		$shortcode = stripslashes( $_POST['shortcode'] );
 
 		$attr = $this->parse_shortcode( $tag, $shortcode );
+		$attr['wc_shortcodes_using_visual_manager'] = 1;
 		
 		switch ( $tag ) {
 			case 'wc_accordion' :
@@ -173,6 +174,10 @@ class WPC_Shortcodes_Ajax {
 				break;
 			case 'wc_skillbar' :
 				$widget = new WPC_Shortcodes_Widget_Skillbar();
+				$widget->form( $attr );
+				break;
+			case 'wc_social_icons' :
+				$widget = new WPC_Shortcodes_Widget_Social_Icons();
 				$widget->form( $attr );
 				break;
 			case 'wc_fa' :

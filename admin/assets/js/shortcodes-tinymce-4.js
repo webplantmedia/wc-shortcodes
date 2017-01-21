@@ -151,7 +151,8 @@
 							{
 								text: "Social Icon",
 								onclick: function(){
-									editor.insertContent('[wc_social_icons align="left" size="large" display="facebook,google,twitter,pinterest,instagram,bloglovin,flickr,rss,email,custom1,custom2,custom3,custom4,custom5"]');
+									var shortcode = '[wc_social_icons format="default" columns="float-center" maxheight="48"][/wc_social_icons]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{

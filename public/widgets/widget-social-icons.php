@@ -13,164 +13,80 @@ class WPC_Shortcodes_Widget_Social_Icons extends WP_Widget {
 
 		$instance['title'] = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		echo $args['before_widget'];
-
 		if ( !empty($instance['title']) )
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 
-		if ( empty( $instance['format'] ) ) {
-			$instance['format'] = 'default';
-		}
-		$format = $instance['format'];
-
-		// set class with the number of columns the user selected
-		$columns = $instance['columns'];
-		if ( empty($columns) ) {
-			$columns = 'float-left';
-		}
-		$maxheight = 'none';
-		if ( isset( $instance['maxheight'] ) ) {
-			$maxheight = $instance['maxheight'];
+		$shortcode = array();
+		foreach ( $instance as $key => $value ) {
+			$shortcode[] = $key . '="' . $value . '"';
 		}
 
-		$order = get_option( WC_SHORTCODES_PREFIX . 'social_icons_display' );
-
-		switch ( $format ) {
-			case 'default' :
-				$format = get_option( WC_SHORTCODES_PREFIX . 'social_icons_format', 'icon' );
-				break;
-			case 'icon' :
-				$format = 'icon';	
-				break;
-			default :
-				$format = 'image';	
+		if ( ! empty( $shortcode ) ) {
+			$shortcode = implode( " ", $shortcode );
+			$shortcode = '[wc_social_icons ' . $shortcode . '][/wc_social_icons]';
+		}
+		else {
+			$shortcode = '[wc_social_icons][/wc_social_icons]';
 		}
 
-		$show_image = 'image' == $format ? true : false;
-
-		if ( ! is_array( $order ) || empty( $order ) ) {
-			return;
-		}
-
-		$first = true;
-
-		$column_display = false;
-		if ( is_numeric( $columns ) & (int) $columns > 0 ) {
-			$column_display = true;
-		}
-
-		$classes = array();
-		$classes[] = 'wc-shortcodes-social-icons';
-		$classes[] = 'wc-shortcodes-clearfix';
-		$classes[] = 'wc-shortcodes-columns-'.$columns;
-		$classes[] = 'wc-shortcodes-maxheight-'.$maxheight;
-		$classes[] = 'wc-shortcodes-social-icons-format-'.$format;
-
-		$html = '<ul class="'.implode( ' ', $classes ).'">';
-			$i = 0;
-			foreach ($order as $key => $name) {
-				$li_class = array();
-				$li_class[] = 'wc-shortcodes-social-icon';
-				$li_class[] = 'wc-shortcode-social-icon-' . $key;
-
-				if ( $column_display && $i % $columns == 0 ) {
-					$li_class[] = 'clear-left';
-				}
-
-				$link_option_name = WC_SHORTCODES_PREFIX . $key . '_link';
-				$image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_icon';
-				$font_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_font_icon';
-
-				$social_link = get_option( $link_option_name );
-				$social_link = apply_filters( 'wc_shortcodes_social_link', $social_link, $key );
-
-				$first_class = $first ? ' first-icon' : '';
-				$first = false;
-
-				if ( $show_image ) {
-					$icon_url = get_option( $image_icon_option_name );
-
-					$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . $key . $first_class . '">';
-						$html .='<a target="_blank" href="'.$social_link.'">';
-							$html .= '<img src="'.$icon_url.'" alt="'.$name.'">';
-						$html .= '</a>';
-					$html .= '</li>';
-				}
-				else {
-					$icon_class = get_option( $font_icon_option_name );
-
-					$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . $key . $first_class . '">';
-						$html .='<a target="_blank" href="'.$social_link.'">';
-							$html .= '<i class="fa '.$icon_class.'"></i>';
-						$html .= '</a>';
-					$html .= '</li>';
-				}
-			}
-		$html .= '</ul>';
-
-		echo $html;
-
+		echo $args['before_widget'];
+		echo do_shortcode( $shortcode );
 		echo $args['after_widget'];
 	}
 
 	function update( $new_instance, $old_instance ) {
-		$instance['title'] = strip_tags( stripslashes($new_instance['title']) );
-		$instance['format'] = $new_instance['format'];
-		$instance['columns'] = $new_instance['columns'];
-		$instance['maxheight'] = $new_instance['maxheight'];
+		$instance = WPC_Shortcodes_Sanitize::social_icons_attr( $new_instance );
+
 		return $instance;
 	}
 
 	function form( $instance ) {
-		$title = isset( $instance['title'] ) ? $instance['title'] : 'Follow Me!';
-		$format = isset( $instance['format'] ) ? $instance['format'] : 'default';
-		$columns = isset( $instance['columns'] ) ? $instance['columns'] : 'float-left';
-		$maxheight = isset( $instance['maxheight'] ) ? $instance['maxheight'] : 'none';
+		// array_merge needs both values to be array.
+		if ( ! is_array( $instance ) ) {
+			$instance = array();
+		}
+
+		$o = array_merge( WPC_Shortcodes_Vars::$attr->social_icons, $instance );
+		$o = WPC_Shortcodes_Sanitize::social_icons_attr( $o );
 		?>
-		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('format'); ?>"><?php _e('Format:'); ?></label>
-			<select id="<?php echo $this->get_field_id('format'); ?>" name="<?php echo $this->get_field_name('format'); ?>">
-				<option value="default"<?php selected( $format, 'default' ); ?>>Default</option>';
-				<option value="icon"<?php selected( $format, 'icon' ); ?>>Icon</option>';
-				<option value="image"<?php selected( $format, 'image' ); ?>>Image</option>';
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('columns'); ?>"><?php _e('Display:'); ?></label>
-			<select id="<?php echo $this->get_field_id('columns'); ?>" name="<?php echo $this->get_field_name('columns'); ?>">
-				<option value="float-center"<?php selected( $columns, 'float-center' ); ?>>Float Center</option>';
-				<option value="float-left"<?php selected( $columns, 'float-left' ); ?>>Float Left</option>';
-				<option value="float-right"<?php selected( $columns, 'float-right' ); ?>>Float Right</option>';
-				<option value="1"<?php selected( $columns, '1' ); ?>>1 Column</option>';
-				<option value="2"<?php selected( $columns, '2' ); ?>>2 Columns</option>';
-				<option value="3"<?php selected( $columns, '3' ); ?>>3 Columns</option>';
-				<option value="4"<?php selected( $columns, '4' ); ?>>4 Columns</option>';
-				<option value="5"<?php selected( $columns, '5' ); ?>>5 Columns</option>';
-				<option value="6"<?php selected( $columns, '6' ); ?>>6 Columns</option>';
-				<option value="7"<?php selected( $columns, '7' ); ?>>7 Columns</option>';
-				<option value="8"<?php selected( $columns, '8' ); ?>>8 Columns</option>';
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('maxheight'); ?>"><?php _e('Max Height:'); ?></label>
-			<select id="<?php echo $this->get_field_id('maxheight'); ?>" name="<?php echo $this->get_field_name('maxheight'); ?>">
-				<option value="none"<?php selected( $maxheight, 'none' ); ?>>None</option>';
-				<?php for( $i = 10; $i <= 70; $i = $i + 2 ) : ?>
-					<option value="<?php echo $i; ?>"<?php selected( $maxheight, $i ); ?>><?php echo $i; ?>px</option>';
-				<?php endfor; ?>
-			</select>
-		</p>
-		<script type="text/javascript">
-			/* <![CDATA[ */
-			jQuery(document).ready(function($){
-				$('.wc-shortcodes-social-icons').sortable({ axis: "y" });
-			});
-			/* ]]> */
-		</script>
+
+		<div id="wc-shortcodes-social-icons-widget-<?php echo $this->number; ?>" class="wc-shortcodes-visual-manager">
+			<?php if ( ! isset( $o['wc_shortcodes_using_visual_manager'] ) ) : ?>
+				<p>
+					<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $o['title']; ?>" />
+				</p>
+			<?php endif; ?>
+			<p>
+				<label for="<?php echo $this->get_field_id('format'); ?>"><?php _e('Format:'); ?></label>
+				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('format'); ?>" name="<?php echo $this->get_field_name('format'); ?>">
+					<?php foreach ( WPC_Shortcodes_Widget_Options::social_icons_formats() as $key => $value ) : ?>
+						<option value="<?php echo $key; ?>"<?php selected( $o['format'], $key ); ?>><?php echo $value; ?></option>';
+					<?php endforeach; ?>
+				</select>
+			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id('columns'); ?>"><?php _e('Display:'); ?></label>
+				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('columns'); ?>" name="<?php echo $this->get_field_name('columns'); ?>">
+					<?php foreach ( WPC_Shortcodes_Widget_Options::social_icons_display_types() as $key => $value ) : ?>
+						<option value="<?php echo $key; ?>"<?php selected( $o['columns'], $key ); ?>><?php echo $value; ?></option>';
+					<?php endforeach; ?>
+				</select>
+			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id('maxheight'); ?>"><?php _e('Max Height:'); ?></label>
+				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('maxheight'); ?>" name="<?php echo $this->get_field_name('maxheight'); ?>">
+					<?php foreach ( WPC_Shortcodes_Widget_Options::social_icons_max_height_values() as $key => $value ) : ?>
+						<option value="<?php echo $key; ?>"<?php selected( $o['maxheight'], $key ); ?>><?php echo $value; ?></option>';
+					<?php endforeach; ?>
+				</select>
+			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id('class'); ?>"><?php _e('Class:') ?></label>
+				<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('class'); ?>" name="<?php echo $this->get_field_name('class'); ?>" value="<?php echo $o['class']; ?>" />
+				<span class="wcs-description">Enter class name for custom CSS styling.</span>
+			</p>
+		</div>
 		<?php
 	}
 }

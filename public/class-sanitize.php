@@ -137,6 +137,33 @@ class WPC_Shortcodes_Sanitize {
 		return '';
 	}
 
+	public static function social_icons_format( $value, $default = 'default' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::social_icons_formats();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function social_icons_display_type( $value, $default = 'float-left' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::social_icons_display_types();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function social_icons_max_height( $value, $default = 48 ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::social_icons_max_height_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function google_map_zoom( $value, $default = 8 ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::google_map_zoom_values();
 
@@ -454,6 +481,33 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'show_percent' :
 					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function social_icons_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'title' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'format' :
+					$atts[ $key ] = self::social_icons_format( $value );
+					break;
+				case 'columns' :
+					$atts[ $key ] = self::social_icons_display_type( $value );
+					break;
+				case 'maxheight' :
+					$atts[ $key ] = self::social_icons_max_height( $value );
+					break;
+				case 'align' :
+					$atts[ $key ] = self::text_align( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
