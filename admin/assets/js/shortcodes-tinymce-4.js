@@ -144,7 +144,8 @@
 							{
 								text: "Skillbar",
 								onclick: function(){
-									editor.insertContent('[wc_skillbar title="' + wcDummyContent + '" percentage="100" color="#6adcfa"]');
+									var shortcode = '[wc_skillbar title="' + wcDummyContent + '" percentage="100" color="#6adcfa"]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{

@@ -171,6 +171,10 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WPC_Shortcodes_Widget_Pricing();
 				$widget->form( $attr );
 				break;
+			case 'wc_skillbar' :
+				$widget = new WPC_Shortcodes_Widget_Skillbar();
+				$widget->form( $attr );
+				break;
 			case 'wc_fa' :
 				$widget = new WPC_Shortcodes_Widget_FA();
 				$widget->form( $attr );

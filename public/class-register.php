@@ -238,28 +238,18 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 * @since v1.3
 	 */
 	public function skillbar( $atts  ) {
-		extract( shortcode_atts( array(
-			'title'	=> '',
-			'percentage'	=> '100',
-			'color'	=> '#6adcfa',
-			'class'	=> '',
-			'show_percent'	=> 'true'
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->skillbar, $atts );
+		$atts = WPC_Shortcodes_Sanitize::skillbar_attr( $atts );
 
-		// sanitize
-		$percentage = WPC_Shortcodes_Sanitize::int_float( $percentage );
-		$color = WPC_Shortcodes_Sanitize::hex_color( $color );
-		$show_percent = WPC_Shortcodes_Sanitize::bool( $show_percent );
-		
 		// Enque scripts
 		wp_enqueue_script('wc-shortcodes-skillbar');
 		
 		// Display the accordion	';
-		$output = '<div class="wc-shortcodes-skillbar wc-shortcodes-item wc-shortcodes-clearfix '. esc_attr( $class ) .'" data-percent="'. esc_attr( $percentage ) .'%">';
-			if ( $title !== '' ) $output .= '<div class="wc-shortcodes-skillbar-title" style="background: '. esc_attr( $color ) .';"><span>'. esc_html( $title ) .'</span></div>';
-			$output .= '<div class="wc-shortcodes-skillbar-bar" style="background: '. esc_attr( $color ) .';"></div>';
-			if ( $show_percent ) {
-				$output .= '<div class="wc-shortcodes-skill-bar-percent">'.$percentage.'%</div>';
+		$output = '<div class="wc-shortcodes-skillbar wc-shortcodes-item wc-shortcodes-clearfix '. esc_attr( $atts['class'] ) .'" data-percent="'. esc_attr( $atts['percentage'] ) .'%">';
+			if ( $atts['title'] !== '' ) $output .= '<div class="wc-shortcodes-skillbar-title" style="background: '. esc_attr( $atts['color'] ) .';"><span>'. esc_html( $atts['title'] ) .'</span></div>';
+			$output .= '<div class="wc-shortcodes-skillbar-bar" style="background: '. esc_attr( $atts['color'] ) .';"></div>';
+			if ( $atts['show_percent'] ) {
+				$output .= '<div class="wc-shortcodes-skill-bar-percent">'.$atts['percentage'].'%</div>';
 			}
 		$output .= '</div>';
 		

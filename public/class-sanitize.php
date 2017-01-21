@@ -54,6 +54,22 @@ class WPC_Shortcodes_Sanitize {
 		return $value;
 	}
 
+	public static function percentage( $value ) {
+		$value = preg_replace( "/[^0-9\.]/", "", $value );
+		$value = floatval( $value );
+
+		if ( empty( $value ) )
+			$value = 0;
+
+		if ( 0 > $value )
+			$value = 0;
+
+		if ( 100 < $value )
+			$value = 100;
+
+		return $value;
+	}
+
 	public static function positive_number( $value ) {
 		$value = preg_replace("/[^0-9\-]/", "",$value);
 		$value = intval( $value );
@@ -414,6 +430,30 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'button_rel' :
 					$atts[ $key ] = self::url_rel( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function skillbar_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'title' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'percentage' :
+					$atts[ $key ] = self::percentage( $value );
+					break;
+				case 'color' :
+					$atts[ $key ] = self::hex_color( $value );
+					break;
+				case 'show_percent' :
+					$atts[ $key ] = self::int_bool( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );

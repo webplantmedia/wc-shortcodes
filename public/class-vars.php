@@ -213,6 +213,13 @@ class WPC_Shortcodes_Vars {
 			'button_rel'			=> 'nofollow', // alternate, author, bookmark, help, license, next, nofollow, noreferrer, prefetch, prev, search, tag
 			'class'					=> '', // add your own css class for customization.
 		);
+		self::$attr->skillbar = array(
+			'title'	=> '',
+			'percentage'	=> '100',
+			'color'	=> '#6adcfa',
+			'class'	=> '',
+			'show_percent'	=> 1
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).
