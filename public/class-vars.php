@@ -229,6 +229,16 @@ class WPC_Shortcodes_Vars {
 			'align'      => 'left', //deprecated?
 			'maxheight'  => '48',
 		);
+		self::$attr->share_buttons = array(
+			// misc options
+			'class' => '',
+		);
+		self::$attr->testimonial = array(
+			'by' => '',
+			'url' => '',
+			'position' => 'left',
+			'class'	=> '',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

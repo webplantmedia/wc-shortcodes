@@ -234,6 +234,15 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
+	public static function testimonial_position( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::testimonial_positions();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function text_align( $value, $default = '' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::text_align_values();
 
@@ -508,6 +517,39 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'align' :
 					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function share_buttons_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function testimonial_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'by' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'url' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'position' :
+					$atts[ $key ] = self::testimonial_position( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );

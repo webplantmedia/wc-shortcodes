@@ -184,6 +184,14 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function testimonial_positions() {
+		return array(
+			'' => 'None',
+			'left' => 'Left',
+			'right' => 'Right',
+		);
+	}
+
 	public static function text_align_values() {
 		return array(
 			'' => 'None',

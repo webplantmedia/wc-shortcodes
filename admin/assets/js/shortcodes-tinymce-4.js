@@ -158,13 +158,15 @@
 							{
 								text: "Share Buttons",
 								onclick: function(){
-									editor.insertContent('[wc_share_buttons]');
+									var shortcode = '[wc_share_buttons][/wc_share_buttons]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
 								text: "Testimonial",
 								onclick: function(){
-									editor.insertContent('[wc_testimonial by="Author" url="" position="left"]' + wcParagraphContent + '[/wc_testimonial]');
+									var shortcode = '[wc_testimonial by="Author" url="" position="left"]' + wcParagraphContent + '[/wc_testimonial]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{

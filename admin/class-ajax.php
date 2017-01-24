@@ -180,6 +180,14 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WPC_Shortcodes_Widget_Social_Icons();
 				$widget->form( $attr );
 				break;
+			case 'wc_share_buttons' :
+				$widget = new WPC_Shortcodes_Widget_Share_Buttons();
+				$widget->form( $attr );
+				break;
+			case 'wc_testimonial' :
+				$widget = new WPC_Shortcodes_Widget_Testimonial();
+				$widget->form( $attr );
+				break;
 			case 'wc_fa' :
 				$widget = new WPC_Shortcodes_Widget_FA();
 				$widget->form( $attr );

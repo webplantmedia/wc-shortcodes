@@ -452,22 +452,18 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 *
 	 */
 	public function testimonial( $atts, $content = null  ) {
-		extract( shortcode_atts( array(
-			'by' => '',
-			'url' => '',
-			'position' => 'left',
-			'class'	=> '',
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->testimonial, $atts );
+		$atts = WPC_Shortcodes_Sanitize::testimonial_attr( $atts );
 
-		if ( ! empty( $url ) ) {
-			$by = '<a href="' . esc_url( $url ) . '">' . $by . '</a>';
+		if ( ! empty( $atts['url'] ) ) {
+			$atts['by'] = '<a href="' . esc_url( $atts['url'] ) . '">' . $atts['by'] . '</a>';
 		}
 
 		$testimonial_content = '';
-		$testimonial_content .= '<div class="wc-shortcodes-testimonial wc-shortcodes-item wc-shortcodes-clearfix wc-shortcodes-testimonial-'.esc_attr( $position ).' '. esc_attr( $class ) .'"><div class="wc-shortcodes-testimonial-content wc-shortcodes-content">';
+		$testimonial_content .= '<div class="wc-shortcodes-testimonial wc-shortcodes-item wc-shortcodes-clearfix wc-shortcodes-testimonial-'.esc_attr( $atts['position'] ).' '. esc_attr( $atts['class'] ) .'"><div class="wc-shortcodes-testimonial-content wc-shortcodes-content">';
 		$testimonial_content .= $content;
 		$testimonial_content .= '</div><div class="wc-shortcodes-testimonial-author">';
-		$testimonial_content .= $by .'</div></div>';	
+		$testimonial_content .= $atts['by'] .'</div></div>';	
 
 		return $testimonial_content;
 	}
@@ -1413,10 +1409,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	}
 
 	public function share_buttons( $atts ) {
-		extract( shortcode_atts( array(
-			// misc options
-			'class' => '',
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->share_buttons, $atts );
+		$atts = WPC_Shortcodes_Sanitize::share_buttons_attr( $atts );
 
 		$share_buttons = get_option( WC_SHORTCODES_PREFIX . 'share_buttons_display' );
 		$size = sizeof( $share_buttons );
