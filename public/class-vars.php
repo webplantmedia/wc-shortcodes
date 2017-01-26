@@ -267,6 +267,13 @@ class WPC_Shortcodes_Vars {
 			// misc options
 			'class' => '',
 		);
+		self::$attr->countdown = array(
+			'date' => '',
+			'format' => 'wdHMs',
+			'labels' => 'Years,Months,Weeks,Days,Hours,Minutes,Seconds',
+			'labels1' => 'Year,Month,Week,Day,Hour,Minute,Second',
+			'message' => 'Your Message Here!',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

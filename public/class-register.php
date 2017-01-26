@@ -848,21 +848,16 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 * @since v1.10
 	 */
 	public function countdown( $atts ) {
-		extract( shortcode_atts( array(
-			'date' => '',
-			'format' => 'wdHMs',
-			'labels' => 'Years,Months,Weeks,Days,Hours,Minutes,Seconds',
-			'labels1' => 'Year,Month,Week,Day,Hour,Minute,Second',
-			'message' => 'Your Message Here!',
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->countdown, $atts );
+		$atts = WPC_Shortcodes_Sanitize::countdown_attr( $atts );
 
-		if ( empty( $date ) ) {
+		if ( empty( $atts['date'] ) ) {
 			return '<p>*Please enter a date for your countdown*</p>';
 		}
 
 		wp_enqueue_script('wc-shortcodes-countdown');
 
-		$html = '<div class="wc-shortcodes-countdown" data-labels="'.esc_attr($labels).'" data-labels1="'.esc_attr($labels1).'" data-date="'.esc_attr( $date ).'" data-format="'.esc_attr( $format ).'" data-message="'.esc_attr( $message ).'"></div>';
+		$html = '<div class="wc-shortcodes-countdown" data-labels="'.esc_attr($atts['labels']).'" data-labels1="'.esc_attr($atts['labels1']).'" data-date="'.esc_attr( $atts['date'] ).'" data-format="'.esc_attr( $atts['format'] ).'" data-message="'.esc_attr( $atts['message'] ).'"></div>';
 		$html = '<div class="wc-shortcodes-countdown-bg1">'.$html.'</div>';
 		$html = '<div class="wc-shortcodes-countdown-bg2">'.$html.'</div>';
 		$html = '<div class="wc-shortcodes-countdown-bg3">'.$html.'</div>';

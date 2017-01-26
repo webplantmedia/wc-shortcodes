@@ -710,6 +710,30 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
+	public static function countdown_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'date' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'format' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'labels' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'labels1' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'message' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function heading_attr( $atts ) {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {

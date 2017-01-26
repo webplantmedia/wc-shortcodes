@@ -181,7 +181,8 @@
 								onclick: function(){
 									var d = new Date();
 									var year = d.getFullYear() + 1;
-									editor.insertContent('[wc_countdown date="July 23, '+year+', 6:00:00 PM" format="wdHMs" message="Your Message Here!" labels="Years,Months,Weeks,Days,Hours,Minutes,Seconds" labels1="Year,Month,Week,Day,Hour,Minute,Second"]');
+									var shortcode = '[wc_countdown date="July 23, '+year+', 6:00:00 PM" format="wdHMs" message="Your Message Here!" labels="Years,Months,Weeks,Days,Hours,Minutes,Seconds" labels1="Year,Month,Week,Day,Hour,Minute,Second"]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
