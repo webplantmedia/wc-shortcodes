@@ -1257,119 +1257,86 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	}
 
 	public function image( $atts ) {
-		extract( shortcode_atts( array(
-			// attachment detail settings
-			'title' => '',
-			'alt' => '',
-			'caption' => '',
-
-			// attachment display settings
-			'link_to' => '', // post, file, none
-			'url' => '', // for custom link_to
-			'align' => '', // none, left, center, right
-			'attachment_id' => '', // int id
-			'size' => 'large', // image size
-
-			// flag options
-			'flag' => '',
-			'left' => '',
-			'right' => '',
-			'top' => '',
-			'bottom' => '',
-			'text_color' => '',
-			'background_color' => '',
-			'font_size' => '',
-			'text_align' => '', // none, left, center, right
-			'flag_width' => '',
-
-			// misc options
-			'class' => '',
-		), $atts ) );
-
-		$font_size = WPC_Shortcodes_Sanitize::css_unit( $font_size );
-		$flag_width = WPC_Shortcodes_Sanitize::css_unit( $flag_width );
+		$atts = shortcode_atts( parent::$attr->image, $atts );
+		$atts = WPC_Shortcodes_Sanitize::image_attr( $atts );
 
 		// function options
 		$div_wrapper = false;
-
-		// sanitize
-		$attachment_id = WPC_Shortcodes_Sanitize::number( $attachment_id );
 
 		// classes
 		$classes = array();
 
 		$classes[] = 'wc-shortcodes-image';
 
-		$whitelist = array( 'none', 'left', 'center', 'right' );
-		if ( in_array( $align, $whitelist ) )
-			$classes[] = 'align' . $align;
+		if ( ! empty( $atts['align'] ) )
+			$classes[] = 'align' . $atts['align'];
 
-		if ( ! empty( $size ) )
-			$classes[] = 'size-' . $size;
+		if ( ! empty( $atts['size'] ) )
+			$classes[] = 'size-' . $atts['size'];
 
-		if ( ! empty( $attachment_id ) )
-			$classes[] = 'wp-image-' . $attachment_id;
+		if ( ! empty( $atts['attachment_id'] ) )
+			$classes[] = 'wp-image-' . $atts['attachment_id'];
 
-		if ( ! empty( $class ) )
-			$classes[] = $class;
+		if ( ! empty( $atts['class'] ) )
+			$classes[] = $atts['class'];
 
 		// check if src is set
-		list( $src, $width, $height ) = wp_get_attachment_image_src( $attachment_id, $size );
+		list( $src, $width, $height ) = wp_get_attachment_image_src( $atts['attachment_id'], $atts['size'] );
 		if ( empty( $src ) ) {
 			return '<p>Please insert a valid image</p>';
 		}
 
-		$html = '<img alt="' . esc_attr( $alt ) . '" title="' . esc_attr( $title ) . '" src="' . esc_url( $src ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" />';
+		$html = '<img alt="' . esc_attr( $atts['alt'] ) . '" title="' . esc_attr( $atts['title'] ) . '" src="' . esc_url( $src ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" />';
 
 		// insert flag
-		if ( ! empty( $flag ) ) {
+		if ( ! empty( $atts['flag'] ) ) {
 			$style = array();
-			if ( is_numeric( $top ) )
-				$style[] = 'top:' . (int) $top . 'px';
-			if ( is_numeric( $right ) )
-				$style[] = 'right:' . (int) $right . 'px';
-			if ( is_numeric( $bottom ) )
-				$style[] = 'bottom:' . (int) $bottom . 'px';
-			if ( is_numeric( $left ) )
-				$style[] = 'left:' . (int) $left . 'px';
-			if ( ! empty( $background_color ) )
-				$style[] = 'background-color:' . $background_color;
-			if ( ! empty( $text_color ) )
-				$style[] = 'color:' . $text_color;
-			if ( ! empty( $font_size ) )
-				$style[] = 'font-size:' . $font_size;
-			if ( in_array( $text_align, $whitelist ) )
-				$style[] = 'text-align:' . $text_align;
-			if ( ! empty( $flag_width ) )
-				$style[] = 'width:' . $flag_width;
+			if ( ! empty( $atts['top'] ) )
+				$style[] = 'top:' . $atts['top'];
+			if ( ! empty( $atts['right'] ) )
+				$style[] = 'right:' . $atts['right'];
+			if ( ! empty( $atts['bottom'] ) )
+				$style[] = 'bottom:' . $atts['bottom'];
+			if ( ! empty( $atts['left'] ) )
+				$style[] = 'left:' . $atts['left'];
+			if ( ! empty( $atts['background_color'] ) )
+				$style[] = 'background-color:' . $atts['background_color'];
+			if ( ! empty( $atts['text_color'] ) )
+				$style[] = 'color:' . $atts['text_color'];
+			if ( ! empty( $atts['font_size'] ) )
+				$style[] = 'font-size:' . $atts['font_size'];
+			if ( ! empty( $atts['text_align'] ) )
+				$style[] = 'text-align:' . $atts['text_align'];
+			if ( ! empty( $atts['flag_width'] ) )
+				$style[] = 'width:' . $atts['flag_width'];
 
 
-			$html .= '<span style="' . esc_attr( implode( ';', $style ) ) . '" class="wc-shortcodes-image-flag-bg"><span class="wc-shortcodes-image-flag-text">' . esc_html( $flag ) . '</span></span>';
+			$html .= '<span style="' . esc_attr( implode( ';', $style ) ) . '" class="wc-shortcodes-image-flag-bg"><span class="wc-shortcodes-image-flag-text">' . esc_html( $atts['flag'] ) . '</span></span>';
 			$div_wrapper = true;
 			
 		}
 
 		// check link_to
-		if ( empty( $url ) ) {
-			if ( 'file' == $link_to )
-				$url = wp_get_attachment_url( $attachment_id );
-			else if ( 'post' == $link_to )
-				$url = get_attachment_link( $attachment_id );
+		if ( empty( $atts['url'] ) ) {
+			if ( 'file' == $atts['link_to'] )
+				$atts['url'] = wp_get_attachment_url( $atts['attachment_id'] );
+			else if ( 'post' == $atts['link_to'] )
+				$atts['url'] = get_attachment_link( $atts['attachment_id'] );
 		}
 
-		if ( 'none' != $link_to )
-			$html = '<a class="wc-shortcodes-image-anchor" href="' . esc_url( $url ) . '">' . $html . '</a>';
+		if ( 'none' != $atts['link_to'] )
+			$html = '<a class="wc-shortcodes-image-anchor" href="' . esc_url( $atts['url'] ) . '">' . $html . '</a>';
 
 		// insert caption
-		if ( ! empty( $caption ) ) {
-			$html .= '<p class="wp-caption-text">' . esc_html( $caption ) . '</p>';
+		if ( ! empty( $atts['caption'] ) ) {
+			$html .= '<p class="wp-caption-text">' . esc_html( $atts['caption'] ) . '</p>';
 			$div_wrapper = true;
 		}
 
 		// do we need a div wrapper?
 		if ( $div_wrapper ) {
 			$html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)\s?/', '$1', $html );
-			$html = '<div id="attachment_' . esc_attr( $attachment_id ) . '" class="wc-shortcodes-image-wrapper wc-shortcodes-item wp-caption align' . esc_attr( $align ) . '" style="width:' . $width . 'px">' . $html . '</div>';
+			$html = '<div id="attachment_' . esc_attr( $atts['attachment_id'] ) . '" class="wc-shortcodes-image-wrapper wc-shortcodes-item wp-caption align' . esc_attr( $atts['align'] ) . '" style="width:' . $width . 'px">' . $html . '</div>';
 		}
 		else if ( in_array( $align, array( 'none', 'center' ) ) ) {
 			$html = '<p>' . $html . '</p>';

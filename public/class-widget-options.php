@@ -145,6 +145,14 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function image_link_to_values() {
+		return array(
+			'' => 'None',
+			'post' => 'Parent Post',
+			'file' => 'Image File',
+		);
+	}
+
 	public static function url_rel_values() {
 		return array(
 			'' => 'None',

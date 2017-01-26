@@ -239,6 +239,34 @@ class WPC_Shortcodes_Vars {
 			'position' => 'left',
 			'class'	=> '',
 		);
+		self::$attr->image = array(
+			// attachment detail settings
+			'title' => '',
+			'alt' => '',
+			'caption' => '',
+
+			// attachment display settings
+			'link_to' => '', // post, file, none
+			'url' => '', // for custom link_to
+			'align' => '', // none, left, center, right
+			'attachment_id' => '', // int id
+			'size' => 'large', // image size
+
+			// flag options
+			'flag' => '',
+			'left' => '',
+			'right' => '',
+			'top' => '',
+			'bottom' => '',
+			'text_color' => '',
+			'background_color' => '',
+			'font_size' => '',
+			'text_align' => '', // none, left, center, right
+			'flag_width' => '',
+
+			// misc options
+			'class' => '',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

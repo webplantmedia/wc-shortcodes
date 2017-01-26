@@ -14,6 +14,7 @@ class WPC_Shortcodes_Ajax {
 
 	private function __construct() {
 		add_action( 'wp_ajax_wc_post_lookup', array( &$this, 'post_lookup_callback' ) );
+		add_action( 'wp_ajax_wc_attachment_lookup', array( &$this, 'attachment_lookup_callback' ) );
 		add_action( 'wp_ajax_wc_terms_lookup', array( &$this, 'terms_lookup_callback' ) );
 		add_action( 'wp_ajax_wc_mce_popup', array( &$this, 'mce_popup' ) );
 	}
@@ -42,6 +43,53 @@ class WPC_Shortcodes_Ajax {
 		";
 
 		$sql = $wpdb->prepare($sql, $request, $post_type);
+
+		$results = $wpdb->get_results($sql);
+
+		//copy the business titles to a simple array
+		$titles = array();
+		$i = 0;
+		foreach( $results as $r ) {
+			$titles[ $i ][ 'label' ] = $r->post_title . " (" . $r->ID . ")";
+			$titles[ $i ][ 'value' ] = $r->ID;
+			$i++;
+		}
+
+		if ( empty( $titles ) ) {
+			$titles[0]['label'] = "No results found in post type \"$post_type\".";
+			$titles[0]['value'] = "0";
+		}
+			
+		echo json_encode($titles); //encode into JSON format and output
+
+		die(); //stop "0" from being output
+	}
+
+	public function attachment_lookup_callback() {
+		global $wpdb; //get access to the WordPress database object variable
+
+		//get names of all businesses
+		$request = '%' . $wpdb->esc_like( stripslashes( sanitize_text_field( $_POST['request'] ) ) ) . '%'; //escape for use in LIKE statement
+		$post_type = 'attachment';
+		$post_status = 'inherit';
+
+		$sql = "
+			select
+				ID,
+				post_title
+			from
+				$wpdb->posts
+			where
+				post_title like %s
+				and post_type='%s'
+				and post_status='%s'
+			order by
+				post_title ASC
+			limit
+				0,30
+		";
+
+		$sql = $wpdb->prepare( $sql, $request, $post_type, $post_status );
 
 		$results = $wpdb->get_results($sql);
 
@@ -186,6 +234,10 @@ class WPC_Shortcodes_Ajax {
 				break;
 			case 'wc_testimonial' :
 				$widget = new WPC_Shortcodes_Widget_Testimonial();
+				$widget->form( $attr );
+				break;
+			case 'wc_image' :
+				$widget = new WPC_Shortcodes_Widget_Image();
 				$widget->form( $attr );
 				break;
 			case 'wc_fa' :

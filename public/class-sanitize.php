@@ -4,6 +4,9 @@
  */
 class WPC_Shortcodes_Sanitize {
 	public static function bool( $value ) {
+		if ( '' == $value )
+			return $value;
+
 		if ( 'true' == $value ) {
 			return true;
 		}
@@ -15,6 +18,9 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function int_bool( $value ) {
+		if ( '' == $value )
+			return $value;
+
 		if ( "no" == $value ) {
 			$value = 0;
 		}
@@ -31,6 +37,9 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function int_float( $value ) {
+		if ( '' == $value )
+			return $value;
+
 		$value = filter_var( $value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
 
 		return $value;
@@ -55,6 +64,9 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function percentage( $value ) {
+		if ( '' == $value )
+			return $value;
+
 		$value = preg_replace( "/[^0-9\.]/", "", $value );
 		$value = floatval( $value );
 
@@ -71,6 +83,9 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function positive_number( $value ) {
+		if ( '' == $value )
+			return $value;
+
 		$value = preg_replace("/[^0-9\-]/", "",$value);
 		$value = intval( $value );
 
@@ -84,6 +99,9 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function number( $value ) {
+		if ( '' == $value )
+			return $value;
+
 		$value = preg_replace("/[^0-9\-]/", "",$value);
 		$value = intval( $value );
 
@@ -182,6 +200,15 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
+	public static function image_link_to( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::image_link_to_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function button_type( $value, $default = 'primary' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::button_types();
 
@@ -236,6 +263,15 @@ class WPC_Shortcodes_Sanitize {
 
 	public static function testimonial_position( $value, $default = '' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::testimonial_positions();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function image_size( $value, $default = 'large' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::image_sizes();
 
 		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
@@ -430,6 +466,72 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'position' :
 					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function image_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'title' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'alt' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'caption' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'link_to' :
+					$atts[ $key ] = self::image_link_to( $value );
+					break;
+				case 'url' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'align' :
+					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'attachment_id' :
+					$atts[ $key ] = self::positive_number( $value );
+					break;
+				case 'size' :
+					$atts[ $key ] = self::image_size( $value );
+					break;
+				case 'flag' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'left' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'right' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'top' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'bottom' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'text_color' :
+					$atts[ $key ] = self::hex_color( $value );
+					break;
+				case 'background_color' :
+					$atts[ $key ] = self::hex_color( $value );
+					break;
+				case 'font_size' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'text_align' :
+					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'flag_width' :
+					$atts[ $key ] = self::css_unit( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
