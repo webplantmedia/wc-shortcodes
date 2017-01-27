@@ -198,7 +198,14 @@
 									var shortcode = '[wc_html name="Custom Field Name"][/wc_html]';
 									wcShortcodes( shortcode, editor );
 								}
-							}
+							},
+							{
+								text: "Box",
+								onclick: function(){
+									var shortcode = '[wc_box color="primary" text_align="left"]' + wcParagraphContent + '[/wc_box]';
+									wcShortcodes( shortcode, editor );
+								}
+							},
 						]
 					},
 					{
@@ -244,53 +251,6 @@
 								onclick: function(){
 									var shortcode = '[wc_post_slider pids="" order="DESC" orderby="name" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_meta_category="0" show_title="1" show_content="1" readmore="Continue Reading" button_class="button secondary-button" size="full" heading_type="h2" template="slider2" heading_size="24" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" slider_mode="fade" slider_pause="4000" slider_auto="0"][/wc_post_slider]';
 									wcShortcodes( shortcode, editor );
-								}
-							}
-						]
-					},
-					{
-						text: 'Boxes',
-						menu: [
-							{
-								text: "Primary",
-								onclick: function(){
-									editor.insertContent('[wc_box color="primary" text_align="left"]' + wcParagraphContent + '[/wc_box]');
-								}
-							},
-							{
-								text: "Secondary",
-								onclick: function(){
-									editor.insertContent('[wc_box color="secondary" text_align="left"]' + wcParagraphContent + '[/wc_box]');
-								}
-							},
-							{
-								text: "Inverse",
-								onclick: function(){
-									editor.insertContent('[wc_box color="inverse" text_align="left"]' + wcParagraphContent + '[/wc_box]');
-								}
-							},
-							{
-								text: "Success",
-								onclick: function(){
-									editor.insertContent('[wc_box color="success" text_align="left"]' + wcParagraphContent + '[/wc_box]');
-								}
-							},
-							{
-								text: "Warning",
-								onclick: function(){
-									editor.insertContent('[wc_box color="warning" text_align="left"]' + wcParagraphContent + '[/wc_box]');
-								}
-							},
-							{
-								text: "Danger",
-								onclick: function(){
-									editor.insertContent('[wc_box color="danger" text_align="left"]' + wcParagraphContent + '[/wc_box]');
-								}
-							},
-							{
-								text: "Info",
-								onclick: function(){
-									editor.insertContent('[wc_box color="info" text_align="left"]' + wcParagraphContent + '[/wc_box]');
 								}
 							}
 						]

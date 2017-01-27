@@ -220,8 +220,8 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
-	public static function button_type( $value, $default = 'primary' ) {
-		$whitelist = WPC_Shortcodes_Widget_Options::button_types();
+	public static function color_type( $value, $default = 'primary' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::color_types();
 
 		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
@@ -464,7 +464,7 @@ class WPC_Shortcodes_Sanitize {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {
 				case 'type' :
-					$atts[ $key ] = self::button_type( $value );
+					$atts[ $key ] = self::color_type( $value );
 					break;
 				case 'url' :
 					$atts[ $key ] = esc_url_raw( $value );
@@ -486,6 +486,30 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'position' :
 					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function box_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'color' :
+					$atts[ $key ] = self::color_type( $value );
+					break;
+				case 'text_align' :
+					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'margin_top' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'margin_bottom' :
+					$atts[ $key ] = self::css_unit( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
@@ -566,7 +590,7 @@ class WPC_Shortcodes_Sanitize {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {
 				case 'type' :
-					$atts[ $key ] = self::button_type( $value );
+					$atts[ $key ] = self::color_type( $value );
 					break;
 				case 'plan' :
 					$atts[ $key ] = sanitize_text_field( $value );

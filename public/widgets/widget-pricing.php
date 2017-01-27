@@ -18,7 +18,7 @@ class WPC_Shortcodes_Widget_Pricing extends WPC_Shortcodes_Widget_Base {
 			<p>
 				<label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Pricing Type:'); ?></label>
 				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>">
-					<?php foreach ( WPC_Shortcodes_Widget_Options::button_types() as $key => $value ) : ?>
+					<?php foreach ( WPC_Shortcodes_Widget_Options::color_types() as $key => $value ) : ?>
 						<option value="<?php echo $key; ?>"<?php selected( $o['type'], $key ); ?>><?php echo $value; ?></option>';
 					<?php endforeach; ?>
 				</select>

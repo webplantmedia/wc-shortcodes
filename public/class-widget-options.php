@@ -133,7 +133,7 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
-	public static function button_types() {
+	public static function color_types() {
 		return array(
 			'primary' => 'Primary',
 			'secondary' => 'Secondary',

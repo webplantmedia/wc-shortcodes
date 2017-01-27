@@ -260,6 +260,10 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WPC_Shortcodes_Widget_HTML();
 				$widget->form( $attr );
 				break;
+			case 'wc_box' :
+				$widget = new WPC_Shortcodes_Widget_Box();
+				$widget->form( $attr );
+				break;
 			case 'wc_heading' :
 				$widget = new WPC_Shortcodes_Widget_Heading();
 				$widget->form( $attr );

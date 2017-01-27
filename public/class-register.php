@@ -415,28 +415,19 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 *
 	 */
 	public function box( $atts, $content = null ) {
-		extract( shortcode_atts( array(
-			'color'			=> 'primary',
-			'text_align'	=> 'left',
-			'margin_top'	=> '',
-			'margin_bottom'	=> '',
-			'class'			=> '',
-		), $atts ) );
-
-		$margin_top = WPC_Shortcodes_Sanitize::css_unit( $margin_top );
-		$margin_bottom = WPC_Shortcodes_Sanitize::css_unit( $margin_bottom );
+		$atts = shortcode_atts( parent::$attr->box, $atts );
+		$atts = WPC_Shortcodes_Sanitize::box_attr( $atts );
 
 		$style_attr = '';
 
-		if( $margin_bottom ) {
-			$style_attr .= 'margin-bottom: '. $margin_bottom .';';
+		if( $atts['margin_bottom'] ) {
+			$style_attr .= 'margin-bottom: '. $atts['margin_bottom'] .';';
 		}
-		if ( $margin_top ) {
-			$style_attr .= 'margin-top: '. $margin_top .';';
+		if ( $atts['margin_top'] ) {
+			$style_attr .= 'margin-top: '. $atts['margin_top'] .';';
 		}
 
-		$alert_content = '';
-		$alert_content .= '<div class="wc-shortcodes-box wc-shortcodes-item wc-shortcodes-content wc-shortcodes-clearfix wc-shortcodes-box-' . esc_attr( $color ) . ' '. esc_attr( $class ) .'" style="text-align:'. esc_attr( $text_align ) .';'. esc_attr( $style_attr ) .'">';
+		$alert_content = '<div class="wc-shortcodes-box wc-shortcodes-item wc-shortcodes-content wc-shortcodes-clearfix wc-shortcodes-box-' . esc_attr( $atts['color'] ) . ' '. esc_attr( $atts['class'] ) .'" style="text-align:'. esc_attr( $atts['text_align'] ) .';'. esc_attr( $style_attr ) .'">';
 
 		$alert_content .= ' '. do_shortcode($content) .'</div>';
 
