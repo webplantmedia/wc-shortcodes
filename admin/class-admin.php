@@ -93,7 +93,7 @@ class WPC_Shortcodes_Admin extends WPC_Shortcodes_Vars {
 
 		return array_merge(
 			array(
-				'settings' => '<a href="' . admin_url( 'themes.php?page=' . parent::$plugin_slug ) . '">' . __( 'Settings', 'wc-shortcodes' ) . '</a>'
+				'settings' => '<a href="' . parent::$plugin_settings_url . '">' . __( 'Settings', 'wc-shortcodes' ) . '</a>'
 			),
 			$links
 		);

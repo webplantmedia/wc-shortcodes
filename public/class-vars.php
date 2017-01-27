@@ -33,7 +33,9 @@ class WPC_Shortcodes_Vars {
 	protected static $share_buttons;
 	protected static $theme_support;
 	protected static $google_map_api_key;
+
 	public static $attr;
+	public static $plugin_settings_url = '';
 
 	public static function init_vars() {
 		define( 'WC_SHORTCODES_IS_ACTIVATED', true );
@@ -44,6 +46,8 @@ class WPC_Shortcodes_Vars {
 		define( 'WC_SHORTCODES_CURRENT_VERSION', get_option( WC_SHORTCODES_PREFIX . 'current_version' ) );
 		define( 'WC_SHORTCODES_FONT_AWESOME_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_font_awesome', true ) );
 		define( 'WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_slide_post_type', true ) );
+
+		self::$plugin_settings_url = admin_url( 'themes.php?page=' . self::$plugin_slug );
 
 		self::$options = array();
 		self::$social_icons = array(
