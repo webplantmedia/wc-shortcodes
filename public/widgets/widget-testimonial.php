@@ -26,7 +26,7 @@ class WPC_Shortcodes_Widget_Testimonial extends WPC_Shortcodes_Widget_Base {
 			<p>
 				<label for="<?php echo $this->get_field_id('position'); ?>"><?php _e('Position:'); ?></label>
 				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('position'); ?>" name="<?php echo $this->get_field_name('position'); ?>">
-					<?php foreach ( WPC_Shortcodes_Widget_Options::testimonial_positions() as $key => $value ) : ?>
+					<?php foreach ( WPC_Shortcodes_Widget_Options::left_right_none_values() as $key => $value ) : ?>
 						<option value="<?php echo $key; ?>"<?php selected( $o['position'], $key ); ?>><?php echo $value; ?></option>';
 					<?php endforeach; ?>
 				</select>

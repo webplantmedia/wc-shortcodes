@@ -192,7 +192,14 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
-	public static function testimonial_positions() {
+	public static function one_three_values() {
+		return array(
+			'1' => '1',
+			'3' => '3',
+		);
+	}
+
+	public static function left_right_none_values() {
 		return array(
 			'' => 'None',
 			'left' => 'Left',

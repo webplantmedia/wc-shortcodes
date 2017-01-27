@@ -274,6 +274,11 @@ class WPC_Shortcodes_Vars {
 			'labels1' => 'Year,Month,Week,Day,Hour,Minute,Second',
 			'message' => 'Your Message Here!',
 		);
+		self::$attr->rsvp = array(
+			'columns' => '3',
+			'align' => 'left',
+			'button_align' => 'center',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

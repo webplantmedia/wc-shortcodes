@@ -252,6 +252,10 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WPC_Shortcodes_Widget_Countdown();
 				$widget->form( $attr );
 				break;
+			case 'wc_rsvp' :
+				$widget = new WPC_Shortcodes_Widget_RSVP();
+				$widget->form( $attr );
+				break;
 			case 'wc_heading' :
 				$widget = new WPC_Shortcodes_Widget_Heading();
 				$widget->form( $attr );

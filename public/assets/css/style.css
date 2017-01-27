@@ -1401,6 +1401,9 @@ pre.pre-wrap {
 	padding-bottom: 5px;
 	display: none;
 }
+.wc-shortcodes-rsvp .rsvp-button {
+	display: inline-block;
+}
 
 
 /**

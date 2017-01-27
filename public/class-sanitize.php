@@ -261,8 +261,17 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
-	public static function testimonial_position( $value, $default = '' ) {
-		$whitelist = WPC_Shortcodes_Widget_Options::testimonial_positions();
+	public static function left_right_none( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::left_right_none_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function one_three( $value, $default = 3 ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::one_three_values();
 
 		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
@@ -622,6 +631,24 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function rsvp_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'columns' :
+					$atts[ $key ] = self::one_three( $value );
+					break;
+				case 'align' :
+					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'button_align' :
+					$atts[ $key ] = self::text_align( $value );
 					break;
 			}
 		}

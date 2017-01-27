@@ -870,16 +870,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 
 	public function rsvp( $atts ) {
-		extract( shortcode_atts( array(
-			'columns' => '3',
-			'align' => 'left',
-			'button_align' => 'center',
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->rsvp, $atts );
+		$atts = WPC_Shortcodes_Sanitize::rsvp_attr( $atts );
 
 		wp_enqueue_script('wc-shortcodes-rsvp');
-
-		$columns = WPC_Shortcodes_Sanitize::positive_number( $columns );
-		$columns = 3 == $columns ? $columns : 1;
 
 		$html = '';
 
@@ -929,7 +923,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		// Style
 
-		if ( 3 == $columns ) {
+		if ( 3 == $atts['columns'] ) {
 			$html .= '<div class="wc-shortcodes-row wc-shortcodes-item wc-shortcodes-clearfix">';
 			$html .= '	<div class="wc-shortcodes-column wc-shortcodes-one-third wc-shortcodes-column-first ">'.$name_html.'</div>';
 			$html .= '	<div class="wc-shortcodes-column wc-shortcodes-one-third wc-shortcodes-column- ">'.$number_html.'</div>';
@@ -943,7 +937,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			$html .= $name_html . $number_html . $event_html . $action_html . $message_html . $button_html;
 		}
 
-		return '<div class="wc-shortcodes-rsvp wc-shortcodes-content wc-shortcodes-item wc-shortcodes-rsvp-columns-'.$columns.' wc-shortcodes-rsvp-align-'.esc_attr($align).' rsvp-button-align-'.esc_attr($button_align).'">' . do_shortcode( $html ) . '</div>';
+		return '<div class="wc-shortcodes-rsvp wc-shortcodes-content wc-shortcodes-item wc-shortcodes-rsvp-columns-'.esc_attr($atts['columns']).' wc-shortcodes-rsvp-align-'.esc_attr($atts['align']).' rsvp-button-align-'.esc_attr($atts['button_align']).'">' . do_shortcode( $html ) . '</div>';
 	}
 
 		/**

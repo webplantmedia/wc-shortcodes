@@ -188,7 +188,8 @@
 							{
 								text: "RSVP",
 								onclick: function(){
-									editor.insertContent('[wc_rsvp columns="3" align="left" button_align="center"]');
+									var shortcode = '[wc_rsvp columns="3" align="left" button_align="center"]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
