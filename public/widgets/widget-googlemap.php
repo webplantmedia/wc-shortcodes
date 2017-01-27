@@ -15,8 +15,11 @@ class WPC_Shortcodes_Widget_GoogleMap extends WPC_Shortcodes_Widget_Base {
 		?>
 
 		<div id="wc-shortcodes-google-maps-widget-<?php echo $this->number; ?>" class="wc-shortcodes-visual-manager">
-			<p class="wcs-instruction">Google requires you to enter an API key for your Maps. Go to your <a href="<?php echo WPC_Shortcodes_Vars::$plugin_settings_url . '&wpcsf_active_tab=wc-shortcodes-options-google-maps-options-tab'; ?>" target="_blank">Shortcodes Settings Page</a> for more details.</p>
+			<?php if ( empty( WPC_Shortcodes_Vars::$google_maps_api_key ) ) : ?>
+				<p class="wcs-instruction">Google requires you to enter an API key for your Maps. Go to your <a href="<?php echo WPC_Shortcodes_Vars::$plugin_settings_url . '&wpcsf_active_tab=wc-shortcodes-options-google-maps-options-tab'; ?>" target="_blank">Shortcodes Settings Page</a> for more details.</p>
+			<?php endif; ?>
 			<p>
+
 				<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
 				<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $o['title']; ?>" />
 			</p>

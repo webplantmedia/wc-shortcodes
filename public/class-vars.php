@@ -32,8 +32,8 @@ class WPC_Shortcodes_Vars {
 	protected static $social_icons;
 	protected static $share_buttons;
 	protected static $theme_support;
-	protected static $google_map_api_key;
 
+	public static $google_maps_api_key;
 	public static $attr;
 	public static $plugin_settings_url = '';
 
@@ -48,6 +48,7 @@ class WPC_Shortcodes_Vars {
 		define( 'WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_slide_post_type', true ) );
 
 		self::$plugin_settings_url = admin_url( 'themes.php?page=' . self::$plugin_slug );
+		self::$google_maps_api_key = get_option( WC_SHORTCODES_PREFIX . 'google_maps_api_key' );
 
 		self::$options = array();
 		self::$social_icons = array(
