@@ -358,13 +358,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	* @since 1.0
 	*/
 	public function highlight( $atts, $content = null ) {
-		extract( shortcode_atts( array(
-			'color'	=> 'yellow',
-			'class'	=> '',
-		), $atts ) );
+		$atts = shortcode_atts( parent::$attr->highlight, $atts );
+		$atts = WPC_Shortcodes_Sanitize::highlight_attr( $atts );
 
-		return '<span class="wc-shortcodes-highlight wc-shortcodes-highlight-'. esc_attr( $color ) .' '. esc_attr( $class ) .'">' . do_shortcode( $content ) . '</span>';
-	
+		return '<span class="wc-shortcodes-highlight wc-shortcodes-highlight-'. esc_attr( $atts['color'] ) .' '. esc_attr( $atts['class'] ) .'">' . do_shortcode( $content ) . '</span>';
 	}
 
 

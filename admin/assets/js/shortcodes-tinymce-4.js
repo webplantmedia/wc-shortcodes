@@ -206,6 +206,13 @@
 									wcShortcodes( shortcode, editor );
 								}
 							},
+							{
+								text: "Highlight",
+								onclick: function(){
+									var shortcode = '[wc_highlight color="yellow"]' + wcDummyContent + '[/wc_highlight]';
+									wcShortcodes( shortcode, editor );
+								}
+							}
 						]
 					},
 					{
@@ -251,41 +258,6 @@
 								onclick: function(){
 									var shortcode = '[wc_post_slider pids="" order="DESC" orderby="name" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_meta_category="0" show_title="1" show_content="1" readmore="Continue Reading" button_class="button secondary-button" size="full" heading_type="h2" template="slider2" heading_size="24" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" slider_mode="fade" slider_pause="4000" slider_auto="0"][/wc_post_slider]';
 									wcShortcodes( shortcode, editor );
-								}
-							}
-						]
-					},
-					{
-						text: 'Highlights',
-						menu: [
-							{
-								text: "Blue",
-								onclick: function(){
-									editor.insertContent('[wc_highlight color="blue"]' + wcDummyContent + '[/wc_highlight]');
-								}
-							},
-							{
-								text: "Gray",
-								onclick: function(){
-									editor.insertContent('[wc_highlight color="gray"]' + wcDummyContent + '[/wc_highlight]');
-								}
-							},
-							{
-								text: "Green",
-								onclick: function(){
-									editor.insertContent('[wc_highlight color="green"]' + wcDummyContent + '[/wc_highlight]');
-								}
-							},
-							{
-								text: "Red",
-								onclick: function(){
-									editor.insertContent('[wc_highlight color="red"]' + wcDummyContent + '[/wc_highlight]');
-								}
-							},
-							{
-								text: "Yellow",
-								onclick: function(){
-									editor.insertContent('[wc_highlight color="yellow"]' + wcDummyContent + '[/wc_highlight]');
 								}
 							}
 						]

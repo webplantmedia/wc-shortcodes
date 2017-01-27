@@ -133,6 +133,16 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function highlight_colors() {
+		return array(
+			'blue' => 'Blue',
+			'gray' => 'Gray',
+			'green' => 'Green',
+			'red' => 'Red',
+			'yellow' => 'Yellow',
+		);
+	}
+
 	public static function color_types() {
 		return array(
 			'primary' => 'Primary',

@@ -220,6 +220,15 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
+	public static function highlight_color( $value, $default = 'yellow' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::highlight_colors();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function color_type( $value, $default = 'primary' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::color_types();
 
@@ -612,6 +621,21 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'button_rel' :
 					$atts[ $key ] = self::url_rel( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function highlight_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'color' :
+					$atts[ $key ] = self::highlight_color( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
