@@ -284,6 +284,9 @@ class WPC_Shortcodes_Vars {
 			'align' => 'left',
 			'button_align' => 'center',
 		);
+		self::$attr->html = array(
+			'name'			=>	''
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

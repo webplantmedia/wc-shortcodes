@@ -155,6 +155,17 @@ class WPC_Shortcodes_Sanitize {
 		return '';
 	}
 
+	public static function custom_field_name( $name ) {
+		if ( '' === $name )
+			return '';
+
+		// 3 or 6 hex digits, or the empty string.
+		$name = trim( sanitize_text_field( $name ) );
+		$name = preg_replace( '/^_/', '', $name );
+
+		return $name;
+	}
+
 	public static function social_icons_format( $value, $default = 'default' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::social_icons_formats();
 
@@ -754,6 +765,18 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'message' :
 					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function html_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'name' :
+					$atts[ $key ] = self::custom_field_name( $value );
 					break;
 			}
 		}

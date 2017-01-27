@@ -195,7 +195,8 @@
 							{
 								text: "HTML",
 								onclick: function(){
-									editor.insertContent('[wc_html name="Custom Field Name"]');
+									var shortcode = '[wc_html name="Custom Field Name"][/wc_html]';
+									wcShortcodes( shortcode, editor );
 								}
 							}
 						]

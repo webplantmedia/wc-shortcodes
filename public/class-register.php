@@ -131,18 +131,17 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		if ( $content != null )
 			return $content;
 
-		extract(shortcode_atts(array(
-			'name'			=>	''
-		), $atts));
+		$atts = shortcode_atts( parent::$attr->html, $atts );
+		$atts = WPC_Shortcodes_Sanitize::html_attr( $atts );
 
 		// sanitize
 		$name = WPC_Shortcodes_Sanitize::text_field( $name );
 		$name = preg_replace( '/^_/', '', $name );
 
-		if ( empty( $name ) )
+		if ( empty( $atts['name'] ) )
 			return null;
 
-		if ( $snippet = get_post_meta($post->ID, $name, true ) ) {
+		if ( $snippet = get_post_meta($post->ID, $atts['name'], true ) ) {
 			$html = '<div class="wc-shortcodes-html-wrapper wc-shortcodes-item wc-shortcodes-content">' . $snippet . '</div>';
 		}
 
