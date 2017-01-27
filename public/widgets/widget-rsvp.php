@@ -15,6 +15,7 @@ class WPC_Shortcodes_Widget_RSVP extends WPC_Shortcodes_Widget_Base {
 		?>
 
 		<div id="wc-shortcodes-rsvp-widget-<?php echo $this->number; ?>" class="wc-shortcodes-visual-manager">
+			<p class="wcs-instruction">You can configure your RSVP display in your <a href="<?php echo WPC_Shortcodes_Vars::$plugin_settings_url . '&wpcsf_active_tab=wc-shortcodes-options-rsvp-options-tab'; ?>" target="_blank">Shortcodes Settings Page</a>.</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('columns'); ?>"><?php _e('Columns:'); ?></label>
 				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('columns'); ?>" name="<?php echo $this->get_field_name('columns'); ?>">

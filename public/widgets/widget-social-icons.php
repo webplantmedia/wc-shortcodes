@@ -51,6 +51,7 @@ class WPC_Shortcodes_Widget_Social_Icons extends WP_Widget {
 		?>
 
 		<div id="wc-shortcodes-social-icons-widget-<?php echo $this->number; ?>" class="wc-shortcodes-visual-manager">
+			<p class="wcs-instruction">You can configure your social icons in your <a href="<?php echo WPC_Shortcodes_Vars::$plugin_settings_url . '&wpcsf_active_tab=wc-shortcodes-options-social-icons-options-tab'; ?>" target="_blank">Shortcode Settings Page</a>.</p>
 			<?php if ( ! isset( $o['wc_shortcodes_using_visual_manager'] ) ) : ?>
 				<p>
 					<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
