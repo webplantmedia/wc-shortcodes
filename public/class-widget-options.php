@@ -143,6 +143,25 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function divider_style_values() {
+		return array(
+			'solid' => 'Solid',
+			'dashed' => 'Dashed',
+			'dotted' => 'Dotted',
+			'image' => 'Image 1',
+			'image2' => 'Image 2',
+			'image3' => 'Image 3',
+		);
+	}
+
+	public static function divider_line_values() {
+		return array(
+			'' => 'None',
+			'single' => 'Single',
+			'double' => 'Double',
+		);
+	}
+
 	public static function color_types() {
 		return array(
 			'primary' => 'Primary',

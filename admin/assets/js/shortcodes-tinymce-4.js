@@ -153,6 +153,13 @@
 									editor.insertContent('[wc_code]' + wcDummyContent + '[/wc_code]');
 								}
 							},
+							{
+								text: "Divider",
+								onclick: function(){
+									var shortcode = '[wc_divider style="solid" line="single" margin_top="" margin_bottom=""][/wc_divider]';
+									wcShortcodes( shortcode, editor );
+								}
+							}
 						]
 					},
 					{
@@ -257,123 +264,6 @@
 								text: "Post Slider 2",
 								onclick: function(){
 									var shortcode = '[wc_post_slider pids="" order="DESC" orderby="name" post_type="post" taxonomy="" terms="" posts_per_page="10" ignore_sticky_posts="0" show_meta_category="0" show_title="1" show_content="1" readmore="Continue Reading" button_class="button secondary-button" size="full" heading_type="h2" template="slider2" heading_size="24" mobile_heading_size="24" excerpt_length="30" desktop_height="600" laptop_height="500" mobile_height="350" slider_mode="fade" slider_pause="4000" slider_auto="0"][/wc_post_slider]';
-									wcShortcodes( shortcode, editor );
-								}
-							}
-						]
-					},
-					{
-						text: 'Dividers',
-						menu: [
-							{
-								text: "Solid",
-								onclick: function(){
-									editor.insertContent('[wc_divider style="solid" line="single" margin_top="" margin_bottom=""]');
-								}
-							},
-							{
-								text: "Dashed",
-								onclick: function(){
-									editor.insertContent('[wc_divider style="dashed" line="single" margin_top="" margin_bottom=""]');
-								}
-							},
-							{
-								text: "Dotted",
-								onclick: function(){
-									editor.insertContent('[wc_divider style="dotted" line="single" margin_top="" margin_bottom=""]');
-								}
-							},
-							{
-								text: "Double",
-								onclick: function(){
-									editor.insertContent('[wc_divider style="solid" line="double" margin_top="" margin_bottom=""]');
-								}
-							},
-							{
-								text: "Image1",
-								onclick: function(){
-									editor.insertContent('[wc_divider style="image" margin_top="" margin_bottom=""]');
-								}
-							},
-							{
-								text: "Image2",
-								onclick: function(){
-									editor.insertContent('[wc_divider style="image2" margin_top="" margin_bottom=""]');
-								}
-							},
-							{
-								text: "Image3",
-								onclick: function(){
-									editor.insertContent('[wc_divider style="image3" margin_top="" margin_bottom=""]');
-								}
-							}
-						]
-					},
-					{
-						text: 'jQuery',
-						menu: [
-							{
-								text: "Accordion",
-								onclick: function(){
-									var shortcode = '[wc_accordion collapse="0" leaveopen="0" layout="box"]<p>[wc_accordion_section title="Section 1"]</p>' + wcParagraphContent + '<p>[/wc_accordion_section]</p><p>[wc_accordion_section title="Section 2"]</p>' + wcDummyParagraphContent + '<p>[/wc_accordion_section]</p>[/wc_accordion]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
-								text: "Accordion Section",
-								onclick: function(){
-									var shortcode = '[wc_accordion_section title="New Accordion Section"]<p>' + wcParagraphContent + '</p>[/wc_accordion_section]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
-								text: "Tabs",
-								onclick: function(){
-									var shortcode = '[wc_tabgroup layout="box" class=""]<p>[wc_tab title="First Tab"]</p>'+wcParagraphContent+'<p>[/wc_tab]</p><p>[wc_tab title="Second Tab"]</p>'+wcDummyParagraphContent+'<p>[/wc_tab]</p>[/wc_tabgroup]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
-								text: "Tab Section",
-								onclick: function(){
-									var shortcode = '[wc_tab title="New Tab Section"]<p>'+wcParagraphContent+'</p>[/wc_tab]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
-								text: "Toggle",
-								onclick: function(){
-									var shortcode = '[wc_toggle title="This Is Your Toggle Title" layout="box"]' + wcParagraphContent + '[/wc_toggle]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
-								text: "Google Map",
-								onclick: function(){
-									var shortcode = '[wc_googlemap title="St. Paul\'s Chapel" location="209 Broadway, New York, NY 10007" zoom="10" height="250" title_on_load="0" class=""]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
-								text: "RSVP",
-								onclick: function(){
-									var shortcode = '[wc_rsvp columns="3" align="left" button_align="center"]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
-								text: "Countdown",
-								onclick: function(){
-									var d = new Date();
-									var year = d.getFullYear() + 1;
-									var shortcode = '[wc_countdown date="July 23, '+year+', 6:00:00 PM" format="wdHMs" message="Your Message Here!" labels="Years,Months,Weeks,Days,Hours,Minutes,Seconds" labels1="Year,Month,Week,Day,Hour,Minute,Second"]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
-								text: "Skillbar",
-								onclick: function(){
-									var shortcode = '[wc_skillbar title="' + wcDummyContent + '" percentage="100" color="#6adcfa"]';
 									wcShortcodes( shortcode, editor );
 								}
 							}

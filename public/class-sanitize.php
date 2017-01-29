@@ -193,6 +193,24 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
+	public static function divider_line( $value, $default = 'single' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::divider_line_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function divider_style( $value, $default = 'solid' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::divider_style_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function google_map_zoom( $value, $default = 8 ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::google_map_zoom_values();
 
@@ -786,6 +804,30 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'zoom' :
 					$atts[ $key ] = self::google_map_zoom( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function divider_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'style' :
+					$atts[ $key ] = self::divider_style( $value );
+					break;
+				case 'line' :
+					$atts[ $key ] = self::divider_line( $value );
+					break;
+				case 'margin_top' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'margin_bottom' :
+					$atts[ $key ] = self::css_unit( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );

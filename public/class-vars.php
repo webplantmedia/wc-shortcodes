@@ -298,6 +298,13 @@ class WPC_Shortcodes_Vars {
 			'color'	=> 'yellow',
 			'class'	=> '',
 		);
+		self::$attr->divider = array(
+			'style'			=> 'solid',
+			'line'			=> 'single',
+			'margin_top'	=> '',
+			'margin_bottom'	=> '',
+			'class'			=> '',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

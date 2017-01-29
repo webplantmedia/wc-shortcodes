@@ -798,25 +798,16 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 * @since v1.1
 	 */
 	public function divider( $atts ) {
-		extract( shortcode_atts( array(
-			'style'			=> 'solid',
-			'line'			=> 'single',
-			'margin_top'	=> '',
-			'margin_bottom'	=> '',
-			'class'			=> '',
-		), $atts ) );
-
-		$margin_top = WPC_Shortcodes_Sanitize::css_unit( $margin_top );
-		$margin_bottom = WPC_Shortcodes_Sanitize::css_unit( $margin_bottom );
+		$atts = shortcode_atts( parent::$attr->divider, $atts );
+		$atts = WPC_Shortcodes_Sanitize::divider_attr( $atts );
 
 		$style_attr = array();
 
-		if ( $margin_top && $margin_bottom ) {  
-			$style_attr[] = 'margin-top: '. $margin_top .';margin-bottom: '. $margin_bottom .';';
-		} elseif( $margin_bottom ) {
-			$style_attr[] = 'margin-bottom: '. $margin_bottom .';';
-		} elseif ( $margin_top ) {
-			$style_attr[] = 'margin-top: '. $margin_top .';';
+		if( $atts['margin_bottom'] ) {
+			$style_attr[] = 'margin-bottom: '. $atts['margin_bottom'] .';';
+		}
+		if ( $atts['margin_top'] ) {
+			$style_attr[] = 'margin-top: '. $atts['margin_top'] .';';
 		}
 
 		if ( ! empty ( $style_attr ) ) {
@@ -826,7 +817,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			$style_attr = '';
 		}
 
-		 return '<hr class="wc-shortcodes-divider wc-shortcodes-item wc-shortcodes-divider-line-'.esc_attr( $line ).' wc-shortcodes-divider-style-'. esc_attr( $style ) .' '. esc_attr( $class ) .'" '.$style_attr.' />';
+		return '<hr class="wc-shortcodes-divider wc-shortcodes-item wc-shortcodes-divider-line-'.esc_attr( $atts['line'] ).' wc-shortcodes-divider-style-'. esc_attr( $atts['style'] ) .' '. esc_attr( $atts['class'] ) .'" '.$style_attr.' />';
 	}
 
 
