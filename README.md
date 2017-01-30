@@ -106,6 +106,10 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 3.11 ###
+
+* Fixed bug with sanitizing column values.
+
 ### Version 3.10 ###
 
 * Fixed bug with testimonail sanitize function.

@@ -8,7 +8,7 @@ class WPC_Shortcodes_Vars {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '3.10';
+	const VERSION = '3.11';
 	const DB_VERSION = '1.0';
 
 	/**
