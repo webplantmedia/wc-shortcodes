@@ -121,7 +121,9 @@ class WPC_Shortcodes_Widget_Options {
 		return array(
 			'one-half' => 'One Half',
 			'one-third' => 'One Third',
+			'two-third' => 'One Third',
 			'one-fourth' => 'One Fourth',
+			'three-fourth' => 'One Fourth',
 		);
 	}
 
