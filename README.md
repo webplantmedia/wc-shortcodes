@@ -15,13 +15,13 @@ A plugin that adds a useful family of shortcodes to your WordPress theme.
 
 The Shortcodes by Angie Makes plugin adds a family of easy to use shortcodes to your WordPress theme. These shortcodes work flawlessly with [Angie Makes WordPress themes](http://angiemakes.com/feminine-wordpress-blog-themes-women/).
 
-= Demo =
+### Demo ###
 
 See A DEMO of These Shortcodes Here:
 
 [http://gentry.angiemakes.com/shortcodes/](http://gentry.angiemakes.com/shortcodes/)
 
-= Features =
+### Features ###
 
 Here are the handy shortcodes included with this plugin:
 
@@ -86,7 +86,7 @@ Wrappers
 * Center Content
 * Full Width
 
-= Professional Support =
+### Professional Support ###
 
 We have tested this plugin to work with the latest version of WordPress, but do not offer individual troubleshooting support as this is a free plugin. If you need individual support, we're happy to assist you if you purchase our premium support by purchasing a premium, Angie Makes WordPress theme from [angiemakes.com](http://angiemakes.com).
 
