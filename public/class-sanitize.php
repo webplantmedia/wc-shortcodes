@@ -755,7 +755,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = esc_url_raw( $value );
 					break;
 				case 'position' :
-					$atts[ $key ] = self::testimonial_position( $value );
+					$atts[ $key ] = self::left_right_none( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
