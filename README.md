@@ -104,6 +104,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.12 ###
+
+* Updated readme file
+
 ### Version 3.11 ###
 
 * Fixed bug with sanitizing column values.
