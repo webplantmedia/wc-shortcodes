@@ -444,18 +444,13 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 *
 	 */
 	public function center( $atts, $content = null ){
-		extract( shortcode_atts( array(
-			'max_width'		=> '500px',
-			'text_align'	=> 'center',
-			'class'			=> '',
-		), $atts ) );
-
-		$max_width = WPC_Shortcodes_Sanitize::css_unit( $max_width );
+		$atts = shortcode_atts( parent::$attr->center, $atts );
+		$atts = WPC_Shortcodes_Sanitize::center_attr( $atts );
 
 		// $append_clearfix = '<div class="wc-shortcodes-clear-floats"></div>';
-		$style = empty( $max_width ) ? '' : ' style="max-width:'.esc_attr( $max_width ).';"';
+		$style = empty( $atts['max_width'] ) ? '' : ' style="max-width:'.esc_attr( $atts['max_width'] ).';"';
 
-		return '<div class="wc-shortcodes-center wc-shortcodes-item wc-shortcodes-content wc-shortcodes-clearfix wc-shortcodes-center-inner-align-'. esc_attr( $text_align ) .' '. esc_attr( $class ) .'"' . $style . '>' . do_shortcode($content) . '</div>';
+		return '<div class="wc-shortcodes-center wc-shortcodes-item wc-shortcodes-content wc-shortcodes-clearfix wc-shortcodes-center-inner-align-'. esc_attr( $atts['text_align'] ) .' '. esc_attr( $atts['class'] ) .'"' . $style . '>' . do_shortcode($content) . '</div>';
 	}
 
 

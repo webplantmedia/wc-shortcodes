@@ -901,6 +901,24 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
+	public static function center_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'max_width' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'text_align' :
+					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function heading_attr( $atts ) {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {

@@ -313,6 +313,11 @@ class WPC_Shortcodes_Vars {
 			'linenums'		=>	0,
 			'wrap'			=>	0,
 		);
+		self::$attr->center = array(
+			'max_width'		=> '500px',
+			'text_align'	=> 'center',
+			'class'			=> '',
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

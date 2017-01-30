@@ -346,7 +346,8 @@
 							{
 								text: "Center Content",
 								onclick: function(){
-									editor.insertContent('[wc_center max_width="500px" text_align="left"]' + wcParagraphContent + '[/wc_center]');
+									var shortcode = '[wc_center max_width="500px" text_align="left"]' + wcParagraphContent + '[/wc_center]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 							{
