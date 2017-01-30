@@ -100,6 +100,8 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Frequently Asked Questions ##
 
+### Links To Help Articles For Common Questions ###
+
 [How do I use the shortcode manager?](http://knowledgebase.angiemakes.com/how-to-use-visual-manager-for-shortcodes/?cat=24)
 
 ## Changelog ##
