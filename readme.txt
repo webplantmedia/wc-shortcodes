@@ -100,31 +100,14 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Frequently Asked Questions ==
 
-= How do I use the shortcodes? =
-
-Use the shortcode manager in the TinyMCE text editor
+[How do I use the shortcode manager?](http://knowledgebase.angiemakes.com/how-to-use-visual-manager-for-shortcodes/?cat=24)
 
 == Screenshots ==
 
-1. Accordion, Tabs & Toggle
-2. Columns & Sections
-3. Testimonials
-4. Borders
-5. Buttons
-6. Full Width
-7. Notifications
-8. Google Maps
-9. Social Icons
-10. Progress Bars
-11. Pricing
-12. Highlights
-13. Countdown
-14. RSVP
-15. Custom HTML
-16. Code Snippets
-17. Isotope / Masonry Posts
-18. Images with Flags
-19. Font Awesome Icons
+1. How To Use
+2. Visual Manager
+3. Editing Shortcode
+4. Displaying Shortcodes
 
 == Changelog ==
 

@@ -100,9 +100,7 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Frequently Asked Questions ##
 
-### How do I use the shortcodes? ###
-
-Use the shortcode manager in the TinyMCE text editor
+[How do I use the shortcode manager?](http://knowledgebase.angiemakes.com/how-to-use-visual-manager-for-shortcodes/?cat=24)
 
 ## Changelog ##
 
