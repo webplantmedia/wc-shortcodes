@@ -38,6 +38,14 @@ class WPC_Shortcodes_Widget_Heading extends WPC_Shortcodes_Widget_Base {
 				<span class="wcs-description">Enter CSS unit value.</span>
 			</p>
 			<p>
+				<label for="<?php echo $this->get_field_id('text_align'); ?>"><?php _e('Text Align:'); ?></label>
+				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('text_align'); ?>" name="<?php echo $this->get_field_name('text_align'); ?>">
+					<?php foreach ( WPC_Shortcodes_Widget_Options::text_align_values() as $key => $value ) : ?>
+						<option value="<?php echo $key; ?>"<?php selected( $o['text_align'], $key ); ?>><?php echo $value; ?></option>';
+					<?php endforeach; ?>
+				</select>
+			</p>
+			<p>
 				<label for="<?php echo $this->get_field_id('font_size'); ?>"><?php _e('Font Size:') ?></label>
 				<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('font_size'); ?>" name="<?php echo $this->get_field_name('font_size'); ?>" value="<?php echo $o['font_size']; ?>" />
 				<span class="wcs-description">Enter CSS unit value.</span>
