@@ -106,6 +106,14 @@ Use the shortcode manager in the TinyMCE text editor
 
 ## Changelog ##
 
+### Version 3.10 ###
+
+* Fixed bug with testimonail sanitize function.
+
+### Version 3.9 ###
+
+* Added visual manager for shortcodes.
+
 ### Version 3.8 ###
 
 * If theme support options are set, assume theme_reset is true, unless user-defined.
