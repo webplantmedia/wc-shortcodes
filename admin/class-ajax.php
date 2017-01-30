@@ -200,6 +200,7 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WPC_Shortcodes_Widget_Toggle();
 				$widget->form( $attr );
 				break;
+			case 'wc_clear_floats' :
 			case 'wc_row' :
 				echo 0;
 				die();
@@ -278,6 +279,10 @@ class WPC_Shortcodes_Ajax {
 				break;
 			case 'wc_center' :
 				$widget = new WPC_Shortcodes_Widget_Center();
+				$widget->form( $attr );
+				break;
+			case 'wc_fullwidth' :
+				$widget = new WPC_Shortcodes_Widget_FullWidth();
 				$widget->form( $attr );
 				break;
 			case 'wc_heading' :

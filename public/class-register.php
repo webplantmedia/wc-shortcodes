@@ -102,17 +102,16 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	 */
 	public function fullwidth( $atts, $content = null ) {
 
-		extract(shortcode_atts(array(
-			'selector' => parent::$theme_support[ 'fullwidth_container' ],
-		), $atts));
+		$atts = shortcode_atts( parent::$attr->fullwidth, $atts );
+		$atts = WPC_Shortcodes_Sanitize::fullwidth_attr( $atts );
 
-		if ( empty( $selector ) ) {
-			$selector = parent::$theme_support[ 'fullwidth_container' ];
+		if ( empty( $atts['selector'] ) ) {
+			$atts['selector'] = parent::$theme_support[ 'fullwidth_container' ];
 		}
 
 		wp_enqueue_script('wc-shortcodes-fullwidth');
 
-		return '<div class="wc-shortcodes-full-width wc-shortcodes-content" data-selector="' . esc_attr( $selector ) . '">' . do_shortcode( $content ) . '</div>';
+		return '<div class="wc-shortcodes-full-width wc-shortcodes-content" data-selector="' . esc_attr( $atts['selector'] ) . '">' . do_shortcode( $content ) . '</div>';
 	}
 
 

@@ -53,10 +53,11 @@
 			}
 			var key = $el.attr('name').split('][').pop();
 			key = key.substring( 0, key.length - 1 );
-			if ( val || 0 === val ) {
+			// Used it for removing clutter in shortcode insert. But, also caused probelms with editing.
+			// if ( val || 0 === val ) {
 				// console.log( "NOT EMPTY == KEY: " + key + "  VAL: " + val )
 				values.push( key + '="' + val + '"' );
-			}
+			// }
 		});
 		// console.log(values);
 		values = values.join(" ");

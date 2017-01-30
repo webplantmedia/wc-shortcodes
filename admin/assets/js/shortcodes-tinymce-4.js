@@ -194,6 +194,22 @@
 								}
 							},
 							{
+								text: "Countdown",
+								onclick: function(){
+									var d = new Date();
+									var year = d.getFullYear() + 1;
+									var shortcode = '[wc_countdown date="July 23, '+year+', 6:00:00 PM" format="wdHMs" message="Your Message Here!" labels="Years,Months,Weeks,Days,Hours,Minutes,Seconds" labels1="Year,Month,Week,Day,Hour,Minute,Second"]';
+									wcShortcodes( shortcode, editor );
+								}
+							},
+							{
+								text: "Skillbar",
+								onclick: function(){
+									var shortcode = '[wc_skillbar title="' + wcDummyContent + '" percentage="100" color="#6adcfa"]';
+									wcShortcodes( shortcode, editor );
+								}
+							},
+							{
 								text: "Image",
 								onclick: function(){
 									var shortcode = '[wc_image attachment_id="" size="medium" title="" alt="" caption="" link_to="post" url="" align="none" flag="For Sale" left="" top="" right="0" bottom="20px" text_color="" background_color="" font_size="" text_align="center" flag_width=""][/wc_image]';
@@ -271,7 +287,7 @@
 						]
 					},
 					{
-						text: 'jQuery',
+						text: 'Actions',
 						menu: [
 							{
 								text: "Accordion",
@@ -321,22 +337,6 @@
 									var shortcode = '[wc_rsvp columns="3" align="left" button_align="center"]';
 									wcShortcodes( shortcode, editor );
 								}
-							},
-							{
-								text: "Countdown",
-								onclick: function(){
-									var d = new Date();
-									var year = d.getFullYear() + 1;
-									var shortcode = '[wc_countdown date="July 23, '+year+', 6:00:00 PM" format="wdHMs" message="Your Message Here!" labels="Years,Months,Weeks,Days,Hours,Minutes,Seconds" labels1="Year,Month,Week,Day,Hour,Minute,Second"]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
-								text: "Skillbar",
-								onclick: function(){
-									var shortcode = '[wc_skillbar title="' + wcDummyContent + '" percentage="100" color="#6adcfa"]';
-									wcShortcodes( shortcode, editor );
-								}
 							}
 						]
 					},
@@ -353,7 +353,8 @@
 							{
 								text: "Full Width",
 								onclick: function(){
-									editor.insertContent('[wc_fullwidth selector=""]' + wcParagraphContent + '[/wc_fullwidth]');
+									var shortcode = '[wc_fullwidth selector=""]' + wcParagraphContent + '[/wc_fullwidth]';
+									wcShortcodes( shortcode, editor );
 								}
 							},
 						]

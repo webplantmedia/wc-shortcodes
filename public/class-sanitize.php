@@ -919,6 +919,18 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
+	public static function fullwidth_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'selector' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function heading_attr( $atts ) {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {

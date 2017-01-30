@@ -31,7 +31,7 @@ class WPC_Shortcodes_Vars {
 	protected static $options;
 	protected static $social_icons;
 	protected static $share_buttons;
-	protected static $theme_support;
+	public static $theme_support;
 
 	public static $google_maps_api_key;
 	public static $attr;
@@ -206,6 +206,9 @@ class WPC_Shortcodes_Vars {
 			'icon_left'		=> '',
 			'icon_right'	=> '',
 			'icon_spacing'	=> '',
+		);
+		self::$attr->fullwidth = array(
+			'selector' => self::$theme_support[ 'fullwidth_container' ],
 		);
 		self::$attr->pricing = array(
 			'type'					=> 'primary', // primary, secondary, inverse
