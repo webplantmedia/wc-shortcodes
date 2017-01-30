@@ -305,6 +305,14 @@ class WPC_Shortcodes_Vars {
 			'margin_bottom'	=> '',
 			'class'			=> '',
 		);
+		self::$attr->pre = array(
+			'name'			=>	'',
+			'scrollable'	=>	1,
+			'color'			=>	1,
+			'lang'			=>	'',
+			'linenums'		=>	0,
+			'wrap'			=>	0,
+		);
 		self::$attr->posts = array(
 			'author' => '', //use author id
 			'author_name' => '', //use 'user_nicename' (NOT name).

@@ -134,10 +134,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$atts = shortcode_atts( parent::$attr->html, $atts );
 		$atts = WPC_Shortcodes_Sanitize::html_attr( $atts );
 
-		// sanitize
-		$name = WPC_Shortcodes_Sanitize::text_field( $name );
-		$name = preg_replace( '/^_/', '', $name );
-
 		if ( empty( $atts['name'] ) )
 			return null;
 
@@ -174,43 +170,28 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		if ( $content != null )
 			return $content;
 
-		extract(shortcode_atts(array(
-			'name'			=>	'',
-			'scrollable'	=>	1,
-			'color'			=>	1,
-			'lang'			=>	'',
-			'linenums'		=>	0,
-			'wrap'			=>	0,
-		), $atts));
-
-		// sanitize
-		$scrollable = WPC_Shortcodes_Sanitize::bool( $scrollable );
-		$color = WPC_Shortcodes_Sanitize::bool( $color );
-		$linenums = WPC_Shortcodes_Sanitize::bool( $linenums );
-		$wrap = WPC_Shortcodes_Sanitize::bool( $wrap );
-		$name = WPC_Shortcodes_Sanitize::text_field( $name );
+		$atts = shortcode_atts( parent::$attr->pre, $atts );
+		$atts = WPC_Shortcodes_Sanitize::pre_attr( $atts );
 
 		$class = array();
-		if ( (int) $color ) {
+		if ( $atts['color'] ) {
 			$class[] = 'prettyprint';
-			if ( (int) $linenums )
+			if ( $atts['linenums'] )
 				$class[] = 'linenums';
-			if ( ! empty( $lang ) )
-				$class[] = 'lang-' . $lang;
+			if ( ! empty( $atts['lang'] ) )
+				$class[] = 'lang-' . $atts['lang'];
 		}
-		if ( (int) $scrollable )
+		if ( $atts['scrollable'] )
 			$class[] = 'pre-scrollable';
-		if ( (int) $wrap )
+		if ( $atts['wrap'] )
 			$class[] = 'pre-wrap';
 
 		$class = implode( ' ', $class );
 
-		$name = preg_replace( '/^_/', '', $name );
-
-		if ( empty( $name ) )
+		if ( empty( $atts['name'] ) )
 			return null;
 
-		if ( $code = get_post_meta($post->ID, $name, true ) ) {
+		if ( $code = get_post_meta($post->ID, $atts['name'], true ) ) {
 			wp_enqueue_script('wc-shortcodes-prettify');
 			wp_enqueue_script('wc-shortcodes-pre');
 			//$code = preg_replace( '/[ ]{4,}|[\t]/', '  ', $code );

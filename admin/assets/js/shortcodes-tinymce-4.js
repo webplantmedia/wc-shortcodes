@@ -144,7 +144,7 @@
 							{
 								text: "Clear Floats",
 								onclick: function(){
-									editor.insertContent('[wc_clear_floats]');
+									editor.insertContent('[wc_clear_floats][/wc_clear_floats]');
 								}
 							},
 							{
@@ -201,13 +201,6 @@
 								}
 							},
 							{
-								text: "HTML",
-								onclick: function(){
-									var shortcode = '[wc_html name="Custom Field Name"][/wc_html]';
-									wcShortcodes( shortcode, editor );
-								}
-							},
-							{
 								text: "Box",
 								onclick: function(){
 									var shortcode = '[wc_box color="primary" text_align="left"]' + wcParagraphContent + '[/wc_box]';
@@ -215,9 +208,17 @@
 								}
 							},
 							{
+								text: "HTML",
+								onclick: function(){
+									var shortcode = '[wc_html name="Custom Field Name"][/wc_html]';
+									wcShortcodes( shortcode, editor );
+								}
+							},
+							{
 								text: "Preformatted Text",
 								onclick: function(){
-									editor.insertContent('[wc_pre color="1" wrap="0" scrollable="1" linenums="0" name="Custom Field Name"]');
+									var shortcode = '[wc_pre color="1" wrap="0" scrollable="1" linenums="0" name="Custom Field Name"][/wc_pre]';
+									wcShortcodes( shortcode, editor );
 								}
 							}
 						]

@@ -874,6 +874,33 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
+	public static function pre_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'name' :
+					$atts[ $key ] = self::custom_field_name( $value );
+					break;
+				case 'scrollable' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'color' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'lang' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+				case 'linenums' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'wrap' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function heading_attr( $atts ) {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {

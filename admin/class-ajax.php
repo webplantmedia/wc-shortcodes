@@ -272,6 +272,10 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WPC_Shortcodes_Widget_Divider();
 				$widget->form( $attr );
 				break;
+			case 'wc_pre' :
+				$widget = new WPC_Shortcodes_Widget_Pre();
+				$widget->form( $attr );
+				break;
 			case 'wc_heading' :
 				$widget = new WPC_Shortcodes_Widget_Heading();
 				$widget->form( $attr );
