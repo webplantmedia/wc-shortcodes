@@ -12,7 +12,17 @@ A plugin that adds a useful family of shortcodes to your WordPress theme.
 
 == Description ==
 
-The Shortcodes by Angie Makes plugin adds a family of easy to use shortcodes to your WordPress theme. These shortcodes work flawlessly with [Angie Makes WordPress themes](http://angiemakes.com/feminine-wordpress-blog-themes-women/). Here are the handy shortcodes included with this plugin:
+The Shortcodes by Angie Makes plugin adds a family of easy to use shortcodes to your WordPress theme. These shortcodes work flawlessly with [Angie Makes WordPress themes](http://angiemakes.com/feminine-wordpress-blog-themes-women/).
+
+= Demo =
+
+See A DEMO of These Shortcodes Here:
+
+[http://gentry.angiemakes.com/shortcodes/](http://gentry.angiemakes.com/shortcodes/)
+
+= Features =
+
+Here are the handy shortcodes included with this plugin:
 
 Columns
 
@@ -74,12 +84,6 @@ Wrappers
 
 * Center Content
 * Full Width
-
-= Demo =
-
-See A DEMO of These Shortcodes Here:
-
-[http://gentry.angiemakes.com/shortcodes/](http://gentry.angiemakes.com/shortcodes/)
 
 = Professional Support =
 
