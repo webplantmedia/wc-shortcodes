@@ -104,66 +104,6 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 Use the shortcode manager in the TinyMCE text editor
 
-## Screenshots ##
-
-###1. Accordion, Tabs & Toggle###
-[missing image]
-
-###2. Columns & Sections###
-[missing image]
-
-###3. Testimonials###
-[missing image]
-
-###4. Borders###
-[missing image]
-
-###5. Buttons###
-[missing image]
-
-###6. Full Width###
-[missing image]
-
-###7. Notifications###
-[missing image]
-
-###8. Google Maps###
-[missing image]
-
-###9. Social Icons###
-[missing image]
-
-###10. Progress Bars###
-[missing image]
-
-###11. Pricing###
-[missing image]
-
-###12. Highlights###
-[missing image]
-
-###13. Countdown###
-[missing image]
-
-###14. RSVP###
-[missing image]
-
-###15. Custom HTML###
-[missing image]
-
-###16. Code Snippets###
-[missing image]
-
-###17. Isotope / Masonry Posts###
-[missing image]
-
-###18. Images with Flags###
-[missing image]
-
-###19. Font Awesome Icons###
-[missing image]
-
-
 ## Changelog ##
 
 ### Version 3.8 ###
