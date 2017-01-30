@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: WP Canvas - Shortcodes
-Plugin URI: http://webplantmedia.com/starter-themes/wordpresscanvas/features/shortcodes/
-Description: A family of shortcodes to enhance site functionality.
+Plugin Name: Shortcodes by Angie Makes
+Plugin URI: http://angiemakes.com/feminine-wordpress-blog-themes-women/
+Description: A plugin that adds a useful family of shortcodes to your WordPress theme.
 Author: Chris Baldelomar
-Author URI: http://webplantmedia.com/
-Version: 3.8
+Author URI: http://angiemakes.com/
+Version: 3.9
 License: GPLv2 or later
 */
 

@@ -1,55 +1,89 @@
-=== WP Canvas - Shortcodes ===
+=== Shortcodes by Angie Makes ===
 
 Contributors: cbaldelomar
-Donate link: http://webplantmedia.com/donate/
-Tags: shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, image, flags, banners, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type, font awesome, icons, fontawesome, fa icons
+Tags: shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, image, flags, banners, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type, post slider, slider, font awesome, icons, fontawesome, fa, box, heading, inline code, divider, spacing, grid, center content, center, icons, image flag, image flags
 Requires at least: 3.7
-Tested up to: 4.7
+Tested up to: 4.7.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A family of shortcodes to enhance your site functionality. 
+A plugin that adds a useful family of shortcodes to your WordPress theme. 
 
 == Description ==
 
-Enhance your pages and posts with the following features.
+The Shortcodes by Angie Makes plugin adds a family of easy to use shortcodes to your WordPress theme. These shortcodes work flawlessly with [Angie Makes WordPress themes](http://angiemakes.com/feminine-wordpress-blog-themes-women/). Here are the handy shortcodes included with this plugin:
+
+Columns
+
+* 1/2 + 1/2
+* 1/3 + 1/3 + 1/3
+* 1/3 + 2/3
+* 2/3 + 1/3
+* 1/4 + 1/4 + 1/4 + 1/4
+* 1/4 + 1/2 + 1/4
+* 1/2 + 1/4 + 1/4
+* 1/4 + 1/4 + 1/2
+* 1/4 + 3/4
+* 3/4 + 1/4
+
+Elements
+
+* Button
+* Font Awesome Icon
+* Heading
+* Highlight
+* Spacing
+* Clear Floats
+* Inline Code
+* Divider
+
+Content
+
+* Pricing Table
+* Social Icon
+* Share Buttons
+* Testimonial
+* Countdown
+* Skillbar
+* Image
+* Box
+* HTML
+* Preformatted Text
+
+Posts
+
+* Masonry - Box
+* Masonry - Borderless
+* Grid - Box
+* Grid - Borderless
+* Post Slider 1
+* Post Slider 2
+
+Actions
 
 * Accordion
+* Accordion Section
 * Tabs
+* Tab Section
 * Toggle
-* Columns & Sections
-* Testimonials
-* Borders
-* Buttons
-* Full Width
-* Notifications
-* Google Maps
-* Social Icons
-* Progress Bars
-* Pricing
-* Images with Flags
-* Highlights
-* Countdown
+* Google Map
 * RSVP
-* Custom HTML
-* Code Snippets
-* Isotope / Masonry Posts
-* Font Awesome Icons
 
-[Live Demo & Documentation](http://webplantmedia.com/starter-themes/wordpresscanvas/features/shortcodes/)
+Wrappers
+
+* Center Content
+* Full Width
+
+= Demo =
+
+See A DEMO of These Shortcodes Here:
+
+[http://gentry.angiemakes.com/shortcodes/](http://gentry.angiemakes.com/shortcodes/)
 
 = Professional Support =
 
-If you need professional plugin support from me, the plugin author, you can contact me at [Web Plant Media](http://webplantmedia.com/).
-
-= Plugin Development =
-
-If you're a theme author, plugin author, or just a code hobbyist, you can follow the development of this plugin on it's [GitHub repository](https://github.com/webplantmedia/wc-shortcodes). 
-
-= Donations =
-
-Thank you so much for even considering supporting my work. If you have benefited from my WordPress plugins, or are appreciative of my customer support, and feel led to send me a monetary donation, please follow the link [here](http://webplantmedia.com/donate/). I am truly thankful for your hard earned giving.
+We have tested this plugin to work with the latest version of WordPress, but do not offer individual troubleshooting support as this is a free plugin. If you need individual support, we're happy to assist you if you purchase our premium support by purchasing a premium, Angie Makes WordPress theme from [angiemakes.com](http://angiemakes.com).
 
 == Installation ==
 
@@ -57,6 +91,8 @@ Thank you so much for even considering supporting my work. If you have benefited
 2. Upload the `wc-shortcodes` folder to your `/wp-content/plugins` directory.
 3. In your WordPress dashboard, head over to the *Plugins* section.
 4. Activate *WP Canvas - Shortcodes*.
+
+See our help article on [how to manually upload a plugin](http://knowledgebase.angiemakes.com/how-to-upload-and-install-a-custom-third-party-plugin/?cat=18).
 
 == Frequently Asked Questions ==
 
