@@ -247,6 +247,15 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
+	public static function pricing_color_type( $value, $default = 'primary' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::pricing_color_types();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function color_type( $value, $default = 'primary' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::color_types();
 
@@ -617,7 +626,7 @@ class WPC_Shortcodes_Sanitize {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {
 				case 'type' :
-					$atts[ $key ] = self::color_type( $value );
+					$atts[ $key ] = self::pricing_color_type( $value );
 					break;
 				case 'plan' :
 					$atts[ $key ] = sanitize_text_field( $value );

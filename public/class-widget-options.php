@@ -164,6 +164,14 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function pricing_color_types() {
+		return array(
+			'primary' => 'Primary',
+			'secondary' => 'Secondary',
+			'inverse' => 'Inverse',
+		);
+	}
+
 	public static function color_types() {
 		return array(
 			'primary' => 'Primary',
