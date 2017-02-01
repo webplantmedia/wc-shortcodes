@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.13 ###
+
+* Fixed bug with button attribute.
+
 ### Version 3.12 ###
 
 * Updated readme file
