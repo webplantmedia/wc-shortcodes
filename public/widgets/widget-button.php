@@ -16,10 +16,10 @@ class WPC_Shortcodes_Widget_Button extends WPC_Shortcodes_Widget_Base {
 
 		<div id="wc-shortcodes-button-widget-<?php echo $this->number; ?>" class="wc-shortcodes-visual-manager">
 			<p>
-				<label for="<?php echo $this->get_field_id('button_type'); ?>"><?php _e('Button Type:'); ?></label>
-				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('button_type'); ?>" name="<?php echo $this->get_field_name('button_type'); ?>">
+				<label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Button Type:'); ?></label>
+				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>">
 					<?php foreach ( WPC_Shortcodes_Widget_Options::color_types() as $key => $value ) : ?>
-						<option value="<?php echo $key; ?>"<?php selected( $o['button_type'], $key ); ?>><?php echo $value; ?></option>';
+						<option value="<?php echo $key; ?>"<?php selected( $o['type'], $key ); ?>><?php echo $value; ?></option>';
 					<?php endforeach; ?>
 				</select>
 			</p>
