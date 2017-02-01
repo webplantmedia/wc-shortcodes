@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.14 ###
+
+* Fixed bug with pricing shortcode color options.
+
 ### Version 3.13 ###
 
 * Fixed bug with button attribute.

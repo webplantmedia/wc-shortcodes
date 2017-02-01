@@ -5,7 +5,7 @@ Plugin URI: http://angiemakes.com/feminine-wordpress-blog-themes-women/
 Description: A plugin that adds a useful family of shortcodes to your WordPress theme.
 Author: Chris Baldelomar
 Author URI: http://angiemakes.com/
-Version: 3.13
+Version: 3.14
 License: GPLv2 or later
 */
 
