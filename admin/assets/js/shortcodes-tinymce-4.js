@@ -109,7 +109,7 @@
 							{
 								text: "Button",
 								onclick: function(){
-									var shortcode = '[wc_button type="primary" url="http://angiemakes.com" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]';
+									var shortcode = '[wc_button type="primary" url="" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]';
 									wcShortcodes( shortcode, editor );
 								}
 							},
@@ -168,7 +168,7 @@
 							{
 								text: "Pricing Table",
 								onclick: function(){
-									var shortcode = '[wc_pricing type="primary" plan="Basic" cost="$19.99" per="per month" button_url="http://angiemakes.com" button_text="Sign Up" button_target="self" button_rel="nofollow"]<ul><li>30GB Storage</li><li>512MB Ram</li><li>10 databases</li><li>1,000 Emails</li><li>25GB Bandwidth</li></ul>[/wc_pricing]';
+									var shortcode = '[wc_pricing type="primary" plan="Basic" cost="$19.99" per="per month" button_url="" button_text="Sign Up" button_target="self" button_rel="nofollow"]<ul><li>30GB Storage</li><li>512MB Ram</li><li>10 databases</li><li>1,000 Emails</li><li>25GB Bandwidth</li></ul>[/wc_pricing]';
 									wcShortcodes( shortcode, editor );
 								}
 							},

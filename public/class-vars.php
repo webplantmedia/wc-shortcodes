@@ -171,7 +171,7 @@ class WPC_Shortcodes_Vars {
 		);
 		self::$attr->button = array(
 			'type'			=> 'primary', // or inverse
-			'url'			=> 'http://angiemakes.com',
+			'url'			=> '',
 			'title'			=> 'Visit Site',
 			'target'		=> 'self',
 			'rel'			=> '',
