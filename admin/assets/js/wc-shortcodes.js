@@ -78,7 +78,7 @@
 	}
 
 	var getTag = function( shortcode ) {
-		var tag = '', last = '', a = ''; aa = '';
+		var tag = '', last = '', a = '', aa = '';
 
 		a = shortcode.split(/\n/);
 
