@@ -113,6 +113,11 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.15 =
+
+* Fixed javascript bug that was breaking visual manager in Google Chrome.
+* Removed angiemakes.com from default url.
+
 = Version 3.14 =
 
 * Fixed bug with pricing shortcode color options.
