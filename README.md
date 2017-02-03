@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.16 ###
+
+* Fixed bug with social icons shortcode
+
 ### Version 3.15 ###
 
 * Fixed javascript bug that was breaking visual manager in Google Chrome.
