@@ -253,8 +253,48 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	* @since 1.0
 	*/
 	public function social_icons( $atts ){
+		//deprecated value
+		$size_is_set = false;
+		$align_is_set = false;
+
+		if ( isset( $atts['size'] ) && ! empty( $atts['size'] ) ) {
+			$size_is_set = true;
+		}
+
+		if ( isset( $atts['align'] ) && ! empty( $atts['align'] ) ) {
+			$align_is_set = true;
+		}
+
 		$atts = shortcode_atts( parent::$attr->social_icons, $atts );
 		$atts = WPC_Shortcodes_Sanitize::social_icons_attr( $atts );
+
+		if ( $size_is_set ) {
+			switch ( $atts['size'] ) {
+				case 'small' :
+					$atts['maxheight'] = 16;
+					break;
+				case 'medium' :
+					$atts['maxheight'] = 24;
+					break;
+				case 'large' :
+					$atts['maxheight'] = 48;
+					break;
+			}
+		}
+
+		if ( $align_is_set ) {
+			switch ( $atts['align'] ) {
+				case 'left' :
+					$atts['columns'] = 'float-left';
+					break;
+				case 'center' :
+					$atts['columns'] = 'float-center';
+					break;
+				case 'right' :
+					$atts['columns'] = 'float-right';
+					break;
+			}
+		}
 
 		$order = get_option( WC_SHORTCODES_PREFIX . 'social_icons_display' );
 

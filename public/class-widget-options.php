@@ -263,6 +263,24 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function social_icons_sizes() {
+		return array(
+			'' => 'None',
+			'small' => 'Small',
+			'medium' => 'Medium',
+			'large' => 'Large',
+		);
+	}
+
+	public static function social_icons_align_values() {
+		return array(
+			'' => 'None',
+			'left' => 'Left',
+			'center' => 'Center',
+			'right' => 'Right',
+		);
+	}
+
 	public static function social_icons_display_types() {
 		return array(
 			'float-center' => 'Float Center',

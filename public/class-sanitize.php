@@ -166,6 +166,24 @@ class WPC_Shortcodes_Sanitize {
 		return $name;
 	}
 
+	public static function social_icons_align( $value, $default = 'left' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::social_icons_align_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function social_icons_size( $value, $default = 'large' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::social_icons_sizes();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function social_icons_format( $value, $default = 'default' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::social_icons_formats();
 
@@ -712,8 +730,11 @@ class WPC_Shortcodes_Sanitize {
 				case 'maxheight' :
 					$atts[ $key ] = self::social_icons_max_height( $value );
 					break;
+				case 'size' :
+					$atts[ $key ] = self::social_icons_size( $value );
+					break;
 				case 'align' :
-					$atts[ $key ] = self::text_align( $value );
+					$atts[ $key ] = self::social_icons_align( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
