@@ -395,17 +395,19 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		$url_rel = ! empty( $atts['rel'] ) ? ' rel="'.esc_attr( $atts['rel'] ).'"' : '';
 		$url_target = ! empty( $atts['target'] ) ? ' target="_'.esc_attr( $atts['target'] ).'"' : '';
+
 		$atts['type'] = 'wc-shortcodes-button-' . $atts['type'];
 		
 		$class = array();
 		$class[] = 'wc-shortcodes-button';
 		$class[] = $atts['type'];
 		$class[] = 'wc-shortcodes-button-position-' . $atts['position'];
-		if ( ! empty( $custom_class ) )
-			$class[] = $custom_class;
+		if ( ! empty( $atts['class'] ) ) {
+			$class[] = $atts['class'];
+		}
 		
 		$button = null;
-		$button .= '<a href="' . esc_url( $atts['url'] ) . '" class="'.esc_attr( implode( ' ', $class ) ).'"'.$url_rel.$url_target.'" title="'. esc_attr( $atts['title'] ) .'">';
+		$button .= '<a href="' . esc_url( $atts['url'] ) . '" class="'.esc_attr( implode( ' ', $class ) ).'"'.$url_rel.$url_target.' title="'. esc_attr( $atts['title'] ) .'">';
 			$button .= '<span class="wc-shortcodes-button-inner">';
 			if ( $atts['icon_left'] ) {
 				$button .= '<span class="wc-shortcodes-button-icon-left fa fa-'. esc_attr( $atts['icon_left'] ) .'"></span>';
