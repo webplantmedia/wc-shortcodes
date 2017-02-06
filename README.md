@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.17 ###
+
+* Fixed bug with class not being applied to button shortcode.
+
 ### Version 3.16 ###
 
 * Fixed bug with social icons shortcode
