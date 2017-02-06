@@ -13,9 +13,6 @@ class WPC_Shortcodes_Widget_Social_Icons extends WP_Widget {
 
 		$instance['title'] = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		if ( !empty($instance['title']) )
-			echo $args['before_title'] . $instance['title'] . $args['after_title'];
-
 		$shortcode = array();
 		foreach ( $instance as $key => $value ) {
 			$shortcode[] = $key . '="' . $value . '"';
@@ -30,6 +27,10 @@ class WPC_Shortcodes_Widget_Social_Icons extends WP_Widget {
 		}
 
 		echo $args['before_widget'];
+
+		if ( !empty($instance['title']) )
+			echo $args['before_title'] . $instance['title'] . $args['after_title'];
+
 		echo do_shortcode( $shortcode );
 		echo $args['after_widget'];
 	}
