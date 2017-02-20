@@ -3,7 +3,7 @@
 		<?php if ( $display['show_meta_comments'] ) : ?>
 			<?php if ( comments_open() ) : ?>
 				<span class="wc-shortcodes-comments-link">
-					<?php comments_popup_link( '<span class="wc-shortcodes-leave-reply">' . __( '0', 'wordpresscanvas' ) . '</span>', __( '1', 'wordpresscanvas' ), __( '%', 'wordpresscanvas' ) ); ?>
+					<?php comments_popup_link( '<span class="wc-shortcodes-leave-reply">' . __( '0', 'wc_shortcodes' ) . '</span>', __( '1', 'wordpresscanvas' ), __( '%', 'wordpresscanvas' ) ); ?>
 				</span><!-- .comments-link -->
 			<?php endif; // comments_open() ?>
 		<?php endif; ?>
@@ -24,7 +24,7 @@
 		if ( $display['show_meta_date'] && ! has_post_format( 'link' ) ) {
 			$meta[] = sprintf( '<span class="wc-shortcodes-date"><a href="%1$s" title="%2$s" rel="bookmark"><time class="wc-shortcodes-entry-date" datetime="%3$s">%4$s</time></a></span>',
 				esc_url( get_permalink() ),
-				esc_attr( sprintf( __( 'Permalink to %s', 'wordpresscanvas' ), the_title_attribute( 'echo=0' ) ) ),
+				esc_attr( sprintf( __( 'Permalink to %s', 'wc_shortcodes' ), the_title_attribute( 'echo=0' ) ) ),
 				esc_attr( get_the_date( 'c' ) ),
 				esc_html( sprintf( '%2$s', get_post_format_string( get_post_format() ), get_the_date('M j, Y') ) )
 			);

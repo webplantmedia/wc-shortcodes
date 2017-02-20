@@ -18,7 +18,7 @@ if ( ! empty( $taxonomy ) ) {
 		$links = array();
 		$link = $nav_filter_hard_links ? $permalink : '#';
 		$term_class = empty( $wpc_term ) ? ' wc-shortcodes-term-active' : '';
-		$links[] = "<a href='{$link}' data-filter='*' title='All Tags' class='wc-shortcodes-term wc-shortcodes-all-tags{$term_class}'>" . __( 'All', 'wordpresscanvas' ) . "</a>";
+		$links[] = "<a href='{$link}' data-filter='*' title='All Tags' class='wc-shortcodes-term wc-shortcodes-all-tags{$term_class}'>" . __( 'All', 'wc_shortcodes' ) . "</a>";
 
 		if ( ! is_array( $whitelist ) || empty( $whitelist ) ) {
 			foreach ( $terms as $term ) {
