@@ -194,7 +194,7 @@
 
 					// Button
 					if(id === "button") {
-						tinyMCE.activeEditor.selection.setContent('[wc_button type="primary" url="http://webplantmedia.com" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]');
+						tinyMCE.activeEditor.selection.setContent('[wc_button type="primary" url="" title="Visit Site" target="self" position="float"]' + wcDummyContent + '[/wc_button]');
 					}
 					
 					
