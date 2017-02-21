@@ -106,6 +106,11 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.19 ###
+
+* updated text domain
+* added language pot file
+
 ### Version 3.18 ###
 
 * Fixed bug with social icons widget title being out of place.
