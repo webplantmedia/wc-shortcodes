@@ -1,0 +1,732 @@
+# Copyright (C) 2017 Shortcodes by Angie Makes
+# This file is distributed under the same license as the Shortcodes by Angie Makes package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Shortcodes by Angie Makes 3.18\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-shortcodes\n"
+"POT-Creation-Date: 2017-02-21 14:40:25+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: admin/class-admin.php:96
+msgid "Settings"
+msgstr ""
+
+#: includes/vendors/wpc-settings-framework/views/page.php:6
+#: includes/vendors/wpc-settings-framework/views/settings-error.php:6
+msgid "Settings saved."
+msgstr ""
+
+#: public/class-post-types.php:69 public/class-post-types.php:81
+msgid "Slider Items"
+msgstr ""
+
+#: public/class-post-types.php:70 public/class-post-types.php:72
+msgid "Slider Item"
+msgstr ""
+
+#: public/class-post-types.php:71 public/class-post-types.php:84
+msgid "Slider"
+msgstr ""
+
+#: public/class-post-types.php:73
+msgid "Add New"
+msgstr ""
+
+#: public/class-post-types.php:74
+msgid "Add New Slider Item"
+msgstr ""
+
+#: public/class-post-types.php:75
+msgid "Edit Slider Item"
+msgstr ""
+
+#: public/class-post-types.php:76
+msgid "New Slider Item"
+msgstr ""
+
+#: public/class-post-types.php:77
+msgid "View Slider Item"
+msgstr ""
+
+#: public/class-post-types.php:78
+msgid "Search Slider"
+msgstr ""
+
+#: public/class-post-types.php:79
+msgid "No slider items found"
+msgstr ""
+
+#: public/class-post-types.php:80
+msgid "No slider items found in trash"
+msgstr ""
+
+#: public/class-post-types.php:116
+msgid "Slider Categories"
+msgstr ""
+
+#: public/class-post-types.php:117 public/class-post-types.php:119
+msgid "Slider Category"
+msgstr ""
+
+#: public/class-post-types.php:118
+msgid "Categories"
+msgstr ""
+
+#: public/class-post-types.php:120
+msgid "Search Slider Categories"
+msgstr ""
+
+#: public/class-post-types.php:121
+msgid "Popular Slider Categories"
+msgstr ""
+
+#: public/class-post-types.php:122
+msgid "All Slider Categories"
+msgstr ""
+
+#: public/class-post-types.php:123
+msgid "Edit Slider Category"
+msgstr ""
+
+#: public/class-post-types.php:124
+msgid "View Slider Category"
+msgstr ""
+
+#: public/class-post-types.php:125
+msgid "Update Slider Category"
+msgstr ""
+
+#: public/class-post-types.php:126
+msgid "Add New Slider Category"
+msgstr ""
+
+#: public/class-post-types.php:127
+msgid "New Slider Category Name"
+msgstr ""
+
+#: public/class-post-types.php:128
+msgid "Separate slider categories with commas"
+msgstr ""
+
+#: public/class-post-types.php:129
+msgid "Add or remove slider categories"
+msgstr ""
+
+#: public/class-post-types.php:130
+msgid "Choose from the most used slider categories"
+msgstr ""
+
+#: public/class-post-types.php:152
+msgid "Slider Tags"
+msgstr ""
+
+#: public/class-post-types.php:153 public/class-post-types.php:155
+msgid "Slider Tag"
+msgstr ""
+
+#: public/class-post-types.php:154
+msgid "Tags"
+msgstr ""
+
+#: public/class-post-types.php:156
+msgid "Search Slider Tags"
+msgstr ""
+
+#: public/class-post-types.php:157
+msgid "Popular Slider Tags"
+msgstr ""
+
+#: public/class-post-types.php:158
+msgid "All Slider Tags"
+msgstr ""
+
+#: public/class-post-types.php:159
+msgid "Edit Slider Tag"
+msgstr ""
+
+#: public/class-post-types.php:160
+msgid "View Slider Tag"
+msgstr ""
+
+#: public/class-post-types.php:161
+msgid "Update Slider Tag"
+msgstr ""
+
+#: public/class-post-types.php:162
+msgid "Add New Slider Tag"
+msgstr ""
+
+#: public/class-post-types.php:163
+msgid "New Slider Tag Name"
+msgstr ""
+
+#: public/class-post-types.php:164
+msgid "Separate slider tags with commas"
+msgstr ""
+
+#: public/class-post-types.php:165
+msgid "Add or remove slider tags"
+msgstr ""
+
+#: public/class-post-types.php:166
+msgid "Choose from the most used slider tags"
+msgstr ""
+
+#: public/class-register.php:1532
+msgid "Share"
+msgstr ""
+
+#: public/class-vars.php:198
+msgid "Sample Heading"
+msgstr ""
+
+#: public/class-widget-options.php:87
+msgid "Thumbnail"
+msgstr ""
+
+#: public/class-widget-options.php:88
+msgid "Medium"
+msgstr ""
+
+#: public/class-widget-options.php:89
+msgid "Large"
+msgstr ""
+
+#: public/class-widget-options.php:90
+msgid "Full Size"
+msgstr ""
+
+#: public/functions.php:92
+msgid "There is no excerpt because this is a protected post."
+msgstr ""
+
+#: public/functions.php:174
+msgid "Posted in"
+msgstr ""
+
+#: public/templates/borderless/entry-meta.php:6
+#: public/templates/box/entry-meta.php:7
+msgid "0"
+msgstr ""
+
+#: public/templates/borderless/entry-meta.php:6
+#: public/templates/box/entry-meta.php:7
+msgid "1"
+msgstr ""
+
+#: public/templates/borderless/entry-meta.php:6
+#: public/templates/box/entry-meta.php:7
+msgid "%"
+msgstr ""
+
+#: public/templates/borderless/entry-meta.php:15
+#: public/templates/box/entry-meta.php:16
+msgid "By"
+msgstr ""
+
+#: public/templates/borderless/entry-meta.php:27
+#: public/templates/box/entry-meta.php:28
+msgid "Permalink to %s"
+msgstr ""
+
+#: public/templates/nav-filtering.php:21
+msgid "All"
+msgstr ""
+
+#: public/templates/nav-pagination.php:7
+msgid "Posts Navigation"
+msgstr ""
+
+#: public/templates/nav-pagination.php:18
+msgid "Previous Page"
+msgstr ""
+
+#: public/templates/nav-pagination.php:19
+msgid "Next Page"
+msgstr ""
+
+#: public/widgets/widget-accordion-main.php:20
+msgid "Collapse?"
+msgstr ""
+
+#: public/widgets/widget-accordion-main.php:24
+msgid "Leave Open?"
+msgstr ""
+
+#: public/widgets/widget-accordion-main.php:27
+#: public/widgets/widget-accordion-section.php:24
+#: public/widgets/widget-box.php:45 public/widgets/widget-button.php:69
+#: public/widgets/widget-center.php:24 public/widgets/widget-column.php:36
+#: public/widgets/widget-divider.php:45 public/widgets/widget-fa.php:34
+#: public/widgets/widget-googlemap.php:49 public/widgets/widget-heading.php:73
+#: public/widgets/widget-highlight.php:27 public/widgets/widget-image.php:109
+#: public/widgets/widget-pricing.php:63
+#: public/widgets/widget-share-buttons.php:20
+#: public/widgets/widget-skillbar.php:35
+#: public/widgets/widget-social-icons.php:87
+#: public/widgets/widget-spacing.php:24 public/widgets/widget-tabgroup.php:19
+#: public/widgets/widget-testimonial.php:35 public/widgets/widget-toggle.php:31
+msgid "Class:"
+msgstr ""
+
+#: public/widgets/widget-accordion-main.php:32
+#: public/widgets/widget-posts.php:153 public/widgets/widget-tabgroup.php:24
+#: public/widgets/widget-toggle.php:36
+msgid "Layout:"
+msgstr ""
+
+#: public/widgets/widget-accordion-section.php:20
+#: public/widgets/widget-button.php:31 public/widgets/widget-googlemap.php:23
+#: public/widgets/widget-heading.php:19 public/widgets/widget-image.php:24
+#: public/widgets/widget-skillbar.php:19
+#: public/widgets/widget-social-icons.php:58 public/widgets/widget-tab.php:20
+#: public/widgets/widget-toggle.php:19
+msgid "Title:"
+msgstr ""
+
+#: public/widgets/widget-box.php:19 public/widgets/widget-highlight.php:19
+msgid "Color Type:"
+msgstr ""
+
+#: public/widgets/widget-box.php:27 public/widgets/widget-center.php:29
+#: public/widgets/widget-column.php:41 public/widgets/widget-heading.php:41
+#: public/widgets/widget-image.php:64
+msgid "Text Align:"
+msgstr ""
+
+#: public/widgets/widget-box.php:35 public/widgets/widget-divider.php:35
+#: public/widgets/widget-heading.php:31
+msgid "Top Margin:"
+msgstr ""
+
+#: public/widgets/widget-box.php:40 public/widgets/widget-divider.php:40
+#: public/widgets/widget-heading.php:36
+msgid "Bottom Margin:"
+msgstr ""
+
+#: public/widgets/widget-button.php:19
+msgid "Button Type:"
+msgstr ""
+
+#: public/widgets/widget-button.php:27 public/widgets/widget-image.php:44
+#: public/widgets/widget-testimonial.php:23
+msgid "URL:"
+msgstr ""
+
+#: public/widgets/widget-button.php:35 public/widgets/widget-pricing.php:47
+msgid "URL Target:"
+msgstr ""
+
+#: public/widgets/widget-button.php:43 public/widgets/widget-pricing.php:55
+msgid "URL Rel:"
+msgstr ""
+
+#: public/widgets/widget-button.php:51 public/widgets/widget-heading.php:58
+msgid "Icon Left:"
+msgstr ""
+
+#: public/widgets/widget-button.php:56 public/widgets/widget-heading.php:63
+msgid "Icon Right:"
+msgstr ""
+
+#: public/widgets/widget-button.php:61 public/widgets/widget-column.php:28
+#: public/widgets/widget-testimonial.php:27
+msgid "Position:"
+msgstr ""
+
+#: public/widgets/widget-center.php:19
+msgid "Max Width:"
+msgstr ""
+
+#: public/widgets/widget-column.php:20 public/widgets/widget-spacing.php:19
+msgid "Size:"
+msgstr ""
+
+#: public/widgets/widget-countdown.php:19 public/widgets/widget-posts.php:173
+msgid "Date Format:"
+msgstr ""
+
+#: public/widgets/widget-countdown.php:24
+#: public/widgets/widget-social-icons.php:63
+msgid "Format:"
+msgstr ""
+
+#: public/widgets/widget-countdown.php:29
+msgid "Plural Labels:"
+msgstr ""
+
+#: public/widgets/widget-countdown.php:34
+msgid "Singular Labels:"
+msgstr ""
+
+#: public/widgets/widget-countdown.php:39
+msgid "Message:"
+msgstr ""
+
+#: public/widgets/widget-divider.php:19
+msgid "Style Type:"
+msgstr ""
+
+#: public/widgets/widget-divider.php:27
+msgid "Line Type:"
+msgstr ""
+
+#: public/widgets/widget-fa.php:19
+msgid "Icon:"
+msgstr ""
+
+#: public/widgets/widget-fa.php:24
+msgid "Left Margin Spacing:"
+msgstr ""
+
+#: public/widgets/widget-fa.php:29
+msgid "Right Margin Spacing:"
+msgstr ""
+
+#: public/widgets/widget-fullwidth.php:19
+msgid "Selector:"
+msgstr ""
+
+#: public/widgets/widget-googlemap.php:28
+msgid "Show Title On Load?"
+msgstr ""
+
+#: public/widgets/widget-googlemap.php:31
+msgid "Location:"
+msgstr ""
+
+#: public/widgets/widget-googlemap.php:36
+msgid "Height:"
+msgstr ""
+
+#: public/widgets/widget-googlemap.php:41
+msgid "Zoom:"
+msgstr ""
+
+#: public/widgets/widget-heading.php:23
+#: public/widgets/widget-post-slider.php:144
+#: public/widgets/widget-posts.php:145
+msgid "Heading Type:"
+msgstr ""
+
+#: public/widgets/widget-heading.php:49
+msgid "Font Size:"
+msgstr ""
+
+#: public/widgets/widget-heading.php:54 public/widgets/widget-skillbar.php:27
+msgid "Font Color:"
+msgstr ""
+
+#: public/widgets/widget-heading.php:68
+msgid "Icon Spacing:"
+msgstr ""
+
+#: public/widgets/widget-html.php:19 public/widgets/widget-pre.php:19
+msgid "Name:"
+msgstr ""
+
+#: public/widgets/widget-image.php:19
+msgid "Attachment ID:"
+msgstr ""
+
+#: public/widgets/widget-image.php:28
+msgid "Alt:"
+msgstr ""
+
+#: public/widgets/widget-image.php:32
+msgid "Caption:"
+msgstr ""
+
+#: public/widgets/widget-image.php:36
+msgid "Image Link To:"
+msgstr ""
+
+#: public/widgets/widget-image.php:48
+msgid "Image Align:"
+msgstr ""
+
+#: public/widgets/widget-image.php:56 public/widgets/widget-post-slider.php:136
+#: public/widgets/widget-posts.php:116
+msgid "Image Size:"
+msgstr ""
+
+#: public/widgets/widget-image.php:72
+msgid "flag:"
+msgstr ""
+
+#: public/widgets/widget-image.php:76
+msgid "Left:"
+msgstr ""
+
+#: public/widgets/widget-image.php:81
+msgid "Right:"
+msgstr ""
+
+#: public/widgets/widget-image.php:86
+msgid "Top:"
+msgstr ""
+
+#: public/widgets/widget-image.php:91
+msgid "Bottom:"
+msgstr ""
+
+#: public/widgets/widget-image.php:96
+msgid "Text Color:"
+msgstr ""
+
+#: public/widgets/widget-image.php:100
+msgid "Background Color:"
+msgstr ""
+
+#: public/widgets/widget-image.php:104
+msgid "Flag Width:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:9
+msgid "Add a post slider to your widget area."
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:10
+msgid "Post Slider"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:55 public/widgets/widget-posts.php:24
+msgid "Post IDs:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:60 public/widgets/widget-posts.php:29
+msgid "Order:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:68 public/widgets/widget-posts.php:37
+msgid "Order By:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:76 public/widgets/widget-posts.php:45
+msgid "Post Type:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:84 public/widgets/widget-posts.php:53
+msgid "Taxonomy:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:98 public/widgets/widget-posts.php:67
+msgid "Terms:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:103 public/widgets/widget-posts.php:72
+msgid "Posts Per Page:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:109 public/widgets/widget-posts.php:78
+msgid "Ignore Sticky Posts"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:116
+msgid "Show Meta Category"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:120 public/widgets/widget-posts.php:85
+msgid "Show Title"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:124
+#: public/widgets/widget-posts.php:109
+msgid "Show Content"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:127
+msgid "Read More Text:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:131
+msgid "Button Class:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:155
+#: public/widgets/widget-posts.php:161
+msgid "Template:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:163
+msgid "Heading Size:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:167
+msgid "Mobile Heading Size:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:171
+#: public/widgets/widget-posts.php:169
+msgid "Excerpt Length:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:175
+msgid "Desktop Height:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:179
+msgid "Laptop Height:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:183
+msgid "Mobile Height:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:190
+msgid "Slider Mode:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:198
+msgid "Slider Pause:"
+msgstr ""
+
+#: public/widgets/widget-post-slider.php:204
+msgid "Enable Auto Transition"
+msgstr ""
+
+#: public/widgets/widget-posts.php:89
+msgid "Show Meta All"
+msgstr ""
+
+#: public/widgets/widget-posts.php:93
+msgid "Show Meta Author"
+msgstr ""
+
+#: public/widgets/widget-posts.php:97
+msgid "Show Meta Date"
+msgstr ""
+
+#: public/widgets/widget-posts.php:101
+msgid "Show Meta Comments"
+msgstr ""
+
+#: public/widgets/widget-posts.php:105
+msgid "Show Thumbnail"
+msgstr ""
+
+#: public/widgets/widget-posts.php:113
+msgid "Show Paging"
+msgstr ""
+
+#: public/widgets/widget-posts.php:125
+msgid "Enable Post Filtering"
+msgstr ""
+
+#: public/widgets/widget-posts.php:132 public/widgets/widget-rsvp.php:20
+msgid "Columns:"
+msgstr ""
+
+#: public/widgets/widget-posts.php:140
+msgid "Gutter Space:"
+msgstr ""
+
+#: public/widgets/widget-pre.php:25
+msgid "Enable Scroll?"
+msgstr ""
+
+#: public/widgets/widget-pre.php:29
+msgid "Display Code Color?"
+msgstr ""
+
+#: public/widgets/widget-pre.php:33
+msgid "Display Line Numbers?"
+msgstr ""
+
+#: public/widgets/widget-pre.php:37
+msgid "Wrap Text?"
+msgstr ""
+
+#: public/widgets/widget-pricing.php:19
+msgid "Pricing Type:"
+msgstr ""
+
+#: public/widgets/widget-pricing.php:27
+msgid "Plan:"
+msgstr ""
+
+#: public/widgets/widget-pricing.php:31
+msgid "Cost:"
+msgstr ""
+
+#: public/widgets/widget-pricing.php:35
+msgid "Per:"
+msgstr ""
+
+#: public/widgets/widget-pricing.php:39
+msgid "Button URL:"
+msgstr ""
+
+#: public/widgets/widget-pricing.php:43
+msgid "Button Text:"
+msgstr ""
+
+#: public/widgets/widget-rsvp.php:28
+msgid "Align:"
+msgstr ""
+
+#: public/widgets/widget-rsvp.php:36
+msgid "Button Align:"
+msgstr ""
+
+#: public/widgets/widget-skillbar.php:23
+msgid "Percentage:"
+msgstr ""
+
+#: public/widgets/widget-skillbar.php:32
+msgid "Show Percent?"
+msgstr ""
+
+#: public/widgets/widget-social-icons.php:8
+msgid "Add your social icons to your sidebar."
+msgstr ""
+
+#: public/widgets/widget-social-icons.php:9
+msgid "WP Canvas - Social Media Icons"
+msgstr ""
+
+#: public/widgets/widget-social-icons.php:71
+msgid "Display:"
+msgstr ""
+
+#: public/widgets/widget-social-icons.php:79
+msgid "Max Height:"
+msgstr ""
+
+#: public/widgets/widget-testimonial.php:19
+msgid "By:"
+msgstr ""
+
+#: public/widgets/widget-toggle.php:23
+msgid "Padding:"
+msgstr ""
+
+#: public/widgets/widget-toggle.php:27
+msgid "Border Width:"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Shortcodes by Angie Makes"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://angiemakes.com/feminine-wordpress-blog-themes-women/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"A plugin that adds a useful family of shortcodes to your WordPress theme."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Chris Baldelomar"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://angiemakes.com/"
+msgstr ""
