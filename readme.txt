@@ -113,6 +113,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.20 =
+
+* Removed extra closing tag
+
 = Version 3.19 =
 
 * updated text domain
