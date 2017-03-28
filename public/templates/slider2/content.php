@@ -1,7 +1,7 @@
 <?php $classes[] = 'wc-shortcodes-post-slide'; ?>
 <?php $image_style = ''; ?>
 <?php if ( has_post_thumbnail() && ! post_password_required() ) : ?>
-		<?php $image_style = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $display['size'] ); ?></a>
+		<?php $image_style = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $display['size'] ); ?>
 		<?php $image_style = 'background-image:url(\''.$image_style[0].'\');'; ?>
 <?php endif; ?>
 <div id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?> style="<?php echo $image_style; ?>">
