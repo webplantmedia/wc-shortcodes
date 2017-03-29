@@ -302,7 +302,24 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			$atts['format'] = get_option( WC_SHORTCODES_PREFIX . 'social_icons_format', 'icon' );
 		}
 
-		$show_image = 'image' == $atts['format'] ? true : false;
+		$show_image = false;
+		$show_large_image = false;
+		$show_medium_image = false;
+		$show_small_image = false;
+		switch ( $atts['format'] ) {
+			case 'image' :
+				$show_large_image = true;
+				$show_image = true;
+				break;
+			case 'medium_image' :
+				$show_medium_image = true;
+				$show_image = true;
+				break;
+			case 'small_image' :
+				$show_small_image = true;
+				$show_image = true;
+				break;
+		}
 
 		if ( ! is_array( $order ) || empty( $order ) ) {
 			return;
@@ -339,7 +356,9 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 					}
 
 					$link_option_name = WC_SHORTCODES_PREFIX . $key . '_link';
-					$image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_icon';
+					$small_image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_small_icon';
+					$medium_image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_medium_icon';
+					$large_image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_icon';
 					$font_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_font_icon';
 
 					$social_link = get_option( $link_option_name );
@@ -347,13 +366,33 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 					$first_class = $first ? ' first-icon' : '';
 					$first = false;
+					$image_src = '';
 
 					if ( $show_image ) {
-						$icon_url = get_option( $image_icon_option_name );
+						if ( $show_small_image ) {
+							$icon_url = get_option( $small_image_icon_option_name );
+							$retina_icon_url = get_option( $medium_image_icon_option_name );
+							$image_src = 'src="'.esc_url( $icon_url ).'"';
+							if ( ! empty( $retina_icon_url ) ) {
+								$image_src .= ' srcset="'.esc_url( $icon_url ).' 1x, '.esc_url( $retina_icon_url ).' 2x"';
+							}
+						}
+						else if ( $show_medium_image ) {
+							$icon_url = get_option( $medium_image_icon_option_name );
+							$retina_icon_url = get_option( $large_image_icon_option_name );
+							$image_src = 'src="'.esc_url( $icon_url ).'"';
+							if ( ! empty( $retina_icon_url ) ) {
+								$image_src .= ' srcset="'.esc_url( $icon_url ).' 1x, '.esc_url( $retina_icon_url ).' 2x"';
+							}
+						}
+						else {
+							$icon_url = get_option( $large_image_icon_option_name );
+							$image_src = 'src="'.esc_url( $icon_url ).'"';
+						}
 
 						$html .= '<li class="wc-shortcodes-social-icon wc-shortcode-social-icon-' . esc_attr( $key . $first_class ) . '">';
 							$html .='<a target="_blank" href="'.esc_url( $social_link ).'">';
-								$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.esc_attr( $name ).'">';
+								$html .= '<img '.$image_src.'" alt="'.esc_attr( $name ).'">';
 							$html .= '</a>';
 						$html .= '</li>';
 					}
@@ -1389,14 +1428,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$html = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="'.esc_attr( $style_attr ).'">';
 			$html .= '<ul class="wc-shortcodes-clearfix">';
 				foreach ( $share_buttons as $key => $name ) {
-					$icon_option_name = WC_SHORTCODES_PREFIX . $key . '_share_icon';
-					$icon_url = get_option( $icon_option_name );
-
-					$icon_option_name = WC_SHORTCODES_PREFIX . $key . '_share_text';
-					$icon_text = get_option( $icon_option_name );
-
-					$font_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_share_font_icon';
-					$icon_class = get_option( $font_icon_option_name );
 
 					$first_class = $first ? ' first-share-button' : '';
 
@@ -1404,85 +1435,35 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 						case 'pinterest' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a href="javascript:void((function()%7Bvar%20e=document.createElement(&apos;script&apos;);e.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);e.setAttribute(&apos;charset&apos;,&apos;UTF-8&apos;);e.setAttribute(&apos;src&apos;,&apos;https://assets.pinterest.com/js/pinmarklet.js?r=&apos;+Math.random()*99999999);document.body.appendChild(e)%7D)());">';
-									switch ( $format ) {
-										case 'image' :
-											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.esc_attr( $icon_text ).'">';
-											break;
-										case 'icon' :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i>';
-											break;
-										default :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i><span class="wc-share-button-'.$key.'">'.esc_html( $icon_text ).'</span>';
-											break;
-									}
+									$html .= $this->helper_get_share_icon( $format, $key );
 								$html .= '</a>';
 							$html .= '</li>';
 							break;
 						case 'facebook' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='.get_permalink().'&amp;t='.rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, $charset ) ).'">';
-									switch ( $format ) {
-										case 'image' :
-											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.esc_attr( $icon_text ).'">';
-											break;
-										case 'icon' :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i>';
-											break;
-										default :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i><span class="wc-share-button-'.$key.'">'.esc_html( $icon_text ).'</span>';
-											break;
-									}
+									$html .= $this->helper_get_share_icon( $format, $key );
 								$html .= '</a>';
 							$html .= '</li>';
 							break;
 						case 'twitter' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a target="_blank" href="https://twitter.com/share?text='.rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, $charset ) ).'&amp;url='.get_permalink().'" class="share-button-twitter" data-lang="en">';
-									switch ( $format ) {
-										case 'image' :
-											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.esc_attr( $icon_text ).'">';
-											break;
-										case 'icon' :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i>';
-											break;
-										default :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i><span class="wc-share-button-'.$key.'">'.esc_html( $icon_text ).'</span>';
-											break;
-									}
+									$html .= $this->helper_get_share_icon( $format, $key );
 								$html .= '</a>';
 							$html .= '</li>';
 							break;
 						case 'email' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a title="Share by Email" href="mailto:?subject='.rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, $charset ) ).'&amp;body='.get_permalink().'">';
-									switch ( $format ) {
-										case 'image' :
-											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.esc_attr( $icon_text ).'">';
-											break;
-										case 'icon' :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i>';
-											break;
-										default :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i><span class="wc-share-button-'.$key.'">'.esc_html( $icon_text ).'</span>';
-											break;
-									}
+									$html .= $this->helper_get_share_icon( $format, $key );
 								$html .= '</a>';
 							$html .= '</li>';
 							break;
 						case 'google' :
 							$html .= '<li class="wc-shortcodes-share-button-icon wc-shortcode-share-button-icon-' . $key . $first_class . '">';
 								$html .='<a target="_blank" href="https://plus.google.com/share?url='.get_permalink().'">';
-									switch ( $format ) {
-										case 'image' :
-											$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.esc_attr( $icon_text ).'">';
-											break;
-										case 'icon' :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i>';
-											break;
-										default :
-											$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i><span class="wc-share-button-'.$key.'">'.esc_html( $icon_text ).'</span>';
-											break;
-									}
+									$html .= $this->helper_get_share_icon( $format, $key );
 								$html .= '</a>';
 							$html .= '</li>';
 							break;
@@ -1494,17 +1475,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 								else {
 									$html .='<a href="#" onclick="javascript:void((function($){w=window.open(\''.get_permalink().'\');$(w).load(function(){setTimeout(function(){w.print();},1000);});})(jQuery));return false;">';
 								}
-										switch ( $format ) {
-											case 'image' :
-												$html .= '<img src="'.esc_url( $icon_url ).'" alt="'.esc_attr( $icon_text ).'">';
-												break;
-											case 'icon' :
-												$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i>';
-												break;
-											default :
-												$html .= '<i class="fa '.esc_attr( $icon_class ).'"></i><span class="wc-share-button-'.$key.'">'.esc_html( $icon_text ).'</span>';
-												break;
-										}
+									$html .= $this->helper_get_share_icon( $format, $key );
 								$html .= '</a>';
 							$html .= '</li>';
 							break;
@@ -1512,6 +1483,56 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 				}
 			$html .= '</ul>';
 		$html .= '</div>';
+
+		return $html;
+	}
+
+	private function helper_get_share_icon( $format, $key ) {
+		$small_image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_small_share_icon';
+		$medium_image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_medium_share_icon';
+		$large_image_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_share_icon';
+		$icon_option_name = WC_SHORTCODES_PREFIX . $key . '_share_text';
+		$font_icon_option_name = WC_SHORTCODES_PREFIX . $key . '_share_font_icon';
+
+		$html = '';
+
+		switch ( $format ) {
+			case 'small_image' :
+				$icon_text = get_option( $icon_option_name );
+				$icon_url = get_option( $small_image_icon_option_name );
+				$retina_icon_url = get_option( $medium_image_icon_option_name );
+				$image_src = 'src="'.esc_url( $icon_url ).'"';
+				if ( ! empty( $retina_icon_url ) ) {
+					$image_src .= ' srcset="'.esc_url( $icon_url ).' 1x, '.esc_url( $retina_icon_url ).' 2x"';
+				}
+				$html = '<img '.$image_src.' alt="'.esc_attr( $icon_text ).'">';
+				break;
+			case 'medium_image' :
+				$icon_text = get_option( $icon_option_name );
+				$icon_url = get_option( $medium_image_icon_option_name );
+				$retina_icon_url = get_option( $large_image_icon_option_name );
+				$image_src = 'src="'.esc_url( $icon_url ).'"';
+				if ( ! empty( $retina_icon_url ) ) {
+					$image_src .= ' srcset="'.esc_url( $icon_url ).' 1x, '.esc_url( $retina_icon_url ).' 2x"';
+				}
+				$html = '<img '.$image_src.' alt="'.esc_attr( $icon_text ).'">';
+				break;
+			case 'image' :
+				$icon_text = get_option( $icon_option_name );
+				$icon_url = get_option( $large_image_icon_option_name );
+				$image_src = 'src="'.esc_url( $icon_url ).'"';
+				$html = '<img '.$image_src.' alt="'.esc_attr( $icon_text ).'">';
+				break;
+			case 'icon' :
+				$icon_class = get_option( $font_icon_option_name );
+				$html = '<i class="fa '.esc_attr( $icon_class ).'"></i>';
+				break;
+			default :
+				$icon_text = get_option( $icon_option_name );
+				$icon_class = get_option( $font_icon_option_name );
+				$html = '<i class="fa '.esc_attr( $icon_class ).'"></i><span class="wc-share-button-'.$key.'">'.esc_html( $icon_text ).'</span>';
+				break;
+		}
 
 		return $html;
 	}

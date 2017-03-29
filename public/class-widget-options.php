@@ -259,7 +259,9 @@ class WPC_Shortcodes_Widget_Options {
 		return array(
 			'default' => 'Default',
 			'icon' => 'Icon',
-			'image' => 'Image',
+			'small_image' => 'Small Image',
+			'medium_image' => 'Medium Image',
+			'image' => 'Large Image',
 		);
 	}
 
@@ -299,6 +301,7 @@ class WPC_Shortcodes_Widget_Options {
 
 	public static function social_icons_max_height_values() {
 		return array(
+			'' => 'Default',
 			'10' => '10',
 			'12' => '12',
 			'14' => '14',
