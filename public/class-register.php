@@ -1501,6 +1501,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 				$icon_text = get_option( $icon_option_name );
 				$icon_url = get_option( $small_image_icon_option_name );
 				$retina_icon_url = get_option( $medium_image_icon_option_name );
+
 				$image_src = 'src="'.esc_url( $icon_url ).'"';
 				if ( ! empty( $retina_icon_url ) ) {
 					$image_src .= ' srcset="'.esc_url( $icon_url ).' 1x, '.esc_url( $retina_icon_url ).' 2x"';
@@ -1511,6 +1512,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 				$icon_text = get_option( $icon_option_name );
 				$icon_url = get_option( $medium_image_icon_option_name );
 				$retina_icon_url = get_option( $large_image_icon_option_name );
+
 				$image_src = 'src="'.esc_url( $icon_url ).'"';
 				if ( ! empty( $retina_icon_url ) ) {
 					$image_src .= ' srcset="'.esc_url( $icon_url ).' 1x, '.esc_url( $retina_icon_url ).' 2x"';
@@ -1520,16 +1522,19 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			case 'image' :
 				$icon_text = get_option( $icon_option_name );
 				$icon_url = get_option( $large_image_icon_option_name );
+
 				$image_src = 'src="'.esc_url( $icon_url ).'"';
 				$html = '<img '.$image_src.' alt="'.esc_attr( $icon_text ).'">';
 				break;
 			case 'icon' :
 				$icon_class = get_option( $font_icon_option_name );
+
 				$html = '<i class="fa '.esc_attr( $icon_class ).'"></i>';
 				break;
 			default :
 				$icon_text = get_option( $icon_option_name );
 				$icon_class = get_option( $font_icon_option_name );
+
 				$html = '<i class="fa '.esc_attr( $icon_class ).'"></i><span class="wc-share-button-'.$key.'">'.esc_html( $icon_text ).'</span>';
 				break;
 		}
