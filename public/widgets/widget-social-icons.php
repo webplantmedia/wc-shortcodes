@@ -6,7 +6,7 @@
 class WPC_Shortcodes_Widget_Social_Icons extends WP_Widget {
 	function __construct() {
 		$widget_ops = array( 'description' => __('Add your social icons to your sidebar.') );
-		parent::__construct( 'wc_shortcodes_social_icons', __('WP Canvas - Social Media Icons'), $widget_ops );
+		parent::__construct( 'wc_shortcodes_social_icons', __('Angie Makes - Social Media Icons'), $widget_ops );
 	}
 
 	function widget($args, $instance) {
