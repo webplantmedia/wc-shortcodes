@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.21 ###
+
+* Added retina support for social and share icon images.
+
 ### Version 3.20 ###
 
 * Removed extra closing tag
