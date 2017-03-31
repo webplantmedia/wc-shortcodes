@@ -337,7 +337,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$classes[] = 'wc-shortcodes-clearfix';
 		$classes[] = 'wc-shortcodes-columns-'.$atts['columns'];
 		$classes[] = 'wc-shortcodes-maxheight-'.$atts['maxheight'];
-		$classes[] = 'wc-shortcodes-social-icons-format-'.$atts['format'];
+		$classes[] = 'wc-shortcodes-social-icons-format-'.str_replace( '_', '-', $atts['format'] );
 
 		if ( ! empty( $atts['class'] ) ) {
 			$atts['class'] = ' ' . $atts['class'];
@@ -1415,7 +1415,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$classes = array();
 
 		$classes[] = 'wc-shortcodes-share-buttons';
-		$classes[] = 'wc-shortcodes-share-buttons-format-'.$format;
+		$classes[] = 'wc-shortcodes-share-buttons-format-'.str_replace( '_', '-', $format );
 		$classes[] = 'wc-shortcodes-share-buttons-size-'.$size;
 		if ( ! empty( $class ) ) {
 			$classes[] = $class;
