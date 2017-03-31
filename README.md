@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.22 ###
+
+* fixed format class name in social icons and share icons
+
 ### Version 3.21 ###
 
 * Added retina support for social and share icon images.
