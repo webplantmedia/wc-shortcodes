@@ -113,6 +113,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.23 =
+
+* added attributes for fullwidth shortcoded
+
 = Version 3.22 =
 
 * fixed format class name in social icons and share icons
