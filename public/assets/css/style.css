@@ -2025,3 +2025,15 @@ pre.pre-wrap {
 .wc-shortcodes-full-width {
 	visibility: hidden;
 }
+.wc-shortcodes-full-width-inner {
+	margin: 0 auto;
+}
+.wc-shortcodes-full-width-has-border-color {
+	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+}
+.wc-shortcodes-full-width-style-frame {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #ffffff;
+}

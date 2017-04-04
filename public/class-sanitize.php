@@ -229,6 +229,15 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
+	public static function fullwidth_style( $value, $default = 'solid' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::fullwidth_style_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function google_map_zoom( $value, $default = 8 ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::google_map_zoom_values();
 
@@ -954,6 +963,30 @@ class WPC_Shortcodes_Sanitize {
 			switch( $key ) {
 				case 'selector' :
 					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'max_width' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+				case 'padding_top' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'padding_bottom' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'padding_side' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'background_color' :
+					$atts[ $key ] = self::hex_color( $value );
+					break;
+				case 'border_color' :
+					$atts[ $key ] = self::hex_color( $value );
+					break;
+				case 'style' :
+					$atts[ $key ] = self::fullwidth_style( $value );
 					break;
 			}
 		}

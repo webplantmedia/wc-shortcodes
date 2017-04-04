@@ -109,9 +109,84 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			$atts['selector'] = parent::$theme_support[ 'fullwidth_container' ];
 		}
 
+		$style = array();
+		$wrapper_style = array();
+		$frame_style = array();
+		$class = array();
+
 		wp_enqueue_script('wc-shortcodes-fullwidth');
 
-		return '<div class="wc-shortcodes-full-width wc-shortcodes-content" data-selector="' . esc_attr( $atts['selector'] ) . '">' . do_shortcode( $content ) . '</div>';
+		// Append style and class names
+		if ( ! empty( $atts['max_width'] ) ) {
+			$style[] = 'max-width:' . $atts['max_width'];
+		}
+		if ( ! empty( $atts['padding_top'] ) ) {
+			$style[] = 'padding-top:' . $atts['padding_top'];
+		}
+		if ( ! empty( $atts['padding_bottom'] ) ) {
+			$style[] = 'padding-bottom:' . $atts['padding_bottom'];
+		}
+		if ( ! empty( $atts['padding_side'] ) ) {
+			$style[] = 'padding-left:' . $atts['padding_side'];
+			$style[] = 'padding-right:' . $atts['padding_side'];
+			$class[] = 'wc-shortcodes-full-width-has-side-padding';
+		}
+		if ( ! empty( $atts['style'] ) ) {
+			$class[] = 'wc-shortcodes-full-width-style-' . $atts['style'];
+		}
+		if ( ! empty( $atts['class'] ) ) {
+			$class[] = $atts['class'];
+		}
+
+		// Insert Element
+		if ( ! empty( $style ) ) {
+			$style = implode( ';', $style );
+			$content = '<div class="wc-shortcodes-full-width-inner" style="' . $style . '">' . $content . '</div>';
+		}
+
+		// Wrapper and Frame Style
+		if ( ! empty( $atts['background_color'] ) ) {
+			if ( 'frame' == $atts['style'] ) {
+				$frame_style[] = 'background-color:' . $atts['background_color'];
+			}
+			else {
+				$wrapper_style[] = 'background-color:' . $atts['background_color'];
+			}
+		}
+		if ( ! empty( $atts['border_color'] ) ) {
+			$wrapper_style[] = 'border-color:' . $atts['border_color'];
+			$class[] = 'wc-shortcodes-full-width-has-border-color';
+		}
+
+		if ( ! empty( $wrapper_style ) ) {
+			$wrapper_style = ' style="' . implode( ';', $wrapper_style ) . '"';
+		}
+		else {
+			$wrapper_style = '';
+		}
+
+		if ( ! empty( $frame_style ) ) {
+			$frame_style = ' style="' . implode( ';', $frame_style ) . '"';
+		}
+		else {
+			$frame_style = '';
+		}
+
+		// Insert Frame Element If Called
+		if ( ! empty( $frame_style ) ) {
+			$content = '<div class="wc-shortcodes-full-width-frame"' . $frame_style . '>' . $content . '</div>';
+		}
+
+		// Wrapper Class
+		if ( ! empty( $class ) ) {
+			$class = ' ' . implode( ' ', $class );
+		}
+		else {
+			$class = '';
+		}
+
+		// Return HTML
+		return '<div class="wc-shortcodes-full-width wc-shortcodes-content' . esc_attr( $class ) . '"' . $wrapper_style . ' data-selector="' . esc_attr( $atts['selector'] ) . '">' . do_shortcode( $content ) . '</div>';
 	}
 
 
@@ -779,10 +854,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		if ( $atts['color'] ) {
 			$style_attr .= 'color: '. $atts['color'] .';';
 		}
-		if( $atts['margin_bottom'] ) {
+		if( '' != $atts['margin_bottom'] ) {
 			$style_attr .= 'margin-bottom: '. $atts['margin_bottom'] .';';
 		}
-		if ( $atts['margin_top'] ) {
+		if ( '' != $atts['margin_top'] ) {
 			$style_attr .= 'margin-top: '. $atts['margin_top'] .';';
 		}
 		

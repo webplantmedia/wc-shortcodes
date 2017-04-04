@@ -156,6 +156,13 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function fullwidth_style_values() {
+		return array(
+			'' => 'Box',
+			'frame' => 'Frame',
+		);
+	}
+
 	public static function divider_line_values() {
 		return array(
 			'' => 'None',

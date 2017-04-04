@@ -249,6 +249,14 @@ class WPC_Shortcodes_Vars {
 		);
 		self::$attr->fullwidth = array(
 			'selector' => self::$theme_support[ 'fullwidth_container' ],
+			'max_width' => '',
+			'padding_top' => '',
+			'padding_bottom' => '',
+			'padding_side' => '',
+			'background_color' => '',
+			'border_color' => '',
+			'style' => '',
+			'class' => '',
 		);
 		self::$attr->pricing = array(
 			'type'					=> 'primary', // primary, secondary, inverse
