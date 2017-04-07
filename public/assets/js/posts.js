@@ -86,90 +86,95 @@
 		}
 	}
 
-	$(document).ready(function(){
-		$('.wc-shortcodes-posts').each( function() {
-			var $container = $(this);
-			var $posts = $container.children('.wc-shortcodes-post-box');
+	$('.wc-shortcodes-posts').each( function() {
+		var $container = $(this);
+		var $posts = $container.children('.wc-shortcodes-post-box');
 
-			// remove posts from element
-			// $container.css('height',0);
+		$posts.css({'visibility':'hidden','position':'relative'}).addClass('wc-shortcodes-loading');
 
-			$(document).ready(function(){
-				// we are going to append masonry items as the images load
-				runMasonry(0, $container, $posts, 'masonry');
+		$.each( $posts, function( index, value ) {
+			var $post = $(this);
+			var $imgs = $post.find('img');
 
-				$container.imagesLoaded().always( function( instance ) {
-					// masonry does its thing
-					runMasonry(0, $container, $posts, 'layout');
-				});
-			});
-
-			$(window).resize(function() {
-				runMasonry(0, $container, $posts, 'masonry');
-			}); 
-
-			// $(window).load(function() {
-			// }); 
-
-			if (window.twttr !== undefined) {
-				twttr.ready(function (twttr) {
-					twttr.events.bind('loaded', function (event) {
-						//DO A MASONRY RELAYOUT HERE
+			if ( $imgs.length ) {
+				$post.imagesLoaded()
+					.always( function( instance ) {
+						$post.css('visibility', 'visible').removeClass('wc-shortcodes-loading');
 						runMasonry(0, $container, $posts, 'layout');
 					});
+			}
+			else {
+				$post.css('visibility', 'visible').removeClass('wc-shortcodes-loading');
+			}
+		});
+
+		runMasonry(0, $container, $posts, 'masonry');
+
+		$(window).resize(function() {
+			runMasonry(0, $container, $posts, 'masonry');
+		}); 
+
+		// $(window).load(function() {
+		// }); 
+
+		if (window.twttr !== undefined) {
+			twttr.ready(function (twttr) {
+				twttr.events.bind('loaded', function (event) {
+					//DO A MASONRY RELAYOUT HERE
+					runMasonry(0, $container, $posts, 'layout');
 				});
+			});
+		}
+
+		$container.find(".wc-shortcodes-post-box .rslides").responsiveSlides({
+			auto: false,             // Boolean: Animate automatically, true or false
+			speed: 500,            // Integer: Speed of the transition, in milliseconds
+			timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+			pager: false,           // Boolean: Show pager, true or false
+			nav: true,             // Boolean: Show navigation, true or false
+			random: false,          // Boolean: Randomize the order of the slides, true or false
+			pause: false,           // Boolean: Pause on hover, true or false
+			pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+			prevText: "",   // String: Text for the "previous" button
+			nextText: "",       // String: Text for the "next" button
+			maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+			navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+			manualControls: "",     // Selector: Declare custom pager navigation
+			namespace: "rslides",   // String: Change the default namespace used
+			before: function(){},   // Function: Before callback
+			after: function(){
+				runMasonry(0, $container, $posts, 'layout');
+			}// Function: After callback
+		});
+	});
+
+	var $filterNav = $('.wc-shortcodes-filtering.wc-shortcodes-filtering-dynamic.wc-shortcodes-filtering-layout-masonry');
+	var $term = $filterNav.find('.wc-shortcodes-term');
+	$term.click( function( event ) {
+		event.preventDefault();
+
+		$term.removeClass('wc-shortcodes-term-active');
+		$(this).addClass('wc-shortcodes-term-active');
+
+		var selector = $(this).attr('data-filter');
+		var target = $filterNav.data('target');
+		var $target = $(target);
+		$target.animate({opacity: 0}, 300, function() {
+			var $targetPosts = $target.children('.wc-shortcodes-post-box');
+			if ( '*' == selector ) {
+				$targetPosts.show();
+			}
+			else {
+				$targetPosts.hide();
+				$target.find(selector).show();
 			}
 
-			$container.find(".wc-shortcodes-post-box .rslides").responsiveSlides({
-				auto: false,             // Boolean: Animate automatically, true or false
-				speed: 500,            // Integer: Speed of the transition, in milliseconds
-				timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
-				pager: false,           // Boolean: Show pager, true or false
-				nav: true,             // Boolean: Show navigation, true or false
-				random: false,          // Boolean: Randomize the order of the slides, true or false
-				pause: false,           // Boolean: Pause on hover, true or false
-				pauseControls: true,    // Boolean: Pause when hovering controls, true or false
-				prevText: "",   // String: Text for the "previous" button
-				nextText: "",       // String: Text for the "next" button
-				maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
-				navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
-				manualControls: "",     // Selector: Declare custom pager navigation
-				namespace: "rslides",   // String: Change the default namespace used
-				before: function(){},   // Function: Before callback
-				after: function(){
-					runMasonry(0, $container, $posts, 'layout');
-				}// Function: After callback
-			});
+			runMasonry(0, $target, $targetPosts, 'layout');
+
+			$target.animate({opacity: 1}, 300);
 		});
 
-		var $filterNav = $('.wc-shortcodes-filtering.wc-shortcodes-filtering-dynamic.wc-shortcodes-filtering-layout-masonry');
-		var $term = $filterNav.find('.wc-shortcodes-term');
-		$term.click( function( event ) {
-			event.preventDefault();
-
-			$term.removeClass('wc-shortcodes-term-active');
-			$(this).addClass('wc-shortcodes-term-active');
-
-			var selector = $(this).attr('data-filter');
-			var target = $filterNav.data('target');
-			var $target = $(target);
-			$target.animate({opacity: 0}, 300, function() {
-				var $targetPosts = $target.children('.wc-shortcodes-post-box');
-				if ( '*' == selector ) {
-					$targetPosts.show();
-				}
-				else {
-					$targetPosts.hide();
-					$target.find(selector).show();
-				}
-
-				runMasonry(0, $target, $targetPosts, 'layout');
-
-				$target.animate({opacity: 1}, 300);
-			});
-
-			return false;
-		});
-
+		return false;
 	});
+
 } )( jQuery );

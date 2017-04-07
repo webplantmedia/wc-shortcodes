@@ -2037,3 +2037,17 @@ pre.pre-wrap {
 	padding-bottom: 10px;
 	background-color: #ffffff;
 }
+/* Loading */
+.wc-shortcodes-loading::after {
+	content: " ";
+	background: url('../img/ring-alt.svg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+	background-color: #f7f7f7;
+	visibility: visible;
+}
