@@ -106,6 +106,11 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.24 ###
+
+* smoother masonry loading
+* updated images loaded to 4.1.1
+
 ### Version 3.23 ###
 
 * added attributes for fullwidth shortcoded
