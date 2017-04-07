@@ -110,7 +110,7 @@ class WPC_Shortcodes_Public extends WPC_Shortcodes_Vars {
 		wp_enqueue_script( 'jquery-masonry' );
 
 		// images loaded
-		wp_register_script( 'wordpresscanvas-imagesloaded', WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/imagesloaded.pkgd.min.js', array (), '4.1.0', true );
+		wp_register_script( 'wordpresscanvas-imagesloaded', WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/imagesloaded.pkgd.min.js', array (), '4.1.1', true );
 
 		// slider
 		wp_register_script( 'wordpresscanvas-rslides', WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/responsiveslides.min.js', array ( 'jquery' ), '1.54', true );
