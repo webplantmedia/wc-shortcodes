@@ -790,6 +790,7 @@
 .wc-shortcodes-social-icons li i.fa-youtube { background-color: #c74a00; }
 .wc-shortcodes-social-icons li i.fa-tumblr { background-color: #426b8a; }
 
+.wc-shortcodes-social-icons.wc-shortcodes-maxheight- img { max-height: none; }
 .wc-shortcodes-social-icons.wc-shortcodes-maxheight-10 img { max-height: 10px; }
 .wc-shortcodes-social-icons.wc-shortcodes-maxheight-12 img { max-height: 12px; }
 .wc-shortcodes-social-icons.wc-shortcodes-maxheight-14 img { max-height: 14px; }
