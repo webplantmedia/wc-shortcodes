@@ -253,6 +253,15 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function image_link_text_position_values() {
+		return array(
+			'top' => 'Top',
+			'center' => 'Center',
+			'bottom' => 'Bottom',
+			'under' => 'Under',
+		);
+	}
+
 	public static function text_align_values() {
 		return array(
 			'' => 'None',

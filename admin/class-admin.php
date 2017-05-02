@@ -77,6 +77,17 @@ class WPC_Shortcodes_Admin extends WPC_Shortcodes_Vars {
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'wc-shortcodes-color-picker-widget', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wccolorpickerwidget.js', array ( 'wp-color-picker' ), $ver, true );
 			wp_enqueue_script( 'wc-shortcodes', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wc-shortcodes.js', array ( 'jquery' ), $ver, true );
+
+			wp_deregister_style( 'wpc-widgets-admin-style' );
+			wp_deregister_script( 'wpc-widgets-admin-js' );
+
+			wp_register_style( 'wpc-widgets-admin-style', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/css/wpc-image.css', array(), $ver, 'all' );
+			wp_enqueue_style( 'wpc-widgets-admin-style' );
+
+			wp_enqueue_media();
+			wp_register_script( 'wpc-widgets-admin-js', WC_SHORTCODES_PLUGIN_URL . 'admin/assets/js/wpc-image.js', array ( 'jquery' ), $ver, true );
+			wp_enqueue_script( 'wpc-widgets-admin-js' );
+
 		}
 
 		if ( $hook == 'post-new.php' || $hook == 'post.php' ) {

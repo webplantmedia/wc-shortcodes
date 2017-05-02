@@ -323,6 +323,29 @@ class WPC_Shortcodes_Vars {
 			// misc options
 			'class' => '',
 		);
+		self::$attr->image_links = array(
+			// image 1
+			'image_1' => '',
+			'text_1'	=> '',
+			'url_1' => '',
+			// image 2
+			'image_2' => '',
+			'text_2'	=> '',
+			'url_2' => '',
+			// image 3
+			'image_3' => '',
+			'text_3'	=> '',
+			'url_3' => '',
+			// image 4
+			'image_4' => '',
+			'text_4'	=> '',
+			'url_4' => '',
+			// settings
+			'text_position' => 'center',
+			'heading_type' => 'h3',
+			'height' => '250px',
+			'class'	=> '',
+		);
 		self::$attr->countdown = array(
 			'date' => '',
 			'format' => 'wdHMs',

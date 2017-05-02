@@ -1,0 +1,19 @@
+.wpc-image-wrapper .wpc-widgets-preview-image img {
+	max-height: 200px;
+	background: #fafafa;
+	padding: 0;
+	border-width: 0;
+	max-width: 100%;
+}
+
+.wpc-image-wrapper .wpc-widgets-preview-image {
+	margin-bottom: 5px;
+}
+
+.wpc-image-wrapper .wpc-widgets-image-field {
+	margin: 1em 0;
+}
+.wpc-image-wrapper .wpc-widgets-image-field .button,
+.wpc-image-wrapper .wpc-widgets-image-field input {
+	margin-bottom: 7px;
+}

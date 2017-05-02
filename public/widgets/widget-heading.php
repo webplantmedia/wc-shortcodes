@@ -10,6 +10,7 @@ class WPC_Shortcodes_Widget_Heading extends WPC_Shortcodes_Widget_Base {
 			$instance = array();
 		}
 
+		// pr(WPC_Shortcodes_Vars::$attr->heading);
 		$o = array_merge( WPC_Shortcodes_Vars::$attr->heading, $instance );
 		$o = WPC_Shortcodes_Sanitize::heading_attr( $o );
 		?>
@@ -20,10 +21,10 @@ class WPC_Shortcodes_Widget_Heading extends WPC_Shortcodes_Widget_Base {
 				<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $o['title']; ?>" />
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('heading_type'); ?>"><?php _e('Heading Type:'); ?></label>
-				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('heading_type'); ?>" name="<?php echo $this->get_field_name('heading_type'); ?>">
+				<label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Heading Type:'); ?></label>
+				<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>">
 					<?php foreach ( WPC_Shortcodes_Widget_Options::heading_tags() as $key => $value ) : ?>
-						<option value="<?php echo $key; ?>"<?php selected( $o['heading_type'], $key ); ?>><?php echo $value; ?></option>';
+						<option value="<?php echo $key; ?>"<?php selected( $o['type'], $key ); ?>><?php echo $value; ?></option>';
 					<?php endforeach; ?>
 				</select>
 			</p>

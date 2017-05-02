@@ -362,6 +362,15 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
+	public static function image_link_text_position_values( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::image_link_text_position_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function text_align( $value, $default = '' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::text_align_values();
 
@@ -775,6 +784,68 @@ class WPC_Shortcodes_Sanitize {
 	public static function share_buttons_attr( $atts ) {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function image_links_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				// image 1
+				case 'image_1' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'text_1' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'url_1' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				// image 2
+				case 'image_2' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'text_2' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'url_2' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				// image 3
+				case 'image_3' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'text_3' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'url_3' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				// image 4
+				case 'image_4' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'text_4' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+				case 'url_4' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				// Settings
+				case 'text_position' :
+					$atts[ $key ] = self::image_link_text_position_values( $value );
+					break;
+				case 'height' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'heading_type' :
+					$atts[ $key ] = self::heading_type( $value );
+					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
 					break;

@@ -7,7 +7,7 @@ class WPC_Shortcodes_Widget_Post_Slider extends WP_Widget {
 	function __construct() {
 
 		$widget_ops = array( 'description' => __('Add a post slider to your widget area.') );
-		parent::__construct( 'wc_shortcodes_post_slider', __('Post Slider'), $widget_ops );
+		parent::__construct( 'wc_shortcodes_post_slider', __('Angie Makes - Post Slider'), $widget_ops );
 	}
 
 	function widget($args, $instance) {

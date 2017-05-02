@@ -2052,3 +2052,83 @@ pre.pre-wrap {
 	background-color: #f7f7f7;
 	visibility: visible;
 }
+/**
+ * [wc_image_links]
+ * ----------------------------------------------------------------------------
+ */
+.wc-shortcodes-image-links-wrapper {
+	overflow: hidden;
+}
+.wc-shortcodes-image-links-wrapper-inner {
+	margin-right: -2em;
+	display: block;
+}
+.wc-shortcodes-image-link {
+	display: block;
+	float: left;
+}
+.wc-shortcodes-image-link-columns-1 .wc-shortcodes-image-link {
+	width: 100%;
+}
+.wc-shortcodes-image-link-columns-2 .wc-shortcodes-image-link {
+	width: 50%;
+}
+.wc-shortcodes-image-link-columns-3 .wc-shortcodes-image-link {
+	width: 33.333333%;
+}
+.wc-shortcodes-image-link-columns-4 .wc-shortcodes-image-link {
+	width: 25%;
+}
+.wc-shortcodes-image-link-background-wrapper {
+	margin-right: 2em;
+}
+.wc-shortcodes-image-link-background {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: relative;
+}
+.wc-shortcodes-image-link-text {
+	text-align: center;
+	display: block;
+	width: 100%;
+	position: absolute;
+	top: 0;
+}
+.wc-shortcodes-image-link-text-position-center .wc-shortcodes-image-link-text {
+	top: 50%;
+	bottom: auto;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+.wc-shortcodes-image-link-text-position-bottom .wc-shortcodes-image-link-text {
+	top: auto;
+	bottom: 0;
+}
+.wc-shortcodes-image-link-text-position-under .wc-shortcodes-image-link-text {
+	top: auto;
+	bottom: auto;
+	position: relative;
+}
+.wc-shortcodes-image-link-text-position-under .wc-shortcodes-image-link-text .wc-shortcodes-image-links-heading {
+}
+#wc-shortcodes-image-links .wc-shortcodes-image-links-heading {
+	margin: 0;
+	padding: 0.7em 1em;
+	display: inline-block;
+	background-color: #ffffff;
+	color: #000000;
+}
+@media (max-width: 767px) {
+	#wc-shortcodes-image-links .wc-shortcodes-image-link {
+		width: 100%;
+	}
+	#wc-shortcodes-image-links .wc-shortcodes-image-link-background-wrapper {
+		margin-right: 0;
+		margin-bottom: 2em;
+	}
+	#wc-shortcodes-image-links .wc-shortcodes-image-links-wrapper-inner {
+		margin-right: 0;
+	}
+}

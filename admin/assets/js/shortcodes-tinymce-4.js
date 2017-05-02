@@ -217,6 +217,13 @@
 								}
 							},
 							{
+								text: "Image Links",
+								onclick: function(){
+									var shortcode = '[wc_image_links image_1="" text_1="" url_1="" image_2="" text_2="" url_2="" image_3="" text_3="" url_3="" image_4="" text_4="" url_4="" text_position="center" heading_type="h3" height="250px" class=""][/wc_image_links]';
+									wcShortcodes( shortcode, editor );
+								}
+							},
+							{
 								text: "Box",
 								onclick: function(){
 									var shortcode = '[wc_box color="primary" text_align="left"]' + wcParagraphContent + '[/wc_box]';

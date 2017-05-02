@@ -241,6 +241,10 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WPC_Shortcodes_Widget_Image();
 				$widget->form( $attr );
 				break;
+			case 'wc_image_links' :
+				$widget = new WPC_Shortcodes_Widget_Image_Links();
+				$widget->form( $attr );
+				break;
 			case 'wc_fa' :
 				$widget = new WPC_Shortcodes_Widget_FA();
 				$widget->form( $attr );

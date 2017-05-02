@@ -33,6 +33,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		add_shortcode( 'wc_posts', array( &$this, 'posts' ) );
 		add_shortcode( 'wc_post_slider', array( &$this, 'post_slider' ) );
 		add_shortcode( 'wc_image', array( &$this, 'image' ) );
+		add_shortcode( 'wc_image_links', array( &$this, 'image_links' ) );
 		add_shortcode( 'wc_fa', array( &$this, 'fa' ) );
 		add_shortcode( 'wc_share', array( &$this, 'share_buttons' ) );
 		add_shortcode( 'wc_share_buttons', array( &$this, 'get_share_buttons' ) );
@@ -1438,6 +1439,51 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		}
 		else if ( in_array( $align, array( 'none', 'center' ) ) ) {
 			$html = '<p>' . $html . '</p>';
+		}
+
+		return $html;
+	}
+
+	public function image_links( $atts ) {
+		$atts = shortcode_atts( parent::$attr->image_links, $atts );
+		$atts = WPC_Shortcodes_Sanitize::image_links_attr( $atts );
+
+		$html = '';
+		$columns = 0;
+
+		for ( $i = 1; $i <= 4; $i++ ) {
+			if ( isset( $atts['image_'.$i] ) && ! empty ( $atts['image_'.$i] ) ) {
+				$columns++;
+
+				$style = array();
+				$style[] = 'background-image:url(\''.esc_url( $atts['image_'.$i] ).'\')';
+				$style[] = 'height:'.$atts['height'];
+
+				$text = '';
+				if ( isset( $atts['text_'.$i] ) && ! empty ( $atts['text_'.$i] ) ) {
+					$text = '<div class="wc-shortcodes-image-link-text"><'.$atts['heading_type'].' class="wc-shortcodes-image-links-heading">' . $atts['text_'.$i] . '</'.$atts['heading_type'].'></div>';
+				}
+
+				$html .= '<a class="wc-shortcodes-image-link wc-shortcodes-image-link-'.$i.'" href="' . esc_url( $atts['url_'.$i] ) . '">';
+					if ( 'under' == $atts['text_position'] ) {
+						$html .= '<div class="wc-shortcodes-image-link-background-wrapper"><div class="wc-shortcodes-image-link-background" style="' . implode( ';', $style ) . '"></div>' . $text . '</div>';
+					}
+					else {
+						$html .= '<div class="wc-shortcodes-image-link-background-wrapper"><div class="wc-shortcodes-image-link-background" style="' . implode( ';', $style ) . '">' . $text . '</div></div>';
+					}
+				$html .= '</a>';
+			}
+		}
+
+		if ( ! empty( $html ) ) {
+			$classes = array();
+			$classes[] = 'wc-shortcodes-image-links-wrapper';
+			$classes[] = 'wc-shortcodes-image-link-text-position-'.$atts['text_position'];
+			$classes[] = 'wc-shortcodes-image-link-columns-' . $columns;
+			if ( ! empty( $atts['class'] ) ) {
+				$classes = $atts['class'];
+			}
+			$html = '<div id="wc-shortcodes-image-links" class="'.implode( ' ', $classes ).'"><div class="wc-shortcodes-image-links-wrapper-inner">'.$html.'</div>';
 		}
 
 		return $html;
