@@ -106,6 +106,11 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.25 ###
+
+* added image links shortcode and widget
+* added max height rule when default is set.
+
 ### Version 3.24 ###
 
 * smoother masonry loading
