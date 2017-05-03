@@ -180,7 +180,7 @@ class WPC_Shortcodes_Widget_Posts extends WPC_Shortcodes_Widget_Base {
 		<script type="text/javascript">
 			/* <![CDATA[ */
 			jQuery(document).ready(function($){
-				$('#wc-shortcodes-posts-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"}).wcPostsWidget();
+				$('#wc-shortcodes-posts-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content", collapsible: true}).wcPostsWidget();
 			});
 			/* ]]> */
 		</script>

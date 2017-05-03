@@ -1285,4 +1285,77 @@ class WPC_Shortcodes_Sanitize {
 
 		return $atts;
 	}
+
+	// Fixes bools on widget update when checkbox is empty, and thus blank. We don't want to revert to the default value, but false.
+	public static function featured_posts_attr_fix_bools( $atts ) {
+		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging' );
+
+		foreach ( $bools as $key ) {
+			if ( ! isset( $atts[ $key ] ) ) {
+				$atts[ $key ] = 0;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function featured_posts_attr( $atts ) {
+		// sanitize bools
+		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging' );
+
+		foreach ( $bools as $key ) {
+			if ( isset( $atts[ $key ] ) ) {
+				if ( "no" == $atts[ $key ] ) {
+					$atts[ $key ] = 0;
+				}
+				else {
+					$atts[ $key ] = (bool) $atts[ $key ];
+					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
+				}
+			}
+		}
+
+		$atts['nopaging'] = (bool) $atts['nopaging'];
+
+		// sanitize ints
+		$ints = array( 'p', 'posts_per_page', 'heading_size');
+		foreach ( $ints as $key ) {
+			if ( isset( $atts[ $key ] ) ) {
+				$atts[ $key ] = (int) $atts[ $key ];
+			}
+		}
+
+		// sanitize limit
+		$atts['nopaging'] = false;
+		if ( $atts['posts_per_page'] <= 0 ) {
+			$atts['posts_per_page'] = 1;
+		}
+		if ( $atts['posts_per_page'] >= 10 ) {
+			$atts['posts_per_page'] = 10;
+		}
+
+		// sanitize dropdown
+		$valid_layouts = WPC_Shortcodes_Widget_Options::featured_post_layouts();
+		if ( ! array_key_exists( $atts['layout'], $valid_layouts ) ) {
+			$atts['layout'] = 'thumbnail';
+		}
+
+		$valid_orders = WPC_Shortcodes_Widget_Options::order_fields();
+		$atts['order'] = strtoupper( $atts['order'] );
+		if ( ! in_array( $atts['order'], $valid_orders ) ) {
+			$atts['order'] = 'DESC';
+		}
+
+		$atts['heading_type'] = strtolower( $atts['heading_type'] );
+		$valid_headings = WPC_Shortcodes_Widget_Options::heading_tags();
+		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
+
+		// sanitize inputs
+		$atts['title'] = sanitize_text_field( $atts['title'] );
+		$atts['terms'] = sanitize_text_field( $atts['terms'] );
+		$atts['pids'] = sanitize_text_field( $atts['pids'] );
+		$atts['post__in'] = sanitize_text_field( $atts['post__in'] );
+
+		return $atts;
+	}
 }

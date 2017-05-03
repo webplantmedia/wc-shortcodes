@@ -209,7 +209,7 @@ class WPC_Shortcodes_Widget_Post_Slider extends WP_Widget {
 		<script type="text/javascript">
 			/* <![CDATA[ */
 			jQuery(document).ready(function($){
-				$('#wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"}).wcPostsWidget();
+				$('#wc-shortcodes-post-slider-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content", collapsible: true}).wcPostsWidget();
 			});
 			/* ]]> */
 		</script>

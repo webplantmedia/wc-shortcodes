@@ -11,6 +11,8 @@ class WPC_Shortcodes_Widget_Options {
 			'h4' => 'h4',
 			'h5' => 'h5',
 			'h6' => 'h6',
+			'p' => 'p',
+			'span' => 'span',
 		);
 	}
 
@@ -50,6 +52,13 @@ class WPC_Shortcodes_Widget_Options {
 		return array(
 			'box' => 'Box',
 			'borderless' => 'Borderless',
+		);
+	}
+
+	public static function featured_post_layouts() {
+		return array(
+			'thumbnail' => 'Thumbnail',
+			'showcase' => 'Showcase',
 		);
 	}
 

@@ -35,5 +35,6 @@ class WPC_Shortcodes_Widgets extends WPC_Shortcodes_Vars {
 		register_widget( 'WPC_Shortcodes_Widget_Social_Icons' );
 		register_widget( 'WPC_Shortcodes_Widget_Post_Slider' );
 		register_widget( 'WPC_Shortcodes_Widget_Image_Links' );
+		register_widget( 'WPC_Shortcodes_Widget_Featured_Posts' );
 	}
 }

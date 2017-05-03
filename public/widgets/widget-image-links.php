@@ -108,7 +108,7 @@ class WPC_Shortcodes_Widget_Image_Links extends WP_Widget {
 		<script type="text/javascript">
 			/* <![CDATA[ */
 			jQuery(document).ready(function($){
-				$('#wc-shortcodes-image-links-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content"});
+				$('#wc-shortcodes-image-links-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content", collapsible: true});
 			});
 			/* ]]> */
 		</script>

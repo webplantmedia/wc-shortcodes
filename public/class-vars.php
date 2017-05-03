@@ -471,5 +471,34 @@ class WPC_Shortcodes_Vars {
 			'slider_pause' => 4000,
 			'slider_auto' => 0,
 		);
+		self::$attr->featured_posts = array(
+			'title' => '', //use author id
+			'author' => '', //use author id
+			'author_name' => '', //use 'user_nicename' (NOT name).
+			'pids' => '', //use post id.
+			'p' => '', //use post id.
+			'post__in' => '', //use post ids
+			'order' => 'DESC', // DESC, ASC
+			'orderby' => 'date',
+			'post_status' => 'publish',
+			'post_type' => 'post', // post, page, wc_portfolio_item, etc
+			'posts_per_page' => 4, //number of post to show per page
+			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
+			'ignore_sticky_posts' => 1,
+
+			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
+			'field' => 'slug', // slug or id
+			'terms' => '', // taxonomy terms.
+
+			'show_meta_category' => 1, // show heading?
+			'show_content' => 0, // show main content?
+
+			'size' => 'medium', // default thumbnail size
+
+			'heading_type' => 'h2', // heading tag for title
+			'layout' => 'thumbnail',
+			'template' => 'featured',
+			'excerpt_length' => 20,
+		);
 	}
 }

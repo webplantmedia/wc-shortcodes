@@ -15,6 +15,9 @@ class WPC_Shortcodes_Widget_Social_Icons extends WP_Widget {
 
 		$shortcode = array();
 		foreach ( $instance as $key => $value ) {
+			if ( 'title' == $key ) {
+				continue;
+			}
 			$shortcode[] = $key . '="' . $value . '"';
 		}
 

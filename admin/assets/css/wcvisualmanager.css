@@ -39,16 +39,19 @@
 }
 /**/
 html .wc-shortcodes-visual-manager,
+html .wc-shortcodes-visual-manager .ui-accordion,
 html .wc-shortcodes-visual-manager.ui-accordion {
 	margin-bottom: 1.5em;
 }
 html .wc-shortcodes-visual-manager .ui-autocomplete,
+html .wc-shortcodes-visual-manager .ui-accordion .ui-autocomplete,
 html .wc-shortcodes-visual-manager.ui-accordion .ui-autocomplete {
 	z-index: 999999;
 	max-height: 300px;
 	overflow: auto;
 }
 html .wc-shortcodes-visual-manager .ui-autocomplete li,
+html .wc-shortcodes-visual-manager .ui-accordion .ui-autocomplete li,
 html .wc-shortcodes-visual-manager.ui-accordion .ui-autocomplete li {
 	white-space: normal;
 }
@@ -62,6 +65,7 @@ html .wc-shortcodes-visual-manager .wc-shortcodes-widget-fa .ui-autocomplete li 
 html .wc-shortcodes-visual-manager .wc-shortcodes-widget-fa .ui-autocomplete li span {
 	line-height: 2;
 }
+html .wc-shortcodes-visual-manager .ui-accordion .ui-accordion-header,
 html .wc-shortcodes-visual-manager.ui-accordion .ui-accordion-header {
 	border: 1px solid #ddd;
 	position: relative;
@@ -78,6 +82,7 @@ html .wc-shortcodes-visual-manager.ui-accordion .ui-accordion-header {
 	font-weight: 600;
 	margin-top: 1em;
 }
+html .wc-shortcodes-visual-manager .ui-accordion .ui-accordion-header:before,
 html .wc-shortcodes-visual-manager.ui-accordion .ui-accordion-header:before {
 	content: "\f345";
 	border: none;
@@ -98,6 +103,7 @@ html .wc-shortcodes-visual-manager.ui-accordion .ui-accordion-header:before {
 	vertical-align: bottom;
 	margin-right: 5px;
 }
+html .wc-shortcodes-visual-manager .ui-accordion .ui-accordion-header.ui-accordion-header-active:before,
 html .wc-shortcodes-visual-manager.ui-accordion .ui-accordion-header.ui-accordion-header-active:before {
 	content: "\f347";
 }

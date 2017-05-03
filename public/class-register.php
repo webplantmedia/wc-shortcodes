@@ -32,6 +32,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		add_shortcode( 'wc_rsvp', array( &$this, 'rsvp' ) );
 		add_shortcode( 'wc_posts', array( &$this, 'posts' ) );
 		add_shortcode( 'wc_post_slider', array( &$this, 'post_slider' ) );
+		add_shortcode( 'wc_featured_posts', array( &$this, 'featured_posts' ) );
 		add_shortcode( 'wc_image', array( &$this, 'image' ) );
 		add_shortcode( 'wc_image_links', array( &$this, 'image_links' ) );
 		add_shortcode( 'wc_fa', array( &$this, 'fa' ) );
@@ -1343,6 +1344,110 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 					ob_start();
 					include('templates/'.$display['template'].'/index.php');
+					$html .= ob_get_clean();
+				}
+
+			$html .= '</div>';
+		$html .= '</div>';
+
+		// reset query
+		wp_reset_query();
+
+		return $html;
+	}
+
+	public function featured_posts( $atts ) {
+		global $post;
+		global $wc_shortcodes_posts_query;
+
+		static $instance = 0;
+		$instance++;
+
+		$atts = shortcode_atts( parent::$attr->featured_posts, $atts );
+		$atts = WPC_Shortcodes_Sanitize::featured_posts_attr( $atts );
+
+		// Convert comma delimeted string to array
+		$p = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['pids'] );
+
+		$atts['p'] = '';
+		$atts['post__in'] = '';
+
+		if ( is_array( $p ) && ! empty( $p ) ) {
+			$size = sizeof( $p );
+			if ( 1 < $size ) {
+				$atts['post__in'] = $p;
+			}
+			else if ( 1 == $size ) {
+				$atts['p'] = $p[0];
+			}
+		}
+
+		$atts['terms'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
+
+		// Return if posts_per_page is set to 0.
+		if ( 0 == $atts['posts_per_page'] ) {
+			return;
+		}
+
+		// fix bug with title argument being added to WP_Query() in 4.4
+		$display_keys = array(
+			'show_meta_category', 'heading_type', 'layout', 'template', 'size', 'title',
+		);
+		$display = array();
+		foreach ( $display_keys as $key ) {
+			$display[ $key ] = $atts[ $key ];
+			unset( $atts[ $key ] );
+		}
+
+		// remove not query keys
+		unset( $atts[ 'pids' ] );
+
+		// check for get variable
+		$wpc_term = null;
+		if ( isset( $_GET['wpc_term'] ) && ! empty( $_GET['wpc_term'] ) ) {
+			$wpc_term = $_GET['wpc_term'];
+		}
+
+		// add tax query if user specified
+		if ( ! empty( $wpc_term ) ) {
+			$atts['tax_query'] = array(
+				array(
+					'taxonomy' => $atts['taxonomy'],
+					'field' => $atts['field'],
+					'terms' => $wpc_term,
+				),
+			);
+		}
+		else if ( ! empty( $atts['terms'] ) ) {
+			$atts['tax_query'] = array(
+				array(
+					'taxonomy' => $atts['taxonomy'],
+					'field' => $atts['field'],
+					'terms' => $atts['terms'],
+				),
+			);
+		}
+
+		// run query
+		$wc_shortcodes_posts_query = new WP_Query($atts);
+
+		// display
+		$html = '';
+
+		$class = array();
+		$class[] = 'wc-shortcodes-featured-posts';
+		$class[] = 'wc-shortcodes-clearfix';
+		$class[] = 'wc-shortcodes-featured-posts-layout-' . $display['layout'];
+		$class[] = 'wc-shortcodes-featured-posts-template-' . $display['template'];
+
+		$html .= '<div id="wc-shortcodes-featured-posts" class="wc-shortcodes-featured-posts-wrapper">';
+			$html .= '<div id="wc-shortcodes-featured-posts-'.$instance.'" class="' . esc_attr( implode( ' ', $class ) ) . '">';
+
+				while( $wc_shortcodes_posts_query->have_posts() ) {
+					$wc_shortcodes_posts_query->the_post();
+					
+					ob_start();
+					include('templates/featured/content.php');
 					$html .= ob_get_clean();
 				}
 
