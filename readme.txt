@@ -113,6 +113,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.26 =
+
+* Added featured posts widget
+
 = Version 3.25 =
 
 * added image links shortcode and widget
