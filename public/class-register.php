@@ -1590,6 +1590,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		if ( ! empty( $html ) ) {
 			$classes = array();
 			$classes[] = 'wc-shortcodes-image-links-wrapper';
+			$classes[] = 'wc-shortcodes-image-link-style-format-'.$atts['style_format'];
 			$classes[] = 'wc-shortcodes-image-link-text-position-'.$atts['text_position'];
 			$classes[] = 'wc-shortcodes-image-link-columns-' . $columns;
 			if ( ! empty( $atts['class'] ) ) {

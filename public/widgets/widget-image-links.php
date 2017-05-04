@@ -106,6 +106,14 @@ class WPC_Shortcodes_Widget_Image_Links extends WP_Widget {
 					<span class="wcs-description">Enter CSS unit value.</span>
 				</p>
 				<p>
+					<label for="<?php echo $this->get_field_id('style_format'); ?>"><?php _e('Style Format:'); ?></label>
+					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('style_format'); ?>" name="<?php echo $this->get_field_name('style_format'); ?>">
+						<?php foreach ( WPC_Shortcodes_Widget_Options::image_links_style_format_values() as $key => $value ) : ?>
+							<option value="<?php echo $key; ?>"<?php selected( $o['style_format'], $key ); ?>><?php echo $value; ?></option>';
+						<?php endforeach; ?>
+					</select>
+				</p>
+				<p>
 					<label for="<?php echo $this->get_field_id('class'); ?>"><?php _e('Class:') ?></label>
 					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('class'); ?>" name="<?php echo $this->get_field_name('class'); ?>" value="<?php echo $o['class']; ?>" />
 					<span class="wcs-description">Enter class name for custom CSS styling.</span>

@@ -362,7 +362,16 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
-	public static function image_link_text_position_values( $value, $default = '' ) {
+	public static function image_links_style_format( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::image_links_style_format_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function image_link_text_position( $value, $default = '' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::image_link_text_position_values();
 
 		if ( array_key_exists( $value, $whitelist ) )
@@ -838,7 +847,7 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				// Settings
 				case 'text_position' :
-					$atts[ $key ] = self::image_link_text_position_values( $value );
+					$atts[ $key ] = self::image_link_text_position( $value );
 					break;
 				case 'height' :
 					$atts[ $key ] = self::css_unit( $value );
@@ -851,6 +860,9 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'background_color' :
 					$atts[ $key ] = self::hex_color( $value );
+					break;
+				case 'style_format' :
+					$atts[ $key ] = self::image_links_style_format( $value );
 					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
@@ -1355,6 +1367,12 @@ class WPC_Shortcodes_Sanitize {
 		$atts['heading_type'] = strtolower( $atts['heading_type'] );
 		$valid_headings = WPC_Shortcodes_Widget_Options::heading_tags();
 		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
+		$valid_orders = WPC_Shortcodes_Widget_Options::order_fields();
+		$atts['order'] = strtoupper( $atts['order'] );
+		if ( ! in_array( $atts['order'], $valid_orders ) ) {
+			$atts['order'] = 'DESC';
+		}
+
 
 		// sanitize inputs
 		$atts['title'] = sanitize_text_field( $atts['title'] );

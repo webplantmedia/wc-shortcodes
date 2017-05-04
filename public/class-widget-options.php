@@ -55,6 +55,13 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function image_links_style_format_values() {
+		return array(
+			'row' => 'Row',
+			'column' => 'Column',
+		);
+	}
+
 	public static function featured_post_layouts() {
 		return array(
 			'thumbnail' => 'Thumbnail',

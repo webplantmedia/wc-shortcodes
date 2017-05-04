@@ -346,6 +346,7 @@ class WPC_Shortcodes_Vars {
 			'text_color' => '',
 			'background_color' => '',
 			'height' => '250px',
+			'style_format' => 'row',
 			'class'	=> '',
 		);
 		self::$attr->countdown = array(

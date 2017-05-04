@@ -2079,6 +2079,15 @@ pre.pre-wrap {
 .wc-shortcodes-image-link-columns-4 .wc-shortcodes-image-link {
 	width: 25%;
 }
+#wc-shortcodes-image-links.wc-shortcodes-image-link-style-format-column .wc-shortcodes-image-link {
+	width: 100%;
+}
+#wc-shortcodes-image-links.wc-shortcodes-image-link-style-format-column .wc-shortcodes-image-link-background-wrapper {
+	margin-bottom: 2em;
+}
+#wc-shortcodes-image-links.wc-shortcodes-image-link-style-format-column .wc-shortcodes-image-link:last-child .wc-shortcodes-image-link-background-wrapper {
+	margin-bottom: 0;
+}
 .wc-shortcodes-image-link-background-wrapper {
 	margin-right: 2em;
 }
