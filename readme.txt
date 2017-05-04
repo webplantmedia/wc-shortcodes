@@ -113,6 +113,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.28 =
+
+* Added style format for image links
+
 = Version 3.27 =
 
 * Added color options for image links
