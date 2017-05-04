@@ -846,6 +846,12 @@ class WPC_Shortcodes_Sanitize {
 				case 'heading_type' :
 					$atts[ $key ] = self::heading_type( $value );
 					break;
+				case 'text_color' :
+					$atts[ $key ] = self::hex_color( $value );
+					break;
+				case 'background_color' :
+					$atts[ $key ] = self::hex_color( $value );
+					break;
 				case 'class' :
 					$atts[ $key ] = self::html_classes( $value );
 					break;

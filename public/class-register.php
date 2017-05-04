@@ -1566,7 +1566,14 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 				$text = '';
 				if ( isset( $atts['text_'.$i] ) && ! empty ( $atts['text_'.$i] ) ) {
-					$text = '<div class="wc-shortcodes-image-link-text"><'.$atts['heading_type'].' class="wc-shortcodes-image-links-heading">' . $atts['text_'.$i] . '</'.$atts['heading_type'].'></div>';
+					$text_style = array();
+					if ( ! empty( $atts['text_color'] ) ) {
+						$text_style[] = 'color:'.$atts['text_color'];
+					}
+					if ( ! empty( $atts['background_color'] ) ) {
+						$text_style[] = 'background-color:'.$atts['background_color'];
+					}
+					$text = '<div class="wc-shortcodes-image-link-text"><'.$atts['heading_type'].' class="wc-shortcodes-image-links-heading" style="' . implode( ';', $text_style ) . '">' . $atts['text_'.$i] . '</'.$atts['heading_type'].'></div>';
 				}
 
 				$html .= '<a class="wc-shortcodes-image-link wc-shortcodes-image-link-'.$i.'" href="' . esc_url( $atts['url_'.$i] ) . '">';

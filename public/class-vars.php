@@ -343,6 +343,8 @@ class WPC_Shortcodes_Vars {
 			// settings
 			'text_position' => 'center',
 			'heading_type' => 'h3',
+			'text_color' => '',
+			'background_color' => '',
 			'height' => '250px',
 			'class'	=> '',
 		);

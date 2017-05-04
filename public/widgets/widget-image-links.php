@@ -93,6 +93,14 @@ class WPC_Shortcodes_Widget_Image_Links extends WP_Widget {
 					</select>
 				</p>
 				<p>
+					<label for="<?php echo $this->get_field_id('text_color'); ?>"><?php _e('Text Color:') ?></label><br />
+					<input type="text" class="wc-shortcodes-widget-option widefat wc-shortcodes-widget-color-picker" id="<?php echo $this->get_field_id('text_color'); ?>" name="<?php echo $this->get_field_name('text_color'); ?>" value="<?php echo $o['text_color']; ?>" />
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('background_color'); ?>"><?php _e('Background Color:') ?></label><br />
+					<input type="text" class="wc-shortcodes-widget-option widefat wc-shortcodes-widget-color-picker" id="<?php echo $this->get_field_id('background_color'); ?>" name="<?php echo $this->get_field_name('background_color'); ?>" value="<?php echo $o['background_color']; ?>" />
+				</p>
+				<p>
 					<label for="<?php echo $this->get_field_id('height'); ?>"><?php _e('Height:') ?></label>
 					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" value="<?php echo $o['height']; ?>" />
 					<span class="wcs-description">Enter CSS unit value.</span>
@@ -108,7 +116,7 @@ class WPC_Shortcodes_Widget_Image_Links extends WP_Widget {
 		<script type="text/javascript">
 			/* <![CDATA[ */
 			jQuery(document).ready(function($){
-				$('#wc-shortcodes-image-links-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content", collapsible: true});
+				$('#wc-shortcodes-image-links-widget-<?php echo $this->number; ?>').accordion({heightStyle: "content", collapsible: true}).wcColorPickerWidget();
 			});
 			/* ]]> */
 		</script>
