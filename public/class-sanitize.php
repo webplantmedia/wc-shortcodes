@@ -174,7 +174,7 @@ class WPC_Shortcodes_Sanitize {
 		$value = filter_var( $value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
 
 		if ( empty( $value ) )
-			$value = '0';
+			return 0;
 
 		return $value . $css_unit;
 	}
