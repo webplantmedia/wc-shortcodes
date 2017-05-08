@@ -22,6 +22,12 @@
 			</div><!-- .entry-summary -->
 			<?php endif; ?>
 
+			<?php if ( $display['readmore'] ) : ?>
+			<div class="wc-shortcodes-read-more">
+				<a class="<?php echo esc_attr( $display['button_class'] ); ?>" href="<?php the_permalink(); ?>"><?php echo $display['readmore']; ?></a>
+			</div><!-- .entry-summary -->
+			<?php endif; ?>
+
 			<?php include('entry-meta.php'); ?>
 
 		</div><!-- .wc-shortcodes-post-content -->

@@ -1112,6 +1112,8 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			'show_thumbnail',
 			'show_content',
 			'show_paging',
+			'readmore',
+			'button_class',
 			'size',
 			'filtering',
 			'columns',

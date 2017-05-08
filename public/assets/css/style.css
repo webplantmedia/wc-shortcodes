@@ -1428,6 +1428,9 @@ pre.pre-wrap {
 .wc-shortcodes-post-content {
 	padding: 0 20px;
 }
+.wc-shortcodes-post-content > *:last-child {
+	margin-bottom: 20px;
+}
 .wc-shortcodes-post-border {
 	border: 1px solid #dddddd;
 }
@@ -1437,7 +1440,7 @@ pre.pre-wrap {
 }
 .wc-shortcodes-entry-title {
 	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 0;
 	-ms-word-wrap: break-word;
 	word-wrap: break-word;
 }
@@ -1446,11 +1449,16 @@ pre.pre-wrap {
 	margin-bottom: 0;
 }
 .wc-shortcodes-entry-meta-inner {
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 }
 .wc-shortcodes-entry-summary {
 	margin-top: 20px;
 	margin-bottom: 0;
+}
+.wc-shortcodes-read-more {
+	margin-top: 20px;
+	margin-bottom: 0;
+	text-align: center;
 }
 .wc-shortcodes-entry-quote blockquote {
 	margin-top: 0;

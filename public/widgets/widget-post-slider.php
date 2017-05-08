@@ -126,6 +126,7 @@ class WPC_Shortcodes_Widget_Post_Slider extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('readmore'); ?>"><?php _e('Read More Text:') ?></label>
 					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('readmore'); ?>" name="<?php echo $this->get_field_name('readmore'); ?>" value="<?php echo $o['readmore']; ?>" />
+					<span class="wcs-description">Enter button text. Leave blank if you do not want a button.</span>
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('button_class'); ?>"><?php _e('Button Class:') ?></label>

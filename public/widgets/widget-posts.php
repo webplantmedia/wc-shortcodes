@@ -113,6 +113,16 @@ class WPC_Shortcodes_Widget_Posts extends WPC_Shortcodes_Widget_Base {
 					<label for="<?php echo $this->get_field_id('show_paging'); ?>"><?php _e('Show Paging') ?></label>
 				</p>
 				<p>
+					<label for="<?php echo $this->get_field_id('readmore'); ?>"><?php _e('Read More Text:') ?></label>
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('readmore'); ?>" name="<?php echo $this->get_field_name('readmore'); ?>" value="<?php echo $o['readmore']; ?>" />
+					<span class="wcs-description">Enter button text. Leave blank if you do not want a button.</span>
+				</p>
+				<p>
+					<label for="<?php echo $this->get_field_id('button_class'); ?>"><?php _e('Button Class:') ?></label>
+					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('button_class'); ?>" name="<?php echo $this->get_field_name('button_class'); ?>" value="<?php echo $o['button_class']; ?>" />
+					<span class="wcs-description">Enter class name for custom CSS styling.</span>
+				</p>
+				<p>
 					<label for="<?php echo $this->get_field_id('size'); ?>"><?php _e('Image Size:'); ?></label>
 					<select class="wc-shortcodes-widget-option" id="<?php echo $this->get_field_id('size'); ?>" name="<?php echo $this->get_field_name('size'); ?>">
 						<?php foreach ( WPC_Shortcodes_Widget_Options::image_sizes() as $key => $value ) : ?>

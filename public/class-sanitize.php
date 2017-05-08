@@ -1249,6 +1249,9 @@ class WPC_Shortcodes_Sanitize {
 		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
 
 		// sanitize inputs
+		$atts['button_class'] = self::html_classes( $atts['button_class'] );
+		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-button' : $atts['button_class'];
+		$atts['readmore'] = sanitize_text_field( $atts['readmore'] );
 		$atts['terms'] = sanitize_text_field( $atts['terms'] );
 		$atts['pids'] = sanitize_text_field( $atts['pids'] );
 		$atts['post__in'] = sanitize_text_field( $atts['post__in'] );
@@ -1332,6 +1335,7 @@ class WPC_Shortcodes_Sanitize {
 		// sanitize inputs
 		$atts['button_class'] = self::html_classes( $atts['button_class'] );
 		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-slide-button' : $atts['button_class'];
+		$atts['readmore'] = sanitize_text_field( $atts['readmore'] );
 		$atts['terms'] = sanitize_text_field( $atts['terms'] );
 		$atts['pids'] = sanitize_text_field( $atts['pids'] );
 		$atts['post__in'] = sanitize_text_field( $atts['post__in'] );

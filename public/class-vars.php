@@ -423,6 +423,9 @@ class WPC_Shortcodes_Vars {
 			'show_content' => 1, // show main content?
 			'show_paging' => 1, // show pagination navigation?
 
+			'readmore' => '', // show read more button?
+			'button_class' => 'button', // show main content?
+
 			'size' => 'large', // default thumbnail size
 
 			'filtering' => 1, // insert isotope filter navigation
@@ -455,7 +458,7 @@ class WPC_Shortcodes_Vars {
 			'show_meta_category' => 1, // show heading?
 			'show_title' => 1, // show heading?
 			'show_content' => 1, // show main content?
-			'readmore' => 'Continue Reading', // show main content?
+			'readmore' => 'Continue Reading', // show read more button?
 			'button_class' => 'button secondary-button', // show main content?
 
 			'size' => 'full', // default thumbnail size
