@@ -5,9 +5,9 @@
 		$('.wc-shortcodes-tabs').each( function() {
 			var $tabs = $(this);
 			var $trigger = $tabs.find('.wcs-tabs-nav li a');
-			var $content = $tabs.find('.tab-content');
+			var $content = $tabs.find('.tab-content-wrapper');
 
-			$content.first().show();
+			$content.first().removeClass('tab-content-hide');
 			$trigger.first().parent().addClass('wcs-state-active');
 
 			$trigger.click(function( event ){
@@ -20,11 +20,9 @@
 				$trigger.parent().removeClass('wcs-state-active');
 				$this.parent().addClass('wcs-state-active');
 
-				$target.show();
-				$content.not($target).hide();
+				$target.removeClass('tab-content-hide');
+				$content.not($target).addClass('tab-content-hide');
 
-				$( document.body ).trigger( 'wcs-toggled' );
-				
 				return false;
 			});
 		});

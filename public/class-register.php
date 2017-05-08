@@ -684,7 +684,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		wp_enqueue_script('wc-shortcodes-toggle');
 		
 		// Display the Toggle
-		return '<div class="'. esc_attr( $class ) .'"><div class="wc-shortcodes-toggle-trigger"><a href="#">'. esc_html( $atts['title'] ) .'</a></div><div style="'.esc_attr( $style ).'" class="wc-shortcodes-toggle-container wc-shortcodes-content">' . do_shortcode($content) . '</div></div>';
+		return '<div class="'. esc_attr( $class ) .'"><div class="wc-shortcodes-toggle-trigger"><a href="#">'. esc_html( $atts['title'] ) .'</a></div><div class="wc-shortcodes-toggle-content-wrapper"><div style="'.esc_attr( $style ).'" class="wc-shortcodes-toggle-container wc-shortcodes-content">' . do_shortcode($content) . '</div></div></div>';
 	}
 
 
@@ -740,7 +740,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$atts = shortcode_atts( parent::$attr->accordion_section, $atts );
 		$atts = WPC_Shortcodes_Sanitize::accordion_section_attr( $atts );
 
-		return '<div class="wc-shortcodes-accordion-trigger '. esc_attr( $atts['class'] ) .'"><a href="#">'. esc_html( $atts['title'] ) .'</a></div><div class="wc-shortcodes-accordion-content wc-shortcodes-content">' . do_shortcode($content) . '</div>';
+		return '<div class="wc-shortcodes-accordion-trigger '. esc_attr( $atts['class'] ) .'"><a href="#">'. esc_html( $atts['title'] ) .'</a></div><div class="wc-shortcodes-accordion-content-wrapper"><div class="wc-shortcodes-accordion-content wc-shortcodes-content">' . do_shortcode($content) . '</div></div>';
 	}
 		
 
@@ -805,7 +805,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		$class = implode( ' ', $classes );
 
-		return '<div id="wc-shortcodes-tab-'. sanitize_title( $atts['title'] ) .'" class="'. esc_attr( $class ) .'">'. do_shortcode( $content ) .'</div>';
+		return '<div class="tab-content-wrapper tab-content-hide"><div id="wc-shortcodes-tab-'. sanitize_title( $atts['title'] ) .'" class="'. esc_attr( $class ) .'">'. do_shortcode( $content ) .'</div></div>';
 	}
 
 

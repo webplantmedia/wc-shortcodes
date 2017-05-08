@@ -124,6 +124,41 @@ class WPC_Shortcodes_Sanitize {
 		return $value."px";
 	}
 
+	public static function css_units( $value, $css_unit = 'px' ) {
+		if ( '' == $value )
+			return $value;
+
+		$value = trim( $value );
+
+		if ( 0 == $value )
+			return $value;
+
+		$values = explode( ' ', $value );
+		$clean = array();
+
+		foreach ( $values as $value ) {
+			if ( preg_match( '/(px|em|rem)$/', $value, $match ) ) {
+				$css_unit = $match[1];
+			}
+			$value = filter_var( $value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
+
+			if ( empty( $value ) ) {
+				$value = '0';
+			}
+			else {
+				$value = $value . $css_unit;
+			}
+
+			$clean[] = $value;
+		}
+
+		if ( empty( $clean ) ) {
+			return '';
+		}
+
+		return implode( ' ', $clean );
+	}
+
 	public static function css_unit( $value, $css_unit = 'px' ) {
 		if ( '' == $value )
 			return $value;
