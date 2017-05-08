@@ -113,6 +113,13 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.29 =
+
+* allowed sanitation of multiple pixel values
+* added read more button to post shortcode
+* updated sanitize for css_pixel
+* updated accordion, toggle, and tabs, javascript
+
 = Version 3.28 =
 
 * Added style format for image links
