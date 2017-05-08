@@ -526,7 +526,7 @@ class WPC_Shortcodes_Sanitize {
 					$atts[ $key ] = self::html_classes( $value );
 					break;
 				case 'padding' :
-					$atts[ $key ] = self::css_unit( $value );
+					$atts[ $key ] = self::css_units( $value );
 					break;
 				case 'border_width' :
 					$atts[ $key ] = self::css_unit( $value );
