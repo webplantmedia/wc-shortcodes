@@ -106,7 +106,7 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
-### Version 3.30 ###
+### Version 3.31 ###
 
 * fixed bug with accordion not closing
 * Added reset button
