@@ -113,6 +113,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.32 =
+
+* Updated WPC Settings Framework to 1.0.7
+
 = Version 3.31 =
 
 * fixed bug with accordion not closing
