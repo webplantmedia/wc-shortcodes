@@ -54,7 +54,7 @@
 						$content.not($next).animate({height:0},'fast','linear');
 					}
 					else {
-						$this.addClass('wc-shortcodes-accordion-header-active');
+						$next.animate({height:0},'fast','linear');
 					}
 
 				}
