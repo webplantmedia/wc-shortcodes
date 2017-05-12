@@ -53,7 +53,8 @@ class WPC_Shortcodes_Options extends WPC_Shortcodes_Vars {
 								array(
 									'option_name' => 'social_icons_display',
 									'title' => 'Order / Show / Hide',
-									'default' => parent::$social_icons,
+									'selection' => parent::$social_icons,
+									'default' => $this->set_default_order_show_hide_type( parent::$theme_support[ 'social_icons_selected' ], parent::$social_icons ),
 									'description' => '',
 									'type' => 'order_show_hide',
 									'callback' => array( &$this, 'sanitize_social_icons' ),
@@ -94,7 +95,8 @@ class WPC_Shortcodes_Options extends WPC_Shortcodes_Vars {
 								array(
 									'option_name' => 'share_buttons_display',
 									'title' => 'Order / Show / Hide',
-									'default' => parent::$share_buttons,
+									'selection' => parent::$share_buttons,
+									'default' => $this->set_default_order_show_hide_type( parent::$theme_support[ 'share_buttons_selected' ], parent::$share_buttons ),
 									'description' => '',
 									'type' => 'order_show_hide',
 									'callback' => array( &$this, 'sanitize_share_buttons' ),
@@ -480,5 +482,24 @@ class WPC_Shortcodes_Options extends WPC_Shortcodes_Vars {
 		}
 
 		return $valid;
+	}
+
+	private function set_default_order_show_hide_type( $selected, $default ) {
+		if ( isset( $selected ) && is_array( $selected ) && ! empty( $selected ) ) {
+			$new_order = array();
+
+			foreach( $selected as $index => $key_name ) {
+				if ( array_key_exists( $key_name, $default ) ) {
+					$new_order[ $key_name ] = $default[ $key_name ];
+					unset( $default[ $key_name ] );
+				}
+			}
+
+			if ( ! empty( $new_order ) ) {
+				return $new_order;
+			}
+		}
+
+		return $default;
 	}
 }

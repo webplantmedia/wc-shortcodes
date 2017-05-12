@@ -590,6 +590,7 @@ class WC_Shortcodes_Settings_Framework {
 			$args['display'] = 'default';
 
 		extract( $args );
+
 		$val = get_option( $option_name, $default );
 
 		switch ( $args['type'] ) {

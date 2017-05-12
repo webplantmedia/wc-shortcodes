@@ -171,6 +171,8 @@ class WPC_Shortcodes_Vars {
 			'print_small_share_button' => '',
 			'print_medium_share_button' => '',
 			'print_share_button' => WC_SHORTCODES_PLUGIN_URL . 'public/assets/img/print.png',
+			'social_icons_selected' => array( 'pinterest', 'instagram', 'facebook', 'twitter', 'email' ),
+			'share_buttons_selected' => array( 'pinterest', 'facebook', 'twitter', 'email' ),
 		);
 
 		// Shortcode Options
