@@ -113,6 +113,11 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.30 =
+
+* fixed bug with accordion not closing
+* Added reset button
+
 = Version 3.29 =
 
 * allowed sanitation of multiple pixel values
