@@ -106,7 +106,7 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
-### Version 3.32 ###
+### Version 3.33 ###
 
 * Updated WPC Settings Framework to 1.0.7
 
