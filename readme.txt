@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A plugin that adds a useful family of shortcodes to your WordPress theme. 
+A plugin that adds a useful family of shortcodes to your WordPress theme.
 
 == Description ==
 
