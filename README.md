@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.34 ###
+
+* added ability to add custom template shortcodes
+
 ### Version 3.33 ###
 
 * Updated WPC Settings Framework to 1.0.7
