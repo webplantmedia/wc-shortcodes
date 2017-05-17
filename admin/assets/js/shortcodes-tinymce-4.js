@@ -10,7 +10,7 @@
 
 		editor.addButton('wpc_shortcodes_button', function() {
 			
-			return {
+			var dropdown = {
 				title: "",
 				text: "[ ]",
 				image: url + "/images/shortcodes.png",
@@ -366,14 +366,49 @@
 							},
 						]
 					},
-					{
-						text: "[edit_selection]",
-						onclick: function(){
-							wcShortcodes( mceSelected, editor );
-						}
-					},
 				]
+			};
+
+			if ( typeof wpc_shortcodes_template_buttons == "object") {
+				var size = dropdown.menu.push(
+					{
+						text: "Templates",
+						menu: [],
+					}
+				);
+				var index = size - 1;
+				for ( var property in wpc_shortcodes_template_buttons ) {
+					/* http://stackoverflow.com/questions/12718284/javascript-onclick-shows-last-element-of-array-with-for-loop */
+					/* http://conceptf1.blogspot.com/2013/11/javascript-closures.html */
+					(function(property) {
+						if ( wpc_shortcodes_template_buttons.hasOwnProperty( property ) ) {
+							if ( 'title' in wpc_shortcodes_template_buttons[property] && 'content' in wpc_shortcodes_template_buttons[property] ) {
+								dropdown.menu[index].menu.push(
+									{
+										text: wpc_shortcodes_template_buttons[property]['title'],
+										onclick: function(){
+											editor.setContent('');
+											editor.insertContent( wpc_shortcodes_template_buttons[property]['content'] );
+										}
+									}
+								); 
+							}
+						}
+					})(property);
+				}	
 			}
+
+			dropdown.menu.push(
+				{
+					text: "[edit_selection]",
+					onclick: function(){
+						wcShortcodes( mceSelected, editor );
+					}
+				}
+			);
+
+
+			return dropdown;
 		});
 	};
 	
