@@ -124,6 +124,10 @@ class WPC_Shortcodes_Widget_Post_Slider extends WP_Widget {
 					<label for="<?php echo $this->get_field_id('show_content'); ?>"><?php _e('Show Content') ?></label>
 				</p>
 				<p>
+					<input type="checkbox" class="wc-shortcodes-widget-option checkbox" id="<?php echo $this->get_field_id('show_button'); ?>" name="<?php echo $this->get_field_name('show_button'); ?>" value="1" <?php checked( $o['show_button'], 1 ); ?> />
+					<label for="<?php echo $this->get_field_id('show_button'); ?>"><?php _e('Show Button') ?></label>
+				</p>
+				<p>
 					<label for="<?php echo $this->get_field_id('readmore'); ?>"><?php _e('Read More Text:') ?></label>
 					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('readmore'); ?>" name="<?php echo $this->get_field_name('readmore'); ?>" value="<?php echo $o['readmore']; ?>" />
 					<span class="wcs-description">Enter button text. Leave blank if you do not want a button.</span>

@@ -1262,7 +1262,7 @@ class WPC_Shortcodes_Sanitize {
 
 	// Fixes bools on widget update when checkbox is empty, and thus blank. We don't want to revert to the default value, but false.
 	public static function post_slider_attr_fix_bools( $atts ) {
-		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto', 'nopaging' );
+		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'show_button', 'slider_auto', 'nopaging' );
 
 		foreach ( $bools as $key ) {
 			if ( ! isset( $atts[ $key ] ) ) {
@@ -1275,7 +1275,7 @@ class WPC_Shortcodes_Sanitize {
 
 	public static function post_slider_attr( $atts ) {
 		// sanitize bools
-		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'slider_auto', 'nopaging' );
+		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'show_button', 'slider_auto', 'nopaging' );
 
 		foreach ( $bools as $key ) {
 			if ( isset( $atts[ $key ] ) ) {

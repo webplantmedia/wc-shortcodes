@@ -1255,7 +1255,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		// fix bug with title argument being added to WP_Query() in 4.4
 		$display_keys = array(
-			'show_meta_category', 'show_title', 'show_content', 'readmore', 'button_class', 'size', 'heading_type', 'heading_size', 'mobile_heading_size', 'layout', 'template', 'excerpt_length', 'desktop_height', 'laptop_height', 'mobile_height', 'slider_mode', 'slider_pause', 'slider_auto',
+			'show_meta_category', 'show_title', 'show_content', 'show_button', 'readmore', 'button_class', 'size', 'heading_type', 'heading_size', 'mobile_heading_size', 'layout', 'template', 'excerpt_length', 'desktop_height', 'laptop_height', 'mobile_height', 'slider_mode', 'slider_pause', 'slider_auto',
 		);
 		$display = array();
 		foreach ( $display_keys as $key ) {
@@ -1334,6 +1334,9 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$class[] = 'wc-shortcodes-clearfix';
 		$class[] = 'wc-shortcodes-posts-layout-' . $display['layout'];
 		$class[] = 'wc-shortcodes-posts-template-' . $display['template'];
+		if ( $display['show_button'] ) {
+			$class[] = 'wc-shortcodes-posts-showing-button';
+		}
 
 		$html .= '<div id="" class="wc-shortcodes-post-slider-wrapper">';
 			$html .= '<div id="wc-shortcodes-post-slider-'.$instance.'" class="' . esc_attr( implode( ' ', $class ) ) . '" data-mode="' . esc_attr( $display['slider_mode'] ) . '" data-pause="' . esc_attr( $display['slider_pause'] ) . '" data-auto="' . esc_attr( $display['slider_auto'] ) . '">';
@@ -1341,8 +1344,14 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 				while( $wc_shortcodes_posts_query->have_posts() ) {
 					$wc_shortcodes_posts_query->the_post();
 					
-					if ( $display['show_content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) )
+					if ( $display['show_content'] && empty( $post->post_excerpt ) && empty( $post->post_content ) ) {
 						$display['show_content'] = false;
+					}
+
+					$display['show_content_box'] = false;
+					if ( $display['show_content'] || $display['show_title'] || $display['show_button'] || $display['show_meta_category'] ) {
+						$display['show_content_box'] = true;
+					}
 
 					ob_start();
 					include('templates/'.$display['template'].'/index.php');

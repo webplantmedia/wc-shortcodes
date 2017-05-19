@@ -460,6 +460,7 @@ class WPC_Shortcodes_Vars {
 			'show_meta_category' => 1, // show heading?
 			'show_title' => 1, // show heading?
 			'show_content' => 1, // show main content?
+			'show_button' => 1, // show button?
 			'readmore' => 'Continue Reading', // show read more button?
 			'button_class' => 'button secondary-button', // show main content?
 
