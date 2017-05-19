@@ -106,6 +106,11 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.35 ###
+
+* updated box slider to version 4.2.12
+* added show button option in post slider
+
 ### Version 3.34 ###
 
 * added ability to add custom template shortcodes
