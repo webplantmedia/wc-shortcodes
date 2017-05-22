@@ -32,6 +32,21 @@ class WPC_Shortcodes_Sanitize {
 		return $value;
 	}
 
+	public static function gutter_space( $value ) {
+		if ( ! is_numeric( $value ) ) {
+			$value = 20;
+		}
+		if ( $value > 0 && $value < 1 ) {
+			$value = (int) ( $value * 1000 );
+		}
+		$value = (int) $value;
+		if ( $value > 50 || $value < 0 ) {
+			$value = 20;
+		}
+
+		return $value;
+	}
+
 	public static function text_field( $value ) {
 		return trim( sanitize_text_field( $value ) );
 	}
@@ -78,6 +93,21 @@ class WPC_Shortcodes_Sanitize {
 
 		if ( 100 < $value )
 			$value = 100;
+
+		return $value;
+	}
+
+	public static function column( $value, $default = 2 ) {
+		$value = intval( $value );
+
+		if ( 1 > $value )
+			return $default;
+
+		if ( 9 < $value )
+			return $default;
+
+		if ( empty( $value ) )
+			return $default;
 
 		return $value;
 	}
@@ -284,6 +314,7 @@ class WPC_Shortcodes_Sanitize {
 
 	public static function heading_type( $value, $default = 'h2' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::heading_tags();
+		$value = strtolower( $value );
 
 		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
@@ -409,6 +440,70 @@ class WPC_Shortcodes_Sanitize {
 	public static function image_link_text_position( $value, $default = '' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::image_link_text_position_values();
 
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function posts_layout( $value, $default = 'bxslider' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::posts_layouts();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function post_slider_layout( $value, $default = 'bxslider' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::post_slider_layouts();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function featured_post_layout( $value, $default = 'thumbnail' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::featured_post_layouts();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function posts_template( $value, $default = 'slider1' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::posts_templates();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function post_slider_template( $value, $default = 'slider1' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::post_slider_templates();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function post_slider_mode( $value, $default = 'fade' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::post_slider_modes();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function order_field( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::order_fields();
+
+		$value = strtoupper( $value );
 		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
 
@@ -1177,85 +1272,75 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function posts_attr( $atts ) {
-		// sanitize bools
-		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging', 'show_title', 'show_meta_all', 'show_meta_author', 'show_meta_date', 'show_meta_comments', 'show_thumbnail', 'show_content', 'show_paging', 'filtering' );
-
-		foreach ( $bools as $key ) {
-			if ( isset( $atts[ $key ] ) ) {
-				if ( "no" == $atts[ $key ] ) {
-					$atts[ $key ] = 0;
-				}
-				else {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'ignore_sticky_posts' :
+				case 'show_meta_category' :
+				case 'nopaging' :
+				case 'show_title' :
+				case 'show_meta_all' :
+				case 'show_meta_author' :
+				case 'show_meta_date' :
+				case 'show_meta_comments' :
+				case 'show_thumbnail' :
+				case 'show_content' :
+				case 'show_paging' :
+				case 'filtering' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'nopaging' :
+					$atts[ $key ] = self::int_bool( $value );
 					$atts[ $key ] = (bool) $atts[ $key ];
-					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
-				}
+					break;
+				case 'gutter_space' :
+					$atts[ $key ] = self::gutter_space( $value );
+					break;
+				case 'p' :
+				case 'posts_per_page' :
+				case 'excerpt_length' :
+					$atts[ $key ] = self::number( $value );
+					break;
+				case 'columns' :
+					$atts[ $key ] = self::column( $value );
+					break;
+				case 'slider_pause' :
+					$atts[ $key ] = self::number( $value );
+					$atts[ $key ] = abs( $atts[ $key ] );
+					break;
+				case 'layout' :
+					$atts[ $key ] = self::posts_layout( $value );
+					break;
+				case 'template' :
+					$atts[ $key ] = self::posts_template( $value );
+					break;
+				case 'order' :
+					$atts[ $key ] = self::order_field( $value );
+					break;
+				case 'heading_type' :
+					$atts[ $key ] = self::heading_type( $value );
+					break;
+				case 'button_class' :
+					$atts[ $key ] = self::html_classes( $atts[ $key ] );
+					$atts[ $key ] = empty( $atts[ $key ] ) ? 'wc-shortcodes-post-slide-button' : $atts[ $key ];
+					break;
+				case 'readmore' :
+				case 'terms' :
+				case 'pids' :
+				case 'post__in' :
+				case 'date_format' :
+					$atts[ $key ] = sanitize_text_field( $value );
 			}
 		}
 
-		$atts['nopaging'] = (bool) $atts['nopaging'];
-
-		// gutter space
-		if ( ! is_numeric( $atts['gutter_space'] ) ) {
-			$atts['gutter_space'] = 20;
-		}
-		if ( $atts['gutter_space'] > 0 && $atts['gutter_space'] < 1 ) {
-			$atts['gutter_space'] = (int) ( $atts['gutter_space'] * 1000 );
-		}
-		$atts['gutter_space'] = (int) $atts['gutter_space'];
-		if ( $atts['gutter_space'] > 50 || $atts['gutter_space'] < 0 ) {
-			$atts['gutter_space'] = 20;
-		}
-
-		// sanitize ints
-		$ints = array( 'p', 'posts_per_page', 'columns', 'excerpt_length' );
-		foreach ( $ints as $key ) {
-			if ( isset( $atts[ $key ] ) ) {
-				$atts[ $key ] = (int) $atts[ $key ];
-			}
-		}
-
-		$valid_columns = array( 1, 2, 3, 4, 5, 6, 7, 8, 9 );
-		$atts['columns'] = in_array( $atts['columns'], $valid_columns ) ? $atts['columns'] : 2;
 		if ( $atts['columns'] == 1 ) {
 			$atts['layout'] = 'single-column';
 		}
-
 
 		// sanitize limit
 		if ( $atts['posts_per_page'] < 0 ) {
 			$atts['posts_per_page'] = -1;
 			$atts['nopaging'] = true;
 		}
-
-		// sanitize dropdown
-		$valid_layouts = array( 'masonry', 'grid', 'single-column' );
-		if ( ! in_array( $atts['layout'], $valid_layouts ) ) {
-			$atts['layout'] = 'masonry';
-		}
-
-		$valid_templates = array( 'box', 'borderless' );
-		if ( ! in_array( $atts['template'], $valid_templates ) ) {
-			$atts['template'] = 'box';
-		}
-
-		$valid_orders = array( 'ASC', 'DESC' );
-		$atts['order'] = strtoupper( $atts['order'] );
-		if ( ! in_array( $atts['order'], $valid_orders ) ) {
-			$atts['order'] = 'DESC';
-		}
-
-		$atts['heading_type'] = strtolower( $atts['heading_type'] );
-		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
-		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
-
-		// sanitize inputs
-		$atts['button_class'] = self::html_classes( $atts['button_class'] );
-		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-button' : $atts['button_class'];
-		$atts['readmore'] = sanitize_text_field( $atts['readmore'] );
-		$atts['terms'] = sanitize_text_field( $atts['terms'] );
-		$atts['pids'] = sanitize_text_field( $atts['pids'] );
-		$atts['post__in'] = sanitize_text_field( $atts['post__in'] );
-		$atts['date_format'] = sanitize_text_field( $atts['date_format'] );
 
 		return $atts;
 	}
@@ -1274,71 +1359,66 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function post_slider_attr( $atts ) {
-		// sanitize bools
-		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'show_button', 'slider_auto', 'nopaging' );
-
-		foreach ( $bools as $key ) {
-			if ( isset( $atts[ $key ] ) ) {
-				if ( "no" == $atts[ $key ] ) {
-					$atts[ $key ] = 0;
-				}
-				else {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'ignore_sticky_posts' :
+				case 'show_meta_category' :
+				case 'show_title' :
+				case 'show_content' :
+				case 'show_button' :
+				case 'slider_auto' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'nopaging' :
+					$atts[ $key ] = self::int_bool( $value );
 					$atts[ $key ] = (bool) $atts[ $key ];
-					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
-				}
+					break;
+				case 'p' :
+				case 'posts_per_page' :
+				case 'heading_size' :
+				case 'mobile_heading_size' :
+				case 'excerpt_length' :
+				case 'desktop_height' :
+				case 'laptop_height' :
+				case 'mobile_height' :
+					$atts[ $key ] = self::number( $value );
+					break;
+				case 'slider_pause' :
+					$atts[ $key ] = self::number( $value );
+					$atts[ $key ] = abs( $atts[ $key ] );
+					break;
+				case 'layout' :
+					$atts[ $key ] = self::post_slider_layout( $value );
+					break;
+				case 'template' :
+					$atts[ $key ] = self::post_slider_template( $value );
+					break;
+				case 'slider_mode' :
+					$atts[ $key ] = self::post_slider_mode( $value );
+					break;
+				case 'order' :
+					$atts[ $key ] = self::order_field( $value );
+					break;
+				case 'heading_type' :
+					$atts[ $key ] = self::heading_type( $value );
+					break;
+				case 'button_class' :
+					$atts[ $key ] = self::html_classes( $atts[ $key ] );
+					$atts[ $key ] = empty( $atts[ $key ] ) ? 'wc-shortcodes-post-slide-button' : $atts[ $key ];
+					break;
+				case 'readmore' :
+				case 'terms' :
+				case 'pids' :
+				case 'post__in' :
+					$atts[ $key ] = sanitize_text_field( $value );
 			}
 		}
-
-		$atts['nopaging'] = (bool) $atts['nopaging'];
-
-		// sanitize ints
-		$ints = array( 'p', 'posts_per_page', 'heading_size', 'mobile_heading_size', 'excerpt_length', 'desktop_height', 'laptop_height', 'mobile_height', 'slider_pause' );
-		foreach ( $ints as $key ) {
-			if ( isset( $atts[ $key ] ) ) {
-				$atts[ $key ] = (int) $atts[ $key ];
-			}
-		}
-		$atts['slider_pause'] = abs( $atts['slider_pause'] );
 
 		// sanitize limit
 		if ( $atts['posts_per_page'] < 0 ) {
 			$atts['posts_per_page'] = -1;
 			$atts['nopaging'] = true;
 		}
-
-		// sanitize dropdown
-		$valid_layouts = array( 'bxslider' );
-		if ( ! in_array( $atts['layout'], $valid_layouts ) ) {
-			$atts['layout'] = 'bxslider';
-		}
-
-		$valid_templates = array( 'slider1', 'slider2' );
-		if ( ! in_array( $atts['template'], $valid_templates ) ) {
-			$atts['template'] = 'slider1';
-		}
-
-		$valid_slider_modes = array( 'fade', 'vertical', 'horizontal' );
-		if ( ! in_array( $atts['slider_mode'], $valid_slider_modes ) ) {
-			$atts['slider_mode'] = 'fade';
-		}
-
-		$valid_orders = array( 'ASC', 'DESC' );
-		$atts['order'] = strtoupper( $atts['order'] );
-		if ( ! in_array( $atts['order'], $valid_orders ) ) {
-			$atts['order'] = 'DESC';
-		}
-
-		$atts['heading_type'] = strtolower( $atts['heading_type'] );
-		$valid_headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
-		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
-
-		// sanitize inputs
-		$atts['button_class'] = self::html_classes( $atts['button_class'] );
-		$atts['button_class'] = empty( $atts['button_class'] ) ? 'wc-shortcodes-post-slide-button' : $atts['button_class'];
-		$atts['readmore'] = sanitize_text_field( $atts['readmore'] );
-		$atts['terms'] = sanitize_text_field( $atts['terms'] );
-		$atts['pids'] = sanitize_text_field( $atts['pids'] );
-		$atts['post__in'] = sanitize_text_field( $atts['post__in'] );
 
 		return $atts;
 	}
@@ -1357,67 +1437,43 @@ class WPC_Shortcodes_Sanitize {
 	}
 
 	public static function featured_posts_attr( $atts ) {
-		// sanitize bools
-		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'nopaging' );
-
-		foreach ( $bools as $key ) {
-			if ( isset( $atts[ $key ] ) ) {
-				if ( "no" == $atts[ $key ] ) {
-					$atts[ $key ] = 0;
-				}
-				else {
-					$atts[ $key ] = (bool) $atts[ $key ];
-					$atts[ $key ] = $atts[ $key ] ? 1 : 0;
-				}
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'ignore_sticky_posts' :
+				case 'show_meta_category' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'nopaging' :
+					$atts[ $key ] = false;
+					break;
+				case 'p' :
+				case 'posts_per_page' :
+				case 'heading_size' :
+					$atts[ $key ] = self::number( $value );
+					break;
+				case 'layout' :
+					$atts[ $key ] = self::featured_post_layout( $value );
+					break;
+				case 'order' :
+					$atts[ $key ] = self::order_field( $value );
+					break;
+				case 'heading_type' :
+					$atts[ $key ] = self::heading_type( $value );
+					break;
+				case 'title' :
+				case 'terms' :
+				case 'pids' :
+				case 'post__in' :
+					$atts[ $key ] = sanitize_text_field( $value );
 			}
 		}
 
-		$atts['nopaging'] = (bool) $atts['nopaging'];
-
-		// sanitize ints
-		$ints = array( 'p', 'posts_per_page', 'heading_size');
-		foreach ( $ints as $key ) {
-			if ( isset( $atts[ $key ] ) ) {
-				$atts[ $key ] = (int) $atts[ $key ];
-			}
-		}
-
-		// sanitize limit
-		$atts['nopaging'] = false;
 		if ( $atts['posts_per_page'] <= 0 ) {
 			$atts['posts_per_page'] = 1;
 		}
 		if ( $atts['posts_per_page'] >= 10 ) {
 			$atts['posts_per_page'] = 10;
 		}
-
-		// sanitize dropdown
-		$valid_layouts = WPC_Shortcodes_Widget_Options::featured_post_layouts();
-		if ( ! array_key_exists( $atts['layout'], $valid_layouts ) ) {
-			$atts['layout'] = 'thumbnail';
-		}
-
-		$valid_orders = WPC_Shortcodes_Widget_Options::order_fields();
-		$atts['order'] = strtoupper( $atts['order'] );
-		if ( ! in_array( $atts['order'], $valid_orders ) ) {
-			$atts['order'] = 'DESC';
-		}
-
-		$atts['heading_type'] = strtolower( $atts['heading_type'] );
-		$valid_headings = WPC_Shortcodes_Widget_Options::heading_tags();
-		$atts['heading_type'] = in_array( $atts['heading_type'], $valid_headings ) ? $atts['heading_type'] : 'h2';
-		$valid_orders = WPC_Shortcodes_Widget_Options::order_fields();
-		$atts['order'] = strtoupper( $atts['order'] );
-		if ( ! in_array( $atts['order'], $valid_orders ) ) {
-			$atts['order'] = 'DESC';
-		}
-
-
-		// sanitize inputs
-		$atts['title'] = sanitize_text_field( $atts['title'] );
-		$atts['terms'] = sanitize_text_field( $atts['terms'] );
-		$atts['pids'] = sanitize_text_field( $atts['pids'] );
-		$atts['post__in'] = sanitize_text_field( $atts['post__in'] );
 
 		return $atts;
 	}

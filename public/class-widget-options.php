@@ -41,20 +41,6 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
-	public static function posts_layouts() {
-		return array(
-			'masonry' => 'Masonry',
-			'grid' => 'Grid',
-		);
-	}
-
-	public static function posts_templates() {
-		return array(
-			'box' => 'Box',
-			'borderless' => 'Borderless',
-		);
-	}
-
 	public static function image_links_style_format_values() {
 		return array(
 			'row' => 'Row',
@@ -66,6 +52,27 @@ class WPC_Shortcodes_Widget_Options {
 		return array(
 			'thumbnail' => 'Thumbnail',
 			'showcase' => 'Showcase',
+		);
+	}
+
+	public static function posts_layouts() {
+		return array(
+			'masonry' => 'Masonry',
+			'grid' => 'Grid',
+			'single-column' => 'Single Column',
+		);
+	}
+
+	public static function posts_templates() {
+		return array(
+			'box' => 'Box',
+			'borderless' => 'Borderless',
+		);
+	}
+
+	public static function post_slider_layouts() {
+		return array(
+			'bxslider' => 'Box Slider',
 		);
 	}
 
