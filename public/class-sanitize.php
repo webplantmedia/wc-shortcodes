@@ -1411,6 +1411,7 @@ class WPC_Shortcodes_Sanitize {
 				case 'pids' :
 				case 'post__in' :
 					$atts[ $key ] = sanitize_text_field( $value );
+					break;
 			}
 		}
 
@@ -1465,6 +1466,7 @@ class WPC_Shortcodes_Sanitize {
 				case 'pids' :
 				case 'post__in' :
 					$atts[ $key ] = sanitize_text_field( $value );
+					break;
 			}
 		}
 
