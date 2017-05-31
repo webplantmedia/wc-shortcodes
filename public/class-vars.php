@@ -342,18 +342,18 @@ class WPC_Shortcodes_Vars {
 			'field' => 'slug', // slug or id
 			'terms' => '', // taxonomy terms.
 
-			'button_class' => 'button primary-button', // show main content?
+			'button_class' => '', // show main content?
 
 			'size' => 'full', // default thumbnail size
 
-			'heading_size' => 30,
-			'mobile_heading_size' => 24,
+			'heading_size' => 26,
+			'mobile_heading_size' => 18,
 			'layout' => 'bxslider', // blog layout
 			'template' => 'collage1',
 			'gutter_space' => 7,
 			'desktop_height' => 600,
 			'laptop_height' => 500,
-			'mobile_height' => 350,
+			'mobile_height' => 250,
 
 			'slider_mode' => 'fade',
 			'slider_pause' => 4000,

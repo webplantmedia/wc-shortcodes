@@ -111,7 +111,7 @@ class WPC_Shortcodes_Widget_Collage extends WP_Widget {
 				<p>
 					<label for="<?php echo $this->get_field_id('button_class'); ?>"><?php _e('Button Class:') ?></label>
 					<input type="text" class="wc-shortcodes-widget-option widefat" id="<?php echo $this->get_field_id('button_class'); ?>" name="<?php echo $this->get_field_name('button_class'); ?>" value="<?php echo $o['button_class']; ?>" />
-					<span class="wcs-description">Enter class name for custom CSS styling.</span>
+					<span class="wcs-description">Enter class name for custom CSS styling. (Ex: button primary-button)</span>
 				</p>
 				<p>
 					<label for="<?php echo $this->get_field_id('size'); ?>"><?php _e('Image Size:'); ?></label>
