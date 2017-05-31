@@ -106,6 +106,12 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.36 ###
+
+* Added collage widget
+* Added break to one of the case statements
+* updated sanitation function for posts, post_slider, and featured post
+
 ### Version 3.35 ###
 
 * updated box slider to version 4.2.12
