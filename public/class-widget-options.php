@@ -70,6 +70,12 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function collage_templates() {
+		return array(
+			'collage1' => 'Style 1',
+		);
+	}
+
 	public static function post_slider_layouts() {
 		return array(
 			'bxslider' => 'Box Slider',

@@ -32,7 +32,11 @@ require_once( plugin_dir_path( __FILE__ ) . 'public/class-register.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-hooks.php' );
 
 if ( WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED ) {
-	require_once( plugin_dir_path( __FILE__ ) . 'public/class-post-types.php' ); //Adds basic filters and actions
+	require_once( plugin_dir_path( __FILE__ ) . 'public/post-types/class-slide-post-type.php' ); //Adds basic filters and actions
+} 
+
+if ( WC_SHORTCODES_COLLAGE_POST_TYPE_ENABLED ) {
+	require_once( plugin_dir_path( __FILE__ ) . 'public/post-types/class-collage-post-type.php' ); //Adds basic filters and actions
 } 
 
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-ajax-front.php' );
@@ -56,7 +60,11 @@ add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Register', 'get_instance' )
 add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Hooks', 'get_instance' ) );
 
 if ( WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED ) {
-	add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Post_Types', 'get_instance' ) );
+	add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Slide_Post_Type', 'get_instance' ) );
+}
+
+if ( WC_SHORTCODES_COLLAGE_POST_TYPE_ENABLED ) {
+	add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Collage_Post_Type', 'get_instance' ) );
 }
 
 add_action( 'plugins_loaded', array( 'WPC_Shortcodes_Ajax_Front', 'get_instance' ) );

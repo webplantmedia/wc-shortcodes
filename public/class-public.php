@@ -114,9 +114,10 @@ class WPC_Shortcodes_Public extends WPC_Shortcodes_Vars {
 
 		// slider
 		wp_register_script( 'wordpresscanvas-rslides', WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/responsiveslides.min.js', array ( 'jquery' ), '1.54', true );
-		wp_register_style( 'wc-shortcodes-bxslider', WC_SHORTCODES_PLUGIN_URL . 'includes/vendors/bxslider/jquery.bxslider.min.css', array( ), '4.2.5' );
-		wp_register_script( 'wc-shortcodes-bxslider', WC_SHORTCODES_PLUGIN_URL . 'includes/vendors/bxslider/jquery.bxslider.min.js', array ( 'jquery' ), '4.2.5', true );
+		wp_register_style( 'wc-shortcodes-bxslider', WC_SHORTCODES_PLUGIN_URL . 'includes/vendors/bxslider/jquery.bxslider.min.css', array( ), '4.2.12' );
+		wp_register_script( 'wc-shortcodes-bxslider', WC_SHORTCODES_PLUGIN_URL . 'includes/vendors/bxslider/jquery.bxslider.min.js', array ( 'jquery' ), '4.2.12', true );
 		wp_register_script( 'wc-shortcodes-post-slider', WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/post-slider.js', array ( 'jquery' ), $ver, true );
+		wp_register_script( 'wc-shortcodes-collage', WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/collage.js', array ( 'jquery' ), $ver, true );
 
 		// posts
 		wp_register_script( 'wc-shortcodes-posts', WC_SHORTCODES_PLUGIN_URL . 'public/assets/js/posts.js', array ( 'jquery', 'wordpresscanvas-rslides', 'jquery-masonry', 'wordpresscanvas-imagesloaded' ), $ver, true );

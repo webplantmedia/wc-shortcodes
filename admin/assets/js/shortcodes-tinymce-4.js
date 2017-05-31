@@ -398,6 +398,20 @@
 				}	
 			}
 
+			if ( typeof wpc_shortcodes_collage_enabled == "boolean") {
+				if ( true == wpc_shortcodes_collage_enabled ) {
+					dropdown.menu[3].menu.push(
+						{
+							text: "Collage",
+							onclick: function(){
+								var shortcode = '[wc_collage][/wc_collage]';
+								wcShortcodes( shortcode, editor );
+							}
+						}
+					);
+				}
+			}
+
 			dropdown.menu.push(
 				{
 					text: "[edit_selection]",
@@ -406,7 +420,6 @@
 					}
 				}
 			);
-
 
 			return dropdown;
 		});

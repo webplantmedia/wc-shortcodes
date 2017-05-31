@@ -46,6 +46,7 @@ class WPC_Shortcodes_Vars {
 		define( 'WC_SHORTCODES_CURRENT_VERSION', get_option( WC_SHORTCODES_PREFIX . 'current_version' ) );
 		define( 'WC_SHORTCODES_FONT_AWESOME_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_font_awesome', true ) );
 		define( 'WC_SHORTCODES_SLIDE_POST_TYPE_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_slide_post_type', true ) );
+		define( 'WC_SHORTCODES_COLLAGE_POST_TYPE_ENABLED', get_option( WC_SHORTCODES_PREFIX . 'enable_collage_post_type', true ) );
 
 		self::$plugin_settings_url = admin_url( 'themes.php?page=' . self::$plugin_slug );
 		self::$google_maps_api_key = get_option( WC_SHORTCODES_PREFIX . 'google_maps_api_key' );
@@ -324,6 +325,39 @@ class WPC_Shortcodes_Vars {
 
 			// misc options
 			'class' => '',
+		);
+		self::$attr->collage = array(
+			'pids' => '', //use post id.
+			'p' => '', //use post id.
+			'post__in' => '', //use post ids
+			'order' => 'DESC', // DESC, ASC
+			'orderby' => 'date',
+			'post_status' => 'publish',
+			'post_type' => 'wcs_collage', // post, page, wc_portfolio_item, etc
+			'posts_per_page' => 10, //number of post to show per page
+			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
+			'ignore_sticky_posts' => 1,
+
+			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
+			'field' => 'slug', // slug or id
+			'terms' => '', // taxonomy terms.
+
+			'button_class' => 'button primary-button', // show main content?
+
+			'size' => 'full', // default thumbnail size
+
+			'heading_size' => 30,
+			'mobile_heading_size' => 24,
+			'layout' => 'bxslider', // blog layout
+			'template' => 'collage1',
+			'gutter_space' => 7,
+			'desktop_height' => 600,
+			'laptop_height' => 500,
+			'mobile_height' => 350,
+
+			'slider_mode' => 'fade',
+			'slider_pause' => 4000,
+			'slider_auto' => 0,
 		);
 		self::$attr->image_links = array(
 			// image 1

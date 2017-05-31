@@ -50,7 +50,7 @@ class WPC_Shortcodes_Widget_Image_Links extends WP_Widget {
 			<?php for ( $i = 1; $i <= 4; $i++ ) : ?>
 				<?php
 				$imagestyle = '';
-				if ( empty( $o['image_1'] ) ) {
+				if ( empty( $o['image_'.$i] ) ) {
 					$imagestyle = ' style="display:none"';
 				}
 				?>

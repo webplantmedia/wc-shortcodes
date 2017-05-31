@@ -32,6 +32,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		add_shortcode( 'wc_rsvp', array( &$this, 'rsvp' ) );
 		add_shortcode( 'wc_posts', array( &$this, 'posts' ) );
 		add_shortcode( 'wc_post_slider', array( &$this, 'post_slider' ) );
+		add_shortcode( 'wc_collage', array( &$this, 'collage' ) );
 		add_shortcode( 'wc_featured_posts', array( &$this, 'featured_posts' ) );
 		add_shortcode( 'wc_image', array( &$this, 'image' ) );
 		add_shortcode( 'wc_image_links', array( &$this, 'image_links' ) );
@@ -1072,6 +1073,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		$atts = shortcode_atts( parent::$attr->posts, $atts );
 		$atts = WPC_Shortcodes_Sanitize::posts_attr( $atts );
 
+		if ( empty( $atts['button_class'] ) ) {
+			$atts['button_class'] = 'wc-shortcodes-post-button';
+		}
+
 		// Set paged variable.
 		if ( (is_front_page() || is_home() ) ) {
 			$atts['paged'] = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
@@ -1220,6 +1225,97 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		return $html;
 	}
 
+	public function collage( $atts ) {
+		global $post;
+		global $wc_shortcodes_posts_query;
+
+		static $instance = 0;
+		$instance++;
+
+		$atts = shortcode_atts( parent::$attr->collage, $atts );
+		$atts = WPC_Shortcodes_Sanitize::collage_attr( $atts );
+
+		// Convert comma delimeted string to array
+		$p = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['pids'] );
+
+		if ( empty( $atts['button_class'] ) ) {
+			$atts['button_class'] = 'wc-shortcodes-collage-button';
+		}
+
+		$atts['p'] = '';
+		$atts['post__in'] = '';
+
+		if ( is_array( $p ) && ! empty( $p ) ) {
+			$size = sizeof( $p );
+			if ( 1 < $size ) {
+				$atts['post__in'] = $p;
+			}
+			else if ( 1 == $size ) {
+				$atts['p'] = $p[0];
+			}
+		}
+
+		$atts['terms'] = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['terms'] );
+
+		// Return if posts_per_page is set to 0.
+		if ( 0 == $atts['posts_per_page'] ) {
+			return;
+		}
+
+		// fix bug with title argument being added to WP_Query() in 4.4
+		$display_keys = array(
+			'button_class', 'size', 'gutter_space', 'heading_size', 'mobile_heading_size', 'layout', 'template', 'desktop_height', 'laptop_height', 'mobile_height', 'slider_mode', 'slider_pause', 'slider_auto',
+		);
+		$display = array();
+		foreach ( $display_keys as $key ) {
+			$display[ $key ] = $atts[ $key ];
+			unset( $atts[ $key ] );
+		}
+
+		// remove not query keys
+		unset( $atts[ 'pids' ] );
+
+		// check for get variable
+		$wpc_term = null;
+		if ( isset( $_GET['wpc_term'] ) && ! empty( $_GET['wpc_term'] ) ) {
+			$wpc_term = $_GET['wpc_term'];
+		}
+
+		// add tax query if user specified
+		if ( ! empty( $wpc_term ) ) {
+			$atts['tax_query'] = array(
+				array(
+					'taxonomy' => $atts['taxonomy'],
+					'field' => $atts['field'],
+					'terms' => $wpc_term,
+				),
+			);
+		}
+		else if ( ! empty( $atts['terms'] ) ) {
+			$atts['tax_query'] = array(
+				array(
+					'taxonomy' => $atts['taxonomy'],
+					'field' => $atts['field'],
+					'terms' => $atts['terms'],
+				),
+			);
+		}
+
+		// run query
+		$wc_shortcodes_posts_query = new WP_Query($atts);
+
+		$html = '';
+
+		ob_start();
+		include('templates/'.$display['template'].'/index.php');
+		$html = ob_get_clean();
+
+		// reset query
+		wp_reset_query();
+
+		return $html;
+	}
+
 	public function post_slider( $atts ) {
 		global $post;
 		global $wc_shortcodes_posts_query;
@@ -1229,6 +1325,10 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		$atts = shortcode_atts( parent::$attr->post_slider, $atts );
 		$atts = WPC_Shortcodes_Sanitize::post_slider_attr( $atts );
+
+		if ( empty( $atts['button_class'] ) ) {
+			$atts['button_class'] = 'wc-shortcodes-post-slide-button';
+		}
 
 		// Convert comma delimeted string to array
 		$p = WPC_Shortcodes_Sanitize::comma_delim_to_array( $atts['pids'] );

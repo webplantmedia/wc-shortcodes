@@ -1937,7 +1937,7 @@ pre.pre-wrap {
 	margin-top: -30px;
 	outline: 0;
 	line-height: 1;
-	padding: 10px;
+	padding: 0 10px;
 	font-size: 50px;
 	z-index: 9999;
 	border: 0px solid #ffffff;
@@ -1999,6 +1999,166 @@ pre.pre-wrap {
 	.wc-shortcodes-post-slide-content .wc-shortcodes-entry-header {
 		margin-bottom: 0;
 	}
+}
+/**
+ * [wc_collage]
+ * ----------------------------------------------------------------------------
+ */
+.wc-shortcodes-collage-wrapper {
+}
+.wc-shortcodes-collage.wc-shortcodes-collage-template-collage1 {
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column {
+	width: 50%;
+	float: left;
+	height: 100%;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-inner {
+	height: 100%;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-inner,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-panel {
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-panel,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-panel-background {
+	margin: 0;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-has-link {
+	cursor: pointer;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-panel-background {
+	height: 100%;
+	display: block;
+	position: relative;
+	background-size: cover;
+	background-position: center center;
+}
+.wc-shortcodes-collage-template-collage1 .post-edit-link {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+/* clear margins */
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content > *:first-child {
+	margin-top: 0;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content > *:last-child {
+	margin-bottom: 0;
+}
+/* columns 1 */
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-1 .wc-shortcodes-collage-panel-5 {
+	height: 60%;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-1 .wc-shortcodes-collage-panel-4 {
+	height: 40%;
+}
+/* columns 2 */
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2 .wc-shortcodes-collage-panel-3 {
+	height: 40%;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2 .wc-shortcodes-collage-panel-wrapper {
+	height: 60%;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2 .wc-shortcodes-collage-panel-inner {
+	height: 100%;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2 .wc-shortcodes-collage-panel-1 {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2 .wc-shortcodes-collage-panel-2 {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+/* content */
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-panel-content {
+	position: relative;
+	text-align: center;
+	top: 50%;
+	bottom: auto;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-panel-content-inner {
+	margin-left: auto;
+	margin-right: auto;
+}
+@media (max-width: 567px) {
+	body #wc-shortcodes-collage.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column {
+		height: auto;
+	}
+	body .wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2 .wc-shortcodes-collage-panel {
+		width: 100%;
+	}
+	body .wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2 .wc-shortcodes-collage-panel,
+	body .wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2 .wc-shortcodes-collage-panel-wrapper {
+		height: auto;
+		float: left;
+		width: 100%;
+	}
+	body #wc-shortcodes-collage.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-panel-inner,
+	body #wc-shortcodes-collage.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-inner {
+		padding-right: 0;
+	}
+	body .wc-shortcodes-collage.wc-shortcodes-collage-template-collage1,
+	body .wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-panel-wrapper {
+		margin-right: 0;
+	}
+	body .wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2,
+	body .wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-panel-wrapper,
+	body .wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-column-2 .wc-shortcodes-collage-panel-1 {
+		padding-top: 0;
+	}
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-slider-wrapper {
+	height: 0;
+	overflow: hidden;
+	position: relative;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-slider-wrapper .bx-wrapper {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	background: transparent;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-slider-wrapper .wc-shortcodes-collage-slider,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-slider-wrapper .bx-wrapper {
+	height: 100%;
+}
+.wc-shortcodes-collage-slider-enabled .wc-shortcodes-collage-panel-5 {
+	position: relative;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content-style h1,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content-style h2,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content-style h3,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content-style h4,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content-style h5,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content-style h6,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content-style p {
+	color: inherit;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content-style .wc-shortcodes-collage-button:hover,
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-content-style .wc-shortcodes-collage-button {
+	border-color: inherit;
+	color: inherit;
+}
+.wc-shortcodes-collage-template-collage1 .wc-shortcodes-collage-button {
+	padding: 0.625em 1.25em;
+	border-width: 2px;
+	border-style: solid;
+	border-color: inherit;
+	text-decoration: none;
+	display: inline-block;
+}
+.wc-shortcodes-collage-button:hover {
+	text-decoration: none;
 }
 /**
  * 

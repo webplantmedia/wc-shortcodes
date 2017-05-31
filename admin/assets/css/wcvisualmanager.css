@@ -37,6 +37,10 @@
 	border: 2px solid #46b450;
 	background-color: white;
 }
+.wc-shortcodes-visual-manager .wcs-instruction.wcs-plain-instructions {
+	border-width: 0;
+	padding: 0;
+}
 /**/
 html .wc-shortcodes-visual-manager,
 html .wc-shortcodes-visual-manager .ui-accordion,

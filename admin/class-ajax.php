@@ -297,6 +297,10 @@ class WPC_Shortcodes_Ajax {
 				$widget = new WPC_Shortcodes_Widget_Post_Slider();
 				$widget->form( $attr );
 				break;
+			case 'wc_collage' :
+				$widget = new WPC_Shortcodes_Widget_Collage();
+				$widget->form( $attr );
+				break;
 			case 'wc_posts' :
 				$widget = new WPC_Shortcodes_Widget_Posts();
 				$widget->form( $attr );

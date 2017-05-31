@@ -1,5 +1,5 @@
 <?php
-class WPC_Shortcodes_Post_Types {
+class WPC_Shortcodes_Slide_Post_Type {
 	
 	protected static $instance = null;
 
@@ -23,6 +23,12 @@ class WPC_Shortcodes_Post_Types {
 		add_action( 'save_post', array( &$this, 'save_meta' ), 1, 2 ); // save the custom fields
 
 		add_action( 'add_meta_boxes', array( &$this, 'slide_metabox' ) );
+		// add_action('do_meta_boxes', array( &$this, 'replace_featured_image_box' ) );
+	}
+
+	function replace_featured_image_box() {
+		remove_meta_box( 'postimagediv', 'wcs_slide', 'side' );
+		add_meta_box('postimagediv', __('Slide Image'), 'post_thumbnail_meta_box', 'wcs_slide', 'side', 'low');
 	}
 
 	/**

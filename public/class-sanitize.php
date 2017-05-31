@@ -32,7 +32,7 @@ class WPC_Shortcodes_Sanitize {
 		return $value;
 	}
 
-	public static function gutter_space( $value ) {
+	public static function gutter_space( $value, $default = 20 ) {
 		if ( ! is_numeric( $value ) ) {
 			$value = 20;
 		}
@@ -41,7 +41,7 @@ class WPC_Shortcodes_Sanitize {
 		}
 		$value = (int) $value;
 		if ( $value > 50 || $value < 0 ) {
-			$value = 20;
+			$value = $default;
 		}
 
 		return $value;
@@ -74,6 +74,24 @@ class WPC_Shortcodes_Sanitize {
 		}
 
 		$value = implode( ' ', $a );
+
+		return trim( $value );
+	}
+
+	public static function opacity( $value ) {
+		if ( '' == $value )
+			return $value;
+
+		$value = number_format( $value, 2, '.', '' );
+		$value = floatval( $value );
+
+		if ( empty( $value ) )
+			$value = 0;
+
+		if ( 0 > $value )
+			$value = 0;
+		else if ( 1 < $value )
+			$value = 1;
 
 		return $value;
 	}
@@ -455,15 +473,6 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
-	public static function post_slider_layout( $value, $default = 'bxslider' ) {
-		$whitelist = WPC_Shortcodes_Widget_Options::post_slider_layouts();
-
-		if ( array_key_exists( $value, $whitelist ) )
-			return $value;
-
-		return $default;
-	}
-
 	public static function featured_post_layout( $value, $default = 'thumbnail' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::featured_post_layouts();
 
@@ -475,6 +484,24 @@ class WPC_Shortcodes_Sanitize {
 
 	public static function posts_template( $value, $default = 'slider1' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::posts_templates();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function collage_template( $value, $default = 'collage1' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::collage_templates();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
+	public static function post_slider_layout( $value, $default = 'bxslider' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::post_slider_layouts();
 
 		if ( array_key_exists( $value, $whitelist ) )
 			return $value;
@@ -932,6 +959,72 @@ class WPC_Shortcodes_Sanitize {
 		return $atts;
 	}
 
+	// Fixes bools on widget update when checkbox is empty, and thus blank. We don't want to revert to the default value, but false.
+	public static function collage_attr_fix_bools( $atts ) {
+		$bools = array( 'ignore_sticky_posts', 'slider_auto', 'nopaging' );
+
+		foreach ( $bools as $key ) {
+			if ( ! isset( $atts[ $key ] ) ) {
+				$atts[ $key ] = 0;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function collage_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'ignore_sticky_posts' :
+				case 'slider_auto' :
+					$atts[ $key ] = self::int_bool( $value );
+					break;
+				case 'nopaging' :
+					$atts[ $key ] = self::int_bool( $value );
+					$atts[ $key ] = (bool) $atts[ $key ];
+					break;
+				case 'p' :
+				case 'posts_per_page' :
+				case 'heading_size' :
+				case 'mobile_heading_size' :
+				case 'desktop_height' :
+				case 'laptop_height' :
+				case 'mobile_height' :
+					$atts[ $key ] = self::number( $value );
+					break;
+				case 'gutter_space' :
+					$atts[ $key ] = self::gutter_space( $value, 7 );
+					break;
+				case 'slider_pause' :
+					$atts[ $key ] = self::number( $value );
+					$atts[ $key ] = abs( $atts[ $key ] );
+					break;
+				case 'layout' :
+					$atts[ $key ] = self::post_slider_layout( $value );
+					break;
+				case 'template' :
+					$atts[ $key ] = self::collage_template( $value );
+					break;
+				case 'slider_mode' :
+					$atts[ $key ] = self::post_slider_mode( $value );
+					break;
+				case 'order' :
+					$atts[ $key ] = self::order_field( $value );
+					break;
+				case 'button_class' :
+					$atts[ $key ] = self::html_classes( $atts[ $key ] );
+					break;
+				case 'terms' :
+				case 'pids' :
+				case 'post__in' :
+					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
 	public static function image_links_attr( $atts ) {
 		foreach ( $atts as $key => $value ) {
 			switch( $key ) {
@@ -1321,7 +1414,7 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'button_class' :
 					$atts[ $key ] = self::html_classes( $atts[ $key ] );
-					$atts[ $key ] = empty( $atts[ $key ] ) ? 'wc-shortcodes-post-slide-button' : $atts[ $key ];
+					$atts[ $key ] = empty( $atts[ $key ] ) ? 'wc-shortcodes-post-button' : $atts[ $key ];
 					break;
 				case 'readmore' :
 				case 'terms' :
@@ -1404,7 +1497,6 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'button_class' :
 					$atts[ $key ] = self::html_classes( $atts[ $key ] );
-					$atts[ $key ] = empty( $atts[ $key ] ) ? 'wc-shortcodes-post-slide-button' : $atts[ $key ];
 					break;
 				case 'readmore' :
 				case 'terms' :

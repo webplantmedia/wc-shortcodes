@@ -15,6 +15,7 @@ class WPC_Shortcodes_TinyMCE_Buttons {
 	private function __construct() {
     	add_action( 'admin_head', array( &$this,'init' ) );
 		add_action( 'admin_head', array( &$this, 'localize_script' ) );
+		add_action( 'admin_head', array( &$this, 'localize_script_for_collage' ) );
     }
 
     public function init() {
@@ -105,6 +106,16 @@ class WPC_Shortcodes_TinyMCE_Buttons {
 			}
 		}
 		die();
+	}
+
+	public function localize_script_for_collage() {
+		?>
+		<?php if (  WC_SHORTCODES_COLLAGE_POST_TYPE_ENABLED ) : ?>
+			<script type="text/javascript">
+				var wpc_shortcodes_collage_enabled = true;
+			</script>
+		<?php endif; ?>
+		<?php
 	}
 
 	public function localize_script() {
