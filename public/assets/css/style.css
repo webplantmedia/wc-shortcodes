@@ -2005,6 +2005,7 @@ pre.pre-wrap {
  * ----------------------------------------------------------------------------
  */
 .wc-shortcodes-collage-wrapper {
+	overflow: hidden;
 }
 .wc-shortcodes-collage.wc-shortcodes-collage-template-collage1 {
 }
