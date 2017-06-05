@@ -113,6 +113,11 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.37 =
+
+* Added call to action.
+* Added overflow hidden to collage wrapper.
+
 = Version 3.36 =
 
 * Added collage widget
