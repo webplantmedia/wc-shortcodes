@@ -446,6 +446,15 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
+	public static function call_to_action_style_format( $value, $default = '' ) {
+		$whitelist = WPC_Shortcodes_Widget_Options::call_to_action_style_format_values();
+
+		if ( array_key_exists( $value, $whitelist ) )
+			return $value;
+
+		return $default;
+	}
+
 	public static function image_links_style_format( $value, $default = '' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::image_links_style_format_values();
 
@@ -1018,6 +1027,56 @@ class WPC_Shortcodes_Sanitize {
 				case 'pids' :
 				case 'post__in' :
 					$atts[ $key ] = sanitize_text_field( $value );
+					break;
+			}
+		}
+
+		return $atts;
+	}
+
+	public static function call_to_action_attr( $atts ) {
+		foreach ( $atts as $key => $value ) {
+			switch( $key ) {
+				// image 1
+				case 'image' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'image_2x' :
+					$atts[ $key ] = esc_url_raw( $value );
+					break;
+				case 'image_max_width' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'image_position' :
+					$atts[ $key ] = self::text_align( $value );
+					break;
+				// Settings
+				case 'style_format' :
+					$atts[ $key ] = self::call_to_action_style_format( $value );
+					break;
+				case 'text_max_width' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'text_position' :
+					$atts[ $key ] = self::text_align( $value );
+					break;
+				case 'gutter_position' :
+					$atts[ $key ] = self::percentage( $value );
+					break;
+				case 'gutter_spacing' :
+					$atts[ $key ] = self::positive_number( $value );
+					break;
+				case 'padding_top' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'padding_bottom' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'padding_side' :
+					$atts[ $key ] = self::css_unit( $value );
+					break;
+				case 'class' :
+					$atts[ $key ] = self::html_classes( $value );
 					break;
 			}
 		}

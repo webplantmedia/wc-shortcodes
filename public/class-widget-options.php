@@ -41,6 +41,13 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function call_to_action_style_format_values() {
+		return array(
+			'image_left' => 'Image | Text',
+			'image_right' => 'Text | Image',
+		);
+	}
+
 	public static function image_links_style_format_values() {
 		return array(
 			'row' => 'Row',

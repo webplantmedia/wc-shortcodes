@@ -2375,3 +2375,40 @@ pre.pre-wrap {
 	max-width: 400px;
 	margin: 0 auto;
 }
+/**
+ * [wc_call_to_action]
+ * ----------------------------------------------------------------------------
+ */
+.wc-shortcodes-call-to-action-wrapper-inner {
+	display: table;
+	width: 100%;
+}
+.wc-shortcodes-call-to-action-wrapper .wcs-call-to-action-container {
+	display: table-cell;
+	vertical-align: middle;
+}
+.wc-shortcodes-call-to-action-image-position-left .wcs-call-to-action-image-inner {
+	text-align: left;
+}
+.wc-shortcodes-call-to-action-image-position-center .wcs-call-to-action-image-inner {
+	text-align: center;
+}
+.wc-shortcodes-call-to-action-image-position-right .wcs-call-to-action-image-inner {
+	text-align: right;
+}
+.wc-shortcodes-call-to-action-text-position-left .wcs-call-to-action-content-wrapper {
+	float: left;
+}
+.wc-shortcodes-call-to-action-text-position-center .wcs-call-to-action-content-wrapper {
+	margin-left: auto;
+	margin-right: auto;
+}
+.wc-shortcodes-call-to-action-text-position-right .wcs-call-to-action-content-wrapper {
+	float: right;
+}
+.wcs-call-to-action-content-wrapper *:first-child {
+	margin-top: 0;
+}
+.wcs-call-to-action-content-wrapper *:last-child {
+	margin-bottom: 0;
+}

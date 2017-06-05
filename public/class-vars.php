@@ -359,6 +359,23 @@ class WPC_Shortcodes_Vars {
 			'slider_pause' => 4000,
 			'slider_auto' => 0,
 		);
+		self::$attr->call_to_action = array(
+			// image
+			'image' => '',
+			'image_2x' => '',
+			'image_max_width' => '200px',
+			'image_position' => 'left',
+			// settings
+			'style_format' => 'image_left',
+			'text_max_width' => '200px',
+			'text_position' => 'center',
+			'gutter_position' => '50',
+			'gutter_spacing' => '80',
+			'padding_top' => '20px',
+			'padding_bottom' => '20px',
+			'padding_side' => '20px',
+			'class'	=> '',
+		);
 		self::$attr->image_links = array(
 			// image 1
 			'image_1' => '',

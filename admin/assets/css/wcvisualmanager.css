@@ -41,6 +41,20 @@
 	border-width: 0;
 	padding: 0;
 }
+.wc-shortcodes-visual-manager .wc-shortcodes-range-wrapper {
+	display: block;
+	float: left;
+	width: 100%;
+}
+.wc-shortcodes-visual-manager .wc-shortcodes-range-wrapper input {
+	width: 90%;
+	float: left;
+}
+.wc-shortcodes-visual-manager .wc-shortcodes-range-wrapper output {
+	width: 10%;
+	float: right;
+	text-align: right;
+}
 /**/
 html .wc-shortcodes-visual-manager,
 html .wc-shortcodes-visual-manager .ui-accordion,

@@ -84,6 +84,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		add_shortcode( 'wc_column', array( &$this, 'column' ) );
 		add_shortcode( 'wc_row', array( &$this, 'row' ) );
 		add_shortcode( 'wc_center', array( &$this, 'center' ) );
+		add_shortcode( 'wc_call_to_action', array( &$this, 'call_to_action' ) );
 		add_shortcode( 'wc_toggle', array( &$this, 'toggle' ) );
 		add_shortcode( 'wc_accordion', array( &$this, 'accordion_main' ) );
 		add_shortcode( 'wc_accordion_section', array( &$this, 'accordion_section' ) );
@@ -1656,6 +1657,82 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		else if ( in_array( $align, array( 'none', 'center' ) ) ) {
 			$html = '<p>' . $html . '</p>';
 		}
+
+		return $html;
+	}
+
+	public function call_to_action( $atts, $content = null ) {
+		$atts = shortcode_atts( parent::$attr->call_to_action, $atts );
+		$atts = WPC_Shortcodes_Sanitize::call_to_action_attr( $atts );
+
+		$gutter_margin = floor( $atts['gutter_spacing'] / 2 );
+		if ( 'image_right' == $atts['style_format'] ) {
+			$text_column = 'width:' . ( 100 - $atts['gutter_position'] ) . '%;';
+			$text_column_inner = 'margin-right:' . $gutter_margin . 'px;';
+			$image_column = 'width:' . $atts['gutter_position'] . '%;';
+			$image_column_inner = 'margin-left:' . $gutter_margin . 'px;';
+		}
+		else {
+			$text_column = 'width:' . $atts['gutter_position'] . '%;';
+			$text_column_inner = 'margin-left:' . $gutter_margin . 'px;';
+			$image_column = 'width:' . ( 100 - $atts['gutter_position'] ) . '%;';
+			$image_column_inner = 'margin-right:' . $gutter_margin . 'px;';
+		}
+
+		$image_max_width = '';
+		if ( ! empty( $atts['image_max_width'] ) ) {
+			$image_max_width = 'max-width:'.$atts['image_max_width'].';';
+		}
+		if ( ! empty( $atts['text_max_width'] ) ) {
+			$text_max_width = 'max-width:'.$atts['text_max_width'].';';
+		}
+
+		$html = '';
+		$output = array();
+		$srcset = '';
+
+		if ( ! empty( $atts['image_2x'] ) ) {
+			$srcset = ' srcset="' . esc_url( $atts['image_2x'] ) . ' 2x"';
+		}
+
+		$img = '<img style="'.$image_max_width.'" class="wcs-call-to-action-image" src="'.esc_url( $atts['image'] ).'"'.$srcset.' />';
+
+		$output[] = '<div class="wcs-call-to-action-image-container wcs-call-to-action-container" style="'.$image_column.'"><div style="'.$image_column_inner.'" class="wcs-call-to-action-image-inner">' . $img . '</div></div>';
+
+		$output[] = '<div class="wcs-call-to-action-text-container wcs-call-to-action-container" style="'.$text_column.'"><div style="'.$text_column_inner.'" class="wcs-call-to-action-text-inner"><div style="'.$text_max_width.'" class="wcs-call-to-action-content-wrapper">' . do_shortcode( $content ) . '</div></div></div>';
+
+		if ( 'image_right' == $atts['style_format'] ) {
+			$output = array_reverse( $output );
+		}
+
+		$output = implode( '', $output );
+
+		$style = array();
+		if ( ! empty( $atts['padding_side'] ) ) {
+			$style[] = 'padding-left:' . $atts['padding_side'] . ';';
+			$style[] = 'padding-right:' . $atts['padding_side'] . ';';
+		}
+		if ( ! empty( $atts['padding_top'] ) ) {
+			$style[] = 'padding-top:' . $atts['padding_top'] . ';';
+		}
+		if ( ! empty( $atts['padding_bottom'] ) ) {
+			$style[] = 'padding-bottom:' . $atts['padding_bottom'] . ';';
+		}
+
+		$classes = array();
+		$classes[] = 'wc-shortcodes-call-to-action-wrapper';
+		$classes[] = 'wc-shortcodes-call-to-action-format-'.$atts['style_format'];
+		$classes[] = 'wc-shortcodes-call-to-action-image-position-'.$atts['image_position'];
+		$classes[] = 'wc-shortcodes-call-to-action-text-position-'.$atts['text_position'];
+		if ( ! empty( $atts['class'] ) ) {
+			$classes = $atts['class'];
+		}
+
+		$html .= '<div id="wc-shortcodes-call-to-action" class="'.implode( ' ', $classes ).'">';
+			$html .= '<div class="wc-shortcodes-call-to-action-wrapper-inner wc-shortcodes-clearfix" style="'.implode( '', $style ).'">';
+				$html .= $output;
+			$html .= '</div>';
+		$html .= '</div>';
 
 		return $html;
 	}
