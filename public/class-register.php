@@ -1695,9 +1695,9 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			$srcset = ' srcset="' . esc_url( $atts['image_2x'] ) . ' 2x"';
 		}
 
-		$img = '<img style="'.$image_max_width.'" class="wcs-call-to-action-image" src="'.esc_url( $atts['image'] ).'"'.$srcset.' />';
+		$img = '<img class="wcs-call-to-action-image" src="'.esc_url( $atts['image'] ).'"'.$srcset.' />';
 
-		$output[] = '<div class="wcs-call-to-action-image-container wcs-call-to-action-container" style="'.$image_column.'"><div style="'.$image_column_inner.'" class="wcs-call-to-action-image-inner">' . $img . '</div></div>';
+		$output[] = '<div class="wcs-call-to-action-image-container wcs-call-to-action-container" style="'.$image_column.'"><div style="'.$image_column_inner.'" class="wcs-call-to-action-image-inner"><div style="'.$image_max_width.'" class="wcs-call-to-action-image-inner2">' . $img . '</div></div></div>';
 
 		$output[] = '<div class="wcs-call-to-action-text-container wcs-call-to-action-container" style="'.$text_column.'"><div style="'.$text_column_inner.'" class="wcs-call-to-action-text-inner"><div style="'.$text_max_width.'" class="wcs-call-to-action-content-wrapper">' . do_shortcode( $content ) . '</div></div></div>';
 
@@ -1707,18 +1707,6 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 
 		$output = implode( '', $output );
 
-		$style = array();
-		if ( ! empty( $atts['padding_side'] ) ) {
-			$style[] = 'padding-left:' . $atts['padding_side'] . ';';
-			$style[] = 'padding-right:' . $atts['padding_side'] . ';';
-		}
-		if ( ! empty( $atts['padding_top'] ) ) {
-			$style[] = 'padding-top:' . $atts['padding_top'] . ';';
-		}
-		if ( ! empty( $atts['padding_bottom'] ) ) {
-			$style[] = 'padding-bottom:' . $atts['padding_bottom'] . ';';
-		}
-
 		$classes = array();
 		$classes[] = 'wc-shortcodes-call-to-action-wrapper';
 		$classes[] = 'wc-shortcodes-call-to-action-format-'.$atts['style_format'];
@@ -1727,6 +1715,20 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 		if ( ! empty( $atts['class'] ) ) {
 			$classes = $atts['class'];
 		}
+
+		$style = array();
+		if ( ! empty( $atts['padding_side'] ) ) {
+			$style[] = 'padding-left:' . $atts['padding_side'] . ';';
+			$style[] = 'padding-right:' . $atts['padding_side'] . ';';
+			$classes[] = 'wc-shortcodes-call-to-action-side-padding';
+		}
+		if ( ! empty( $atts['padding_top'] ) ) {
+			$style[] = 'padding-top:' . $atts['padding_top'] . ';';
+		}
+		if ( ! empty( $atts['padding_bottom'] ) ) {
+			$style[] = 'padding-bottom:' . $atts['padding_bottom'] . ';';
+		}
+
 
 		$html .= '<div id="wc-shortcodes-call-to-action" class="'.implode( ' ', $classes ).'">';
 			$html .= '<div class="wc-shortcodes-call-to-action-wrapper-inner wc-shortcodes-clearfix" style="'.implode( '', $style ).'">';

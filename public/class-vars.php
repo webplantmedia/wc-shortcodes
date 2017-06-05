@@ -373,7 +373,7 @@ class WPC_Shortcodes_Vars {
 			'gutter_spacing' => '80',
 			'padding_top' => '20px',
 			'padding_bottom' => '20px',
-			'padding_side' => '20px',
+			'padding_side' => '',
 			'class'	=> '',
 		);
 		self::$attr->image_links = array(
