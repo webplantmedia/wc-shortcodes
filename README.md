@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.38 ###
+
+* Better responive display for call to action.
+
 ### Version 3.37 ###
 
 * Added call to action.
