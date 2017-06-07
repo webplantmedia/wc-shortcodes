@@ -104,6 +104,18 @@ class WPC_Shortcodes_Widget_Options {
 		);
 	}
 
+	public static function testimonial_slider_layouts() {
+		return array(
+			'bxslider' => 'Box Slider',
+		);
+	}
+
+	public static function testimonial_slider_templates() {
+		return array(
+			'testimonial' => 'Testimonial',
+		);
+	}
+
 	public static function posts_columns() {
 		return array(
 			'1' => '1',

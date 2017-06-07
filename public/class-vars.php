@@ -531,6 +531,47 @@ class WPC_Shortcodes_Vars {
 			'slider_pause' => 4000,
 			'slider_auto' => 0,
 		);
+		self::$attr->testimonial_slider = array(
+			'author' => '', //use author id
+			'author_name' => '', //use 'user_nicename' (NOT name).
+			'pids' => '', //use post id.
+			'p' => '', //use post id.
+			'post__in' => '', //use post ids
+			'order' => 'DESC', // DESC, ASC
+			'orderby' => 'date',
+			'post_status' => 'publish',
+			'post_type' => 'post', // post, page, wc_portfolio_item, etc
+			'posts_per_page' => 10, //number of post to show per page
+			'nopaging' => false, //show all posts or use pagination. Default value is 'false', use paging.
+			'ignore_sticky_posts' => 1,
+
+			'taxonomy' => '', // category, post_tag, wc_portfolio_tag, etc
+			'field' => 'slug', // slug or id
+			'terms' => '', // taxonomy terms.
+
+			'show_meta_category' => 1, // show heading?
+			'show_title' => 1, // show heading?
+			'show_content' => 1, // show main content?
+			'show_button' => 1, // show button?
+			'readmore' => 'Continue Reading', // show read more button?
+			'button_class' => 'button secondary-button', // show main content?
+
+			'size' => 'full', // default thumbnail size
+
+			'heading_type' => 'h2', // heading tag for title
+			'heading_size' => 30,
+			'mobile_heading_size' => 24,
+			'layout' => 'bxslider', // blog layout
+			'template' => 'slider2',
+			'excerpt_length' => 55,
+			'desktop_height' => 600,
+			'laptop_height' => 500,
+			'mobile_height' => 350,
+
+			'slider_mode' => 'fade',
+			'slider_pause' => 4000,
+			'slider_auto' => 0,
+		);
 		self::$attr->featured_posts = array(
 			'title' => '', //use author id
 			'author' => '', //use author id
