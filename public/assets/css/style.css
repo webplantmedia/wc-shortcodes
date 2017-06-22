@@ -623,7 +623,7 @@
 	margin-bottom: 20px;
 }
 .wc-shortcodes-box *:last-child {
-	margin: 0;
+	margin-bottom: 0;
 }
 .wc-shortcodes-box *:first-child {
 	margin-top: 0;
