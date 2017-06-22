@@ -536,24 +536,6 @@ class WPC_Shortcodes_Sanitize {
 		return $default;
 	}
 
-	public static function testimonial_slider_layout( $value, $default = 'bxslider' ) {
-		$whitelist = WPC_Shortcodes_Widget_Options::testimonial_slider_layouts();
-
-		if ( array_key_exists( $value, $whitelist ) )
-			return $value;
-
-		return $default;
-	}
-
-	public static function testimonial_slider_template( $value, $default = 'testimonial' ) {
-		$whitelist = WPC_Shortcodes_Widget_Options::testimonial_slider_templates();
-
-		if ( array_key_exists( $value, $whitelist ) )
-			return $value;
-
-		return $default;
-	}
-
 	public static function order_field( $value, $default = '' ) {
 		$whitelist = WPC_Shortcodes_Widget_Options::order_fields();
 
@@ -1562,84 +1544,6 @@ class WPC_Shortcodes_Sanitize {
 					break;
 				case 'template' :
 					$atts[ $key ] = self::post_slider_template( $value );
-					break;
-				case 'slider_mode' :
-					$atts[ $key ] = self::post_slider_mode( $value );
-					break;
-				case 'order' :
-					$atts[ $key ] = self::order_field( $value );
-					break;
-				case 'heading_type' :
-					$atts[ $key ] = self::heading_type( $value );
-					break;
-				case 'button_class' :
-					$atts[ $key ] = self::html_classes( $atts[ $key ] );
-					break;
-				case 'readmore' :
-				case 'terms' :
-				case 'pids' :
-				case 'post__in' :
-					$atts[ $key ] = sanitize_text_field( $value );
-					break;
-			}
-		}
-
-		// sanitize limit
-		if ( $atts['posts_per_page'] < 0 ) {
-			$atts['posts_per_page'] = -1;
-			$atts['nopaging'] = true;
-		}
-
-		return $atts;
-	}
-
-	// Fixes bools on widget update when checkbox is empty, and thus blank. We don't want to revert to the default value, but false.
-	public static function testimonial_slider_attr_fix_bools( $atts ) {
-		$bools = array( 'ignore_sticky_posts', 'show_meta_category', 'show_title', 'show_content', 'show_button', 'slider_auto', 'nopaging' );
-
-		foreach ( $bools as $key ) {
-			if ( ! isset( $atts[ $key ] ) ) {
-				$atts[ $key ] = 0;
-			}
-		}
-
-		return $atts;
-	}
-
-	public static function testimonial_slider_attr( $atts ) {
-		foreach ( $atts as $key => $value ) {
-			switch( $key ) {
-				case 'ignore_sticky_posts' :
-				case 'show_meta_category' :
-				case 'show_title' :
-				case 'show_content' :
-				case 'show_button' :
-				case 'slider_auto' :
-					$atts[ $key ] = self::int_bool( $value );
-					break;
-				case 'nopaging' :
-					$atts[ $key ] = self::int_bool( $value );
-					$atts[ $key ] = (bool) $atts[ $key ];
-					break;
-				case 'p' :
-				case 'posts_per_page' :
-				case 'heading_size' :
-				case 'mobile_heading_size' :
-				case 'excerpt_length' :
-				case 'desktop_height' :
-				case 'laptop_height' :
-				case 'mobile_height' :
-					$atts[ $key ] = self::number( $value );
-					break;
-				case 'slider_pause' :
-					$atts[ $key ] = self::number( $value );
-					$atts[ $key ] = abs( $atts[ $key ] );
-					break;
-				case 'layout' :
-					$atts[ $key ] = self::testimonial_slider_layout( $value );
-					break;
-				case 'template' :
-					$atts[ $key ] = self::testimonial_slider_template( $value );
 					break;
 				case 'slider_mode' :
 					$atts[ $key ] = self::post_slider_mode( $value );
