@@ -26,7 +26,7 @@
 				esc_url( get_permalink() ),
 				esc_attr( sprintf( __( 'Permalink to %s', 'wc_shortcodes' ), the_title_attribute( 'echo=0' ) ) ),
 				esc_attr( get_the_date( 'c' ) ),
-				esc_html( sprintf( '%2$s', get_post_format_string( get_post_format() ), get_the_date('M j, Y') ) )
+				esc_html( sprintf( '%2$s', get_post_format_string( get_post_format() ), get_the_date( $display['date_format'] ) ) )
 			);
 		}
 		?>
