@@ -113,6 +113,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.40 =
+
+* Fixed bug with date format on borderless template
+
 = Version 3.39 =
 
 * Fixed css bug with box shortcode and last element margin.
