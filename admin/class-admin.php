@@ -91,7 +91,7 @@ class WPC_Shortcodes_Admin extends WPC_Shortcodes_Vars {
 		}
 
 		if ( $hook == 'post-new.php' || $hook == 'post.php' ) {
-			wp_enqueue_style('wc-font-awesome-styles', WC_SHORTCODES_PLUGIN_URL . 'public/assets/css/font-awesome.css', array(), WC_SHORTCODES_VERSION, 'all');
+			wp_enqueue_style('wc-font-awesome-styles', WC_SHORTCODES_PLUGIN_URL . 'public/assets/css/font-awesome.css', array(), '4.7.0', 'all');
 		}
 	}
 

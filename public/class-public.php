@@ -142,7 +142,7 @@ class WPC_Shortcodes_Public extends WPC_Shortcodes_Vars {
 		
 		if ( WC_SHORTCODES_FONT_AWESOME_ENABLED ) {
 			wp_deregister_style( 'wordpresscanvas-font-awesome' );
-			wp_register_style( 'wordpresscanvas-font-awesome', WC_SHORTCODES_PLUGIN_URL . 'public/assets/css/font-awesome.min.css', array( ), '4.6.3' );
+			wp_register_style( 'wordpresscanvas-font-awesome', WC_SHORTCODES_PLUGIN_URL . 'public/assets/css/font-awesome.min.css', array( ), '4.7.0' );
 			wp_enqueue_style( 'wordpresscanvas-font-awesome' );
 		}
 		
