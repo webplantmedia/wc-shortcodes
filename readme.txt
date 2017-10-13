@@ -113,6 +113,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 == Changelog ==
 
+= Version 3.42 =
+
+* fixed bug with excert wrapper not being applied
+
 = Version 3.41 =
 
 * Updated to Font Awesome 4.7.0
