@@ -12,7 +12,9 @@
 		<?php endif; ?>
 
 		<?php if ( $display['show_content'] ) : ?>
+		<div class="wc-shortcodes-entry-summary">
 			<?php wc_shortcodes_the_excerpt(); ?>
+		</div>
 		<?php endif; ?>
 
 		<?php include('entry-meta.php'); ?>
