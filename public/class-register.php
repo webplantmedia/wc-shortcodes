@@ -16,6 +16,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 	private function __construct() {
 		add_filter( 'the_content', array( &$this, 'pre_process' ), 7 );
 		add_filter( 'wc_shortcodes_the_content', array( &$this, 'pre_process' ), 7 );
+		add_filter( 'acf_the_content', array( &$this, 'pre_process' ), 7 );
 		add_action( 'wc_shortcodes_add_preprocess', array( &$this, 'add_preprocess' ) );
 		add_shortcode( 'wc_html', array( &$this, 'displayhtml' ) );
 		add_shortcode( 'wc_pre' , array( &$this, 'displaypre' ) );
