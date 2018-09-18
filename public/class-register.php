@@ -1787,7 +1787,7 @@ class WPC_Shortcodes_Register extends WPC_Shortcodes_Vars {
 			if ( ! empty( $atts['class'] ) ) {
 				$classes = $atts['class'];
 			}
-			$html = '<div id="wc-shortcodes-image-links" class="'.implode( ' ', $classes ).'"><div class="wc-shortcodes-image-links-wrapper-inner">'.$html.'</div>';
+			$html = '<div id="wc-shortcodes-image-links" class="'.implode( ' ', $classes ).'"><div class="wc-shortcodes-image-links-wrapper-inner">'.$html.'</div></div>';
 		}
 
 		return $html;
