@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.44 ###
+
+* Fixed bug with missing closing div
+
 ### Version 3.43 ###
 
 * Added plugin support for Advanced Custom Fields
