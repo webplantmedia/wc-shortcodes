@@ -3,7 +3,7 @@
 Contributors: cbaldelomar
 Tags: shortcode, shortcodes, accordion, accordions, tab, tabs, toggle, columns, column, section, sections, testimonials, border, borders, button, buttons, fullwidth, full width, notification, notifications, google maps, maps, googlemaps, social icons, progress bar, pricing, pricing box, highlights, image, flags, banners, countdown, rsvp, custom html, code, code snippets, snippets, isotope, masonry, posts, post_type, post slider, slider, font awesome, icons, fontawesome, fa, box, heading, inline code, divider, spacing, grid, center content, center, icons, image flag, image flags
 Requires at least: 3.7
-Tested up to: 4.7.3
+Tested up to: 5.0.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -112,6 +112,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 4. Displaying Shortcodes
 
 == Changelog ==
+
+= Version 3.45 =
+
+* Updated readme.
 
 = Version 3.44 =
 
