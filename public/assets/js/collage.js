@@ -13,6 +13,7 @@
 				'pager' : false,
 				'mode' : mode,
 				'auto' : auto,
+				'touchEnabled': false, // fixes problem with links not working in Google Chrome.
 				'autoHover' : true,
 				'autoStart' : auto,
 				'pause' : pause,
