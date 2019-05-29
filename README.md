@@ -106,6 +106,10 @@ See our help article on [how to manually upload a plugin](http://knowledgebase.a
 
 ## Changelog ##
 
+### Version 3.46 ###
+
+* Fixed bug with slider button links not working in Chrome.
+
 ### Version 3.45 ###
 
 * Updated readme.
